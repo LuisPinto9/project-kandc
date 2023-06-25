@@ -10,13 +10,13 @@ const Navbar = () => {
         <div className="container-fluid d-flex">
           <Link className="navbar-brand align-items-center " to="/">
             <div className="d-flex d-inline-block align-items-center">
-              <h1 className="titulo px-2">Edificio K&C</h1>
+              <h1 className="titulo px-2 pt-2">Edificio K&C</h1>
               <img
                 src={edificio}
                 alt="Logo"
                 width="64"
-                height="65"
-                className="pb-3"
+                height="64"
+                className="pb-1"
               />
             </div>
           </Link>
