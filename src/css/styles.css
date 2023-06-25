@@ -1,7 +1,36 @@
-.navbar-red {
-    background-color: red;
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.navbar-principal {
+  height: 111px;
+  opacity: 0.9900000095367432;
+  background: var(--verde, #42634d);
+}
+
+.titulo {
+  text-align: left;
+  color: #fff;
+  /* titulo1 */
+  font-size: 40px;
+  font-family: Inria Serif;
+  font-weight: 700;
+}
+.inicio-sesion{
+    float: right;
+    color: #FFF;
+text-align: center;
+font-size: 24px;
+font-family: Inria Serif;
+font-weight: 700;
+}
+.img-edificio {
+    padding-bottom: 1%;
 }
 
 .footer {
-    background-color: red;
+  opacity: 0.9900000095367432;
+  background: var(--verde, #42634d);
 }

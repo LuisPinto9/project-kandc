@@ -1,14 +1,14 @@
 import React from "react";
 import "../css/styles.css";
 
-const Navbar = () => {
+const Footer = () => {
   return (
     <div>
-      <nav className="navbar-red">
-        <h1>Navbar</h1>
-      </nav>
+      <footer className="footer">
+        <h1>Footer</h1>
+      </footer>
     </div>
   );
 };
 
-export default Navbar;
+export default Footer;

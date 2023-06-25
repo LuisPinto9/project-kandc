@@ -8,9 +8,8 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      {/* <Card></Card> */}
-      <Footer />
-      <header className="App-header">
+       <header className="App-header">
+       
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -24,6 +23,11 @@ function App() {
           Learn React
         </a>
       </header>
+      
+      
+      
+      {/* <Card></Card> */}
+      <Footer />
     </div>
   );
 }
