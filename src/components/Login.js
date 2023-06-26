@@ -1,11 +1,10 @@
 import React from 'react'
 
-const Nosotrosi = () => {
+const Login = () => {
   return (
     <div>inicio de sesion
-      
     </div>
   )
 }
 
-export default Nosotrosi
+export default Login

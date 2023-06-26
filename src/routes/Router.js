@@ -4,19 +4,16 @@ import Home from "../components/Home";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import App from "../App";
-
-
-import Nosotrosi from "../components/iniciosesion";
+import Login from "../components/Login";
 
 const Router = () => {
   return (
     <BrowserRouter>
-    <Navbar />
+      <Navbar />
       <Routes>
         <Route path="/" Component={Home} />
         <Route path="/app" Component={App} />
-
-        <Route  path='iniciosesion'   element={<Nosotrosi/>}/> 
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
     </BrowserRouter>
