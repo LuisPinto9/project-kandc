@@ -11,6 +11,7 @@
 
 .titulo {
   color: #fff;
+  font-size: 32px;
   font-family: Inria Serif;
   font-weight: 700;
 }
@@ -30,6 +31,7 @@
 }
 
 .titulo-footer{
+  font-size: 20px;
   font-family: Inria Serif;
   color: #FFF;
 }

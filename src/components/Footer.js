@@ -1,6 +1,8 @@
 import React from "react";
 import "../css/styles.css";
 import edificio from "../images/edificio.png";
+import whatsapp from "../images/whatsapp.png";
+import facebook from "../images/facebook.png";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -8,16 +10,24 @@ const Footer = () => {
     <div>
       <div className="footer-principal">
         <footer className="d-flex">
-          <Link className="navbar-brand align-items-center " to="/">
+          <Link className="navbar-brand align-items-center col-3 px-3" to="/">
             <div className="d-flex d-inline-block align-items-center">
               <h4 className="titulo-footer px-2 pt-3">Edificio K&C</h4>
               <img src={edificio} alt="Logo" width="45" height="45" />
             </div>
           </Link>
-          <div className=" d-flex px-5">
-          <h4 className="titulo-footer px-5 pt-3">Carrera</h4>
-          <h4 className="titulo-footer px-5 pt-3">334233423</h4>
-          <h4 className="titulo-footer px-5 pt-3">facebook</h4>
+          <div className=" d-flex">
+            <div className="px-5 pt-2 col-8">
+              <h4 className="titulo-footer pt-1">Carrera 15 #141 - 79</h4>
+            </div>
+            <div className="d-flex col-7 pt-1">
+              <h4 className="titulo-footer px-4 pt-2">3342334231</h4>
+              <img src={whatsapp} alt="Logo" width="45" height="45" />
+            </div>
+            <div className="d-flex pt-1">
+              <h4 className="titulo-footer px-4 pt-2">Facebook</h4>
+              <img src={facebook} alt="Logo" width="45" height="45" />
+            </div>
           </div>
         </footer>
       </div>
