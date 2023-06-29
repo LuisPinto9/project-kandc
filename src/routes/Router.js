@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import App from "../App";
 import Login from "../components/Login";
+import inventario from "../pages/inventario";
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
         <Route path="/" Component={Home} />
         <Route path="/app" Component={App} />
         <Route path="/login" element={<Login />} />
+        <Route path="/inventario" Component={inventario} />
       </Routes>
       <Footer />
     </BrowserRouter>
