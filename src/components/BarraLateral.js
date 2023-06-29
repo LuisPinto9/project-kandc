@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const BarraLateral = () => {
   return (
-    <aside>
+    <aside className="text-center">
       <h2>Anuncios</h2>
       <ul>
         <li>
