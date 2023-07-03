@@ -1,27 +1,119 @@
+:root {
+  --verde: #42634d;
+  --verde-claro: #a0d9b3;
+  --verde-seleccion: #baffd1;
+  --blanco: #fff;
+  --negro: #000;
+  --fuente-aside: "Roboto Mono", monospace;
+  --fuente-nav-footer: Inria Serif;
+}
+
 .navbar-principal {
   opacity: 0.9900000095367432;
-  background: var(--verde, #42634d);
+  background: var(--verde);
 }
 
 .titulo {
-  color: #fff;
+  color: var(--blanco);
   font-size: 32px;
-  font-family: Inria Serif;
+  font-family: var(--fuente-nav-footer);
   font-weight: 700;
 }
 .inicio-sesion {
   font-size: 20px;
-  font-family: Inria Serif;
-  color: #fff;
+  font-family: var(--fuente-nav-footer);
+  color: var(--blanco);
 }
 
 .footer-principal {
   opacity: 0.9900000095367432;
-  background: var(--verde, #42634d);
+  background: var(--verde);
 }
 
 .titulo-footer {
   font-size: 20px;
-  font-family: Inria Serif;
-  color: #fff;
+  font-family: var(--fuente-nav-footer);
+  color: var(--blanco);
+}
+
+.div-barra {
+  background-color: var(--verde-claro);
+  border-right: 3px solid rgba(116, 105, 105, 0.21);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.div-zonas {
+  border-bottom: 3px solid;
+  border-bottom-color: rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+.div-zonas:hover {
+  background-color: var(--verde-seleccion);
+}
+
+.link-zonas {
+  font-family: var(--fuente-aside);
+  color: black;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.div-habitaciones {
+  border-bottom: 3px solid;
+  border-bottom-color: rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+.div-habitaciones:hover {
+  background-color: var(--verde-seleccion);
+}
+
+.link-habitaciones {
+  font-family: var(--fuente-aside);
+  color: var(--negro);
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.div-componentes {
+  border-bottom: 3px solid;
+  border-bottom-color: rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+.div-componentes:hover {
+  background-color: var(--verde-seleccion);
+}
+
+.div-componentes:hover {
+  background-color: var(--verde-seleccion);
+}
+
+.link-componentes {
+  font-family: var(--fuente-aside);
+  color: var(--negro);
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.div-usuarios {
+  border-bottom: 3px solid;
+  border-bottom-color: rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+.div-usuarios:hover {
+  background-color: var(--verde-seleccion);
+}
+
+.div-usuarios:hover {
+  background-color: var(--verde-seleccion);
+}
+
+.link-usuarios {
+  font-family: var(--fuente-aside);
+  color: var(--negro);
+  text-decoration: none;
+  font-weight: 400;
 }

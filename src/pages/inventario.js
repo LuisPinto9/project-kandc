@@ -8,7 +8,7 @@ const inventario = () => {
   return (
     <div>
       <div className="d-flex">
-        <div className="col-2">
+        <div className="col-2 div-barra">
           <BarraLateral />
         </div>
         <div className="body-1 col-10 text-center">
