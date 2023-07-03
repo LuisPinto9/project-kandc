@@ -8,6 +8,28 @@
   --fuente-nav-footer: Inria Serif;
 }
 
+.fondo {
+  background: url(../images/Fondo.png), lightgray 50% / cover no-repeat;
+  height: 25rem;
+}
+
+.div-titulo {
+  background-color: rgb(255, 255, 255, 0.7);
+}
+
+.titulo-home {
+  font-size: 3rem;
+  font-family: var(--fuente-nav-footer);
+  font-weight: 700;
+}
+
+.subtitulo-home {
+  color: var(--negro);
+  font-size: 1.5rem;
+  font-family: var(--fuente-nav-footer);
+  font-weight: 400;
+}
+
 .navbar-principal {
   opacity: 0.9900000095367432;
   background: var(--verde);

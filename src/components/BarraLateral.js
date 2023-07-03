@@ -23,7 +23,6 @@ const BarraLateral = () => {
               <img src={habitaciones} alt="Logo" width="37" height="42" />
             </div>
             <div className="px-1">Habitaciones</div>
-            
           </Link>
         </div>
         <div className="container-fluid div-componentes">
@@ -32,7 +31,6 @@ const BarraLateral = () => {
               <img src={componentes} alt="Logo" width="34" height="40" />
             </div>
             <div className="px-1">Componentes</div>
-            
           </Link>
         </div>
         <div className="container-fluid div-usuarios">
@@ -40,10 +38,7 @@ const BarraLateral = () => {
             <div className="">
               <img src={usuarios} alt="Logo" width="33" height="37" />
             </div>
-            <div className="px-1">
-            Usuarios
-            </div>
-            
+            <div className="px-1">Usuarios</div>
           </Link>
         </div>
       </div>

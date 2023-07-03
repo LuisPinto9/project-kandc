@@ -3,7 +3,7 @@ import edificio from "../images/edificio.png";
 import { Link } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
 
-const Navbariniciora = () => {
+const Navbarinicio = () => {
   return (
     <div>
       <nav className="navbar navbar-principal">
@@ -35,4 +35,4 @@ const Navbariniciora = () => {
   );
 };
 
-export default Navbariniciora;
+export default Navbarinicio;
