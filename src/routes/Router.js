@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import App from "../App";
 import Login from "../components/Login";
-import inventario from "../pages/inventario";
+import inventario from "../pages/Inventario";
 
 const Router = () => {
   return (

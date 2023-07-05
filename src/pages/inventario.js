@@ -4,7 +4,7 @@ import "../css/styles.css";
 import logo from "../logo.svg";
 import "../App.css";
 
-const inventario = () => {
+const Inventario = () => {
   return (
     <div>
       <div className="d-flex">
@@ -34,4 +34,4 @@ const inventario = () => {
   );
 };
 
-export default inventario;
+export default Inventario;
