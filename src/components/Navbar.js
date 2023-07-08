@@ -1,9 +1,10 @@
 import "../css/styles.css";
 import edificio from "../images/edificio.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
 
 const Navbarinicio = () => {
+  const location = useLocation();
   return (
     <div>
       <nav className="navbar navbar-principal">
@@ -16,19 +17,21 @@ const Navbarinicio = () => {
               </div>
             </div>
           </Link>
-          <Navbar expand="lg" className="navBg">
-            <Container>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                  <Nav.Link as={Link} to="/login" className="inicio-sesion">
-                    {" "}
-                    Iniciar Sesión
-                  </Nav.Link>
-                </Nav>
-              </Navbar.Collapse>
-            </Container>
-          </Navbar>
+          {location.pathname === "/" && (
+            <Navbar expand="lg" className="navBg">
+              <Container>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="me-auto">
+                    <Nav.Link as={Link} to="/login" className="inicio-sesion">
+                      {" "}
+                      Iniciar Sesión
+                    </Nav.Link>
+                  </Nav>
+                </Navbar.Collapse>
+              </Container>
+            </Navbar>
+          )}
         </div>
       </nav>
     </div>
