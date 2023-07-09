@@ -4,7 +4,7 @@ import Home from "../components/Home";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import App from "../App";
-import Inventario from "../pages/inventario";
+import Inventario from "../pages/Inventario";
 import Login from "../components/Login";
 
 
