@@ -7,7 +7,6 @@ import App from "../App";
 import Inventario from "../pages/Inventario";
 import Login from "../components/Login";
 
-
 const Router = () => {
   return (
     <BrowserRouter>

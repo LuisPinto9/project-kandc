@@ -139,3 +139,8 @@
   text-decoration: none;
   font-weight: 400;
 }
+
+.div-imagenp1{
+  border: solid #000 1px;
+  background-color: rgb(255, 255, 255, 0.7);
+}
