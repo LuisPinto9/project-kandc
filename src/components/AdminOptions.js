@@ -34,7 +34,7 @@ const AdminOptions = () => {
       </div>
       <div className="container-fluid div-usuarios">
         <Link className="link-usuarios d-flex align-items-center" to="#4">
-          <div className="">
+          <div>
             <img src={usuarios} alt="Logo" width="33" height="37" />
           </div>
           <div className="px-1">Usuarios</div>

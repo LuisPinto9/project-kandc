@@ -8,8 +8,8 @@ const BarraLateral = () => {
   return (
     <aside className="text-center">
       <div>
-        {location.pathname === "/inventario" && <AdminOptions />}
-        {location.pathname === "/sistema-usuario" && <UserOptions />}
+        {location.pathname === "/dashboard-admin" && <AdminOptions />}
+        {location.pathname === "/dashboard-usuario" && <UserOptions />}
       </div>
     </aside>
   );

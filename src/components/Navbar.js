@@ -32,6 +32,36 @@ const Navbarinicio = () => {
               </Container>
             </Navbar>
           )}
+          {location.pathname === "/dashboard-admin" && (
+            <Navbar expand="lg" className="navBg">
+              <Container>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="me-auto">
+                    <Link as={Link} to="/" className="inicio-sesion">
+                      {" "}
+                      Cerrar Sesión
+                    </Link>
+                  </Nav>
+                </Navbar.Collapse>
+              </Container>
+            </Navbar>
+          )}
+          {location.pathname === "/dashboard-usuario" && (
+            <Navbar expand="lg" className="navBg">
+              <Container>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="me-auto">
+                    <Link as={Link} to="/" className="inicio-sesion">
+                      {" "}
+                      Cerrar Sesión
+                    </Link>
+                  </Nav>
+                </Navbar.Collapse>
+              </Container>
+            </Navbar>
+          )}
         </div>
       </nav>
     </div>
