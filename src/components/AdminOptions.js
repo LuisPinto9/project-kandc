@@ -4,10 +4,22 @@ import zonas from "../images/Company.png";
 import habitaciones from "../images/Living Room.png";
 import componentes from "../images/TV.png";
 import usuarios from "../images/User.png";
+import inicio from "../images/hogar.png";
 
 const AdminOptions = () => {
   return (
     <div>
+      <div className="container-fluid div-inicio">
+        <Link
+          className="link-zonas d-flex align-items-center"
+          to="/dashboard-admin"
+        >
+          <div>
+            <img src={inicio} alt="Logo" width="39" height="38" />
+          </div>
+          <div className="px-1">Inicio</div>
+        </Link>
+      </div>
       <div className="container-fluid div-zonas">
         <Link className="link-zonas d-flex align-items-center" to="#1">
           <div>
@@ -33,7 +45,10 @@ const AdminOptions = () => {
         </Link>
       </div>
       <div className="container-fluid div-usuarios">
-        <Link className="link-usuarios d-flex align-items-center" to="#4">
+        <Link
+          className="link-usuarios d-flex align-items-center"
+          to="/dashboard-admin/registro"
+        >
           <div>
             <img src={usuarios} alt="Logo" width="33" height="37" />
           </div>
