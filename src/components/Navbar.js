@@ -23,10 +23,10 @@ const Navbarinicio = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
-                    <Nav.Link as={Link} to="/login" className="inicio-sesion">
+                    <Link as={Link} to="/login" className="inicio-sesion">
                       {" "}
                       Iniciar Sesión
-                    </Nav.Link>
+                    </Link>
                   </Nav>
                 </Navbar.Collapse>
               </Container>

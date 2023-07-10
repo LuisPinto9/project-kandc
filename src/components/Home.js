@@ -17,7 +17,7 @@ function Home() {
             </h1>
           </div>
         </div>
-        <div className="p-3 mt-5">
+        <div className="p-2 mt-4">
           <Card />
         </div>
       </div>
