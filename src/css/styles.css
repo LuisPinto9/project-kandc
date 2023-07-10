@@ -9,8 +9,9 @@
 }
 
 .fondo {
-  background: url(../images/Fondo.png), lightgray 50% / cover no-repeat;
-  height: 25rem;
+  background: url(../images/Fondo2.png);
+  background-color: var(--blanco);
+  background-repeat: no-repeat;
 }
 
 .div-titulo {
@@ -138,4 +139,15 @@
   color: var(--negro);
   text-decoration: none;
   font-weight: 400;
+}
+
+.div-imagenp {
+  border: solid #000 1px;
+  background-color: rgb(255, 255, 255, 0.7);
+}
+
+.card-text {
+  font-family: var(--fuente-nav-footer);
+  font-size: 1.3rem;
+  font-weight: 700;
 }
