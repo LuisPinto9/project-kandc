@@ -23,7 +23,7 @@ function Inventario() {
   const [LeaseDate, setLeaseDate] = useState("");
   const [State1, setState1] = useState("");
 
-  const [ArrendatarioList, setArrendatarioList] = useState([]);
+  const [ArrendatarioList, setArrendatario] = useState([]);
 
   /* agregar arrendatarios */
   const add = () => {
@@ -33,6 +33,7 @@ function Inventario() {
       Nombre: Nombre,
       PhoneNumber: PhoneNumber
     }).then(() => {
+      getArrendatario();
       alert("se registro bro");
     });
   }
@@ -40,24 +41,13 @@ function Inventario() {
   /* mostrar arrendatarios */
   const getArrendatario = () => {
 
-    Axios.get("http://localhost:3001/Arrendatarios").then((response) => {
-      setArrendatarioList(response.data);
+    Axios.get("http://localhost:3001/Arrendatarios").then((res) => {
+      alert("mostrar datos1");  
+    setArrendatario(res.data);
+      console.log(res.data);
       alert("mostrar datos");
-      {
-
-        ArrendatarioList.map((val, key) => {
-          return
-          <label>
-            {val.Nombre}
-          </label>
-
-        })
-
-      }
-
     });
   }
-
 
 
   return (
@@ -68,14 +58,6 @@ function Inventario() {
         </div>
         <div className="container">
 
-          <div className="inventario1">
-
-            {/*  map-pasar por todos los valores */}
-            <div className="lista">
-              <button onClick={getArrendatario}> Listar </button>
-              <label>holaa</label>
-            </div>
-          </div>
 
 
           <div className="card text-center">
@@ -87,107 +69,140 @@ function Inventario() {
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">ID del Usuario </span>
                 <input type="number"
-                 onChange={(event) => {
-                  setIDUsuario(event.target.value);
-                }}
-                className="form-control"  aria-label="Username" aria-describedby="basic-addon1"/>
+                  onChange={(event) => {
+                    setIDUsuario(event.target.value);
+                  }}
+                  className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
               </div>
 
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">Nombre </span>
                 <input type="text"
-                 onChange={(event) => {
-                  setNombre(event.target.value);
-                }}
-                className="form-control" aria-label="Username" aria-describedby="basic-addon1"/>
+                  onChange={(event) => {
+                    setNombre(event.target.value);
+                  }}
+                  className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
               </div>
 
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">Apellido </span>
                 <input type="text"
-                 onChange={(event) => {
-                  setApellido(event.target.value);
-                }}
-                className="form-control"  aria-label="Username" aria-describedby="basic-addon1"/>
+                  onChange={(event) => {
+                    setApellido(event.target.value);
+                  }}
+                  className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
               </div>
 
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">Tipo de Usuario </span>
                 <input type="text"
-                 onChange={(event) => {
-                  setTypeUser(event.target.value);
-                }}
-                className="form-control"  aria-label="Username" aria-describedby="basic-addon1"/>
+                  onChange={(event) => {
+                    setTypeUser(event.target.value);
+                  }}
+                  className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
               </div>
 
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">Contraseña</span>
                 <input type="text"
-                 onChange={(event) => {
-                  setContraseña(event.target.value);
-                }}
-                className="form-control"  aria-label="Username" aria-describedby="basic-addon1"/>
+                  onChange={(event) => {
+                    setContraseña(event.target.value);
+                  }}
+                  className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
               </div>
 
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">Identificacion</span>
                 <input type="text"
-                 onChange={(event) => {
-                  setIdentification(event.target.value);
-                }}
-                className="form-control"  aria-label="Username" aria-describedby="basic-addon1"/>
+                  onChange={(event) => {
+                    setIdentification(event.target.value);
+                  }}
+                  className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">Correo Electronico</span>
                 <input type="text"
-                 onChange={(event) => {
-                  setGmail(event.target.value);
-                }}
-                className="form-control"  aria-label="Username" aria-describedby="basic-addon1"/>
+                  onChange={(event) => {
+                    setGmail(event.target.value);
+                  }}
+                  className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">Numero de telefono</span>
                 <input type="number"
-                 onChange={(event) => {
-                  setphoneNumber(event.target.value);
-                }}
-                className="form-control"  aria-label="Username" aria-describedby="basic-addon1"/>
+                  onChange={(event) => {
+                    setphoneNumber(event.target.value);
+                  }}
+                  className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">fecha de arriendo</span>
                 <input type="text"
-                 onChange={(event) => {
-                  setLeaseDate(event.target.value);
-                }}
-                className="form-control"  aria-label="Username" aria-describedby="basic-addon1"/>
+                  onChange={(event) => {
+                    setLeaseDate(event.target.value);
+                  }}
+                  className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">Estado de arriendo</span>
                 <input type="text"
-                 onChange={(event) => {
-                  setState1(event.target.value);
-                }}
-                className="form-control"  aria-label="Username" aria-describedby="basic-addon1"/>
+                  onChange={(event) => {
+                    setState1(event.target.value);
+                  }}
+                  className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
               </div>
 
 
-              
+
 
             </div>
             <div className="card-footer text-body-secondary">
               <button className='btn btn-success' onClick={add}> Registrar </button>
-
-
+              
+              <button className='btn btn-success' onClick={getArrendatario}> Listar </button>
+             
 
 
             </div>
           </div>
+          {/* aqui empieza la tabla  */}
+          <table class="table">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID Usuario</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Telefono</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              {
+
+                ArrendatarioList.map((val, key) => {
+                  
+                  return <tr>
+                    <th scope="row">{val.IDUsuario}</th>
+                    <td>{val.IDUsuario}</td>
+                    <td>{val.Nombre}</td>
+                    <td>{val.PhoneNumber}</td>
+                  </tr>
+
+                })
+
+              }
 
 
+
+
+
+            </tbody>
+          </table>
 
 
 
         </div>
+        {/*   cierra cpntainer */}
 
 
       </div>

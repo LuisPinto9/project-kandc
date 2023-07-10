@@ -41,7 +41,7 @@ app.get("/Arrendatarios", (req, res) => {
             if (err) {
                 console.log(err);
             } else {
-                console.log("mostrar en la tabla");
+                console.log("mostrar ");
                 res.send(result1);
             }
         }
