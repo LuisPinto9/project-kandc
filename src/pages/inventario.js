@@ -42,8 +42,8 @@ function Inventario() {
   const getArrendatario = () => {
 
     Axios.get("http://localhost:3001/Arrendatarios").then((res) => {
-      alert("mostrar datos1");  
-    setArrendatario(res.data);
+      alert("mostrar datos1");
+      setArrendatario(res.data);
       console.log(res.data);
       alert("mostrar datos");
     });
@@ -158,16 +158,16 @@ function Inventario() {
             </div>
             <div className="card-footer text-body-secondary">
               <button className='btn btn-success' onClick={add}> Registrar </button>
-              
+
               <button className='btn btn-success' onClick={getArrendatario}> Listar </button>
-             
+
 
 
             </div>
           </div>
           {/* aqui empieza la tabla  */}
-          <table class="table">
-            <thead class="table-dark">
+          <table className="table">
+            <thead className="table-dark">
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">ID Usuario</th>
@@ -180,15 +180,17 @@ function Inventario() {
               {
 
                 ArrendatarioList.map((val, key) => {
-                  
-                  return <tr>
-                    <th scope="row">{val.IDUsuario}</th>
-                    <td>{val.IDUsuario}</td>
-                    <td>{val.Nombre}</td>
-                    <td>{val.PhoneNumber}</td>
-                  </tr>
-
+                  return (
+                    <tr key={key}>
+                      <th scope="row">{val.IDUsuario}</th>
+                      {/* van los nombres de la base en si */}
+                      <td>{val.ID}</td>
+                      <td>{val.nombre}</td>
+                      <td>{val.telefono}</td>
+                    </tr>
+                  );
                 })
+
 
               }
 
@@ -200,6 +202,7 @@ function Inventario() {
           </table>
 
 
+          
 
         </div>
         {/*   cierra cpntainer */}
