@@ -136,9 +136,6 @@
   background-color: var(--verde-seleccion);
 }
 
-.div-componentes:hover {
-  background-color: var(--verde-seleccion);
-}
 
 .link-componentes {
   font-family: var(--fuente-aside);
@@ -151,10 +148,6 @@
   border-bottom: 3px solid;
   border-bottom-color: rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-}
-
-.div-usuarios:hover {
-  background-color: var(--verde-seleccion);
 }
 
 .div-usuarios:hover {
