@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import Registro from "../pages/Registro";
 import DashboardAdmin from "../pages/DashboardAdmin";
 import DashboardUsuario from "../pages/DashboardUsuario";
-import Login from "../components/Login";
+import Login from "../pages/Login";
 
 const Router = () => {
   return (
