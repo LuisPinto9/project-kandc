@@ -48,5 +48,5 @@ app.get("/Arrendatarios", (req, res) => {
 });
 
 app.listen(3001, () => {
-  console.log("Corriendo en puerto3001");
+  console.log(`Corriendo en puerto ${3001}`);
 });
