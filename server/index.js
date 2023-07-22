@@ -1,16 +1,17 @@
 const express = require("express");
 const app = express();
 const mysql = require("mysql");
-
+require('dotenv').config();
 const cors = require("cors");
+
 app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "proyectoSoftware",
+  host: process.env.HOST ,
+  user: process.env.USER ,
+  password: process.env.PASSWORD ,
+  database: process.env.DATABASE,
 });
 
 app.post("/create", (req, res) => {
