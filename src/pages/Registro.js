@@ -6,6 +6,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
 import Axios from "axios";
 
+/* para que los alert se vean bonitos */
+ import Swal from 'sweetalert2'
+/*import withReactContent from 'sweetalert2-react-content'
+const notifica = withReactContent(Swal) */
+
+
 function Registro() {
   /* datos de los arrendatarios */
   const [IDUsuario, setIDUsuario] = useState("");
@@ -30,7 +36,13 @@ function Registro() {
       PhoneNumber: PhoneNumber,
     }).then(() => {
       getArrendatario();
+      limpiarCampos();
       alert("se registro bro");
+      Swal.fire({
+        title: '<strong>Registro exitoso</strong>',
+        html: '<i>El arrendatario: <strong>'+ Nombre+'</strong> fue registrado</i>',
+        icon: 'success',timer:2000
+      }) 
     });
   };
 
@@ -52,6 +64,12 @@ function Registro() {
       getArrendatario();
       alert("se actualizo bro");
       limpiarCampos();
+
+     Swal.fire({
+      title: '<strong>Actualizacion exitosa</strong>',
+      html: '<i>El arrendatario: <strong>'+ Nombre+'</strong> fue actualizado</i>',
+      icon: 'success',timer:2000
+      }) 
     });
   };
 
