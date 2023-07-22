@@ -1,16 +1,17 @@
 const express = require("express");
 const app = express();
 const mysql = require("mysql");
-require('dotenv').config();
 const cors = require("cors");
+require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
+app.set("port", process.env.PORT || 3001);
 
 const db = mysql.createConnection({
-  host: process.env.HOST ,
-  user: process.env.USER ,
-  password: process.env.PASSWORD ,
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
   database: process.env.DATABASE,
 });
 
@@ -23,22 +24,20 @@ app.post("/create", (req, res) => {
     [IDUsuario, Nombre, PhoneNumber],
     (err, result) => {
       if (err) {
-        console.log(err);
+        res.status(500).send("Hubo un error en el servidor")
       } else {
-        console.log("tal cosa");
-        res.send("arrendatario registradosss");
+        res.send("Arrendatario registrado");
       }
     }
   );
 });
 
-app.get("/Arrendatarios", (req, res) => {
-  db.query("select * from Arrendatario1", (err, result1) => {
+app.get("/arrendatarios", (req, res) => {
+  db.query("select * from Arrendatario1", (err, result) => {
     if (err) {
       console.log(err);
     } else {
-      console.log("mostrar ");
-      res.send(result1);
+      res.send(result);
     }
   });
 
@@ -48,6 +47,6 @@ app.get("/Arrendatarios", (req, res) => {
      */
 });
 
-app.listen(3001, () => {
-  console.log(`Corriendo en puerto ${3001}`);
+app.listen(app.get("port"), () => {
+  console.log(`Corriendo en puerto ${app.get("port")}`);
 });

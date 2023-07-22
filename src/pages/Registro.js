@@ -35,11 +35,9 @@ function Registro() {
 
   /* mostrar arrendatarios */
   const getArrendatario = () => {
-    Axios.get("http://localhost:3001/Arrendatarios").then((res) => {
-      alert("mostrar datos1");
+    Axios.get("http://localhost:3001/arrendatarios").then((res) => {
       setArrendatario(res.data);
       console.log(res.data);
-      alert("mostrar datos");
     });
   };
 
