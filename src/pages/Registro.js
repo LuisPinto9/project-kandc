@@ -19,6 +19,7 @@ function Registro() {
   const [LeaseDate, setLeaseDate] = useState("");
   const [State1, setState1] = useState("");
 
+  const [Editar, setEditar] = useState(false);
   const [ArrendatarioList, setArrendatario] = useState([]);
 
   /* agregar arrendatarios */
@@ -32,6 +33,28 @@ function Registro() {
       alert("se registro bro");
     });
   };
+
+  /* es para actualizar */
+  const EditarArrendatarios = (val) => {
+    setEditar(true);
+    /*  setIDUsuario(val.ID); */
+    setIDUsuario(val.ID);
+    setNombre(val.nombre);
+    setphoneNumber(val.telefono)
+
+  }
+  const update = () => {
+    Axios.put("http://localhost:3001/update", {
+      IDUsuario: IDUsuario,
+      Nombre: Nombre,
+      PhoneNumber: PhoneNumber,
+    }).then(() => {
+      getArrendatario();
+      alert("se actualizo bro");
+    });
+  };
+
+
 
   /* mostrar arrendatarios */
   const getArrendatario = () => {
@@ -56,7 +79,7 @@ function Registro() {
                   ID del Usuario{" "}
                 </span>
                 <input
-                  type="number"
+                  type="number" value={IDUsuario}
                   onChange={(event) => {
                     setIDUsuario(event.target.value);
                   }}
@@ -71,7 +94,7 @@ function Registro() {
                   Nombre{" "}
                 </span>
                 <input
-                  type="text"
+                  type="text" value={Nombre}
                   onChange={(event) => {
                     setNombre(event.target.value);
                   }}
@@ -86,7 +109,7 @@ function Registro() {
                   Apellido{" "}
                 </span>
                 <input
-                  type="text"
+                  type="text" value={Apellido}
                   onChange={(event) => {
                     setApellido(event.target.value);
                   }}
@@ -101,7 +124,7 @@ function Registro() {
                   Tipo de Usuario{" "}
                 </span>
                 <input
-                  type="text"
+                  type="text" value={TypeUser}
                   onChange={(event) => {
                     setTypeUser(event.target.value);
                   }}
@@ -116,7 +139,7 @@ function Registro() {
                   Contraseña
                 </span>
                 <input
-                  type="text"
+                  type="text" value={Contraseña}
                   onChange={(event) => {
                     setContraseña(event.target.value);
                   }}
@@ -131,7 +154,7 @@ function Registro() {
                   Identificacion
                 </span>
                 <input
-                  type="text"
+                  type="text" value={Identification}
                   onChange={(event) => {
                     setIdentification(event.target.value);
                   }}
@@ -145,7 +168,7 @@ function Registro() {
                   Correo Electronico
                 </span>
                 <input
-                  type="text"
+                  type="text" value={Gmail}
                   onChange={(event) => {
                     setGmail(event.target.value);
                   }}
@@ -159,7 +182,7 @@ function Registro() {
                   Numero de telefono
                 </span>
                 <input
-                  type="number"
+                  type="number" value={PhoneNumber}
                   onChange={(event) => {
                     setphoneNumber(event.target.value);
                   }}
@@ -173,7 +196,7 @@ function Registro() {
                   fecha de arriendo
                 </span>
                 <input
-                  type="text"
+                  type="text" value={LeaseDate}
                   onChange={(event) => {
                     setLeaseDate(event.target.value);
                   }}
@@ -187,7 +210,7 @@ function Registro() {
                   Estado de arriendo
                 </span>
                 <input
-                  type="text"
+                  type="text" value={State1}
                   onChange={(event) => {
                     setState1(event.target.value);
                   }}
@@ -198,12 +221,33 @@ function Registro() {
               </div>
             </div>
             <div className="card-footer text-body-secondary">
-              <button className="btn btn-success" onClick={add}>
-                {" "}
-                Registrar{" "}
-              </button>
+              {/* aqui esta el boton de editar */}
+              {
+                Editar == true ?
+                  <div>
 
-              <button className="btn btn-success" onClick={getArrendatario}>
+                    <button className="btn btn-warning m-2" onClick={update}>
+                      {" "}
+                      Actualizar{" "}
+                    </button>
+                    <button className="btn btn-warning m-2" onClick={add}>
+                      {" "}
+                      cancelar{" "}
+                    </button>
+
+
+                  </div>
+
+                  :
+
+                  <button className="btn btn-success m-2" onClick={add}>
+                    {" "}
+                    Registrar{" "}
+                  </button>
+
+              }
+
+              <button className="btn btn-success m-2" onClick={getArrendatario}>
                 {" "}
                 Listar{" "}
               </button>
@@ -217,24 +261,52 @@ function Registro() {
                 <th scope="col">ID Usuario</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Telefono</th>
+                <th scope="col">Accciones</th>
+
               </tr>
             </thead>
             <tbody>
               {ArrendatarioList.map((val, key) => {
                 return (
                   <tr key={key}>
+                    <th scope="row">{val.ID}</th>
+                    {/* van los nombres de la base de datos en si */}
+                    <td>{val.ID}</td>
+                    <td>{val.nombre}</td>
+                    <td>{val.telefono}</td>
+                    <td>
+                      <div className="btn-group" role="group" aria-label="Basic example">
+
+                        <button type="button" onClick={() => {
+                          EditarArrendatarios(val);
+
+                        }}
+                          className="btn btn-info">actualizar</button>
+                        <button type="button" className="btn btn-danger">borrar</button>
+
+                      </div>
+
+                    </td>
+
+                  </tr>
+                );
+              })}
+              {/* 
+              {ArrendatarioList.map((val, key) => {
+                return (
+                  <tr key={key}>
                     <th scope="row">{val.IDUsuario}</th>
-                    {/* van los nombres de la base en si */}
                     <td>{val.ID}</td>
                     <td>{val.nombre}</td>
                     <td>{val.telefono}</td>
                   </tr>
                 );
-              })}
+              })} */}
+
             </tbody>
           </table>
         </div>
-        {/*   cierra cpntainer */}
+        {/*   cierra container */}
       </div>
     </div>
   );

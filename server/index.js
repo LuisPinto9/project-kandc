@@ -9,7 +9,7 @@ app.use(express.json());
 app.set("port", process.env.PORT || 3001);
 
 const db = mysql.createConnection({
-  host: process.env.HOST,
+  host: process.env .HOST,
   user: process.env.USER,
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
@@ -40,12 +40,29 @@ app.get("/arrendatarios", (req, res) => {
       res.send(result);
     }
   });
-
-  /* 
-        db.query('insert into Arrendatario1(ID,mombre,telefono) values(?,?,?)',['1','diana','3123213243']
-        
-     */
 });
+
+
+
+app.put("/update", (req, res) => {
+  const IDUsuario = req.body.IDUsuario;
+  const Nombre = req.body.Nombre;
+  const PhoneNumber = req.body.PhoneNumber;
+  db.query(
+   /*  "update  Arrendatario1 set(ID,nombre,telefono) values(?,?,?)" where ID=?", */
+    "update Arrendatario1 set nombre=?,telefono=? where ID=?",  
+   /*  "update Arrendatario1 set(ID,nombre,telefono) values(?,?,?) where ID=?",*/
+    [ Nombre, PhoneNumber, IDUsuario],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Hubo un error en el servidor")
+      } else {
+        res.send("Arrendatario-actualizado");
+      }
+    }
+  );
+});
+
 
 app.listen(app.get("port"), () => {
   console.log(`Corriendo en puerto ${app.get("port")}`);
