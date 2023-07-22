@@ -51,9 +51,16 @@ function Registro() {
     }).then(() => {
       getArrendatario();
       alert("se actualizo bro");
+      limpiarCampos();
     });
   };
 
+  const limpiarCampos=()=>  {
+    setIDUsuario("");
+    setNombre("");
+    setphoneNumber("");
+    setEditar(false);
+  }
 
 
   /* mostrar arrendatarios */
@@ -230,7 +237,7 @@ function Registro() {
                       {" "}
                       Actualizar{" "}
                     </button>
-                    <button className="btn btn-warning m-2" onClick={add}>
+                    <button className="btn btn-warning m-2" onClick={limpiarCampos}>
                       {" "}
                       cancelar{" "}
                     </button>
