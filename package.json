@@ -4,10 +4,13 @@
   "description": "Proyecto Edificio K&C",
   "main": "index.js",
   "scripts": {
-    "server":"cd ./Back/server && npm run dev",
-    "start": "concurrently \"npm run start:react\" \"npm run server\"",
-    "start:react": "cd ./Front && npm start"
+    "server": "cd ./Back/server && npm run dev",
+    "start:react": "cd ./Front && npm start",
+    "start": "concurrently \"npm run start:react\" \"npm run server\""
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
 }
