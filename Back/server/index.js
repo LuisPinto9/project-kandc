@@ -6,7 +6,7 @@ require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
-app.set("port", process.env.PORT || 3001);
+app.set("port", process.env.PORT);
 
 const db = mysql.createConnection({
   host: process.env .HOST,
@@ -100,5 +100,5 @@ app.delete("/delete", (req, res) => {
 
 
 app.listen(app.get("port"), () => {
-  console.log(`Corriendo en puerto ${app.get("port")}`);
+  console.log(`Corriendo en el puerto ${app.get("port")}`);
 });
