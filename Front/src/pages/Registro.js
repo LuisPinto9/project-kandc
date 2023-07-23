@@ -7,12 +7,11 @@ import "../App.css";
 import Axios from "axios";
 
 /* para que los alert se vean bonitos */
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import SistemaUsuario from "./DashboardUsuario";
 import { Alert } from "react-bootstrap";
 /*import withReactContent from 'sweetalert2-react-content'
 const notifica = withReactContent(Swal) */
-
 
 function Registro() {
   /* datos de los arrendatarios */
@@ -26,25 +25,27 @@ function Registro() {
   const [Gmail, setGmail] = useState("");
   const [LeaseDate, setLeaseDate] = useState("");
   const [State1, setState1] = useState("");
-
   const [Editar, setEditar] = useState(false);
   const [ArrendatarioList, setArrendatario] = useState([]);
 
   /* agregar arrendatarios */
   const add = () => {
-    Axios.post("http://localhost:3001/create", {
+    Axios.post("http://localhost:3001/user/create", {
       IDUsuario: IDUsuario,
       Nombre: Nombre,
       PhoneNumber: PhoneNumber,
     }).then(() => {
       getArrendatario();
       limpiarCampos();
-      alert("se registro bro");
       Swal.fire({
-        title: '<strong>Registro exitoso</strong>',
-        html: '<i>El arrendatario: <strong>' + Nombre + '</strong> fue registrado</i>',
-        icon: 'success', timer: 2000
-      })
+        title: "<strong>Registro exitoso</strong>",
+        html:
+          "<i>El arrendatario: <strong>" +
+          Nombre +
+          "</strong> fue registrado</i>",
+        icon: "success",
+        timer: 2000,
+      });
     });
   };
 
@@ -55,24 +56,26 @@ function Registro() {
     setIDUsuario(val.ID);
 
     setNombre(val.nombre);
-    setphoneNumber(val.telefono)
-
-  }
+    setphoneNumber(val.telefono);
+  };
   const update = () => {
-    Axios.put("http://localhost:3001/update", {
+    Axios.put("http://localhost:3001/user/update", {
       IDUsuario: IDUsuario,
       Nombre: Nombre,
       PhoneNumber: PhoneNumber,
     }).then(() => {
       getArrendatario();
-      alert("se actualizo bro");
       limpiarCampos();
 
       Swal.fire({
-        title: '<strong>Actualizacion exitosa</strong>',
-        html: '<i>El arrendatario: <strong>' + Nombre + '</strong> fue actualizado</i>',
-        icon: 'success', timer: 2000
-      })
+        title: "<strong>Actualizacion exitosa</strong>",
+        html:
+          "<i>El arrendatario: <strong>" +
+          Nombre +
+          "</strong> fue actualizado</i>",
+        icon: "success",
+        timer: 2000,
+      });
     });
   };
 
@@ -84,48 +87,51 @@ function Registro() {
   };
 
   const Eliminar = (val) => {
-
     Swal.fire({
-      title: 'ELIMINAR',
-      html: '<i>Desea eliminar al usuario <strong>' + val.nombre + '</strong> ?  </i>',
-
-      icon: 'warning',
+      title: "ELIMINAR",
+      html:
+        "<i>Desea eliminar al usuario <strong>" +
+        val.nombre +
+        "</strong> ?  </i>",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'si, eliminar'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, eliminar",
     }).then((result) => {
       if (result.isConfirmed) {
-/* aqui es donde se elimina */
+        /* aqui es donde se elimina */
         const IDUsuario = val.ID;
-        Axios.delete("http://localhost:3001/delete", {
+        Axios.delete("http://localhost:3001/user/delete", {
           data: { IDUsuario: IDUsuario },
-        }).then(() => {
-          getArrendatario();
-
-          Swal.fire({
-            position: 'top-end',
-            title: '<strong>Eliminacion exitosa</strong>',
-            html: '<i>El arrendatario: <strong>' + val.nombre + '</strong> fue eliminado</i>',
-            icon: 'success', timer: 5000,
-            showConfirmButton: false
+        })
+          .then(() => {
+            getArrendatario();
+            Swal.fire({
+              title: "<strong>Eliminacion exitosa</strong>",
+              html:
+                "<i>El arrendatario: <strong>" +
+                val.nombre +
+                "</strong> fue eliminado</i>",
+              icon: "success",
+              timer: 2000,
+              showConfirmButton: false,
+            });
           })
-
-        }).catch(function(error){
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'no se pudo eliminar',showConfirmButton: false,
-            footer: "intente mas tarde"
-            /* JSON.parse(JSON.stringify(error)).message=="Network Error"?"intente mas tarde": footer: JSON.parse(JSON.stringify(error)).message
-           */})
-
-        });    
+          .catch(function (error) {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "No se pudo eliminar",
+              showConfirmButton: false,
+              footer: "Intente mas tarde",
+              /* JSON.parse(JSON.stringify(error)).message=="Network Error"?"intente mas tarde": footer: JSON.parse(JSON.stringify(error)).message
+               */
+            });
+          });
       }
-    })
+    });
   };
-
-
 
   /*  
   
@@ -138,10 +144,9 @@ function Registro() {
     });
   }; */
 
-
   /* mostrar arrendatarios */
   const getArrendatario = () => {
-    Axios.get("http://localhost:3001/arrendatarios").then((res) => {
+    Axios.get("http://localhost:3001/user/arrendatarios").then((res) => {
       setArrendatario(res.data);
       console.log(res.data);
     });
@@ -162,7 +167,8 @@ function Registro() {
                   ID del Usuario{" "}
                 </span>
                 <input
-                  type="number" value={IDUsuario}
+                  type="number"
+                  value={IDUsuario}
                   onChange={(event) => {
                     setIDUsuario(event.target.value);
                   }}
@@ -177,7 +183,8 @@ function Registro() {
                   Nombre{" "}
                 </span>
                 <input
-                  type="text" value={Nombre}
+                  type="text"
+                  value={Nombre}
                   onChange={(event) => {
                     setNombre(event.target.value);
                   }}
@@ -192,7 +199,8 @@ function Registro() {
                   Apellido{" "}
                 </span>
                 <input
-                  type="text" value={Apellido}
+                  type="text"
+                  value={Apellido}
                   onChange={(event) => {
                     setApellido(event.target.value);
                   }}
@@ -207,7 +215,8 @@ function Registro() {
                   Tipo de Usuario{" "}
                 </span>
                 <input
-                  type="text" value={TypeUser}
+                  type="text"
+                  value={TypeUser}
                   onChange={(event) => {
                     setTypeUser(event.target.value);
                   }}
@@ -222,7 +231,8 @@ function Registro() {
                   Contraseña
                 </span>
                 <input
-                  type="text" value={Contraseña}
+                  type="text"
+                  value={Contraseña}
                   onChange={(event) => {
                     setContraseña(event.target.value);
                   }}
@@ -237,7 +247,8 @@ function Registro() {
                   Identificacion
                 </span>
                 <input
-                  type="text" value={Identification}
+                  type="text"
+                  value={Identification}
                   onChange={(event) => {
                     setIdentification(event.target.value);
                   }}
@@ -251,7 +262,8 @@ function Registro() {
                   Correo Electronico
                 </span>
                 <input
-                  type="text" value={Gmail}
+                  type="text"
+                  value={Gmail}
                   onChange={(event) => {
                     setGmail(event.target.value);
                   }}
@@ -265,7 +277,8 @@ function Registro() {
                   Numero de telefono
                 </span>
                 <input
-                  type="number" value={PhoneNumber}
+                  type="number"
+                  value={PhoneNumber}
                   onChange={(event) => {
                     setphoneNumber(event.target.value);
                   }}
@@ -279,7 +292,8 @@ function Registro() {
                   fecha de arriendo
                 </span>
                 <input
-                  type="text" value={LeaseDate}
+                  type="text"
+                  value={LeaseDate}
                   onChange={(event) => {
                     setLeaseDate(event.target.value);
                   }}
@@ -293,7 +307,8 @@ function Registro() {
                   Estado de arriendo
                 </span>
                 <input
-                  type="text" value={State1}
+                  type="text"
+                  value={State1}
                   onChange={(event) => {
                     setState1(event.target.value);
                   }}
@@ -305,30 +320,26 @@ function Registro() {
             </div>
             <div className="card-footer text-body-secondary">
               {/* aqui esta el boton de editar */}
-              {
-                Editar == true ?
-                  <div>
-
-                    <button className="btn btn-warning m-2" onClick={update}>
-                      {" "}
-                      Actualizar{" "}
-                    </button>
-                    <button className="btn btn-warning m-2" onClick={limpiarCampos}>
-                      {" "}
-                      cancelar{" "}
-                    </button>
-
-
-                  </div>
-
-                  :
-
-                  <button className="btn btn-success m-2" onClick={add}>
+              {Editar == true ? (
+                <div>
+                  <button className="btn btn-warning m-2" onClick={update}>
                     {" "}
-                    Registrar{" "}
+                    Actualizar{" "}
                   </button>
-
-              }
+                  <button
+                    className="btn btn-warning m-2"
+                    onClick={limpiarCampos}
+                  >
+                    {" "}
+                    cancelar{" "}
+                  </button>
+                </div>
+              ) : (
+                <button className="btn btn-success m-2" onClick={add}>
+                  {" "}
+                  Registrar{" "}
+                </button>
+              )}
 
               <button className="btn btn-success m-2" onClick={getArrendatario}>
                 {" "}
@@ -345,7 +356,6 @@ function Registro() {
                 <th scope="col">Nombre</th>
                 <th scope="col">Telefono</th>
                 <th scope="col">Accciones</th>
-
               </tr>
             </thead>
             <tbody>
@@ -358,31 +368,37 @@ function Registro() {
                     <td>{val.nombre}</td>
                     <td>{val.telefono}</td>
                     <td>
-                      <div className="btn-group" role="group" aria-label="Basic example">
+                      <div
+                        className="btn-group"
+                        role="group"
+                        aria-label="Basic example"
+                      >
+                        <button
+                          type="button"
+                          onClick={() => {
+                            EditarArrendatarios(val);
+                          }}
+                          className="btn btn-info"
+                        >
+                          actualizar
+                        </button>
 
-                        <button type="button" onClick={() => {
-                          EditarArrendatarios(val);
+                        <button
+                          type="button"
+                          onClick={() => {
+                            Eliminar(val);
 
-                        }}
-                          className="btn btn-info">actualizar</button>
-
-                        <button type="button" onClick={() => {
-
-                          Eliminar(val);
-
-                          /*  alert("el id es"+IDUsuario) */
-                        }}
-                          className="btn btn-danger">borrar</button>
-
+                            /*  alert("el id es"+IDUsuario) */
+                          }}
+                          className="btn btn-danger"
+                        >
+                          borrar
+                        </button>
                       </div>
-
                     </td>
-
                   </tr>
                 );
               })}
-
-
             </tbody>
           </table>
         </div>
