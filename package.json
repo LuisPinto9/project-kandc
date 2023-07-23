@@ -1,0 +1,16 @@
+{
+  "name": "project-kandc",
+  "version": "1.0.0",
+  "description": "Proyecto Edificio K&C",
+  "main": "index.js",
+  "scripts": {
+    "server": "cd ./Back/server && npm run dev",
+    "start:react": "cd ./Front && npm start",
+    "start": "concurrently \"npm run start:react\" \"npm run server\""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
