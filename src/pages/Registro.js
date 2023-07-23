@@ -7,7 +7,7 @@ import "../App.css";
 import Axios from "axios";
 
 /* para que los alert se vean bonitos */
- import Swal from 'sweetalert2'
+import Swal from 'sweetalert2'
 import SistemaUsuario from "./DashboardUsuario";
 import { Alert } from "react-bootstrap";
 /*import withReactContent from 'sweetalert2-react-content'
@@ -42,9 +42,9 @@ function Registro() {
       alert("se registro bro");
       Swal.fire({
         title: '<strong>Registro exitoso</strong>',
-        html: '<i>El arrendatario: <strong>'+ Nombre+'</strong> fue registrado</i>',
-        icon: 'success',timer:2000
-      }) 
+        html: '<i>El arrendatario: <strong>' + Nombre + '</strong> fue registrado</i>',
+        icon: 'success', timer: 2000
+      })
     });
   };
 
@@ -53,7 +53,7 @@ function Registro() {
     setEditar(true);
     /*  setIDUsuario(val.ID); */
     setIDUsuario(val.ID);
-    
+
     setNombre(val.nombre);
     setphoneNumber(val.telefono)
 
@@ -68,48 +68,75 @@ function Registro() {
       alert("se actualizo bro");
       limpiarCampos();
 
-     Swal.fire({
-      title: '<strong>Actualizacion exitosa</strong>',
-      html: '<i>El arrendatario: <strong>'+ Nombre+'</strong> fue actualizado</i>',
-      icon: 'success',timer:2000
-      }) 
+      Swal.fire({
+        title: '<strong>Actualizacion exitosa</strong>',
+        html: '<i>El arrendatario: <strong>' + Nombre + '</strong> fue actualizado</i>',
+        icon: 'success', timer: 2000
+      })
     });
   };
 
-  const limpiarCampos=()=>  {
+  const limpiarCampos = () => {
     setIDUsuario("");
     setNombre("");
     setphoneNumber("");
     setEditar(false);
   };
 
-const Eliminar =(val)=>{
-  const IDUsuario=val.ID;
-  Axios.delete("http://localhost:3001/delete", {
-    data: { IDUsuario: IDUsuario },
-  }).then(() => {
-    getArrendatario();
-    alert("se elimino bro"+IDUsuario);    
+  const Eliminar = (val) => {
 
-  });
-};
+    Swal.fire({
+      title: 'ELIMINAR',
+      html: '<i>Desea eliminar al usuario <strong>' + val.nombre + '</strong> ?  </i>',
+
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'si, eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+/* aqui es donde se elimina */
+        const IDUsuario = val.ID;
+        Axios.delete("http://localhost:3001/delete", {
+          data: { IDUsuario: IDUsuario },
+        }).then(() => {
+          getArrendatario();
+
+          Swal.fire({
+            position: 'top-end',
+            title: '<strong>Eliminacion exitosa</strong>',
+            html: '<i>El arrendatario: <strong>' + val.nombre + '</strong> fue eliminado</i>',
+            icon: 'success', timer: 5000,
+            showConfirmButton: false
+          })
+
+        }).catch(function(error){
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'no se pudo eliminar',showConfirmButton: false,
+            footer: "intente mas tarde"
+            /* JSON.parse(JSON.stringify(error)).message=="Network Error"?"intente mas tarde": footer: JSON.parse(JSON.stringify(error)).message
+           */})
+
+        });    
+      }
+    })
+  };
 
 
 
-/*  
-
- const Eliminar2 = (IDUsuario) => {
-  Axios.delete("http://localhost:3001/delete/${IDUsuario}").then(() => {
-    getArrendatario();
-    alert("se elimino bro"+IDUsuario);
-
-   Swal.fire({
-    title: '<strong>Eliminacion exitosa</strong>',
-    html: '<i>El arrendatario: <strong>'+ IDUsuario +'</strong> fue eliminado</i>',
-    icon: 'success',timer:6000
-    }) 
-  });
-}; */
+  /*  
+  
+   const Eliminar2 = (IDUsuario) => {
+    Axios.delete("http://localhost:3001/delete/${IDUsuario}").then(() => {
+      getArrendatario();
+      alert("se elimino bro"+IDUsuario);
+  
+     
+    });
+  }; */
 
 
   /* mostrar arrendatarios */
@@ -340,12 +367,12 @@ const Eliminar =(val)=>{
                           className="btn btn-info">actualizar</button>
 
                         <button type="button" onClick={() => {
-                            
+
                           Eliminar(val);
-                        
-                           /*  alert("el id es"+IDUsuario) */
+
+                          /*  alert("el id es"+IDUsuario) */
                         }}
-                        className="btn btn-danger">borrar</button>
+                          className="btn btn-danger">borrar</button>
 
                       </div>
 
@@ -354,7 +381,7 @@ const Eliminar =(val)=>{
                   </tr>
                 );
               })}
-              
+
 
             </tbody>
           </table>
