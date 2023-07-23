@@ -64,6 +64,41 @@ app.put("/update", (req, res) => {
 });
 
 
+app.delete("/delete", (req, res) => {
+  const IDUsuario = req.body.IDUsuario;  
+  db.query(
+   /*  "update  Arrendatario1 set(ID,nombre,telefono) values(?,?,?)" where ID=?", */
+   
+   "Delete from Arrendatario1 where ID=?",  
+   /*  "update Arrendatario1 set(ID,nombre,telefono) values(?,?,?) where ID=?",*/
+    [IDUsuario],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Hubo un error en el servidor")
+      } else {
+        res.send("Arrendatario-eliminado");
+      }
+    }
+  );
+  
+});
+/* app.delete("/delete/:IDUsuario", (req, res) => {
+  const IDUsuario = req.params.IDUsuario;
+  db.query(
+    "Delete from Arrendatario1 where ID=?",  
+    [IDUsuario],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Hubo un error en el servidor")
+      } else {
+        res.send("Arrendatario-eliminado");
+      }
+    }
+  );
+}); */
+
+
+
 app.listen(app.get("port"), () => {
   console.log(`Corriendo en puerto ${app.get("port")}`);
 });

@@ -8,6 +8,8 @@ import Axios from "axios";
 
 /* para que los alert se vean bonitos */
  import Swal from 'sweetalert2'
+import SistemaUsuario from "./DashboardUsuario";
+import { Alert } from "react-bootstrap";
 /*import withReactContent from 'sweetalert2-react-content'
 const notifica = withReactContent(Swal) */
 
@@ -51,6 +53,7 @@ function Registro() {
     setEditar(true);
     /*  setIDUsuario(val.ID); */
     setIDUsuario(val.ID);
+    
     setNombre(val.nombre);
     setphoneNumber(val.telefono)
 
@@ -78,7 +81,35 @@ function Registro() {
     setNombre("");
     setphoneNumber("");
     setEditar(false);
-  }
+  };
+
+const Eliminar =(val)=>{
+  const IDUsuario=val.ID;
+  Axios.delete("http://localhost:3001/delete", {
+    data: { IDUsuario: IDUsuario },
+  }).then(() => {
+    getArrendatario();
+    alert("se elimino bro"+IDUsuario);    
+
+  });
+};
+
+
+
+/*  
+
+ const Eliminar2 = (IDUsuario) => {
+  Axios.delete("http://localhost:3001/delete/${IDUsuario}").then(() => {
+    getArrendatario();
+    alert("se elimino bro"+IDUsuario);
+
+   Swal.fire({
+    title: '<strong>Eliminacion exitosa</strong>',
+    html: '<i>El arrendatario: <strong>'+ IDUsuario +'</strong> fue eliminado</i>',
+    icon: 'success',timer:6000
+    }) 
+  });
+}; */
 
 
   /* mostrar arrendatarios */
@@ -307,7 +338,14 @@ function Registro() {
 
                         }}
                           className="btn btn-info">actualizar</button>
-                        <button type="button" className="btn btn-danger">borrar</button>
+
+                        <button type="button" onClick={() => {
+                            
+                          Eliminar(val);
+                        
+                           /*  alert("el id es"+IDUsuario) */
+                        }}
+                        className="btn btn-danger">borrar</button>
 
                       </div>
 
@@ -316,17 +354,7 @@ function Registro() {
                   </tr>
                 );
               })}
-              {/* 
-              {ArrendatarioList.map((val, key) => {
-                return (
-                  <tr key={key}>
-                    <th scope="row">{val.IDUsuario}</th>
-                    <td>{val.ID}</td>
-                    <td>{val.nombre}</td>
-                    <td>{val.telefono}</td>
-                  </tr>
-                );
-              })} */}
+              
 
             </tbody>
           </table>
