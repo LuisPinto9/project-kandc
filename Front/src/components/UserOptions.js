@@ -1,39 +1,91 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import user from "../images/User2.png";
 import lista from "../images/list.png";
 import inicio from "../images/hogar.png";
 
 const UserOptions = () => {
+  const location = useLocation();
   return (
     <div>
-      <div className="container-fluid div-inicio">
-        <Link
-          className="link-zonas d-flex align-items-center"
-          to="/dashboard-usuario"
-        >
-          <div>
-            <img src={inicio} alt="Logo" width="39" height="38" />
-          </div>
-          <div className="px-1">Inicio</div>
-        </Link>
-      </div>
-      <div className="container-fluid div-zonas">
-        <Link className="link-zonas d-flex align-items-center" to="#1">
-          <div>
-            <img src={user} alt="Logo" width="39" height="38" />
-          </div>
-          <div className="px-1">Perfil</div>
-        </Link>
-      </div>
-      <div className="container-fluid div-habitaciones">
-        <Link className="link-habitaciones d-flex align-items-center" to="#2">
-          <div>
-            <img src={lista} alt="Logo" width="37" height="42" />
-          </div>
-          <div className="px-1">Inventario</div>
-        </Link>
-      </div>
+      {location.pathname === "/dashboard-usuario" && (
+        <div className="container-fluid div-inicio-seleccionado">
+          <Link
+            className="link-zonas d-flex align-items-center"
+            to="/dashboard-usuario"
+          >
+            <div>
+              <img src={inicio} alt="Logo" width="39" height="38" />
+            </div>
+            <div className="px-1">Inicio</div>
+          </Link>
+        </div>
+      )}
+      {location.pathname !== "/dashboard-usuario" && (
+        <div className="container-fluid div-inicio">
+          <Link
+            className="link-zonas d-flex align-items-center"
+            to="/dashboard-usuario"
+          >
+            <div>
+              <img src={inicio} alt="Logo" width="39" height="38" />
+            </div>
+            <div className="px-1">Inicio</div>
+          </Link>
+        </div>
+      )}
+      {location.pathname === "/dashboard-usuario/perfil" && (
+        <div className="container-fluid div-inicio-seleccionado">
+          <Link
+            className="link-zonas d-flex align-items-center"
+            to="/dashboard-usuario/perfil"
+          >
+            <div>
+              <img src={user} alt="Logo" width="39" height="38" />
+            </div>
+            <div className="px-1">Usuario</div>
+          </Link>
+        </div>
+      )}
+      {location.pathname !== "/dashboard-usuario/perfil" && (
+        <div className="container-fluid div-inicio">
+          <Link
+            className="link-zonas d-flex align-items-center"
+            to="/dashboard-usuario/perfil"
+          >
+            <div>
+              <img src={user} alt="Logo" width="39" height="38" />
+            </div>
+            <div className="px-1">Usuario</div>
+          </Link>
+        </div>
+      )}
+      {location.pathname === "/dashboard-usuario/inventario" && (
+        <div className="container-fluid div-inicio-seleccionado">
+          <Link
+            className="link-zonas d-flex align-items-center"
+            to="/dashboard-usuario/inventario"
+          >
+            <div>
+              <img src={lista} alt="Logo" width="37" height="42" />
+            </div>
+            <div className="px-1">Inventario</div>
+          </Link>
+        </div>
+      )}
+      {location.pathname !== "/dashboard-usuario/inventario" && (
+        <div className="container-fluid div-inicio">
+          <Link
+            className="link-zonas d-flex align-items-center"
+            to="/dashboard-usuario/inventario"
+          >
+            <div>
+              <img src={lista} alt="Logo" width="37" height="42" />
+            </div>
+            <div className="px-1">Inventario</div>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

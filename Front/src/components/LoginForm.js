@@ -5,7 +5,7 @@ import "../css/form.css";
 const LoginForm = () => {
   return (
     <div className="row justify-content-center m-5">
-      <div className="form-rectangle col-7 p-4 justify-content-center">
+      <div className="form-rectangle col-7 p-4 pb-2 justify-content-center">
         <div className="div-titulo-login">
           <h1 className="titulo-login">Iniciar Sesión</h1>
         </div>
@@ -72,9 +72,9 @@ const LoginForm = () => {
             </div>
             <div className="d-flex justify-content-center">
               <div className="px-5">
-                <button type="button" className="btn btn-primary form-button shadow-sm">
-                  <Link to="/" className="button-text-volver">Volver</Link>
-                </button>
+                <Link to="/" className="btn btn-danger form-button shadow-sm">
+                  Volver
+                </Link>
               </div>
               <div className="px-5">
                 <button type="submit" className="btn btn-primary form-button">
@@ -83,7 +83,8 @@ const LoginForm = () => {
               </div>
             </div>
           </form>
-          <div className="d-flex">
+        </div>
+        <div className="d-flex justify-content-center pt-3">
             <Link to="/dashboard-admin">
               <p>Admin</p>
             </Link>
@@ -91,7 +92,6 @@ const LoginForm = () => {
               <p>Usuario</p>
             </Link>
           </div>
-        </div>
       </div>
     </div>
   );

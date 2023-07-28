@@ -11,6 +11,8 @@ const BarraLateral = () => {
         {location.pathname === "/dashboard-admin" && <AdminOptions />}
         {location.pathname === "/dashboard-admin/registro" && <AdminOptions />}
         {location.pathname === "/dashboard-usuario" && <UserOptions />}
+        {location.pathname === "/dashboard-usuario/perfil" && <UserOptions />}
+        {location.pathname === "/dashboard-usuario/inventario" && <UserOptions />}
       </div>
     </aside>
   );
