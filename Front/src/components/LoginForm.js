@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/form.css";
 
 const LoginForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleCheckChange = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="row justify-content-center m-5">
       <div className="form-rectangle col-7 p-4 pb-2 justify-content-center">
@@ -38,35 +44,39 @@ const LoginForm = () => {
                 </div>
               </div>
             </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">
+            <div className="mb-3">
+              <label htmlFor="InputPassword" className="form-label">
                 Contraseña
               </label>
               <div className="text-input-login">
-                <div class="input-group mb-0">
+                <div className="input-group mb-0">
                   <div className="input-group-gray">
                     <span
-                      class="input-group-text input-login px-2 pt-1 pb-1"
+                      className="input-group-text input-login px-2 pt-1 pb-1"
                       id="basic-addon1"
                     >
-                      <i class="bi bi-lock" style={{ fontSize: "1.3rem" }}></i>
+                      <i
+                        className="bi bi-lock"
+                        style={{ fontSize: "1.3rem" }}
+                      ></i>
                     </span>
                   </div>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     className="form-control"
-                    id="exampleInputPassword1"
+                    id="InputPassword"
                   />
                 </div>
               </div>
             </div>
-            <div class="mb-3 form-check">
+            <div className="mb-3 form-check">
               <input
                 type="checkbox"
                 className="form-check-input"
-                id="exampleCheck1"
+                id="Check"
+                onChange={handleCheckChange}
               />
-              <label class="form-check-label" for="exampleCheck1">
+              <label className="form-check-label" htmlFor="Check">
                 Check me out
               </label>
             </div>
