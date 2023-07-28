@@ -1,0 +1,66 @@
+:root {
+  --verde: #42634d;
+  --verde-claro: #a0d9b3;
+  --verde-seleccion: #baffd1;
+  --blanco: #fff;
+  --negro: #000;
+  --fuente: "Inter";
+}
+
+.form-rectangle {
+  border: 1px black solid;
+}
+
+.div-titulo-login {
+  border-bottom: #000 solid 1px;
+}
+
+.titulo-login {
+  font: var(--fuente);
+  font-size: 2.1rem;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.form-label {
+  font: var(--fuente);
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+.input-group-gray {
+  background-color: lightgray;
+  border-radius: 0.2rem;
+}
+
+.input-login {
+  background-color: #1f844a;
+  color: var(--blanco);
+  margin-left: 0.5rem;
+  border: none;
+  border-radius: 0;
+}
+
+.form-button{
+color: var(--blanco);
+width: 6.5rem;
+background-color: #FF8700;
+border: none;
+border-radius: 0.6rem;
+font: var(--fuente);
+font-size: 1.3rem;
+filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.25));
+}
+
+.form-button:hover{
+  background-color: #d87300;
+  }
+
+  .button-text-volver{
+    color: var(--blanco);
+    text-decoration: none;
+  }
+
+  .text-input-login{
+    border-radius: 0.6rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }

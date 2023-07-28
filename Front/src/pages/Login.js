@@ -1,16 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import LoginForm from "../components/LoginForm";
 
 const Login = () => {
   return (
     <div>
-      inicio de sesion
-      <Link to="/dashboard-admin">
-        <p>Admin</p>
-      </Link>
-      <Link to="/dashboard-usuario">
-        <p>Usuario</p>
-      </Link>
+      <LoginForm />
     </div>
   );
 };

@@ -38,7 +38,7 @@ const Navbarinicio = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
-                    <Link as={Link} to="/" className="inicio-sesion">
+                    <Link as={Link} to="/login" className="inicio-sesion">
                       {" "}
                       Cerrar Sesión
                     </Link>
@@ -53,7 +53,7 @@ const Navbarinicio = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
-                    <Link as={Link} to="/" className="inicio-sesion">
+                    <Link as={Link} to="/login" className="inicio-sesion">
                       {" "}
                       Cerrar Sesión
                     </Link>
@@ -68,7 +68,7 @@ const Navbarinicio = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
-                    <Link as={Link} to="/" className="inicio-sesion">
+                    <Link as={Link} to="/login" className="inicio-sesion">
                       {" "}
                       Cerrar Sesión
                     </Link>
