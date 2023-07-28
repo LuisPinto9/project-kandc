@@ -9,9 +9,9 @@ const UserOptions = () => {
   return (
     <div>
       {location.pathname === "/dashboard-usuario" && (
-        <div className="container-fluid div-inicio-seleccionado">
+        <div className="container-fluid div-barra-seleccionado">
           <Link
-            className="link-zonas d-flex align-items-center"
+            className="link-to d-flex align-items-center"
             to="/dashboard-usuario"
           >
             <div>
@@ -22,9 +22,9 @@ const UserOptions = () => {
         </div>
       )}
       {location.pathname !== "/dashboard-usuario" && (
-        <div className="container-fluid div-inicio">
+        <div className="container-fluid div-barra-seccion">
           <Link
-            className="link-zonas d-flex align-items-center"
+            className="link-to d-flex align-items-center"
             to="/dashboard-usuario"
           >
             <div>
@@ -35,9 +35,9 @@ const UserOptions = () => {
         </div>
       )}
       {location.pathname === "/dashboard-usuario/perfil" && (
-        <div className="container-fluid div-inicio-seleccionado">
+        <div className="container-fluid div-barra-seleccionado">
           <Link
-            className="link-zonas d-flex align-items-center"
+            className="link-to d-flex align-items-center"
             to="/dashboard-usuario/perfil"
           >
             <div>
@@ -48,9 +48,9 @@ const UserOptions = () => {
         </div>
       )}
       {location.pathname !== "/dashboard-usuario/perfil" && (
-        <div className="container-fluid div-inicio">
+        <div className="container-fluid div-barra-seccion">
           <Link
-            className="link-zonas d-flex align-items-center"
+            className="link-to d-flex align-items-center"
             to="/dashboard-usuario/perfil"
           >
             <div>
@@ -61,9 +61,9 @@ const UserOptions = () => {
         </div>
       )}
       {location.pathname === "/dashboard-usuario/inventario" && (
-        <div className="container-fluid div-inicio-seleccionado">
+        <div className="container-fluid div-barra-seleccionado">
           <Link
-            className="link-zonas d-flex align-items-center"
+            className="link-to d-flex align-items-center"
             to="/dashboard-usuario/inventario"
           >
             <div>
@@ -74,9 +74,9 @@ const UserOptions = () => {
         </div>
       )}
       {location.pathname !== "/dashboard-usuario/inventario" && (
-        <div className="container-fluid div-inicio">
+        <div className="container-fluid div-barra-seccion">
           <Link
-            className="link-zonas d-flex align-items-center"
+            className="link-to d-flex align-items-center"
             to="/dashboard-usuario/inventario"
           >
             <div>

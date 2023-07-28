@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import BarraLateral from "../components/BarraLateral";
-import "../css/styles.css";
-import "../css/registro.css";
+import BarraLateral from "../../components/BarraLateral";
+import "../../css/styles.css";
+import "../../css/registro.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../App.css";
+import "../../App.css";
 import Axios from "axios";
 
 /* para que los alert se vean bonitos */
 import Swal from "sweetalert2";
-import SistemaUsuario from "./DashboardUsuario";
+import SistemaUsuario from "../user/DashboardUsuario";
 import { Alert } from "react-bootstrap";
 /*import withReactContent from 'sweetalert2-react-content'
 const notifica = withReactContent(Swal) */
@@ -153,8 +153,8 @@ function Registro() {
   };
 
   return (
-    <div className="d-flex">
-      <div className="col-2 div-barra">
+    <div className="d-flex" style={{ minHeight: "100vh" }}>
+      <div className="div-barra">
         <BarraLateral />
       </div>
       <div className="container">

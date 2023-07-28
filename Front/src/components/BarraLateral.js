@@ -7,12 +7,17 @@ const BarraLateral = () => {
   const location = useLocation();
   return (
     <aside className="text-center">
-      <div>
+      <div className="d-flex">
         {location.pathname === "/dashboard-admin" && <AdminOptions />}
         {location.pathname === "/dashboard-admin/registro" && <AdminOptions />}
+        {location.pathname === "/dashboard-admin/zonas" && <AdminOptions />}
+        {location.pathname === "/dashboard-admin/habitaciones" && <AdminOptions />}
+        {location.pathname === "/dashboard-admin/componentes" && <AdminOptions />}
         {location.pathname === "/dashboard-usuario" && <UserOptions />}
         {location.pathname === "/dashboard-usuario/perfil" && <UserOptions />}
-        {location.pathname === "/dashboard-usuario/inventario" && <UserOptions />}
+        {location.pathname === "/dashboard-usuario/inventario" && (
+          <UserOptions />
+        )}
       </div>
     </aside>
   );

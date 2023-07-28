@@ -1,17 +1,17 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "../components/Home";
+import Home from "../pages/Home";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Registro from "../pages/Registro";
-import DashboardAdmin from "../pages/DashboardAdmin";
-import DashboardUsuario from "../pages/DashboardUsuario";
+import Registro from "../pages/admin/Registro";
+import DashboardAdmin from "../pages/admin/DashboardAdmin";
+import DashboardUsuario from "../pages/user/DashboardUsuario";
 import Login from "../pages/Login";
-import PerfilUser from "../pages/PerfilUser";
-import InventarioUser from "../pages/InventarioUser";
-import Zonas from "../pages/Zonas";
-import Componentes from "../pages/Componentes";
-import Habitaciones from "../pages/Habitaciones";
+import PerfilUser from "../pages/user/PerfilUser";
+import InventarioUser from "../pages/user/InventarioUser";
+import Zonas from "../pages/admin/Zonas";
+import Componentes from "../pages/admin/Componentes";
+import Habitaciones from "../pages/admin/Habitaciones";
 import Error404 from "../pages/Error404";
 
 const Router = () => {

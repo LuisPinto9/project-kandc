@@ -1,14 +1,12 @@
 import React from "react";
-import BarraLateral from "../components/BarraLateral";
-import "../css/styles.css";
-import logo from "../logo.svg";
-import "../App.css";
+import BarraLateral from "../../components/BarraLateral";
+import logo from "../../logo.svg";
 
-const SistemaUsuario = () => {
+const DashboardAdmin = () => {
   return (
     <div>
-      <div className="d-flex">
-        <div className="col-2 div-barra">
+      <div className="d-flex" style={{ minHeight: "100vh" }}>
+        <div className="div-barra">
           <BarraLateral />
         </div>
         <div className="body-1 col-10 text-center">
@@ -34,4 +32,4 @@ const SistemaUsuario = () => {
   );
 };
 
-export default SistemaUsuario;
+export default DashboardAdmin;

@@ -85,13 +85,13 @@ const LoginForm = () => {
           </form>
         </div>
         <div className="d-flex justify-content-center pt-3">
-            <Link to="/dashboard-admin">
-              <p>Admin</p>
-            </Link>
-            <Link to="/dashboard-usuario">
-              <p>Usuario</p>
-            </Link>
-          </div>
+          <Link to="/dashboard-admin">
+            <p>Admin</p>
+          </Link>
+          <Link to="/dashboard-usuario">
+            <p>Usuario</p>
+          </Link>
+        </div>
       </div>
     </div>
   );

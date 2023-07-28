@@ -24,7 +24,6 @@ const Navbarinicio = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
                     <Link as={Link} to="/login" className="inicio-sesion">
-                      {" "}
                       Iniciar Sesión
                     </Link>
                   </Nav>
@@ -39,7 +38,6 @@ const Navbarinicio = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
                     <Link as={Link} to="/login" className="inicio-sesion">
-                      {" "}
                       Cerrar Sesión
                     </Link>
                   </Nav>
@@ -54,7 +52,48 @@ const Navbarinicio = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
                     <Link as={Link} to="/login" className="inicio-sesion">
-                      {" "}
+                      Cerrar Sesión
+                    </Link>
+                  </Nav>
+                </Navbar.Collapse>
+              </Container>
+            </Navbar>
+          )}
+          {location.pathname === "/dashboard-admin/componentes" && (
+            <Navbar expand="lg" className="navBg">
+              <Container>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="me-auto">
+                    <Link as={Link} to="/login" className="inicio-sesion">
+                      Cerrar Sesión
+                    </Link>
+                  </Nav>
+                </Navbar.Collapse>
+              </Container>
+            </Navbar>
+          )}
+          {location.pathname === "/dashboard-admin/zonas" && (
+            <Navbar expand="lg" className="navBg">
+              <Container>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="me-auto">
+                    <Link as={Link} to="/login" className="inicio-sesion">
+                      Cerrar Sesión
+                    </Link>
+                  </Nav>
+                </Navbar.Collapse>
+              </Container>
+            </Navbar>
+          )}
+          {location.pathname === "/dashboard-admin/habitaciones" && (
+            <Navbar expand="lg" className="navBg">
+              <Container>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="me-auto">
+                    <Link as={Link} to="/login" className="inicio-sesion">
                       Cerrar Sesión
                     </Link>
                   </Nav>
@@ -69,7 +108,34 @@ const Navbarinicio = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
                     <Link as={Link} to="/login" className="inicio-sesion">
-                      {" "}
+                      Cerrar Sesión
+                    </Link>
+                  </Nav>
+                </Navbar.Collapse>
+              </Container>
+            </Navbar>
+          )}
+          {location.pathname === "/dashboard-usuario/perfil" && (
+            <Navbar expand="lg" className="navBg">
+              <Container>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="me-auto">
+                    <Link as={Link} to="/login" className="inicio-sesion">
+                      Cerrar Sesión
+                    </Link>
+                  </Nav>
+                </Navbar.Collapse>
+              </Container>
+            </Navbar>
+          )}
+          {location.pathname === "/dashboard-usuario/inventario" && (
+            <Navbar expand="lg" className="navBg">
+              <Container>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="me-auto">
+                    <Link as={Link} to="/login" className="inicio-sesion">
                       Cerrar Sesión
                     </Link>
                   </Nav>

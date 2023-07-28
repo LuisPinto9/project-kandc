@@ -11,9 +11,9 @@ const AdminOptions = () => {
   return (
     <div>
       {location.pathname === "/dashboard-admin" && (
-        <div className="container-fluid div-inicio-seleccionado">
+        <div className="container-fluid div-barra-seleccionado">
           <Link
-            className="link-zonas d-flex align-items-center"
+            className="link-to d-flex align-items-center"
             to="/dashboard-admin"
           >
             <div>
@@ -24,9 +24,9 @@ const AdminOptions = () => {
         </div>
       )}
       {location.pathname !== "/dashboard-admin" && (
-        <div className="container-fluid div-inicio">
+        <div className="container-fluid div-barra-seccion">
           <Link
-            className="link-zonas d-flex align-items-center"
+            className="link-to d-flex align-items-center"
             to="/dashboard-admin"
           >
             <div>
@@ -36,34 +36,88 @@ const AdminOptions = () => {
           </Link>
         </div>
       )}
-      <div className="container-fluid div-zonas">
-        <Link className="link-zonas d-flex align-items-center" to="#1">
-          <div>
-            <img src={zonas} alt="Logo" width="39" height="38" />
-          </div>
-          <div className="px-1">Zonas</div>
-        </Link>
-      </div>
-      <div className="container-fluid div-habitaciones">
-        <Link className="link-habitaciones d-flex align-items-center" to="#2">
-          <div>
-            <img src={habitaciones} alt="Logo" width="37" height="42" />
-          </div>
-          <div className="px-1">Habitaciones</div>
-        </Link>
-      </div>
-      <div className="container-fluid div-componentes">
-        <Link className="link-componentes d-flex align-items-center" to="#3">
-          <div>
-            <img src={componentes} alt="Logo" width="34" height="40" />
-          </div>
-          <div className="px-1">Componentes</div>
-        </Link>
-      </div>
-      {location.pathname === "/dashboard-admin/registro" && (
-        <div className="container-fluid div-usuarios-seleccionado">
+      {location.pathname === "/dashboard-admin/zonas" && (
+        <div className="container-fluid div-barra-seleccionado">
           <Link
-            className="link-usuarios d-flex align-items-center"
+            className="link-to d-flex align-items-center"
+            to="/dashboard-admin/zonas"
+          >
+            <div>
+              <img src={zonas} alt="Logo" width="39" height="38" />
+            </div>
+            <div className="px-1">Zonas</div>
+          </Link>
+        </div>
+      )}
+      {location.pathname !== "/dashboard-admin/zonas" && (
+        <div className="container-fluid div-barra-seccion">
+          <Link
+            className="link-to d-flex align-items-center"
+            to="/dashboard-admin/zonas"
+          >
+            <div>
+              <img src={zonas} alt="Logo" width="39" height="38" />
+            </div>
+            <div className="px-1">Zonas</div>
+          </Link>
+        </div>
+      )}
+      {location.pathname === "/dashboard-admin/habitaciones" && (
+        <div className="container-fluid div-barra-seleccionado">
+          <Link
+            className="link-to d-flex align-items-center"
+            to="/dashboard-admin/habitaciones"
+          >
+            <div>
+              <img src={habitaciones} alt="Logo" width="39" height="38" />
+            </div>
+            <div className="px-1">Habitaciones</div>
+          </Link>
+        </div>
+      )}
+      {location.pathname !== "/dashboard-admin/habitaciones" && (
+        <div className="container-fluid div-barra-seccion">
+          <Link
+            className="link-to d-flex align-items-center"
+            to="/dashboard-admin/habitaciones"
+          >
+            <div>
+              <img src={habitaciones} alt="Logo" width="39" height="38" />
+            </div>
+            <div className="px-1">Habitaciones</div>
+          </Link>
+        </div>
+      )}
+      {location.pathname === "/dashboard-admin/componentes" && (
+        <div className="container-fluid div-barra-seleccionado">
+          <Link
+            className="link-to d-flex align-items-center"
+            to="/dashboard-admin/componentes"
+          >
+            <div>
+              <img src={componentes} alt="Logo" width="39" height="38" />
+            </div>
+            <div className="px-1">Componentes</div>
+          </Link>
+        </div>
+      )}
+      {location.pathname !== "/dashboard-admin/componentes" && (
+        <div className="container-fluid div-barra-seccion">
+          <Link
+            className="link-to d-flex align-items-center"
+            to="/dashboard-admin/componentes"
+          >
+            <div>
+              <img src={componentes} alt="Logo" width="39" height="38" />
+            </div>
+            <div className="px-1">Componentes</div>
+          </Link>
+        </div>
+      )}
+      {location.pathname === "/dashboard-admin/registro" && (
+        <div className="container-fluid div-barra-seleccionado">
+          <Link
+            className="link-to d-flex align-items-center"
             to="/dashboard-admin/registro"
           >
             <div>
@@ -74,9 +128,9 @@ const AdminOptions = () => {
         </div>
       )}
       {location.pathname !== "/dashboard-admin/registro" && (
-        <div className="container-fluid div-usuarios">
+        <div className="container-fluid div-barra-seccion">
           <Link
-            className="link-usuarios d-flex align-items-center"
+            className="link-to d-flex align-items-center"
             to="/dashboard-admin/registro"
           >
             <div>
