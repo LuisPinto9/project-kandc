@@ -5,7 +5,7 @@
 section{
   color:rgb(48, 117, 176);
   /* text-shadow: 3px 3px rgba(50,50,70,0.5); */
-  background-color: rgb(200, 248, 174)
+  background-color: rgb(123, 199, 152)
   /* height: 100vh; */
 }
 
@@ -48,4 +48,9 @@ section{
   to {
     transform: rotate(360deg);
   }
+}
+
+.encabezado-tabla {
+  background-color: rgb(123, 199, 152);
+  color: white; /* Cambiar el color del texto si es necesario */
 }

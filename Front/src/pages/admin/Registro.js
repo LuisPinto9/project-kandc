@@ -133,6 +133,9 @@ function Registro() {
     });
   };
 
+
+
+
   /*  
   
    const Eliminar2 = (IDUsuario) => {
@@ -161,6 +164,7 @@ function Registro() {
         <div className="card text-center">
           <div className="card-header">Gestion de Arrendatario</div>
           <div className="card-body">
+
             <div className="input-group mb-3">
               <span className="input-group-text" id="basic-addon1">
                 ID del Usuario{" "}
@@ -316,6 +320,9 @@ function Registro() {
                 aria-describedby="basic-addon1"
               />
             </div>
+
+
+
           </div>
           <div className="card-footer text-body-secondary">
             {/* aqui esta el boton de editar */}
@@ -331,27 +338,36 @@ function Registro() {
                 </button>
               </div>
             ) : (
-              <button className="btn btn-success m-2" onClick={add}>
-                {" "}
-                Registrar{" "}
+              <button className="btn btn-success " onClick={add}>
+                
+                <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
+                          <i className=" bi bi-person-fill-add" style={{ fontSize: "2.2rem", color: "white" }}></i>
+                        </span>
+                         
               </button>
             )}
 
             <button className="btn btn-success m-2" onClick={getArrendatario}>
-              {" "}
-              Listar{" "}
+            <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
+                          <i className="
+                        bi bi-card-checklist" style={{ fontSize: "2.2rem", color: "white" }}></i>
+                        </span>
             </button>
           </div>
+
+
+
+
         </div>
         {/* aqui empieza la tabla  */}
-        <table className="table">
+        <table className="table table-bordered">
           <thead className="table-dark">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">ID Usuario</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Telefono</th>
-              <th scope="col">Accciones</th>
+          <tr>
+              <th class="table-success" scope="col">#</th>
+              <th class="table-success" scope="col">ID Usuario</th>
+              <th class="table-success" scope="col">Nombre</th>
+              <th class="table-success" scope="col">Telefono</th>
+              <th class="table-success" scope="col">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -374,9 +390,11 @@ function Registro() {
                         onClick={() => {
                           EditarArrendatarios(val);
                         }}
-                        className="btn btn-info"
+                        className="btn "
                       >
-                        actualizar
+                      <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
+                          <i className="bi bi-pencil-square" style={{ fontSize: "2rem", color: "#87CEFA" }}></i>
+                        </span>
                       </button>
 
                       <button
@@ -386,9 +404,11 @@ function Registro() {
 
                           /*  alert("el id es"+IDUsuario) */
                         }}
-                        className="btn btn-danger"
+                        className="btn "
                       >
-                        borrar
+                        <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
+                          <i className="bi bi-x-octagon-fill" style={{ fontSize: "2rem", color: "red" }}></i>
+                        </span>
                       </button>
                     </div>
                   </td>
@@ -397,6 +417,8 @@ function Registro() {
             })}
           </tbody>
         </table>
+
+
       </div>
       {/*   cierra container */}
     </div>
