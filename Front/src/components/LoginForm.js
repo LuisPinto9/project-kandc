@@ -24,15 +24,17 @@ const LoginForm = () => {
               <div className="text-input-login">
                 <div class="input-group mb-2">
                   <div className="input-group-gray">
+                    
                     <span
                       className="input-group-text input-login px-1 py-0"
                       id="basic-addon1"
-                    >
+                      >
                       <i
                         className="bi bi-at"
                         style={{ fontSize: "1.6rem" }}
                       ></i>
                     </span>
+
                   </div>
                   <input
                     type="email"
