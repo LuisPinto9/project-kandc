@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import SistemaUsuario from "../user/DashboardUsuario";
 import { Alert } from "react-bootstrap";
 
+import "../../css/tabla.css";
 
 const Zonas = () => {
 
@@ -46,57 +47,71 @@ const Zonas = () => {
 
 
       <div className="container">
-        <div className="card text-center">
-
-          <div className="card-header">Gestion de Zonas</div>
-          <div className="card-body">
-
-            <p>espacio para input</p>
-
+        
+        <div >
+            {/* aqui esta el boton de editar */}
+            <p></p>
           </div>
-
-          <div className="card-footer text-body-secondary">
-            <p>botones</p>
-            <button className="btn btn-success " onClick={add}>
-
-              <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
-                <i className=" bi bi-person-fill-add" style={{ fontSize: "2.2rem", color: "white" }}></i>
-              </span>
-
-            </button>
+        {/* aqui empieza la tabla  */}
 
 
-            <button className="btn btn-success m-2" onClick={getArrendatario}>
-              <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
-                <i className="
-                        bi bi-card-checklist" style={{ fontSize: "2.2rem", color: "white" }}></i>
-              </span>
-            </button>
-          </div>
+
+
+        <div class="input-group mb-3 align-items-center">
+
+          <input type="text" className="form-control delgado" placeholder="Nombre del arrendatario" aria-label="Nombre de usuario del destinatario" aria-describedby="basic-addon1" />
+          
+          <button class="btn btn-outline"
+            type="button" ><i className="bi bi-search" style={{ fontSize: "2rem", color: "black" }}></i>
+
+          </button>
+
+          {/* botones */}
+
+          <button className="btn btn-primary m-2" onClick={add}>
+            <i className="bi bi-person-fill-add" style={{ fontSize: "2.2rem", color: "white" }}></i>
+
+          </button>
+
+
+          <button className="btn btn-success m-2" onClick={getArrendatario}>
+            <i className="bi bi-card-checklist" style={{ fontSize: "2.2rem", color: "white" }}></i>
+          </button>
 
         </div>
 
+
         {/* aqui empieza la tabla  */}
-        <table className="table table-bordered">
-          <thead className="table-dark">
+
+        <table className="table" >
+          <thead className="table-success">
             <tr>
-              <th class="table-success" scope="col">#</th>
-              <th class="table-success" scope="col">ID Usuario</th>
-              <th class="table-success" scope="col">Nombre</th>
-              <th class="table-success" scope="col">Telefono</th>
-              <th class="table-success" scope="col">Acciones</th>
+              <th className="tablecolor" scope="col">#</th>
+              <th className="tablecolor" scope="col">ID Zona</th>
+              <th className="tablecolor" scope="col">Nombre</th>
+              <th className="tablecolor" scope="col">Estado</th>              
+              <th className="tablecolor" scope="col">alquiler</th>              
+              <th className="tablecolor" scope="col">acceso</th>
+              <th className="tablecolor" scope="col">Acciones</th>
             </tr>
           </thead>
           <tbody>
+
             {ArrendatarioList.map((val, key) => {
               return (
                 <tr key={key}>
-                  <th scope="row">{val.ID}</th>
+
+                  <th style={{ backgroundColor: "#e9e7e76c" }} scope="row">{val.ID}</th>
                   {/* van los nombres de la base de datos en si */}
-                  <td>{val.ID}</td>
-                  <td>{val.nombre}</td>
-                  <td>{val.telefono}</td>
-                  <td>
+                  <td style={{ backgroundColor: "#e9e7e76c" }}>{val.ID}</td>
+
+                  <td style={{ backgroundColor: "#e9e7e76c" }}>{val.nombre}</td>
+                  <td style={{ backgroundColor: "#e9e7e76c" }}>{val.telefono}</td>
+                  
+                  <td style={{ backgroundColor: "#e9e7e76c" }}></td>
+                  
+                  <td style={{ backgroundColor: "#e9e7e76c" }}></td>
+                  <td style={{ backgroundColor: "#e9e7e76c" }}>
                     <div
                       className="btn-group"
                       role="group"
@@ -107,15 +122,11 @@ const Zonas = () => {
                         onClick={() => {
                           EditarArrendatarios(val);
                         }}
-                        className="btn"
-                      >
+                        className="btn " >
+                        <i className="bi bi-pencil-square" style={{ fontSize: "2rem", color: "#ffd650" }}></i>
 
-                        {/*   <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
-                          <i className="bi bi-pen-fill" style={{ fontSize: "2rem", color: "blue" }}></i>
-                        </span> */}
-                        <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
-                          <i className="bi bi-pencil-square" style={{ fontSize: "2rem", color: "#87CEFA" }}></i>
-                        </span>
+                        {/*  <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
+                           </span> */}
                       </button>
 
                       <button
@@ -125,31 +136,19 @@ const Zonas = () => {
 
                           /*  alert("el id es"+IDUsuario) */
                         }}
-                        className="btn "
-                      >
-                        {/* <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "2px solid white", backgroundColor: "red" }}>
-  <i className="bi bi-x-octagon-fill " style={{ fontSize: "2rem", color: "white" }}></i>
-</span>
-<span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
-  <i className="bi bi-x-octagon-fill icon-rojo" style={{ fontSize: "1.6rem" }}></i>
-</span> */}
-                        <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
-                          <i className="bi bi-x-octagon-fill" style={{ fontSize: "2rem", color: "red" }}></i>
-                        </span>
-
-
-
-                        {/*  <span
-                          className="input-group-text input-login px-1 py-0"
-                          id="basic-addon1"
-                        >
-                          <i
-                            className="bi bi-x-octagon"
-                            style={{ fontSize: "1.6rem" }}
-                          ></i>
+                        className="btn " >
+                        <i className="bi bi-x-octagon-fill" style={{ fontSize: "2rem", color: "red" }}></i>
+                        {/* <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
+                          
                         </span> */}
-
                       </button>
+
+
+
+
+
+
+
                     </div>
                   </td>
                 </tr>

@@ -1,0 +1,23 @@
+.table {
+    border-collapse: separate;
+    border-spacing: 5px;
+  
+   /*  background: rgba(128, 128, 128, 0.10); */
+   /*  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
+  }
+    td {
+    background-color: "#e9e7e76c" ;
+    border-radius: 20px;
+   
+  }
+ /* 
+  .tablecolor{
+ 
+    border-radius: 10px;
+  }
+  */
+  .delgado {
+    width: 200px;
+    height:52px;
+  }
+  
