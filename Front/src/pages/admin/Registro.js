@@ -133,9 +133,6 @@ function Registro() {
     });
   };
 
-
-
-
   /*  
   
    const Eliminar2 = (IDUsuario) => {
@@ -164,7 +161,6 @@ function Registro() {
         <div className="card text-center">
           <div className="card-header">Gestion de Arrendatario</div>
           <div className="card-body">
-
             <div className="input-group mb-3">
               <span className="input-group-text" id="basic-addon1">
                 ID del Usuario{" "}
@@ -320,9 +316,6 @@ function Registro() {
                 aria-describedby="basic-addon1"
               />
             </div>
-
-
-
           </div>
           <div className="card-footer text-body-secondary">
             {/* aqui esta el boton de editar */}
@@ -338,36 +331,55 @@ function Registro() {
                 </button>
               </div>
             ) : (
-              <button className="btn btn-success " onClick={add}>
-                
-                <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
-                          <i className=" bi bi-person-fill-add" style={{ fontSize: "2.2rem", color: "white" }}></i>
-                        </span>
-                         
-              </button>
+              //         <i
+              //   type="button"
+              //   data-bs-toggle="modal"
+              //   data-bs-target="#exampleModal"
+              //   className="bi bi-plus-circle-fill"
+              //   style={{ color: "blue", fontSize: "2.5rem" }}
+              // />
+              <i
+                type="button"
+                className="bi bi-plus-circle-fill"
+                style={{ color: "blue", fontSize: "2.5rem" }}
+                onClick={add}
+              />
             )}
 
             <button className="btn btn-success m-2" onClick={getArrendatario}>
-            <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
-                          <i className="
-                        bi bi-card-checklist" style={{ fontSize: "2.2rem", color: "white" }}></i>
-                        </span>
+              <span
+                className="input-group-text input-login px-1 py-0"
+                id="basic-addon1"
+                style={{ border: "none", backgroundColor: "transparent" }}
+              >
+                <i
+                  className="
+                        bi bi-card-checklist"
+                  style={{ fontSize: "2.2rem", color: "white" }}
+                ></i>
+              </span>
             </button>
           </div>
-
-
-
-
         </div>
         {/* aqui empieza la tabla  */}
         <table className="table table-bordered">
           <thead className="table-dark">
-          <tr>
-              <th class="table-success" scope="col">#</th>
-              <th class="table-success" scope="col">ID Usuario</th>
-              <th class="table-success" scope="col">Nombre</th>
-              <th class="table-success" scope="col">Telefono</th>
-              <th class="table-success" scope="col">Acciones</th>
+            <tr>
+              <th class="table-success" scope="col">
+                #
+              </th>
+              <th class="table-success" scope="col">
+                ID Usuario
+              </th>
+              <th class="table-success" scope="col">
+                Nombre
+              </th>
+              <th class="table-success" scope="col">
+                Telefono
+              </th>
+              <th class="table-success" scope="col">
+                Acciones
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -392,8 +404,18 @@ function Registro() {
                         }}
                         className="btn "
                       >
-                      <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
-                          <i className="bi bi-pencil-square" style={{ fontSize: "2rem", color: "#87CEFA" }}></i>
+                        <span
+                          className="input-group-text input-login px-1 py-0"
+                          id="basic-addon1"
+                          style={{
+                            border: "none",
+                            backgroundColor: "transparent",
+                          }}
+                        >
+                          <i
+                            className="bi bi-pencil-square"
+                            style={{ fontSize: "2rem", color: "#ffac04" }}
+                          ></i>
                         </span>
                       </button>
 
@@ -406,8 +428,18 @@ function Registro() {
                         }}
                         className="btn "
                       >
-                        <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
-                          <i className="bi bi-x-octagon-fill" style={{ fontSize: "2rem", color: "red" }}></i>
+                        <span
+                          className="input-group-text input-login px-1 py-0"
+                          id="basic-addon1"
+                          style={{
+                            border: "none",
+                            backgroundColor: "transparent",
+                          }}
+                        >
+                          <i
+                            className="bi bi-x-octagon-fill"
+                            style={{ fontSize: "2rem", color: "red" }}
+                          ></i>
                         </span>
                       </button>
                     </div>
@@ -417,8 +449,6 @@ function Registro() {
             })}
           </tbody>
         </table>
-
-
       </div>
       {/*   cierra container */}
     </div>
