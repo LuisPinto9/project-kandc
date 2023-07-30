@@ -406,30 +406,16 @@ function Registro() {
                       role="group"
                       aria-label="Basic example"
                     >
-                      <button   type="button"
+                      <button
+                        type="button"
                         onClick={() => {
                           EditarArrendatarios(val);
                         }}
                         className="btn " >
-                        <i className="bi bi-pencil-square vamos" style={{ fontSize: "2rem", color: "#ffd650" }}></i>
+                        <i className="bi bi-pencil-square" style={{ fontSize: "2rem", color: "#ffd650" }}></i>
 
                         {/*  <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
                            </span> */}
-                        className="btn "
-                      >
-                        <span
-                          className="input-group-text input-login px-1 py-0"
-                          id="basic-addon1"
-                          style={{
-                            border: "none",
-                            backgroundColor: "transparent",
-                          }}
-                        >
-                          <i
-                            className="bi bi-pencil-square"
-                            style={{ fontSize: "2rem", color: "#ffac04" }}
-                          ></i>
-                        </span>
                       </button>
 
                       <button
@@ -444,22 +430,8 @@ function Registro() {
                         {/* <span className="input-group-text input-login px-1 py-0" id="basic-addon1" style={{ border: "none", backgroundColor: "transparent" }}>
                           
                         </span> */}
-                        className="btn "
-                      >
-                        <span
-                          className="input-group-text input-login px-1 py-0"
-                          id="basic-addon1"
-                          style={{
-                            border: "none",
-                            backgroundColor: "transparent",
-                          }}
-                        >
-                          <i
-                            className="bi bi-x-octagon-fill"
-                            style={{ fontSize: "2rem", color: "red" }}
-                          ></i>
-                        </span>
                       </button>
+
                     </div>
                   </td>
                 </tr>
