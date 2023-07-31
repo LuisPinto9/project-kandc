@@ -14,225 +14,111 @@ const PutRegistroModal = ({ values, getArrendatario }) => {
   const [LeaseDate, setLeaseDate] = useState("");
   const [State1, setState1] = useState("");
 
-//   const getNombre = (values) => {
-//     return values.Nombre;
-//   };
+  useEffect(() => {
+    setIDUsuario(values.IDUsuario);
+    setNombre(values.Nombre);
+    setPhoneNumber(values.PhoneNumber);
+  }, [values]);
 
-//   const getId = (values) => {
-//     return values.IDUsuario;
-//   };
-
-//   const getPhone = (values) => {
-//     return values.PhoneNumber;
-//   };
-
-  const putOption = () => {
+  const putUser = () => {
     update({ IDUsuario, Nombre, PhoneNumber });
     getArrendatario();
+    limpiarCampos();
   };
 
-//   useEffect(() => {
-//     const nombreObtenido = getNombre(values);
-//     setNombre(nombreObtenido);
-
-//     const idObtenido = getId(values);
-//     setIDUsuario(idObtenido);
-
-//     const phoneObtenido = getPhone(values);
-//     setPhoneNumber(phoneObtenido);
-    
-//   });
+  const limpiarCampos = () => {
+    setIDUsuario(values.IDUsuario);
+    setNombre(values.Nombre);
+    setPhoneNumber(values.PhoneNumber);
+  };
 
   return (
     <div>
       <div
         className="modal fade"
-        id="exampleModal1"
+        // id={id}
+        id="staticBackdrop"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
         tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">
-                Actualizar usuario
+              <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                Actualización
               </h1>
               <button
                 type="button"
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
+                onClick={limpiarCampos}
               ></button>
             </div>
             <div className="modal-body">
-              <div className="card text-center">
-                <div className="card-header">Actualizacion</div>
-                <div className="card-body">
-                  <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1">
-                      ID del Usuario{" "}
-                    </span>
-                    <input
-                      type="number"
-                      value={values.IDUsuario}
-                      onChange={(event) => {
-                        setIDUsuario(event.target.value);
-                      }}
-                      className="form-control"
-                      aria-label="Username"
-                      aria-describedby="basic-addon1"
-                    />
-                  </div>
-
-                  <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1">
-                      Nombre{" "}
-                    </span>
-                    <input
-                      type="text"
-                      value={values.Nombre}
-                      onChange={(e) => setNombre(e.target.value)}
-                      className="form-control"
-                      aria-label="Username"
-                      aria-describedby="basic-addon1"
-                    />
-                  </div>
-
-                  <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1">
-                      Apellido{" "}
-                    </span>
-                    <input
-                      type="text"
-                      value={Apellido}
-                      onChange={(event) => {
-                        setApellido(event.target.value);
-                      }}
-                      className="form-control"
-                      aria-label="Username"
-                      aria-describedby="basic-addon1"
-                    />
-                  </div>
-
-                  <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1">
-                      Tipo de Usuario{" "}
-                    </span>
-                    <input
-                      type="text"
-                      value={TypeUser}
-                      onChange={(event) => {
-                        setTypeUser(event.target.value);
-                      }}
-                      className="form-control"
-                      aria-label="Username"
-                      aria-describedby="basic-addon1"
-                    />
-                  </div>
-
-                  <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1">
-                      Contraseña
-                    </span>
-                    <input
-                      type="text"
-                      value={Contraseña}
-                      onChange={(event) => {
-                        setContraseña(event.target.value);
-                      }}
-                      className="form-control"
-                      aria-label="Username"
-                      aria-describedby="basic-addon1"
-                    />
-                  </div>
-
-                  <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1">
-                      Identificacion
-                    </span>
-                    <input
-                      type="text"
-                      value={Identification}
-                      onChange={(event) => {
-                        setIdentification(event.target.value);
-                      }}
-                      className="form-control"
-                      aria-label="Username"
-                      aria-describedby="basic-addon1"
-                    />
-                  </div>
-                  <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1">
-                      Correo Electronico
-                    </span>
-                    <input
-                      type="text"
-                      value={Gmail}
-                      onChange={(event) => {
-                        setGmail(event.target.value);
-                      }}
-                      className="form-control"
-                      aria-label="Username"
-                      aria-describedby="basic-addon1"
-                    />
-                  </div>
-                  <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1">
-                      Numero de telefono
-                    </span>
-                    <input
-                      type="number"
-                      value={values.PhoneNumber}
-                      onChange={(event) => {
-                        setPhoneNumber(event.target.value);
-                      }}
-                      className="form-control"
-                      aria-label="Username"
-                      aria-describedby="basic-addon1"
-                    />
-                  </div>
-                  <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1">
-                      fecha de arriendo
-                    </span>
-                    <input
-                      type="text"
-                      value={LeaseDate}
-                      onChange={(event) => {
-                        setLeaseDate(event.target.value);
-                      }}
-                      className="form-control"
-                      aria-label="Username"
-                      aria-describedby="basic-addon1"
-                    />
-                  </div>
-                  <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1">
-                      Estado de arriendo
-                    </span>
-                    <input
-                      type="text"
-                      value={State1}
-                      onChange={(event) => {
-                        setState1(event.target.value);
-                      }}
-                      className="form-control"
-                      aria-label="Username"
-                      aria-describedby="basic-addon1"
-                    />
-                  </div>
-                </div>
+              <div className="input-group mb-3">
+                <span className="input-group-text" id="basic-addon1">
+                  ID del Usuario
+                </span>
+                <input
+                  type="number"
+                  value={IDUsuario}
+                  onChange={(event) => {
+                    setIDUsuario(event.target.value);
+                  }}
+                  className="form-control"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                />
+              </div>
+              <div className="input-group mb-3">
+                <span className="input-group-text">Nombre</span>
+                <input
+                  type="text"
+                  value={Nombre}
+                  onChange={(event) => {
+                    setNombre(event.target.value);
+                  }}
+                  className="form-control"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                />
+              </div>
+              <div className="input-group mb-3">
+                <span className="input-group-text" id="basic-addon1">
+                  Número de Teléfono
+                </span>
+                <input
+                  type="tel"
+                  value={PhoneNumber}
+                  onChange={(event) => {
+                    setPhoneNumber(event.target.value);
+                  }}
+                  className="form-control"
+                  aria-label="Phone Number"
+                  aria-describedby="basic-addon1"
+                />
               </div>
             </div>
             <div className="modal-footer">
               <button
                 type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+                onClick={limpiarCampos}
+              >
+                Close
+              </button>
+              <button
+                type="button"
                 className="btn btn-primary"
                 data-bs-dismiss="modal"
-                onClick={putOption}
+                onClick={putUser}
               >
-                Actualizar
+                Understood
               </button>
             </div>
           </div>

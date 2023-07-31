@@ -20,7 +20,6 @@ function Registro() {
   const [Gmail, setGmail] = useState("");
   const [LeaseDate, setLeaseDate] = useState("");
   const [State1, setState1] = useState("");
-  const [registroSeleccionado, setRegistroSeleccionado] = useState("");
   const [ArrendatarioList, setArrendatario] = useState([]);
 
   const getArrendatario = () => {
@@ -38,14 +37,6 @@ function Registro() {
     setNombre(val.nombre);
     setphoneNumber(val.telefono);
   };
-
-  // const abrirModal = (id, name, telefono) => {
-  //   setRegistroSeleccionado({ id, name, telefono });
-  // };
-
-  // const cerrarModal = () => {
-  //   setRegistroSeleccionado(null);
-  // };
 
   useEffect(() => {
     getArrendatario();
@@ -110,7 +101,7 @@ function Registro() {
                       type="button"
                       className="bi bi-pencil-square px-2"
                       data-bs-toggle="modal"
-                      data-bs-target="#exampleModal1"
+                      data-bs-target="#staticBackdrop"
                       style={{ fontSize: "2rem", color: "#ffd650" }}
                       onClick={() => {
                         EditarArrendatarios(val);
