@@ -24,22 +24,7 @@
   margin-top: 5px;
 }
 
-.btn-add-registro{
-  color: blue; 
-  font-size: 2.5rem;
-}
-
-.btn-add-registro:hover{
-  color: rgb(0, 0, 150); 
-  font-size: 2.5rem;
-}
-
-.btn-add-registro:hover{
-  color: rgb(0, 0, 150); 
-  font-size: 2.5rem;
-}
-
-.btn-add-registro:active{
-  color: rgb(83, 83, 255); 
-  font-size: 2.5rem;
+.input-registro-search {
+  width: 80.7%;
+  height:3.5625rem;
 }

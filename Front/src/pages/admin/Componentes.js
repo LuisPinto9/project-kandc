@@ -11,7 +11,6 @@ import SistemaUsuario from "../user/DashboardUsuario";
 import { Alert } from "react-bootstrap";
 
 import "../../css/tabla.css";
-import FormModal from "../../components/FormModal";
 
 const Componentes = () => {
   return (
@@ -19,15 +18,9 @@ const Componentes = () => {
       <div className="div-barra">
         <BarraLateral />
       </div>
-
-      <div>
-        <FormModal/>
-      </div>
-
+      <div></div>
     </div>
   );
-
 };
-
 
 export default Componentes;

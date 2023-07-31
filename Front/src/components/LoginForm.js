@@ -17,12 +17,12 @@ const LoginForm = () => {
         </div>
         <div className="px-5 pt-4">
           <form>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" className="form-label">
+            <div className="mb-3">
+              <label htmlFor="exampleInputEmail1" className="form-label">
                 Nombre de usuario
               </label>
               <div className="text-input-login">
-                <div class="input-group mb-2">
+                <div className="input-group mb-2">
                   <div className="input-group-gray">
                     
                     <span
