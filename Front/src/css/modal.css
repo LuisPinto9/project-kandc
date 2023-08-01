@@ -12,3 +12,29 @@
   color: rgb(83, 83, 255);
   font-size: 2.5rem;
 }
+
+.btn-delete {
+  color: red;
+  font-size: 2rem;
+}
+
+.btn-delete:hover {
+  color: rgb(228, 0, 0);
+}
+
+.btn-delete:active {
+  color: rgb(255, 82, 82);
+}
+
+.btn-update {
+  color: #ffac04 ;
+  font-size: 2rem;
+}
+
+.btn-update:hover {
+  color: #d48f03 ;
+}
+
+.btn-update:active {
+  color: #ffcf6f ;
+}

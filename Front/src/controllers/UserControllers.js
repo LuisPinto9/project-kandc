@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Axios from "axios";
 import Swal from "sweetalert2";
 
@@ -21,6 +20,7 @@ export const add = (datos) => {
 };
 
 export const update = (datos) => {
+  console.log(datos);
   Axios.put("http://localhost:3001/user/update", {
     IDUsuario: datos.IDUsuario,
     Nombre: datos.Nombre,
@@ -84,13 +84,12 @@ export const Eliminar = ({val, getArrendatario}) => {
 };
 
 /* traer la infromacion de los arrendatarios */
-export const arrendatarios = () => {
-  return Axios.get("http://localhost:3001/user/arrendatarios")
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      console.error("Error al obtener los datos:", error);
-      return null; 
-    });
+export const arrendatarios = async () => {
+  try {
+    const response = await Axios.get("http://localhost:3001/user/arrendatarios");
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener los datos:", error);
+    return null;
+  }
 };

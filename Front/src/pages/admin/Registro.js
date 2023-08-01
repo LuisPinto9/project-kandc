@@ -99,10 +99,9 @@ function Registro() {
                   <td>
                     <i
                       type="button"
-                      className="bi bi-pencil-square px-2"
+                      className="bi bi-pencil-square px-2 btn-update"
                       data-bs-toggle="modal"
-                      data-bs-target="#staticBackdrop"
-                      style={{ fontSize: "2rem", color: "#ffd650" }}
+                      data-bs-target="#staticBackdrop1"
                       onClick={() => {
                         EditarArrendatarios(val);
                       }}
@@ -122,8 +121,7 @@ function Registro() {
                       onClick={() => {
                         Eliminar({ val, getArrendatario });
                       }}
-                      className="bi bi-x-octagon-fill px-2"
-                      style={{ fontSize: "2rem", color: "red" }}
+                      className="bi bi-x-octagon-fill px-2 btn-delete"
                     />
                   </td>
                 </tr>
