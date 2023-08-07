@@ -38,7 +38,7 @@ export const update = (datos) => {
   });
 };
 
-export const Eliminar = ({val, getArrendatario}) => {
+export const Eliminar = ({ val, getArrendatarios }) => {
   Swal.fire({
     title: "ELIMINAR",
     html:
@@ -58,7 +58,7 @@ export const Eliminar = ({val, getArrendatario}) => {
         data: { IDUsuario: IDUsuario },
       })
         .then(() => {
-          getArrendatario()
+          getArrendatarios();
           Swal.fire({
             title: "<strong>Eliminacion exitosa</strong>",
             html:
@@ -74,9 +74,8 @@ export const Eliminar = ({val, getArrendatario}) => {
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "No se pudo eliminar",
+            text: "No se pudo eliminar. Intente más tarde",
             showConfirmButton: false,
-            footer: "Intente mas tarde",
           });
         });
     }
@@ -86,7 +85,9 @@ export const Eliminar = ({val, getArrendatario}) => {
 /* traer la infromacion de los arrendatarios */
 export const arrendatarios = async () => {
   try {
-    const response = await Axios.get("http://localhost:3001/user/arrendatarios");
+    const response = await Axios.get(
+      "http://localhost:3001/user/arrendatarios"
+    );
     return response.data;
   } catch (error) {
     console.error("Error al obtener los datos:", error);

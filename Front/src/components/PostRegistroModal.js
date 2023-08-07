@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { add } from "../controllers/UserControllers";
 import "../css/modal.css";
 
-const FormRegistroPost = ({ getArrendatario }) => {
+const FormRegistroPost = ({ getArrendatarios }) => {
   const [IDUsuario, setIDUsuario] = useState("");
   const [Nombre, setNombre] = useState("");
   const [Apellido, setApellido] = useState("");
@@ -22,7 +22,7 @@ const FormRegistroPost = ({ getArrendatario }) => {
 
   const AddPost = () => {
     add({ IDUsuario, Nombre, PhoneNumber });
-    getArrendatario();
+    getArrendatarios();
     limpiarCampos();
   };
 

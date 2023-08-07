@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { update } from "../controllers/UserControllers";
 import "../css/modal.css";
 
-const PutRegistroModal = ({ values, getArrendatario }) => {
+const PutRegistroModal = ({ values, getArrendatarios }) => {
   const [IDUsuario, setIDUsuario] = useState("");
   const [Nombre, setNombre] = useState("");
   const [Apellido, setApellido] = useState("");
@@ -22,7 +22,7 @@ const PutRegistroModal = ({ values, getArrendatario }) => {
 
   const putUser = () => {
     update({ IDUsuario, Nombre, PhoneNumber });
-    getArrendatario();
+    getArrendatarios();
     limpiarCampos();
   };
 
@@ -30,7 +30,7 @@ const PutRegistroModal = ({ values, getArrendatario }) => {
     setIDUsuario(values.IDUsuario);
     setNombre(values.Nombre);
     setPhoneNumber(values.PhoneNumber);
-    getArrendatario()
+    getArrendatarios();
   };
 
   return (

@@ -22,7 +22,7 @@ function Registro() {
   const [State1, setState1] = useState("");
   const [ArrendatarioList, setArrendatario] = useState([]);
 
-  const getArrendatario = () => {
+  const getArrendatarios = () => {
     arrendatarios()
       .then((data) => {
         setArrendatario(data);
@@ -39,7 +39,7 @@ function Registro() {
   };
 
   useEffect(() => {
-    getArrendatario();
+    getArrendatarios();
   }, []);
 
   return (
@@ -66,7 +66,7 @@ function Registro() {
             />
           </div>
           <div>
-            <PostRegistroModal getArrendatario={getArrendatario} />
+            <PostRegistroModal getArrendatarios={getArrendatarios} />
           </div>
         </div>
         {/* aqui empieza la tabla  */}
@@ -112,14 +112,14 @@ function Registro() {
                         Nombre: Nombre,
                         PhoneNumber: PhoneNumber,
                       }}
-                      getArrendatario={getArrendatario}
+                      getArrendatarios={getArrendatarios}
                     />
                   </td>
                   <td className="row-border-right">
                     <i
                       type="button"
                       onClick={() => {
-                        Eliminar({ val, getArrendatario });
+                        Eliminar({ val, getArrendatarios });
                       }}
                       className="bi bi-x-octagon-fill px-2 btn-delete"
                     />
