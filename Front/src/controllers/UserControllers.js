@@ -20,7 +20,6 @@ export const add = (datos) => {
 };
 
 export const update = (datos) => {
-  console.log(datos);
   Axios.put("http://localhost:3001/user/update", {
     IDUsuario: datos.IDUsuario,
     Nombre: datos.Nombre,
