@@ -37,7 +37,7 @@ const PutRegistroModal = ({ values, getArrendatarios }) => {
     <div>
       <div
         className="modal fade"
-        id="staticBackdrop1"
+        id="staticBackdrop-put"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
         tabIndex="-1"

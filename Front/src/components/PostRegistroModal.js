@@ -23,6 +23,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
   const AddPost = () => {
     add({ IDUsuario, Nombre, PhoneNumber });
     getArrendatarios();
+    getArrendatarios();
     limpiarCampos();
   };
 
@@ -31,12 +32,12 @@ const FormRegistroPost = ({ getArrendatarios }) => {
       <i
         type="button"
         data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop"
+        data-bs-target="#staticBackdrop-post"
         className="bi bi-plus-circle-fill btn-add"
       />
       <div
         className="modal fade"
-        id="staticBackdrop"
+        id="staticBackdrop-post"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
         tabIndex="-1"

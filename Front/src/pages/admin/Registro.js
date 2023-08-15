@@ -101,7 +101,7 @@ function Registro() {
                       type="button"
                       className="bi bi-pencil-square px-2 btn-update"
                       data-bs-toggle="modal"
-                      data-bs-target="#staticBackdrop1"
+                      data-bs-target="#staticBackdrop-put"
                       onClick={() => {
                         EditarArrendatarios(val);
                       }}
