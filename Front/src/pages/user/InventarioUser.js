@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import BarraLateral from "../../components/BarraLateral";
-import { arrendatarios, Eliminar } from "../../controllers/UserControllers";
+import { arrendatarios, eliminar } from "../../controllers/UserControllers";
 import PostRegistroModal from "../../components/PostRegistroModal";
 import PutRegistroModal from "../../components/PutRegistroModal";
 
@@ -114,7 +114,7 @@ const InventarioUser = () => {
                     <i
                       type="button"
                       onClick={() => {
-                        Eliminar({ val, getArrendatario });
+                        eliminar({ val, getArrendatario });
                       }}
                       className="bi bi-x-octagon-fill px-2 btn-delete"
                     />

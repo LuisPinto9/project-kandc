@@ -6,41 +6,38 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 import "../../css/tabla.css";
 import { arrendatarios, Eliminar } from "../../controllers/UserControllers";
-import PostRegistroModal from "../../components/PostRegistroModal";
-import PutRegistroModal from "../../components/PutRegistroModal";
+import PostZonasModal from "../../components/PostZonasModal";
+import PutZonasModal from "../../components/PutZonasModal";
 
 const Zonas = () => {
   const [IDUsuario, setIDUsuario] = useState("");
   const [Nombre, setNombre] = useState("");
-  const [Apellido, setApellido] = useState("");
-  const [TypeUser, setTypeUser] = useState("");
-  const [Identification, setIdentification] = useState("");
-  const [Contraseña, setContraseña] = useState("");
-  const [PhoneNumber, setphoneNumber] = useState("");
-  const [Gmail, setGmail] = useState("");
-  const [LeaseDate, setLeaseDate] = useState("");
-  const [State1, setState1] = useState("");
-  const [ArrendatarioList, setArrendatario] = useState([]);
+  const [Precio, setPrecio] = useState("");
+  const [Acceso, setAcceso] = useState("");
+  const [ZonasList, setZonas] = useState([]);
 
-  const getArrendatario = () => {
+  const getZonas = () => {
     arrendatarios()
       .then((data) => {
-        setArrendatario(data);
+        setZonas(data);
       })
       .catch((error) => {
-        console.error("Error al obtener los arrendatarios:", error);
+        console.error("Error al obtener las zonas:", error);
       });
   };
 
-  const EditarArrendatarios = (val) => {
+  const EditarZonas = (val) => {
     setIDUsuario(val.ID);
     setNombre(val.nombre);
-    setphoneNumber(val.telefono);
+    setPrecio(val.telefono);
+    setAcceso("");
   };
 
   useEffect(() => {
-    getArrendatario();
+    getZonas();
   }, []);
+
+  let autoIncrementa = 1;
 
   return (
     <div className="d-flex" style={{ minHeight: "100vh" }}>
@@ -53,8 +50,8 @@ const Zonas = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Nombre del arrendatario"
-              aria-label="Nombre de usuario del destinatario"
+              placeholder="Nombre de la zona"
+              aria-label="Nombre de la zona"
               aria-describedby="basic-addon1"
             />
           </div>
@@ -66,7 +63,7 @@ const Zonas = () => {
             />
           </div>
           <div>
-            <PostRegistroModal getArrendatario={getArrendatario} />
+            <PostZonasModal getZonas={getZonas} />
           </div>
         </div>
         {/* aqui empieza la tabla  */}
@@ -76,9 +73,11 @@ const Zonas = () => {
               <th className="row-border-left" scope="col">
                 #
               </th>
-              <th scope="col">ID Usuario</th>
+              <th scope="col">ID zona</th>
               <th scope="col">Nombre</th>
-              <th scope="col">Telefono</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Tipo de acceso</th>
               <th scope="col">Editar</th>
               <th className="row-border-right" scope="col">
                 Borrar
@@ -86,40 +85,42 @@ const Zonas = () => {
             </tr>
           </thead>
           <tbody>
-            {ArrendatarioList.map((val, key) => {
+            {ZonasList.map((val, key) => {
               return (
                 <tr key={key}>
                   <th className="row-border-left" scope="row">
-                    {val.ID}
+                    {autoIncrementa++}
                   </th>
                   {/* van los nombres de la base de datos en si */}
                   <td>{val.ID}</td>
                   <td>{val.nombre}</td>
+                  <td>descipcion</td>
                   <td>{val.telefono}</td>
+                  <td>Publico</td>
                   <td>
                     <i
                       type="button"
                       className="bi bi-pencil-square px-2 btn-update"
                       data-bs-toggle="modal"
-                      data-bs-target="#staticBackdrop1"
+                      data-bs-target="#staticBackdrop-put"
                       onClick={() => {
-                        EditarArrendatarios(val);
+                        EditarZonas(val);
                       }}
                     />
-                    <PutRegistroModal
+                    <PutZonasModal
                       values={{
                         IDUsuario: IDUsuario,
                         Nombre: Nombre,
-                        PhoneNumber: PhoneNumber,
+                        Precio: Precio,
                       }}
-                      getArrendatario={getArrendatario}
+                      getZonas={getZonas}
                     />
                   </td>
                   <td className="row-border-right">
                     <i
                       type="button"
                       onClick={() => {
-                        Eliminar({ val, getArrendatario });
+                        //Eliminar({ val, getZonas });
                       }}
                       className="bi bi-x-octagon-fill px-2 btn-delete"
                     />

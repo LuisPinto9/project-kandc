@@ -5,7 +5,7 @@ export const add = (datos) => {
   Axios.post("http://localhost:3001/user/create", {
     IDUsuario: datos.IDUsuario,
     Nombre: datos.Nombre,
-    PhoneNumber: datos.PhoneNumber,
+    Telefono: datos.Telefono,
   }).then(() => {
     Swal.fire({
       title: "<strong>Registro exitoso</strong>",
@@ -23,7 +23,7 @@ export const update = (datos) => {
   Axios.put("http://localhost:3001/user/update", {
     IDUsuario: datos.IDUsuario,
     Nombre: datos.Nombre,
-    PhoneNumber: datos.PhoneNumber,
+    Telefono: datos.Telefono,
   }).then(() => {
     Swal.fire({
       title: "<strong>Actualizacion exitosa</strong>",
@@ -37,7 +37,7 @@ export const update = (datos) => {
   });
 };
 
-export const Eliminar = ({ val, getArrendatarios }) => {
+export const eliminar = ({ val, getArrendatarios }) => {
   Swal.fire({
     title: "ELIMINAR",
     html:

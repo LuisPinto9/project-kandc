@@ -4,7 +4,7 @@ import "../../css/styles.css";
 import "../../css/registro.css";
 import "../../css/tabla.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { arrendatarios, Eliminar } from "../../controllers/UserControllers";
+import { arrendatarios, eliminar } from "../../controllers/UserControllers";
 import PostRegistroModal from "../../components/PostRegistroModal";
 import PutRegistroModal from "../../components/PutRegistroModal";
 
@@ -12,20 +12,19 @@ function Registro() {
   /* datos de los arrendatarios */
   const [IDUsuario, setIDUsuario] = useState("");
   const [Nombre, setNombre] = useState("");
-  const [Apellido, setApellido] = useState("");
-  const [TypeUser, setTypeUser] = useState("");
-  const [Identification, setIdentification] = useState("");
+  const [MetodoRenta, setMetodoRenta] = useState("");
+  const [ExtensionDias, setExtensionDias] = useState("");
+  const [Telefono, setTelefono] = useState("");
+  const [NombreUsuario, setNombreUsuario] = useState("");
   const [Contraseña, setContraseña] = useState("");
-  const [PhoneNumber, setphoneNumber] = useState("");
-  const [Gmail, setGmail] = useState("");
-  const [LeaseDate, setLeaseDate] = useState("");
-  const [State1, setState1] = useState("");
-  const [ArrendatarioList, setArrendatario] = useState([]);
+  const [Correo, setCorreo] = useState("");
+  const [TipoUsuario, setTipoUsuario] = useState("");
+  const [ArrendatariosList, setArrendatarios] = useState([]);
 
   const getArrendatarios = () => {
     arrendatarios()
       .then((data) => {
-        setArrendatario(data);
+        setArrendatarios(data);
       })
       .catch((error) => {
         console.error("Error al obtener los arrendatarios:", error);
@@ -35,12 +34,20 @@ function Registro() {
   const EditarArrendatarios = (val) => {
     setIDUsuario(val.ID);
     setNombre(val.nombre);
-    setphoneNumber(val.telefono);
+    setMetodoRenta("");
+    setExtensionDias("");
+    setTelefono(val.telefono);
+    setNombreUsuario("");
+    setContraseña("");
+    setCorreo("");
+    setTipoUsuario("");
   };
 
   useEffect(() => {
     getArrendatarios();
   }, []);
+
+  let autoIncremento = 1;
 
   return (
     <div className="d-flex" style={{ minHeight: "100vh" }}>
@@ -76,9 +83,14 @@ function Registro() {
               <th className="row-border-left" scope="col">
                 #
               </th>
-              <th scope="col">ID Usuario</th>
+              <th scope="col">ID usuario</th>
               <th scope="col">Nombre</th>
-              <th scope="col">Telefono</th>
+              <th scope="col">Método de renta</th>
+              <th scope="col">Extensión</th>
+              <th scope="col">Teléfono</th>
+              <th scope="col">Nombre de usuario</th>
+              <th scope="col">Correo</th>
+              <th scope="col">Tipo de usuario</th>
               <th scope="col">Editar</th>
               <th className="row-border-right" scope="col">
                 Borrar
@@ -86,16 +98,21 @@ function Registro() {
             </tr>
           </thead>
           <tbody>
-            {ArrendatarioList.map((val, key) => {
+            {ArrendatariosList.map((val, key) => {
               return (
                 <tr key={key}>
                   <th className="row-border-left" scope="row">
-                    {val.ID}
+                    {autoIncremento++}
                   </th>
                   {/* van los nombres de la base de datos en si */}
                   <td>{val.ID}</td>
                   <td>{val.nombre}</td>
+                  <td>Metodo</td>
+                  <td>Extension</td>
                   <td>{val.telefono}</td>
+                  <td>Nombre de usuario</td>
+                  <td>Correo</td>
+                  <td>Tipo</td>
                   <td>
                     <i
                       type="button"
@@ -110,7 +127,7 @@ function Registro() {
                       values={{
                         IDUsuario: IDUsuario,
                         Nombre: Nombre,
-                        PhoneNumber: PhoneNumber,
+                        Telefono: Telefono,
                       }}
                       getArrendatarios={getArrendatarios}
                     />
@@ -119,7 +136,7 @@ function Registro() {
                     <i
                       type="button"
                       onClick={() => {
-                        Eliminar({ val, getArrendatarios });
+                        eliminar({ val, getArrendatarios });
                       }}
                       className="bi bi-x-octagon-fill px-2 btn-delete"
                     />

@@ -1,48 +1,54 @@
-import React, { useState } from "react";
-import { add } from "../controllers/UserControllers";
+import React, { useState, useEffect } from "react";
+//import { update } from "../controllers/UserControllers";
 import "../css/modal.css";
 
-const FormRegistroPost = ({ getArrendatarios }) => {
-  const [IDUsuario, setIDUsuario] = useState("");
+const PutComponentesModal = ({ values, getComponentes }) => {
+  const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
-  const [MetodoRenta, setMetodoRenta] = useState("");
-  const [ExtensionDias, setExtensionDias] = useState("");
-  const [Telefono, setTelefono] = useState("");
-  const [NombreUsuario, setNombreUsuario] = useState("");
-  const [Contraseña, setContraseña] = useState("");
-  const [Correo, setCorreo] = useState("");
-  const [TipoUsuario, setTipoUsuario] = useState("");
+  const [Marca, setMarca] = useState("");
+  const [Cantidad, setCantidad] = useState("");
+  const [Costo, setCosto] = useState("");
+  const [Estado, setEstado] = useState("");
+  const [Descripcion, setDescripcion] = useState("");
+  const [Observacion, setObservacion] = useState("");
+  const [Habitacion, setHabitacion] = useState("");
 
-  const limpiarCampos = () => {
-    setIDUsuario("");
-    setNombre("");
-    setMetodoRenta("");
-    setExtensionDias("");
-    setTelefono("");
-    setNombreUsuario("");
-    setContraseña("");
-    setCorreo("");
-    setTipoUsuario("");
+  useEffect(() => {
+    setId(values.Id);
+    setNombre(values.Nombre);
+    setMarca("");
+    setCantidad("");
+    setCosto(values.Costo);
+    setEstado("");
+    setDescripcion("");
+    setObservacion("");
+    setHabitacion("");
+  }, [values]);
+
+  const putUser = () => {
+    //update({ IDUsuario, Nombre, PhoneNumber });
+    getComponentes();
+    limpiarCampos();
   };
 
-  const AddPost = () => {
-    add({ IDUsuario, Nombre, Telefono });
-    getArrendatarios();
-    getArrendatarios();
-    limpiarCampos();
+  const limpiarCampos = () => {
+    setId(values.Id);
+    setNombre(values.Nombre);
+    setMarca("");
+    setCantidad("");
+    setCosto(values.Costo);
+    setEstado("");
+    setDescripcion("");
+    setObservacion("");
+    setHabitacion("");
+    getComponentes("");
   };
 
   return (
     <div>
-      <i
-        type="button"
-        data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop-post"
-        className="bi bi-plus-circle-fill btn-add"
-      />
       <div
         className="modal fade"
-        id="staticBackdrop-post"
+        id="staticBackdrop-put"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
         tabIndex="-1"
@@ -53,7 +59,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                Registrar Usuario Nuevo
+                Actualizar Componente
               </h1>
               <button
                 type="button"
@@ -70,9 +76,9 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                 </span>
                 <input
                   type="text"
-                  value={IDUsuario}
+                  value={Id}
                   onChange={(event) => {
-                    setIDUsuario(event.target.value);
+                    setId(event.target.value);
                   }}
                   className="form-control"
                   aria-label="id"
@@ -94,106 +100,106 @@ const FormRegistroPost = ({ getArrendatarios }) => {
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
-                  Método de Renta
+                  Marca
                 </span>
                 <input
                   type="text"
-                  value={MetodoRenta}
+                  value={Marca}
                   onChange={(event) => {
-                    setMetodoRenta(event.target.value);
+                    setMarca(event.target.value);
                   }}
                   className="form-control"
-                  aria-label="metodo-renta"
+                  aria-label="marca"
                   aria-describedby="basic-addon1"
                 />
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
-                  Extensión de Días
+                  Cantidad
                 </span>
                 <input
                   type="text"
-                  value={ExtensionDias}
+                  value={Cantidad}
                   onChange={(event) => {
-                    setExtensionDias(event.target.value);
+                    setCantidad(event.target.value);
                   }}
                   className="form-control"
-                  aria-label="extension"
+                  aria-label="cantidad"
                   aria-describedby="basic-addon1"
                 />
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
-                  Teléfono
+                  Costo
                 </span>
                 <input
                   type="text"
-                  value={Telefono}
+                  value={Costo}
                   onChange={(event) => {
-                    setTelefono(event.target.value);
+                    setCosto(event.target.value);
                   }}
                   className="form-control"
-                  aria-label="Phone Number"
+                  aria-label="costo"
                   aria-describedby="basic-addon1"
                 />
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
-                  Nombre de Usuario
+                  Estado
                 </span>
                 <input
                   type="text"
-                  value={NombreUsuario}
+                  value={Estado}
                   onChange={(event) => {
-                    setNombreUsuario(event.target.value);
+                    setEstado(event.target.value);
                   }}
                   className="form-control"
-                  aria-label="nombre-usuario"
+                  aria-label="estado"
                   aria-describedby="basic-addon1"
                 />
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
-                  Contraseña
+                  Descripción
                 </span>
                 <input
                   type="text"
-                  value={Contraseña}
+                  value={Descripcion}
                   onChange={(event) => {
-                    setContraseña(event.target.value);
+                    setDescripcion(event.target.value);
                   }}
                   className="form-control"
-                  aria-label="Username"
+                  aria-label="descripcion"
                   aria-describedby="basic-addon1"
                 />
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
-                  Correo
+                  Observación
                 </span>
                 <input
                   type="text"
-                  value={Correo}
+                  value={Observacion}
                   onChange={(event) => {
-                    setCorreo(event.target.value);
+                    setObservacion(event.target.value);
                   }}
                   className="form-control"
-                  aria-label="correo"
+                  aria-label="observacion"
                   aria-describedby="basic-addon1"
                 />
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
-                  Tipo de Usuario
+                  Habitación
                 </span>
                 <input
                   type="text"
-                  value={TipoUsuario}
+                  value={Habitacion}
                   onChange={(event) => {
-                    setTipoUsuario(event.target.value);
+                    setHabitacion(event.target.value);
                   }}
                   className="form-control"
-                  aria-label="tipo-usuario"
+                  aria-label="habitacion"
                   aria-describedby="basic-addon1"
                 />
               </div>
@@ -211,9 +217,9 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                 type="button"
                 className="btn btn-primary"
                 data-bs-dismiss="modal"
-                onClick={AddPost}
+                onClick={putUser}
               >
-                Agregar
+                Actualizar
               </button>
             </div>
           </div>
@@ -223,4 +229,4 @@ const FormRegistroPost = ({ getArrendatarios }) => {
   );
 };
 
-export default FormRegistroPost;
+export default PutComponentesModal;
