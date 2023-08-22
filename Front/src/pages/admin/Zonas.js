@@ -40,7 +40,7 @@ const Zonas = () => {
   let autoIncrementa = 1;
 
   return (
-    <div className="d-flex" style={{ minHeight: "100vh" }}>
+    <div className="d-flex" style={{ minHeight: "78.6vh" }}>
       <div className="div-barra">
         <BarraLateral />
       </div>

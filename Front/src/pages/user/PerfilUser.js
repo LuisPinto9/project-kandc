@@ -4,12 +4,12 @@ import "../../css/perfil.css";
 
 const PerfilUser = () => {
   return (
-    <div className="d-flex" style={{ minHeight: "100vh" }}>
+    <div className="d-flex" style={{ minHeight: "78.6vh" }}>
       <div className="div-barra">
         <BarraLateral />
       </div>
       <div className="d-flex flex-row flex-wrap" style={{ width: "100%" }}>
-        <div className=" pt-4" style={{ width: "62%" }}>
+        <div style={{ width: "62%" }}>
           <div className="d-flex flex-column">
             <div className="mb-2 pt-4 pb-2 d-flex">
               <div className="info-div ps-5">
@@ -51,7 +51,7 @@ const PerfilUser = () => {
             </div>
           </div>
         </div>
-        <div className="d-flex ms-5 mt-5 div-foto-grande justify-content-center align-items-center">
+        <div className="d-flex ms-5 mt-4 div-foto-grande justify-content-center align-items-center">
           <div className="py-3 px-5">
             <i className="bi bi-person-fill" style={{ fontSize: "12rem" }}></i>
           </div>

@@ -1,0 +1,14 @@
+.pagina-inicio {
+  background: url(../images/Fondo2.png);
+  background-repeat: no-repeat;
+}
+
+.div-blanco > h1 {
+  color: black;
+  font-family: Times;
+  font-size: 5rem;
+}
+
+.div-blanco{
+    background-color: rgb(255, 255, 255, 0.7);
+}

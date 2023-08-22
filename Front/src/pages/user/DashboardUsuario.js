@@ -1,32 +1,20 @@
 import React from "react";
 import BarraLateral from "../../components/BarraLateral";
 import "../../css/styles.css";
-import logo from "../../logo.svg";
-import "../../App.css";
+import "../../css/dashboardInicio.css"
 
 const SistemaUsuario = () => {
   return (
     <div>
-      <div className="d-flex" style={{ minHeight: "100vh" }}>
+      <div className="d-flex" style={{ minHeight: "78.6vh" }}>
         <div className="div-barra">
           <BarraLateral />
         </div>
-        <div className="body-1 col-10 text-center">
-          <div className="App">
-            <header className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
-              <p>
-                Edit <code>src/App.js</code> and save to reload.
-              </p>
-              <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Learn React
-              </a>
-            </header>
+        <div className=" d-flex justify-content-center align-items-center text-center flex-wrap px-3">
+          <div className="pagina-inicio">
+            <div className="div-blanco m-5">
+              <h1>Bienvendio al Modulo de Arrendatario</h1>
+            </div>
           </div>
         </div>
       </div>
