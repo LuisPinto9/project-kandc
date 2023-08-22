@@ -37,6 +37,8 @@ const InventarioUser = () => {
     getArrendatario();
   }, []);
 
+  let autoIncrementa = 1;
+
   return (
     <div className="d-flex" style={{ minHeight: "78.6vh" }}>
       <div className="div-barra">
@@ -85,7 +87,7 @@ const InventarioUser = () => {
               return (
                 <tr key={key}>
                   <th className="row-border-left" scope="row">
-                    {val.ID}
+                    {autoIncrementa++}
                   </th>
                   {/* van los nombres de la base de datos en si */}
                   <td>{val.ID}</td>

@@ -77,75 +77,77 @@ function Registro() {
           </div>
         </div>
         {/* aqui empieza la tabla  */}
-        <table className="table tabla-get text-center">
-          <thead>
-            <tr>
-              <th className="row-border-left" scope="col">
-                #
-              </th>
-              <th scope="col">ID usuario</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Método de renta</th>
-              <th scope="col">Extensión</th>
-              <th scope="col">Teléfono</th>
-              <th scope="col">Nombre de usuario</th>
-              <th scope="col">Correo</th>
-              <th scope="col">Tipo de usuario</th>
-              <th scope="col">Editar</th>
-              <th className="row-border-right" scope="col">
-                Borrar
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {ArrendatariosList.map((val, key) => {
-              return (
-                <tr key={key}>
-                  <th className="row-border-left" scope="row">
-                    {autoIncremento++}
-                  </th>
-                  {/* van los nombres de la base de datos en si */}
-                  <td>{val.ID}</td>
-                  <td>{val.nombre}</td>
-                  <td>Metodo</td>
-                  <td>Extension</td>
-                  <td>{val.telefono}</td>
-                  <td>Nombre de usuario</td>
-                  <td>Correo</td>
-                  <td>Tipo</td>
-                  <td>
-                    <i
-                      type="button"
-                      className="bi bi-pencil-square px-2 btn-update"
-                      data-bs-toggle="modal"
-                      data-bs-target="#staticBackdrop-put"
-                      onClick={() => {
-                        EditarArrendatarios(val);
-                      }}
-                    />
-                    <PutRegistroModal
-                      values={{
-                        IDUsuario: IDUsuario,
-                        Nombre: Nombre,
-                        Telefono: Telefono,
-                      }}
-                      getArrendatarios={getArrendatarios}
-                    />
-                  </td>
-                  <td className="row-border-right">
-                    <i
-                      type="button"
-                      onClick={() => {
-                        eliminar({ val, getArrendatarios });
-                      }}
-                      className="bi bi-x-octagon-fill px-2 btn-delete"
-                    />
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div className="table-responsive">
+          <table className="table tabla-get text-center">
+            <thead>
+              <tr>
+                <th className="row-border-left" scope="col">
+                  #
+                </th>
+                <th scope="col">ID usuario</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Método de renta</th>
+                <th scope="col">Extensión</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Nombre de usuario</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Tipo de usuario</th>
+                <th scope="col">Editar</th>
+                <th className="row-border-right" scope="col">
+                  Borrar
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {ArrendatariosList.map((val, key) => {
+                return (
+                  <tr key={key}>
+                    <th className="row-border-left" scope="row">
+                      {autoIncremento++}
+                    </th>
+                    {/* van los nombres de la base de datos en si */}
+                    <td>{val.ID}</td>
+                    <td>{val.nombre}</td>
+                    <td>Metodo</td>
+                    <td>Extension</td>
+                    <td>{val.telefono}</td>
+                    <td>Nombre de usuario</td>
+                    <td>Correo</td>
+                    <td>Tipo</td>
+                    <td>
+                      <i
+                        type="button"
+                        className="bi bi-pencil-square px-2 btn-update"
+                        data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop-put"
+                        onClick={() => {
+                          EditarArrendatarios(val);
+                        }}
+                      />
+                      <PutRegistroModal
+                        values={{
+                          IDUsuario: IDUsuario,
+                          Nombre: Nombre,
+                          Telefono: Telefono,
+                        }}
+                        getArrendatarios={getArrendatarios}
+                      />
+                    </td>
+                    <td className="row-border-right">
+                      <i
+                        type="button"
+                        onClick={() => {
+                          eliminar({ val, getArrendatarios });
+                        }}
+                        className="bi bi-x-octagon-fill px-2 btn-delete"
+                      />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
