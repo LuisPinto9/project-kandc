@@ -11,7 +11,7 @@ const InventarioUser = () => {
   const [TypeUser, setTypeUser] = useState("");
   const [Identification, setIdentification] = useState("");
   const [Contraseña, setContraseña] = useState("");
-  const [PhoneNumber, setphoneNumber] = useState("");
+  const [Telefono, setTelefono] = useState("");
   const [Gmail, setGmail] = useState("");
   const [LeaseDate, setLeaseDate] = useState("");
   const [State1, setState1] = useState("");
@@ -30,7 +30,7 @@ const InventarioUser = () => {
   const EditarArrendatarios = (val) => {
     setIDUsuario(val.ID);
     setNombre(val.nombre);
-    setphoneNumber(val.telefono);
+    setTelefono(val.telefono);
   };
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const InventarioUser = () => {
       <div className="div-barra">
         <BarraLateral />
       </div>
-      <div className="container pt-3">
+      <div className="container pt-3 col-sm-7 col-md-9 col-xl-10">
         <div className="d-flex mb-2 justify-content-center align-items-center">
           <div className="input-registro-search d-flex align-items-center pe-2">
             <input
@@ -67,65 +67,67 @@ const InventarioUser = () => {
           </div>
         </div>
         {/* aqui empieza la tabla  */}
-        <table className="table tabla-get text-center">
-          <thead>
-            <tr>
-              <th className="row-border-left" scope="col">
-                #
-              </th>
-              <th scope="col">ID Usuario</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Telefono</th>
-              <th scope="col">Editar</th>
-              <th className="row-border-right" scope="col">
-                Borrar
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {ArrendatarioList.map((val, key) => {
-              return (
-                <tr key={key}>
-                  <th className="row-border-left" scope="row">
-                    {autoIncrementa++}
-                  </th>
-                  {/* van los nombres de la base de datos en si */}
-                  <td>{val.ID}</td>
-                  <td>{val.nombre}</td>
-                  <td>{val.telefono}</td>
-                  <td>
-                    <i
-                      type="button"
-                      className="bi bi-pencil-square px-2 btn-update"
-                      data-bs-toggle="modal"
-                      data-bs-target="#staticBackdrop1"
-                      onClick={() => {
-                        EditarArrendatarios(val);
-                      }}
-                    />
-                    <PutRegistroModal
-                      values={{
-                        IDUsuario: IDUsuario,
-                        Nombre: Nombre,
-                        PhoneNumber: PhoneNumber,
-                      }}
-                      getArrendatario={getArrendatario}
-                    />
-                  </td>
-                  <td className="row-border-right">
-                    <i
-                      type="button"
-                      onClick={() => {
-                        eliminar({ val, getArrendatario });
-                      }}
-                      className="bi bi-x-octagon-fill px-2 btn-delete"
-                    />
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div className="table-responsive">
+          <table className="table tabla-get text-center">
+            <thead>
+              <tr>
+                <th className="row-border-left" scope="col">
+                  #
+                </th>
+                <th scope="col">ID Usuario</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Editar</th>
+                <th className="row-border-right" scope="col">
+                  Borrar
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {ArrendatarioList.map((val, key) => {
+                return (
+                  <tr key={key}>
+                    <th className="row-border-left" scope="row">
+                      {autoIncrementa++}
+                    </th>
+                    {/* van los nombres de la base de datos en si */}
+                    <td>{val.ID}</td>
+                    <td>{val.nombre}</td>
+                    <td>{val.telefono}</td>
+                    <td>
+                      <i
+                        type="button"
+                        className="bi bi-pencil-square px-2 btn-update"
+                        data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop1"
+                        onClick={() => {
+                          EditarArrendatarios(val);
+                        }}
+                      />
+                      <PutRegistroModal
+                        values={{
+                          IDUsuario: IDUsuario,
+                          Nombre: Nombre,
+                          Telefono: Telefono,
+                        }}
+                        getArrendatario={getArrendatario}
+                      />
+                    </td>
+                    <td className="row-border-right">
+                      <i
+                        type="button"
+                        onClick={() => {
+                          eliminar({ val, getArrendatario });
+                        }}
+                        className="bi bi-x-octagon-fill px-2 btn-delete"
+                      />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

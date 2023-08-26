@@ -54,7 +54,7 @@ function Registro() {
       <div className="div-barra">
         <BarraLateral />
       </div>
-      <div className="container pt-3">
+      <div className="container pt-3 col-sm-7 col-md-9 col-xl-10">
         <div className="d-flex mb-2 justify-content-center align-items-center">
           <div className="input-registro-search d-flex align-items-center pe-2">
             <input
