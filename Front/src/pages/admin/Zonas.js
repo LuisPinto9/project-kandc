@@ -103,7 +103,7 @@ const Zonas = () => {
                    
                     <td>{val.id}</td>
                     <td>{val.nombre}</td>
-                    <td>{val.descipcion}</td>
+                    <td>{val.descripcion}</td>
                     <td>{val.precio}</td>
                     <td>{val.acceso}</td>
                     <td>
