@@ -127,7 +127,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   Teléfono
                 </span>
                 <input
-                  type="number"
+                  type="text"
                   value={Telefono}
                   onChange={(event) => {
                     setTelefono(event.target.value);
@@ -187,7 +187,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   Tipo de Usuario
                 </span>
                 <input
-                  type="number"
+                  type="text"
                   value={TipoUsuario}
                   onChange={(event) => {
                     setTipoUsuario(event.target.value);

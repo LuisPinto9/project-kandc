@@ -133,7 +133,7 @@ const PutRegistroModal = ({ values, getArrendatarios }) => {
                   Teléfono
                 </span>
                 <input
-                  type="number"
+                  type="text"
                   value={Telefono}
                   onChange={(event) => {
                     setTelefono(event.target.value);
@@ -193,7 +193,7 @@ const PutRegistroModal = ({ values, getArrendatarios }) => {
                   Tipo de Usuario
                 </span>
                 <input
-                  type="number"
+                  type="text"
                   value={TipoUsuario}
                   onChange={(event) => {
                     setTipoUsuario(event.target.value);
