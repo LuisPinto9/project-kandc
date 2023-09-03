@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-//import { add } from "../controllers/UserControllers";
+import { add } from "../controllers/HabitacionControllers";
 import "../css/modal.css";
 
 const PostHabitacionesModal = ({ getHabitaciones }) => {
@@ -18,7 +18,7 @@ const PostHabitacionesModal = ({ getHabitaciones }) => {
   };
 
   const AddPost = () => {
-    //add({ Id, Nombre, Precio, Acceso });
+    add({ Id, Nombre, Estado,Precio, Zona });    
     getHabitaciones();
     getHabitaciones();
     limpiarCampos();

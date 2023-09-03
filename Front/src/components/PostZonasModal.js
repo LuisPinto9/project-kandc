@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-//import { add } from "../controllers/UserControllers";
+import { add } from "../controllers/ZonasControllers";
 import "../css/modal.css";
 
 const PostZonasModal = ({ getZonas }) => {
@@ -18,7 +18,7 @@ const PostZonasModal = ({ getZonas }) => {
   };
 
   const AddPost = () => {
-    //add({ Id, Nombre, Precio, Acceso });
+    add({ Id, Nombre,Descripcion, Precio, Acceso });
     getZonas();
     getZonas();
     limpiarCampos();

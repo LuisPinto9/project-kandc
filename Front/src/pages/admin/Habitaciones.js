@@ -4,10 +4,12 @@ import "../../css/styles.css";
 import "../../css/registro.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
-import { arrendatarios, Eliminar } from "../../controllers/UserControllers";
+
+import { habitaciones, eliminar } from "../../controllers/HabitacionControllers";
 import PostHabitacionesModal from "../../components/PostHabitacionesModal";
 import PutHabitacionesModal from "../../components/PutHabitacionesModal";
 import "../../css/tabla.css";
+//import { habitaciones } from "../../controllers/HabitacionControllers";
 
 const Habitaciones = () => {
   const [Id, setId] = useState("");
@@ -18,7 +20,7 @@ const Habitaciones = () => {
   const [HabitacionesList, setHabitaciones] = useState([]);
 
   const getHabitaciones = () => {
-    arrendatarios()
+    habitaciones()
       .then((data) => {
         setHabitaciones(data);
       })
@@ -26,13 +28,13 @@ const Habitaciones = () => {
         console.error("Error al obtener las habitaciones:", error);
       });
   };
-
+//aqui
   const EditarHabitaciones = (val) => {
-    setId(val.ID);
+    setId(val.id);
     setNombre(val.nombre);
-    setEstado("");
-    setPrecio(val.telefono);
-    setZona("");
+    setEstado(val.estado);
+    setPrecio(val.precio);
+    setZona(val.zonas);
   };
 
   useEffect(() => {
@@ -88,18 +90,19 @@ const Habitaciones = () => {
               </tr>
             </thead>
             <tbody>
-              {HabitacionesList.map((val, key) => {
+              {HabitacionesList && HabitacionesList.map((val, key) => {
                 return (
                   <tr key={key}>
                     <th className="row-border-left" scope="row">
                       {autoIncrementa++}
                     </th>
                     {/* van los nombres de la base de datos en si */}
-                    <td>{val.ID}</td>
+                    <td>{val.id}</td>
                     <td>{val.nombre}</td>
-                    <td>Estado</td>
-                    <td>{val.telefono}</td>
-                    <td>Zona</td>
+                    <td>{val.estado}</td>
+                    <td>{val.precio}</td>
+                    <td>{val.zonas}</td>
+
                     <td>
                       <i
                         type="button"
@@ -114,7 +117,11 @@ const Habitaciones = () => {
                         values={{
                           Id: Id,
                           Nombre: Nombre,
-                          Precio: Precio,
+                          Estado: Estado,
+                          Precio:Precio,
+                          Zona:Zona,
+
+
                         }}
                         getHabitaciones={getHabitaciones}
                       />
@@ -123,7 +130,7 @@ const Habitaciones = () => {
                       <i
                         type="button"
                         onClick={() => {
-                          //Eliminar({ val, getHabitaciones });
+                          eliminar({ val, getHabitaciones });
                         }}
                         className="bi bi-x-octagon-fill px-2 btn-delete"
                       />

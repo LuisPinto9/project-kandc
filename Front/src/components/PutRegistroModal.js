@@ -16,17 +16,17 @@ const PutRegistroModal = ({ values, getArrendatarios }) => {
   useEffect(() => {
     setIDUsuario(values.IDUsuario);
     setNombre(values.Nombre);
-    setMetodoRenta("");
-    setExtensionDias("");
+    setMetodoRenta(values.MetodoRenta);
+    setExtensionDias(values.ExtensionDias);
     setTelefono(values.Telefono);
-    setNombreUsuario("");
-    setContraseña("");
-    setCorreo("");
-    setTipoUsuario("");
+    setNombreUsuario(values.NombreUsuario);
+    setContraseña(values.Contraseña);
+    setCorreo(values.Correo);
+    setTipoUsuario(values.TipoUsuario);
   }, [values]);
 
   const putUser = () => {
-    update({ IDUsuario, Nombre, Telefono });
+    update({ IDUsuario, Nombre, MetodoRenta,ExtensionDias, Telefono, NombreUsuario,Contraseña, Correo,TipoUsuario});
     getArrendatarios();
     limpiarCampos();
   };
@@ -34,10 +34,10 @@ const PutRegistroModal = ({ values, getArrendatarios }) => {
   const limpiarCampos = () => {
     setIDUsuario(values.IDUsuario);
     setNombre(values.Nombre);
-    setMetodoRenta("");
-    setExtensionDias("");
+    setMetodoRenta(values.MetodoRenta);
+    setExtensionDias(values.ExtensionDias);
     setTelefono(values.Telefono);
-    setNombreUsuario("");
+    setNombreUsuario(values.NombreUsuario);
     setContraseña("");
     setCorreo("");
     setTipoUsuario("");
@@ -133,7 +133,7 @@ const PutRegistroModal = ({ values, getArrendatarios }) => {
                   Teléfono
                 </span>
                 <input
-                  type="text"
+                  type="number"
                   value={Telefono}
                   onChange={(event) => {
                     setTelefono(event.target.value);
@@ -193,7 +193,7 @@ const PutRegistroModal = ({ values, getArrendatarios }) => {
                   Tipo de Usuario
                 </span>
                 <input
-                  type="text"
+                  type="number"
                   value={TipoUsuario}
                   onChange={(event) => {
                     setTipoUsuario(event.target.value);
@@ -204,6 +204,7 @@ const PutRegistroModal = ({ values, getArrendatarios }) => {
                 />
               </div>
             </div>
+
             <div className="modal-footer">
               <button
                 type="button"

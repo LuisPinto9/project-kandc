@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-//import { update } from "../controllers/UserControllers";
+import { update } from "../controllers/ZonasControllers";
 import "../css/modal.css";
 
 const PutZonasModal = ({ values, getZonas }) => {
@@ -10,21 +10,21 @@ const PutZonasModal = ({ values, getZonas }) => {
   const [Acceso, setAcceso] = useState("");
 
   useEffect(() => {
-    setId(values.IDUsuario);
+    setId(values.Id);
     setNombre(values.Nombre);
-    setDescripcion("");
+    setDescripcion(values.Descripcion);
     setPrecio(values.Precio);
-    setAcceso("");
+    setAcceso(values.Acceso);
   }, [values]);
 
   const putUser = () => {
-    //update({ IDUsuario, Nombre, Precio });
+    update({ Id, Nombre,Descripcion, Precio,Acceso });
     getZonas();
     limpiarCampos();
   };
 
   const limpiarCampos = () => {
-    setId(values.IDUsuario);
+    setId(values.Id);
     setNombre(values.Nombre);
     setDescripcion("");
     setPrecio(values.Precio);

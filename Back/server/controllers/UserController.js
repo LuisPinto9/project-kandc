@@ -1,7 +1,7 @@
 const db = require("../db");
 
 const getUsers = (req, res) => {
-  db.query("SELECT * FROM arrendatario1", (err, result) => {
+  db.query("SELECT * FROM usuario", (err, result) => {
     if (err) {
       res.status(500).send("Hubo un error en el servidor");
     } else {
@@ -13,10 +13,19 @@ const getUsers = (req, res) => {
 const createUser = (req, res) => {
   const IDUsuario = req.body.IDUsuario;
   const Nombre = req.body.Nombre;
+  
+  const MetodoRenta = req.body.MetodoRenta;
+  const ExtensionDias = req.body.ExtensionDias;
   const Telefono = req.body.Telefono;
+  const NombreUsuario = req.body.NombreUsuario;
+  const Contraseña = req.body.Contraseña;
+  const Correo = req.body.Correo;
+  const TipoUsuario = req.body.TipoUsuario;
+
+
   db.query(
-    "insert into Arrendatario1(ID,nombre,telefono) values(?,?,?)",
-    [IDUsuario, Nombre, Telefono],
+    "insert into usuario(id,nombre,metodo_renta,extension_dias,telefono,nombre_usuario,contraseña,correo,tipo) values(?,?,?,?,?,?,?,?,?)",
+    [IDUsuario, Nombre, MetodoRenta,ExtensionDias, Telefono,NombreUsuario,Contraseña, Correo,TipoUsuario],
     (err, result) => {
       if (err) {
         res.status(500).send("Hubo un error en el servidor");
@@ -28,14 +37,26 @@ const createUser = (req, res) => {
 };
 
 const updateUser = (req, res) => {
+
   const IDUsuario = req.body.IDUsuario;
   const Nombre = req.body.Nombre;
+  
+  const MetodoRenta = req.body.MetodoRenta;
+  const ExtensionDias = req.body.ExtensionDias;
   const Telefono = req.body.Telefono;
+  const NombreUsuario = req.body.NombreUsuario;
+  
+  const Contraseña = req.body.Contraseña;
+  const Correo = req.body.Correo;
+  const TipoUsuario = req.body.TipoUsuario;
+
+
+
+
+
   db.query(
-    /*  "update  Arrendatario1 set(ID,nombre,telefono) values(?,?,?)" where ID=?", */
-    "update Arrendatario1 set nombre=?,telefono=? where ID=?",
-    /*  "update Arrendatario1 set(ID,nombre,telefono) values(?,?,?) where ID=?",*/
-    [Nombre, Telefono, IDUsuario],
+    "update usuario set nombre=?,metodo_renta=?,extension_dias=?,telefono=?,nombre_usuario=?,contraseña=?,correo=?,tipo=? where id=?",
+    [ Nombre, MetodoRenta,ExtensionDias, Telefono,NombreUsuario,Contraseña, Correo,TipoUsuario,IDUsuario],
     (err, result) => {
       if (err) {
         res.status(500).send("Hubo un error en el servidor");
@@ -49,7 +70,7 @@ const updateUser = (req, res) => {
 const deleteUser = (req, res) => {
   const IDUsuario = req.body.IDUsuario;
   db.query(
-    "Delete from Arrendatario1 where ID=?",
+    "Delete from usuario where id=?",
     [IDUsuario],
     (err, result) => {
       if (err) {

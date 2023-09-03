@@ -3,19 +3,16 @@ import Swal from "sweetalert2";
 
 //aqui
 export const add = (datos) => {
-  Axios.post("http://localhost:3001/user/create", {
+  Axios.post("http://localhost:3001/Habitacion/create", {
 
-  IDUsuario:  datos.IDUsuario,
-  Nombre:  datos.Nombre,
+ 
+  Id: datos.Id,
+  Nombre: datos.Nombre,
+  Estado: datos.Estado,
+  Precio: datos.Precio,
+  Zona: datos.Zona,
+
   
-  
-  MetodoRenta:  datos.MetodoRenta,
-  ExtensionDias:  datos.ExtensionDias,
-  Telefono:  datos.Telefono,
-  NombreUsuario:  datos.NombreUsuario,
-  Contraseña: datos.Contraseña,
-  Correo:  datos.Correo,
-  TipoUsuario: datos.TipoUsuario,
 
   }).then(() => {
     Swal.fire({
@@ -31,19 +28,14 @@ export const add = (datos) => {
 };
 
 
-
 export const update = (datos) => {
-  Axios.put("http://localhost:3001/user/update", {
-    IDUsuario:  datos.IDUsuario,
-    Nombre:  datos.Nombre,
-    MetodoRenta:  datos.MetodoRenta,
-    
-    ExtensionDias:  datos.ExtensionDias,
-    Telefono:  datos.Telefono,
-    NombreUsuario:  datos.NombreUsuario,
-    Contraseña: datos.Contraseña,
-    Correo:  datos.Correo,
-    TipoUsuario: datos.TipoUsuario,
+  Axios.put("http://localhost:3001/Habitacion/update", {
+      Id: datos.Id,
+  Nombre: datos.Nombre,
+  Estado: datos.Estado,
+  Precio:datos.Precio,
+  Zona:datos.Zona,
+
 
 
   }).then(() => {
@@ -59,11 +51,11 @@ export const update = (datos) => {
   });
 };
 
-export const eliminar = ({ val, getArrendatarios }) => {
+export const eliminar = ({ val, getHabitaciones }) => {
   Swal.fire({
     title: "ELIMINAR",
     html:
-      "<i>Desea eliminar al usuario <strong>" +
+      "<i>Desea eliminar la habitacion <strong>" +
       val.nombre +
       "</strong> ?  </i>",
     icon: "warning",
@@ -74,12 +66,12 @@ export const eliminar = ({ val, getArrendatarios }) => {
   }).then((result) => {
     if (result.isConfirmed) {
       /* aqui es donde se elimina */
-      const IDUsuario = val.id;
-      Axios.delete("http://localhost:3001/user/delete", {
-        data: { IDUsuario: IDUsuario },
+      const Id = val.id;
+      Axios.delete("http://localhost:3001/Habitacion/delete", {
+        data: { Id: Id },
       })
         .then(() => {
-          getArrendatarios();
+            getHabitaciones();
           Swal.fire({
             title: "<strong>Eliminacion exitosa</strong>",
             html:
@@ -104,10 +96,10 @@ export const eliminar = ({ val, getArrendatarios }) => {
 };
 
 /* traer la infromacion de los arrendatarios */
-export const arrendatarios = async () => {
+export const habitaciones = async () => {
   try {
     const response = await Axios.get(
-      "http://localhost:3001/user/arrendatarios"
+      "http://localhost:3001/Habitacion/habitaciones"
     );
     return response.data;
   } catch (error) {

@@ -26,7 +26,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
   };
 
   const AddPost = () => {
-    add({ IDUsuario, Nombre, Telefono });
+    add({ IDUsuario, Nombre, MetodoRenta,ExtensionDias, Telefono,NombreUsuario,Contraseña, Correo,TipoUsuario });
     getArrendatarios();
     getArrendatarios();
     limpiarCampos();
@@ -127,7 +127,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   Teléfono
                 </span>
                 <input
-                  type="text"
+                  type="number"
                   value={Telefono}
                   onChange={(event) => {
                     setTelefono(event.target.value);
@@ -187,7 +187,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   Tipo de Usuario
                 </span>
                 <input
-                  type="text"
+                  type="number"
                   value={TipoUsuario}
                   onChange={(event) => {
                     setTipoUsuario(event.target.value);
@@ -198,6 +198,10 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                 />
               </div>
             </div>
+
+
+
+
             <div className="modal-footer">
               <button
                 type="button"

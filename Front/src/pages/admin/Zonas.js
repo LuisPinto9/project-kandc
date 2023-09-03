@@ -5,19 +5,24 @@ import "../../css/registro.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 import "../../css/tabla.css";
-import { arrendatarios, Eliminar } from "../../controllers/UserControllers";
+import { zonas, eliminar } from "../../controllers/ZonasControllers";
 import PostZonasModal from "../../components/PostZonasModal";
 import PutZonasModal from "../../components/PutZonasModal";
 
+//import {zonas} from "../../controllers/ZonasControllers";
+
+
 const Zonas = () => {
-  const [IDUsuario, setIDUsuario] = useState("");
+  const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
+  const [Descripcion, setDescripcion] = useState("");
   const [Precio, setPrecio] = useState("");
   const [Acceso, setAcceso] = useState("");
   const [ZonasList, setZonas] = useState([]);
 
   const getZonas = () => {
-    arrendatarios()
+    //aqui
+    zonas()
       .then((data) => {
         setZonas(data);
       })
@@ -27,10 +32,11 @@ const Zonas = () => {
   };
 
   const EditarZonas = (val) => {
-    setIDUsuario(val.ID);
+    setId(val.id);
     setNombre(val.nombre);
-    setPrecio(val.telefono);
-    setAcceso("");
+    setDescripcion(val.descripcion);
+    setPrecio(val.precio);
+    setAcceso(val.acceso);
   };
 
   useEffect(() => {
@@ -86,18 +92,20 @@ const Zonas = () => {
               </tr>
             </thead>
             <tbody>
-              {ZonasList.map((val, key) => {
+              {ZonasList&&ZonasList.map((val, key) => {
                 return (
                   <tr key={key}>
                     <th className="row-border-left" scope="row">
                       {autoIncrementa++}
                     </th>
                     {/* van los nombres de la base de datos en si */}
-                    <td>{val.ID}</td>
+                   
+                   
+                    <td>{val.id}</td>
                     <td>{val.nombre}</td>
-                    <td>descipcion</td>
-                    <td>{val.telefono}</td>
-                    <td>Publico</td>
+                    <td>{val.descipcion}</td>
+                    <td>{val.precio}</td>
+                    <td>{val.acceso}</td>
                     <td>
                       <i
                         type="button"
@@ -110,9 +118,11 @@ const Zonas = () => {
                       />
                       <PutZonasModal
                         values={{
-                          IDUsuario: IDUsuario,
+                          Id: Id,
                           Nombre: Nombre,
+                          Descripcion: Descripcion,
                           Precio: Precio,
+                          Acceso: Acceso,
                         }}
                         getZonas={getZonas}
                       />
@@ -121,7 +131,7 @@ const Zonas = () => {
                       <i
                         type="button"
                         onClick={() => {
-                          //Eliminar({ val, getZonas });
+                          eliminar({ val, getZonas });
                         }}
                         className="bi bi-x-octagon-fill px-2 btn-delete"
                       />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-//import { update } from "../controllers/UserControllers";
+import { update } from "../controllers/HabitacionControllers";
 import "../css/modal.css";
 
 const PutHabitacionesModal = ({ values, getHabitaciones }) => {
@@ -12,13 +12,13 @@ const PutHabitacionesModal = ({ values, getHabitaciones }) => {
   useEffect(() => {
     setId(values.Id);
     setNombre(values.Nombre);
-    setEstado("");
+    setEstado(values.Estado);
     setPrecio(values.Precio);
-    setZona("");
+    setZona(values.Zona);
   }, [values]);
 
   const putUser = () => {
-    //update({ IDUsuario, Nombre, PhoneNumber });
+    update({  Id, Nombre, Estado,Precio, Zona });
     getHabitaciones();
     limpiarCampos();
   };
