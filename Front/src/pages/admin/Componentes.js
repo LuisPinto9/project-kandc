@@ -4,7 +4,7 @@ import "../../css/styles.css";
 import "../../css/registro.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
-import { arrendatarios, Eliminar } from "../../controllers/UserControllers";
+import { componentes, eliminar } from "../../controllers/ComponentesControllers";
 import PostComponentesModal from "../../components/PostComponentesModal";
 import PutComponentesModal from "../../components/PutComponentesModal";
 import "../../css/tabla.css";
@@ -22,7 +22,7 @@ const Componentes = () => {
   const [ComponentesList, setComponentes] = useState([]);
 
   const getComponentes = () => {
-    arrendatarios()
+    componentes()
       .then((data) => {
         setComponentes(data);
       })
@@ -32,15 +32,15 @@ const Componentes = () => {
   };
 
   const EditarComponentes = (val) => {
-    setId(val.ID);
+    setId(val.id);
     setNombre(val.nombre);
-    setMarca("");
-    setCantidad("");
-    setCosto(val.telefono);
-    setEstado("");
-    setDescripcion("");
-    setObservacion("");
-    setHabitacion("");
+    setMarca(val.marca);
+    setCantidad(val.cantidad);
+    setCosto(val.costo);
+    setEstado(val.estado);
+    setDescripcion(val.descripcion);
+    setObservacion(val.observacion);
+    setHabitacion(val.habitacion);
   };
 
   useEffect(() => {
@@ -90,7 +90,7 @@ const Componentes = () => {
                 <th scope="col">Cantidad</th>
                 <th scope="col">Costo</th>
                 <th scope="col">Estado</th>
-                <th scope="col">Descirpción</th>
+                <th scope="col">Descripción</th>
                 <th scope="col">Observación</th>
                 <th scope="col">Habitación</th>
                 <th scope="col">Editar</th>
@@ -100,22 +100,23 @@ const Componentes = () => {
               </tr>
             </thead>
             <tbody>
-              {ComponentesList.map((val, key) => {
+              {ComponentesList&&ComponentesList.map((val, key) => {
                 return (
                   <tr key={key}>
                     <th className="row-border-left" scope="row">
                       {autoIncrementar++}
                     </th>
                     {/* van los nombres de la base de datos en si */}
-                    <td>{val.ID}</td>
+                    <td>{val.id}</td>
                     <td>{val.nombre}</td>
-                    <td>Marca</td>
-                    <td>Cantidad</td>
-                    <td>{val.telefono}</td>
-                    <td>Estado</td>
-                    <td>Descripción</td>
-                    <td>Observación</td>
-                    <td>Habitación</td>
+                    <td>{val.marca}</td>
+                    <td>{val.cantidad}</td>
+                    <td>{val.cantidad}</td>
+                    <td>{val.estado}</td>
+                    <td>{val.descripcion}</td>
+                    <td>{val.observacion}</td>
+                    <td>{val.habitacion}</td>
+
                     <td>
                       <i
                         type="button"
@@ -130,7 +131,14 @@ const Componentes = () => {
                         values={{
                           Id: Id,
                           Nombre: Nombre,
-                          Costo: Costo,
+                          Marca:Marca,
+                          Cantidad:Cantidad,
+                          Costo:Costo,
+                          Estado:Estado,
+                          Descripcion:Descripcion,
+                          Observacion:Observacion,
+                          Habitacion:Habitacion,
+
                         }}
                         getComponentes={getComponentes}
                       />
@@ -139,7 +147,7 @@ const Componentes = () => {
                       <i
                         type="button"
                         onClick={() => {
-                          //Eliminar({ val, getComponentes });
+                          eliminar({ val, getComponentes });
                         }}
                         className="bi bi-x-octagon-fill px-2 btn-delete"
                       />

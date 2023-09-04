@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-//import { add } from "../controllers/UserControllers";
+import { add } from "../controllers/ComponentesControllers";
 import "../css/modal.css";
 
 const PostComponentesModal = ({ getComponentes }) => {
@@ -26,7 +26,8 @@ const PostComponentesModal = ({ getComponentes }) => {
   };
 
   const AddPost = () => {
-    //add({ Id, Nombre, Precio, Acceso });
+  
+    add({ Id, Nombre, Marca, Cantidad,Costo,Estado,Descripcion,Observacion,Habitacion });
     getComponentes();
     getComponentes();
     limpiarCampos();

@@ -3,15 +3,18 @@ import Swal from "sweetalert2";
 
 //aqui
 export const add = (datos) => {
-  Axios.post("http://localhost:3001/Habitacion/create", {
+  Axios.post("http://localhost:3001/Componentes/create", {
 
  
   Id: datos.Id,
   Nombre: datos.Nombre,
-  Estado: datos.Estado,
-  Precio: datos.Precio,
-  Zona: datos.Zona,
-
+  Marca:datos.Marca,
+  Cantidad:datos.Cantidad,
+  Costo:datos.Costo,
+  Estado:datos.Estado,
+  Descripcion:datos.Descripcion,
+  Observacion:datos.Observacion,
+  Habitacion:datos.Habitacion,
   
 
   }).then(() => {
@@ -29,13 +32,18 @@ export const add = (datos) => {
 
 
 export const update = (datos) => {
-  Axios.put("http://localhost:3001/Habitacion/update", {
-      Id: datos.Id,
+  Axios.put("http://localhost:3001/Componentes/update", {
+    
+  Id: datos.Id,
   Nombre: datos.Nombre,
-  Estado: datos.Estado,
-  Precio:datos.Precio,
-  Zona:datos.Zona,
-
+  Marca:datos.Marca,
+  Cantidad:datos.Cantidad,
+  Costo:datos.Costo,
+  Estado:datos.Estado,
+  Descripcion:datos.Descripcion,
+  Observacion:datos.Observacion,
+  Habitacion:datos.Habitacion,
+  
 
 
   }).then(() => {
@@ -51,7 +59,7 @@ export const update = (datos) => {
   });
 };
 
-export const eliminar = ({ val, getHabitaciones }) => {
+export const eliminar = ({ val, getComponentes}) => {
   Swal.fire({
     title: "ELIMINAR",
     html:
@@ -67,11 +75,11 @@ export const eliminar = ({ val, getHabitaciones }) => {
     if (result.isConfirmed) {
       /* aqui es donde se elimina */
       const Id = val.id;
-      Axios.delete("http://localhost:3001/Habitacion/delete", {
+      Axios.delete("http://localhost:3001/Componentes/delete", {
         data: { Id: Id },
       })
         .then(() => {
-            getHabitaciones();
+          getComponentes();
           Swal.fire({
             title: "<strong>Eliminacion exitosa</strong>",
             html:
@@ -96,10 +104,10 @@ export const eliminar = ({ val, getHabitaciones }) => {
 };
 
 /* traer la infromacion de los arrendatarios */
-export const habitaciones = async () => {
+export const componentes = async () => {
   try {
     const response = await Axios.get(
-      "http://localhost:3001/Habitacion/habitaciones"
+      "http://localhost:3001/Componentes/Componentes"
     );
     return response.data;
   } catch (error) {

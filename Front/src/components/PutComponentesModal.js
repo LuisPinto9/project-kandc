@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-//import { update } from "../controllers/UserControllers";
+import { update } from "../controllers/ComponentesControllers";
 import "../css/modal.css";
 
 const PutComponentesModal = ({ values, getComponentes }) => {
@@ -14,33 +14,38 @@ const PutComponentesModal = ({ values, getComponentes }) => {
   const [Habitacion, setHabitacion] = useState("");
 
   useEffect(() => {
+    
     setId(values.Id);
     setNombre(values.Nombre);
-    setMarca("");
-    setCantidad("");
+    setMarca(values.Marca);
+    setCantidad(values.Cantidad);
     setCosto(values.Costo);
-    setEstado("");
-    setDescripcion("");
-    setObservacion("");
-    setHabitacion("");
+    setEstado(values.Estado);
+    setDescripcion(values.Descripcion);
+    setObservacion(values.Observacion);
+    setHabitacion(values.Habitacion);
   }, [values]);
 
   const putUser = () => {
-    //update({ IDUsuario, Nombre, PhoneNumber });
+  
+
+    update({ Id, Nombre, Marca, Cantidad,Costo,Estado,Descripcion,Observacion,Habitacion});
     getComponentes();
     limpiarCampos();
   };
 
   const limpiarCampos = () => {
+
+
     setId(values.Id);
     setNombre(values.Nombre);
-    setMarca("");
-    setCantidad("");
+    setMarca(values.Marca);
+    setCantidad(values.Cantidad);
     setCosto(values.Costo);
-    setEstado("");
-    setDescripcion("");
-    setObservacion("");
-    setHabitacion("");
+    setEstado(values.Estado);
+    setDescripcion(values.Descripcion);
+    setObservacion(values.Observacion);
+    setHabitacion(values.Habitacion);
     getComponentes("");
   };
 
