@@ -27,7 +27,26 @@ export const add = (datos) => {
       icon: "success",
       timer: 2000,
     });
+  }).catch((error) => {
+    if (error.response && error.response.status === 400 && error.response.data && error.response.data.error) {
+      Swal.fire({
+        title: "Error de validación",
+        html: error.response.data.error,
+        icon: "error",
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Ocurrió un error. Intente más tarde",
+      });
+    }
   });
+
+
+
+
+
 };
 
 

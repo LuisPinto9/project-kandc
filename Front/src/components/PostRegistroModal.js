@@ -13,6 +13,11 @@ const FormRegistroPost = ({ getArrendatarios }) => {
   const [Correo, setCorreo] = useState("");
   const [TipoUsuario, setTipoUsuario] = useState("");
 
+
+  const [errorIDUsuario, setErrorIDUsuario] = useState("");
+  const [errorNombre, setErrorNombre] = useState("");
+  //  Resto de los mensajes de error
+
   const limpiarCampos = () => {
     setIDUsuario("");
     setNombre("");
@@ -26,6 +31,20 @@ const FormRegistroPost = ({ getArrendatarios }) => {
   };
 
   const AddPost = () => {
+    //aqui
+
+    if (!IDUsuario) {
+      setErrorIDUsuario("Este campo no puede estar vacío");
+      return;
+    }
+
+    if (!Nombre) {
+      setErrorNombre("Este campo no puede estar vacío");
+      return;
+    }
+
+    // Agregar las demás validaciones para los otros campos aqui jeje
+
     add({ IDUsuario, Nombre, MetodoRenta,ExtensionDias, Telefono,NombreUsuario,Contraseña, Correo,TipoUsuario });
     getArrendatarios();
     getArrendatarios();
@@ -73,12 +92,25 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   value={IDUsuario}
                   onChange={(event) => {
                     setIDUsuario(event.target.value);
+                    setErrorIDUsuario("");
                   }}
+                  //aquivalidad
+                  onBlur={() => {
+                    if (!IDUsuario) {
+                      setErrorIDUsuario("Este campo no puede estar vacío");
+                    }
+                  }}
+
+
                   className="form-control"
                   aria-label="id"
                   aria-describedby="basic-addon1"
                 />
+                  {errorIDUsuario && <div className="error-message">{errorIDUsuario}</div>}
+      
               </div>
+
+
               <div className="input-group mb-3">
                 <span className="input-group-text">Nombre</span>
                 <input
@@ -86,12 +118,23 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   value={Nombre}
                   onChange={(event) => {
                     setNombre(event.target.value);
+                    setErrorNombre("");
                   }}
+
+                  onBlur={() => {
+                    if (!Nombre) {
+                      setErrorNombre("Este campo no puede estar vacío");
+                    }
+                  }}
+
                   className="form-control"
                   aria-label="nombre"
                   aria-describedby="basic-addon1"
                 />
+                 {errorNombre && <div className="error-message">{errorNombre}</div>}
+      
               </div>
+
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                   Método de Renta
