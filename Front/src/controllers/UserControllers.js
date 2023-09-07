@@ -27,6 +27,7 @@ export const add = (datos) => {
       icon: "success",
       timer: 2000,
     });
+    //validacion
   }).catch((error) => {
     if (error.response && error.response.status === 400 && error.response.data && error.response.data.error) {
       Swal.fire({
