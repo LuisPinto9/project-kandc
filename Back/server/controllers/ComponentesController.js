@@ -1,5 +1,6 @@
 const db = require("../db");
 
+//no se ve los cambios
 const getUsers = (req, res) => {
   db.query("SELECT * FROM componentes", (err, result) => {
     if (err) {
