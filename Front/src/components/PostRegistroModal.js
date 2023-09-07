@@ -4,6 +4,8 @@ import "../css/modal.css";
 
 import Swal from "sweetalert2";
 
+
+
 const FormRegistroPost = ({ getArrendatarios }) => {
   const [IDUsuario, setIDUsuario] = useState("");
   const [Nombre, setNombre] = useState("");
@@ -15,7 +17,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
   const [Correo, setCorreo] = useState("");
   const [TipoUsuario, setTipoUsuario] = useState("");
 
-  const [formIsValid, setFormIsValid] = useState(true);
+  const [formularioVisible, setFormularioVisible] = useState(true);
 
   //const [errorIDUsuario, setErrorIDUsuario] = useState("");
  // const [errorNombre, setErrorNombre] = useState("");
@@ -137,6 +139,31 @@ const validateFields = () => {
   setErrorMessages(newErrorMessages);
   return isValid;
 };
+
+const mostrarMensajeError = () => {
+  Swal.fire({
+    title: "Campos inválidos",
+    text: "Uno o más campos contienen datos inválidos. Por favor, corrige los errores.",
+    icon: "error",
+    showCancelButton: true,
+    confirmButtonText: "Aceptar",
+  });
+};
+/*
+
+const mostrarMensajeError = () => {
+  Swal.fire({
+    title: "Campos inválidos",
+    text: "Uno o más campos contienen datos inválidos. Por favor, corrige los errores.",
+    icon: "error",
+    showCancelButton: true,
+    confirmButtonText: "Aceptar",
+  });
+
+  
+};
+*/
+
 
   const limpiarCampos = () => {
     setIDUsuario("");
@@ -277,7 +304,9 @@ const AddPost = () => {
  */
 
   const AddPost = () => {
-    if (validateFields()) {
+    const camposValidos = validateFields(); // Reemplaza esto con tu lógica de validación
+  
+    if (camposValidos) {
       add({
         IDUsuario,
         Nombre,
@@ -291,6 +320,9 @@ const AddPost = () => {
       });
       getArrendatarios();
       limpiarCampos();
+      setFormularioVisible(false);
+    } else {
+      mostrarMensajeError();
     }
   };
 
@@ -491,7 +523,7 @@ const AddPost = () => {
               <button
                 type="button"
                 className="btn btn-primary"
-                data-bs-dismiss="modal"
+               // data-bs-dismiss="modal"
                 onClick={AddPost}
               >
                 Agregar
