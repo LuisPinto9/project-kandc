@@ -4,8 +4,6 @@ import "../../css/styles.css";
 import "../../css/registro.css";
 import "../../css/tabla.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-
 import { arrendatarios, eliminar } from "../../controllers/UserControllers";
 import PostRegistroModal from "../../components/PostRegistroModal";
 import PutRegistroModal from "../../components/PutRegistroModal";
@@ -40,7 +38,7 @@ function Registro() {
     setExtensionDias(val.extension_dias);
     setTelefono(val.telefono);
     setNombreUsuario(val.nombre_usuario);
-    setContraseña( val.contraseña);
+    setContraseña(val.contraseña);
     setCorreo(val.correo);
     setTipoUsuario(val.tipo);
   };
@@ -96,77 +94,69 @@ function Registro() {
                 <th scope="col">Correo</th>
                 <th scope="col">Tipo de usuario</th>
                 <th scope="col">Editar</th>
-
-              
-
-
                 <th className="row-border-right" scope="col">
                   Borrar
                 </th>
               </tr>
             </thead>
             <tbody>
-              {ArrendatariosList && ArrendatariosList.map((val, key) => {
-                return (
-                  <tr key={key}>
-                    <th className="row-border-left" scope="row">
-                      {autoIncremento++}
-                    </th>
-                    {/* van los nombres de la base de datos en si */}
-                     <td>{val.id}</td>
-                    <td>{val.nombre}</td>
-                    <td>{val.metodo_renta}</td>
-                    <td>{val.extension_dias}</td>
-                    <td>{val.telefono}</td>
-                    <td>{val.nombre_usuario}</td>
-                    <td>{val.contraseña}</td>
-                    <td>{val.correo}</td>
-                    <td>{val.tipo}</td>                   
+              {ArrendatariosList &&
+                ArrendatariosList.map((val, key) => {
+                  return (
+                    <tr key={key}>
+                      <th className="row-border-left" scope="row">
+                        {autoIncremento++}
+                      </th>
+                      {/* van los nombres de la base de datos en si */}
+                      <td>{val.id}</td>
+                      <td>{val.nombre}</td>
+                      <td>{val.metodo_renta}</td>
+                      <td>{val.extension_dias}</td>
+                      <td>{val.telefono}</td>
+                      <td>{val.nombre_usuario}</td>
+                      <td>{val.contraseña}</td>
+                      <td>{val.correo}</td>
+                      <td>{val.tipo}</td>
 
-    
-                    <td>
-                      <i
-                        type="button"
-                        className="bi bi-pencil-square px-2 btn-update"
-                        data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop-put"
-                        onClick={() => {
-                          EditarArrendatarios(val);
-                        }}
-                      />
-                      <PutRegistroModal
-                        values={{
-                          IDUsuario: IDUsuario,
-                          Nombre: Nombre,
-                          
-                          MetodoRenta: MetodoRenta,
-                          ExtensionDias: ExtensionDias,
-                          Telefono: Telefono,
-                          NombreUsuario: NombreUsuario,
-                          Contraseña:Contraseña,
-                          Correo: Correo,
-                          TipoUsuario:TipoUsuario,
+                      <td>
+                        <i
+                          type="button"
+                          className="bi bi-pencil-square px-2 btn-update"
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdrop-put"
+                          onClick={() => {
+                            EditarArrendatarios(val);
+                          }}
+                        />
+                        <PutRegistroModal
+                          values={{
+                            IDUsuario: IDUsuario,
+                            Nombre: Nombre,
 
-                        }}
-                        getArrendatarios={getArrendatarios}
-                      />
-                    </td>
-                    <td className="row-border-right">
-                      <i
-                        type="button"
-                        onClick={() => {
-                          eliminar({ val, getArrendatarios });
-                        }}
-                        className="bi bi-x-octagon-fill px-2 btn-delete"
-                      />
-                    </td>
-                  </tr>
-                  
-                );
-              })}
+                            MetodoRenta: MetodoRenta,
+                            ExtensionDias: ExtensionDias,
+                            Telefono: Telefono,
+                            NombreUsuario: NombreUsuario,
+                            Contraseña: Contraseña,
+                            Correo: Correo,
+                            TipoUsuario: TipoUsuario,
+                          }}
+                          getArrendatarios={getArrendatarios}
+                        />
+                      </td>
+                      <td className="row-border-right">
+                        <i
+                          type="button"
+                          onClick={() => {
+                            eliminar({ val, getArrendatarios });
+                          }}
+                          className="bi bi-x-octagon-fill px-2 btn-delete"
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
-
-            
           </table>
         </div>
       </div>

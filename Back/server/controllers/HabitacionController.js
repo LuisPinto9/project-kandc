@@ -11,20 +11,15 @@ const getUsers = (req, res) => {
 };
 
 const createUser = (req, res) => {
-
-  
-
   const Id = req.body.Id;
   const Nombre = req.body.Nombre;
-  
   const Estado = req.body.Estado;
   const Precio = req.body.Precio;
   const Zona = req.body.Zona;
 
-
   db.query(
     "insert into habitaciones(id, nombre, estado,precio, zonas) values(?,?,?,?,?)",
-    [Id, Nombre, Estado,Precio, Zona],
+    [Id, Nombre, Estado, Precio, Zona],
     (err, result) => {
       if (err) {
         res.status(500).send("Hubo un error en el servidor");
@@ -36,19 +31,15 @@ const createUser = (req, res) => {
 };
 
 const updateUser = (req, res) => {
-
   const Id = req.body.Id;
   const Nombre = req.body.Nombre;
-  
   const Estado = req.body.Estado;
   const Precio = req.body.Precio;
   const Zona = req.body.Zona;
 
-
-
   db.query(
     "update habitaciones set nombre=?,estado=?,precio=?,zonas=? where id=?",
-    [ Nombre, Estado, Precio, Zona, Id],
+    [Nombre, Estado, Precio, Zona, Id],
     (err, result) => {
       if (err) {
         res.status(500).send("Hubo un error en el servidor");
@@ -62,17 +53,13 @@ const updateUser = (req, res) => {
 const deleteUser = (req, res) => {
   //aqui
   const Id = req.body.Id;
-  db.query(
-    "Delete from habitaciones where id=?",
-    [Id],
-    (err, result) => {
-      if (err) {
-        res.status(500).send("Hubo un error en el servidor");
-      } else {
-        res.send("Arrendatario eliminado");
-      }
+  db.query("Delete from habitaciones where id=?", [Id], (err, result) => {
+    if (err) {
+      res.status(500).send("Hubo un error en el servidor");
+    } else {
+      res.send("Arrendatario eliminado");
     }
-  );
+  });
 };
 
 module.exports = {

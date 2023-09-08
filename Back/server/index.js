@@ -12,13 +12,16 @@ const crudRoutes = require("./routes/UserRoutes.js");
 app.use("/user", crudRoutes);
 
 const crudRoutes2 = require("./routes/HabitacionRoutes.js");
-app.use("/Habitacion", crudRoutes2);
+app.use("/habitaciones", crudRoutes2);
 
 const crudRoutes3 = require("./routes/ComponentesRoutes.js");
-app.use("/Componentes", crudRoutes3);
+app.use("/componentes", crudRoutes3);
 
 const crudRoutes4 = require("./routes/ZonasRoutes.js");
-app.use("/Zonas", crudRoutes4);
+app.use("/zonas", crudRoutes4);
+
+const loginRoutes = require("./routes/LoginRoutes.js");
+app.use("/login", loginRoutes);
 
 app.listen(app.get("port"), () => {
   console.log(`Corriendo en el puerto ${app.get("port")}`);

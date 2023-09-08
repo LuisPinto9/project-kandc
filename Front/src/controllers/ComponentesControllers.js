@@ -3,20 +3,16 @@ import Swal from "sweetalert2";
 
 //aqui
 export const add = (datos) => {
-  Axios.post("http://localhost:3001/Componentes/create", {
-
- 
-  Id: datos.Id,
-  Nombre: datos.Nombre,
-  Marca:datos.Marca,
-  Cantidad:datos.Cantidad,
-  Costo:datos.Costo,
-  Estado:datos.Estado,
-  Descripcion:datos.Descripcion,
-  Observacion:datos.Observacion,
-  Habitacion:datos.Habitacion,
-  
-
+  Axios.post("http://localhost:3001/componentes/create", {
+    Id: datos.Id,
+    Nombre: datos.Nombre,
+    Marca: datos.Marca,
+    Cantidad: datos.Cantidad,
+    Costo: datos.Costo,
+    Estado: datos.Estado,
+    Descripcion: datos.Descripcion,
+    Observacion: datos.Observacion,
+    Habitacion: datos.Habitacion,
   }).then(() => {
     Swal.fire({
       title: "<strong>Registro exitoso</strong>",
@@ -30,22 +26,17 @@ export const add = (datos) => {
   });
 };
 
-
 export const update = (datos) => {
-  Axios.put("http://localhost:3001/Componentes/update", {
-    
-  Id: datos.Id,
-  Nombre: datos.Nombre,
-  Marca:datos.Marca,
-  Cantidad:datos.Cantidad,
-  Costo:datos.Costo,
-  Estado:datos.Estado,
-  Descripcion:datos.Descripcion,
-  Observacion:datos.Observacion,
-  Habitacion:datos.Habitacion,
-  
-
-
+  Axios.put("http://localhost:3001/componentes/update", {
+    Id: datos.Id,
+    Nombre: datos.Nombre,
+    Marca: datos.Marca,
+    Cantidad: datos.Cantidad,
+    Costo: datos.Costo,
+    Estado: datos.Estado,
+    Descripcion: datos.Descripcion,
+    Observacion: datos.Observacion,
+    Habitacion: datos.Habitacion,
   }).then(() => {
     Swal.fire({
       title: "<strong>Actualizacion exitosa</strong>",
@@ -59,7 +50,7 @@ export const update = (datos) => {
   });
 };
 
-export const eliminar = ({ val, getComponentes}) => {
+export const eliminar = ({ val, getComponentes }) => {
   Swal.fire({
     title: "ELIMINAR",
     html:
@@ -75,7 +66,7 @@ export const eliminar = ({ val, getComponentes}) => {
     if (result.isConfirmed) {
       /* aqui es donde se elimina */
       const Id = val.id;
-      Axios.delete("http://localhost:3001/Componentes/delete", {
+      Axios.delete("http://localhost:3001/componentes/delete", {
         data: { Id: Id },
       })
         .then(() => {
@@ -107,7 +98,7 @@ export const eliminar = ({ val, getComponentes}) => {
 export const componentes = async () => {
   try {
     const response = await Axios.get(
-      "http://localhost:3001/Componentes/Componentes"
+      "http://localhost:3001/componentes/get-componentes"
     );
     return response.data;
   } catch (error) {

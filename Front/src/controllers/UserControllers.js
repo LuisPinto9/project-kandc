@@ -4,19 +4,15 @@ import Swal from "sweetalert2";
 //aqui
 export const add = (datos) => {
   Axios.post("http://localhost:3001/user/create", {
-
-  IDUsuario:  datos.IDUsuario,
-  Nombre:  datos.Nombre,
-  
-  
-  MetodoRenta:  datos.MetodoRenta,
-  ExtensionDias:  datos.ExtensionDias,
-  Telefono:  datos.Telefono,
-  NombreUsuario:  datos.NombreUsuario,
-  Contraseña: datos.Contraseña,
-  Correo:  datos.Correo,
-  TipoUsuario: datos.TipoUsuario,
-
+    IDUsuario: datos.IDUsuario,
+    Nombre: datos.Nombre,
+    MetodoRenta: datos.MetodoRenta,
+    ExtensionDias: datos.ExtensionDias,
+    Telefono: datos.Telefono,
+    NombreUsuario: datos.NombreUsuario,
+    Contraseña: datos.Contraseña,
+    Correo: datos.Correo,
+    TipoUsuario: datos.TipoUsuario,
   }).then(() => {
     Swal.fire({
       title: "<strong>Registro exitoso</strong>",
@@ -30,22 +26,17 @@ export const add = (datos) => {
   });
 };
 
-
-
 export const update = (datos) => {
   Axios.put("http://localhost:3001/user/update", {
-    IDUsuario:  datos.IDUsuario,
-    Nombre:  datos.Nombre,
-    MetodoRenta:  datos.MetodoRenta,
-    
-    ExtensionDias:  datos.ExtensionDias,
-    Telefono:  datos.Telefono,
-    NombreUsuario:  datos.NombreUsuario,
+    IDUsuario: datos.IDUsuario,
+    Nombre: datos.Nombre,
+    MetodoRenta: datos.MetodoRenta,
+    ExtensionDias: datos.ExtensionDias,
+    Telefono: datos.Telefono,
+    NombreUsuario: datos.NombreUsuario,
     Contraseña: datos.Contraseña,
-    Correo:  datos.Correo,
+    Correo: datos.Correo,
     TipoUsuario: datos.TipoUsuario,
-
-
   }).then(() => {
     Swal.fire({
       title: "<strong>Actualizacion exitosa</strong>",
@@ -107,7 +98,7 @@ export const eliminar = ({ val, getArrendatarios }) => {
 export const arrendatarios = async () => {
   try {
     const response = await Axios.get(
-      "http://localhost:3001/user/arrendatarios"
+      "http://localhost:3001/user/get-users"
     );
     return response.data;
   } catch (error) {

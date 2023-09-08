@@ -3,14 +3,12 @@ import Swal from "sweetalert2";
 
 //aqui
 export const add = (datos) => {
-  Axios.post("http://localhost:3001/Zonas/create", {
-
-  Id: datos.Id,
-  Nombre: datos.Nombre,
-  Descripcion: datos.Descripcion,
-  Precio: datos.Precio,
-  Acceso: datos.Acceso,
-
+  Axios.post("http://localhost:3001/zonas/create", {
+    Id: datos.Id,
+    Nombre: datos.Nombre,
+    Descripcion: datos.Descripcion,
+    Precio: datos.Precio,
+    Acceso: datos.Acceso,
   }).then(() => {
     Swal.fire({
       title: "<strong>Registro exitoso</strong>",
@@ -24,18 +22,13 @@ export const add = (datos) => {
   });
 };
 
-
-
 export const update = (datos) => {
-  Axios.put("http://localhost:3001/Zonas/update", {
-      Id: datos.Id,
-  Nombre: datos.Nombre,
-  Descripcion: datos.Descripcion,
-  Precio: datos.Precio,
-  Acceso: datos.Acceso,
-
-
-
+  Axios.put("http://localhost:3001/zonas/update", {
+    Id: datos.Id,
+    Nombre: datos.Nombre,
+    Descripcion: datos.Descripcion,
+    Precio: datos.Precio,
+    Acceso: datos.Acceso,
   }).then(() => {
     Swal.fire({
       title: "<strong>Actualizacion exitosa</strong>",
@@ -65,7 +58,7 @@ export const eliminar = ({ val, getZonas }) => {
     if (result.isConfirmed) {
       /* aqui es donde se elimina */
       const Id = val.id;
-      Axios.delete("http://localhost:3001/Zonas/delete", {
+      Axios.delete("http://localhost:3001/zonas/delete", {
         data: { Id: Id },
       })
         .then(() => {
@@ -96,9 +89,7 @@ export const eliminar = ({ val, getZonas }) => {
 /* traer la infromacion de los arrendatarios */
 export const zonas = async () => {
   try {
-    const response = await Axios.get(
-      "http://localhost:3001/Zonas/zonas"
-    );
+    const response = await Axios.get("http://localhost:3001/zonas/get-zonas");
     return response.data;
   } catch (error) {
     console.error("Error al obtener los datos:", error);

@@ -3,17 +3,12 @@ import Swal from "sweetalert2";
 
 //aqui
 export const add = (datos) => {
-  Axios.post("http://localhost:3001/Habitacion/create", {
-
- 
-  Id: datos.Id,
-  Nombre: datos.Nombre,
-  Estado: datos.Estado,
-  Precio: datos.Precio,
-  Zona: datos.Zona,
-
-  
-
+  Axios.post("http://localhost:3001/habitaciones/create", {
+    Id: datos.Id,
+    Nombre: datos.Nombre,
+    Estado: datos.Estado,
+    Precio: datos.Precio,
+    Zona: datos.Zona,
   }).then(() => {
     Swal.fire({
       title: "<strong>Registro exitoso</strong>",
@@ -27,17 +22,13 @@ export const add = (datos) => {
   });
 };
 
-
 export const update = (datos) => {
-  Axios.put("http://localhost:3001/Habitacion/update", {
-      Id: datos.Id,
-  Nombre: datos.Nombre,
-  Estado: datos.Estado,
-  Precio:datos.Precio,
-  Zona:datos.Zona,
-
-
-
+  Axios.put("http://localhost:3001/habitaciones/update", {
+    Id: datos.Id,
+    Nombre: datos.Nombre,
+    Estado: datos.Estado,
+    Precio: datos.Precio,
+    Zona: datos.Zona,
   }).then(() => {
     Swal.fire({
       title: "<strong>Actualizacion exitosa</strong>",
@@ -67,11 +58,11 @@ export const eliminar = ({ val, getHabitaciones }) => {
     if (result.isConfirmed) {
       /* aqui es donde se elimina */
       const Id = val.id;
-      Axios.delete("http://localhost:3001/Habitacion/delete", {
+      Axios.delete("http://localhost:3001/habitaciones/delete", {
         data: { Id: Id },
       })
         .then(() => {
-            getHabitaciones();
+          getHabitaciones();
           Swal.fire({
             title: "<strong>Eliminacion exitosa</strong>",
             html:
@@ -99,7 +90,7 @@ export const eliminar = ({ val, getHabitaciones }) => {
 export const habitaciones = async () => {
   try {
     const response = await Axios.get(
-      "http://localhost:3001/Habitacion/habitaciones"
+      "http://localhost:3001/habitaciones/get-habitaciones"
     );
     return response.data;
   } catch (error) {

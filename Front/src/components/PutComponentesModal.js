@@ -14,7 +14,6 @@ const PutComponentesModal = ({ values, getComponentes }) => {
   const [Habitacion, setHabitacion] = useState("");
 
   useEffect(() => {
-    
     setId(values.Id);
     setNombre(values.Nombre);
     setMarca(values.Marca);

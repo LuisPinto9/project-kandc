@@ -26,7 +26,6 @@ const PostComponentesModal = ({ getComponentes }) => {
   };
 
   const AddPost = () => {
-  
     add({ Id, Nombre, Marca, Cantidad,Costo,Estado,Descripcion,Observacion,Habitacion });
     getComponentes();
     getComponentes();
