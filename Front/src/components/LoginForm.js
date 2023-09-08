@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/form.css";
 import { verificar } from "../controllers/LoginController";
 import { useNavigate } from 'react-router-dom';
+import { SaveLocalStorage } from "../resources/SaveLocalStorae";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,6 +18,7 @@ const LoginForm = () => {
     e.preventDefault();
     verificar({ nombreUsuario, contraseña })
       .then((data) => {
+        SaveLocalStorage("login", data.token)
         if (data.tipo.toLowerCase() === "administrador") {
           navigate('/dashboard-admin');
         } else if (data.tipo.toLowerCase() === "arrendatario") {
