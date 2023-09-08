@@ -8,7 +8,6 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [nombreUsuario, setNombreUsuario] = useState("");
   const [contraseña, setContraseña] = useState("");
-  const [tipoUsuario, setTipoUsuario] = useState("");
   const navigate = useNavigate();
 
   const handleCheckChange = () => {
@@ -48,7 +47,7 @@ const LoginForm = () => {
                     className="input-group-text input-login px-1 py-0"
                     id="basic-addon1"
                   >
-                    <i className="bi bi-at" style={{ fontSize: "1.6rem" }}></i>
+                    <i className="bi bi-person" style={{ fontSize: "1.6rem" }}></i>
                   </span>
                 </div>
                 <input
