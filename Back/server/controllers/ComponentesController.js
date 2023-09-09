@@ -1,6 +1,6 @@
 const db = require("../db");
 
-const getUsers = (req, res) => {
+const getComponents = (req, res) => {
   db.query("SELECT * FROM componentes", (err, result) => {
     if (err) {
       res.status(500).send("Hubo un error en el servidor");
@@ -10,7 +10,7 @@ const getUsers = (req, res) => {
   });
 };
 
-const createUser = (req, res) => {
+const createComponent = (req, res) => {
   const Id = req.body.Id;
   const Nombre = req.body.Nombre;
   const Marca = req.body.Marca;
@@ -38,13 +38,13 @@ const createUser = (req, res) => {
       if (err) {
         res.status(500).send("Hubo un error en el servidor");
       } else {
-        res.send("Arrendatario registrado");
+        res.send("Componente registrado");
       }
     }
   );
 };
 
-const updateUser = (req, res) => {
+const updateComponent = (req, res) => {
   const Id = req.body.Id;
   const Nombre = req.body.Nombre;
   const Marca = req.body.Marca;
@@ -72,27 +72,28 @@ const updateUser = (req, res) => {
       if (err) {
         res.status(500).send("Hubo un error en el servidor");
       } else {
-        res.send("Arrendatario actualizado");
+        res.send("Componente actualizado");
       }
     }
   );
 };
 
-const deleteUser = (req, res) => {
+const deleteComponent = (req, res) => {
   //aqui
-  const Id = req.body.Id;
+  const Id = req.params.id;
+  console.log(Id);
   db.query("Delete from componentes where id=?", [Id], (err, result) => {
     if (err) {
       res.status(500).send("Hubo un error en el servidor");
     } else {
-      res.send("Arrendatario eliminado");
+      res.send("Componente eliminado");
     }
   });
 };
 
 module.exports = {
-  getUsers,
-  createUser,
-  updateUser,
-  deleteUser,
+  getComponents,
+  createComponent,
+  updateComponent,
+  deleteComponent,
 };

@@ -117,7 +117,6 @@ function Registro() {
                       <td>{val.contraseña}</td>
                       <td>{val.correo}</td>
                       <td>{val.tipo}</td>
-
                       <td>
                         <i
                           type="button"
@@ -132,7 +131,6 @@ function Registro() {
                           values={{
                             IDUsuario: IDUsuario,
                             Nombre: Nombre,
-
                             MetodoRenta: MetodoRenta,
                             ExtensionDias: ExtensionDias,
                             Telefono: Telefono,

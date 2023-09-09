@@ -1,8 +1,9 @@
 const jwt = require("jwt-simple");
 const moment = require("moment");
+require("dotenv").config();
 
 // Clave secreta para la generación de tokens
-const secret = "CLAVE_SECRETA_K&C_78826913"; // Deberías almacenar esto de forma segura
+const secret = process.env.SECRET; // Deberías almacenar esto de forma segura
 
 // Función para generar un token JWT
 const createToken = (user) => {

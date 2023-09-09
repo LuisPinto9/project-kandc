@@ -5,11 +5,13 @@ import "../../css/registro.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 
-import { habitaciones, eliminar } from "../../controllers/HabitacionControllers";
+import {
+  habitaciones,
+  eliminar,
+} from "../../controllers/HabitacionControllers";
 import PostHabitacionesModal from "../../components/PostHabitacionesModal";
 import PutHabitacionesModal from "../../components/PutHabitacionesModal";
 import "../../css/tabla.css";
-//import { habitaciones } from "../../controllers/HabitacionControllers";
 
 const Habitaciones = () => {
   const [Id, setId] = useState("");
@@ -28,7 +30,7 @@ const Habitaciones = () => {
         console.error("Error al obtener las habitaciones:", error);
       });
   };
-//aqui
+  //aqui
   const EditarHabitaciones = (val) => {
     setId(val.id);
     setNombre(val.nombre);
@@ -90,54 +92,52 @@ const Habitaciones = () => {
               </tr>
             </thead>
             <tbody>
-              {HabitacionesList && HabitacionesList.map((val, key) => {
-                return (
-                  <tr key={key}>
-                    <th className="row-border-left" scope="row">
-                      {autoIncrementa++}
-                    </th>
-                    {/* van los nombres de la base de datos en si */}
-                    <td>{val.id}</td>
-                    <td>{val.nombre}</td>
-                    <td>{val.estado}</td>
-                    <td>{val.precio}</td>
-                    <td>{val.zonas}</td>
-
-                    <td>
-                      <i
-                        type="button"
-                        className="bi bi-pencil-square px-2 btn-update"
-                        data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop-put"
-                        onClick={() => {
-                          EditarHabitaciones(val);
-                        }}
-                      />
-                      <PutHabitacionesModal
-                        values={{
-                          Id: Id,
-                          Nombre: Nombre,
-                          Estado: Estado,
-                          Precio:Precio,
-                          Zona:Zona,
-
-
-                        }}
-                        getHabitaciones={getHabitaciones}
-                      />
-                    </td>
-                    <td className="row-border-right">
-                      <i
-                        type="button"
-                        onClick={() => {
-                          eliminar({ val, getHabitaciones });
-                        }}
-                        className="bi bi-x-octagon-fill px-2 btn-delete"
-                      />
-                    </td>
-                  </tr>
-                );
-              })}
+              {HabitacionesList &&
+                HabitacionesList.map((val, key) => {
+                  return (
+                    <tr key={key}>
+                      <th className="row-border-left" scope="row">
+                        {autoIncrementa++}
+                      </th>
+                      {/* van los nombres de la base de datos en si */}
+                      <td>{val.id}</td>
+                      <td>{val.nombre}</td>
+                      <td>{val.estado}</td>
+                      <td>{val.precio}</td>
+                      <td>{val.zonas}</td>
+                      <td>
+                        <i
+                          type="button"
+                          className="bi bi-pencil-square px-2 btn-update"
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdrop-put"
+                          onClick={() => {
+                            EditarHabitaciones(val);
+                          }}
+                        />
+                        <PutHabitacionesModal
+                          values={{
+                            Id: Id,
+                            Nombre: Nombre,
+                            Estado: Estado,
+                            Precio: Precio,
+                            Zona: Zona,
+                          }}
+                          getHabitaciones={getHabitaciones}
+                        />
+                      </td>
+                      <td className="row-border-right">
+                        <i
+                          type="button"
+                          onClick={() => {
+                            eliminar({ val, getHabitaciones });
+                          }}
+                          className="bi bi-x-octagon-fill px-2 btn-delete"
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>

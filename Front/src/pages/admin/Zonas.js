@@ -9,9 +9,6 @@ import { zonas, eliminar } from "../../controllers/ZonasControllers";
 import PostZonasModal from "../../components/PostZonasModal";
 import PutZonasModal from "../../components/PutZonasModal";
 
-//import {zonas} from "../../controllers/ZonasControllers";
-
-
 const Zonas = () => {
   const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
@@ -92,53 +89,52 @@ const Zonas = () => {
               </tr>
             </thead>
             <tbody>
-              {ZonasList&&ZonasList.map((val, key) => {
-                return (
-                  <tr key={key}>
-                    <th className="row-border-left" scope="row">
-                      {autoIncrementa++}
-                    </th>
-                    {/* van los nombres de la base de datos en si */}
-                   
-                   
-                    <td>{val.id}</td>
-                    <td>{val.nombre}</td>
-                    <td>{val.descripcion}</td>
-                    <td>{val.precio}</td>
-                    <td>{val.acceso}</td>
-                    <td>
-                      <i
-                        type="button"
-                        className="bi bi-pencil-square px-2 btn-update"
-                        data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop-put"
-                        onClick={() => {
-                          EditarZonas(val);
-                        }}
-                      />
-                      <PutZonasModal
-                        values={{
-                          Id: Id,
-                          Nombre: Nombre,
-                          Descripcion: Descripcion,
-                          Precio: Precio,
-                          Acceso: Acceso,
-                        }}
-                        getZonas={getZonas}
-                      />
-                    </td>
-                    <td className="row-border-right">
-                      <i
-                        type="button"
-                        onClick={() => {
-                          eliminar({ val, getZonas });
-                        }}
-                        className="bi bi-x-octagon-fill px-2 btn-delete"
-                      />
-                    </td>
-                  </tr>
-                );
-              })}
+              {ZonasList &&
+                ZonasList.map((val, key) => {
+                  return (
+                    <tr key={key}>
+                      <th className="row-border-left" scope="row">
+                        {autoIncrementa++}
+                      </th>
+                      {/* van los nombres de la base de datos en si */}
+                      <td>{val.id}</td>
+                      <td>{val.nombre}</td>
+                      <td>{val.descripcion}</td>
+                      <td>{val.precio}</td>
+                      <td>{val.acceso}</td>
+                      <td>
+                        <i
+                          type="button"
+                          className="bi bi-pencil-square px-2 btn-update"
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdrop-put"
+                          onClick={() => {
+                            EditarZonas(val);
+                          }}
+                        />
+                        <PutZonasModal
+                          values={{
+                            Id: Id,
+                            Nombre: Nombre,
+                            Descripcion: Descripcion,
+                            Precio: Precio,
+                            Acceso: Acceso,
+                          }}
+                          getZonas={getZonas}
+                        />
+                      </td>
+                      <td className="row-border-right">
+                        <i
+                          type="button"
+                          onClick={() => {
+                            eliminar({ val, getZonas });
+                          }}
+                          className="bi bi-x-octagon-fill px-2 btn-delete"
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>

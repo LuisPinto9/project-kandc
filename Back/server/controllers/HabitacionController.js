@@ -1,6 +1,6 @@
 const db = require("../db");
 
-const getUsers = (req, res) => {
+const getRooms = (req, res) => {
   db.query("SELECT * FROM habitaciones", (err, result) => {
     if (err) {
       res.status(500).send("Hubo un error en el servidor");
@@ -10,7 +10,7 @@ const getUsers = (req, res) => {
   });
 };
 
-const createUser = (req, res) => {
+const createRoom = (req, res) => {
   const Id = req.body.Id;
   const Nombre = req.body.Nombre;
   const Estado = req.body.Estado;
@@ -24,13 +24,13 @@ const createUser = (req, res) => {
       if (err) {
         res.status(500).send("Hubo un error en el servidor");
       } else {
-        res.send("Arrendatario registrado");
+        res.send("Habitación registrada");
       }
     }
   );
 };
 
-const updateUser = (req, res) => {
+const updateRoom = (req, res) => {
   const Id = req.body.Id;
   const Nombre = req.body.Nombre;
   const Estado = req.body.Estado;
@@ -44,27 +44,27 @@ const updateUser = (req, res) => {
       if (err) {
         res.status(500).send("Hubo un error en el servidor");
       } else {
-        res.send("Arrendatario actualizado");
+        res.send("Habitación actualizada");
       }
     }
   );
 };
 
-const deleteUser = (req, res) => {
+const deleteRoom = (req, res) => {
   //aqui
-  const Id = req.body.Id;
+  const Id = req.params.id;
   db.query("Delete from habitaciones where id=?", [Id], (err, result) => {
     if (err) {
       res.status(500).send("Hubo un error en el servidor");
     } else {
-      res.send("Arrendatario eliminado");
+      res.send("Habitación eliminada");
     }
   });
 };
 
 module.exports = {
-  getUsers,
-  createUser,
-  updateUser,
-  deleteUser,
+  getRooms,
+  createRoom,
+  updateRoom,
+  deleteRoom,
 };

@@ -24,7 +24,7 @@ const createZona = (req, res) => {
       if (err) {
         res.status(500).send("Hubo un error en el servidor");
       } else {
-        res.send("Arrendatario registrado");
+        res.send("Zona registrada");
       }
     }
   );
@@ -44,7 +44,7 @@ const updateZona = (req, res) => {
       if (err) {
         res.status(500).send("Hubo un error en el servidor");
       } else {
-        res.send("Arrendatario actualizado");
+        res.send("Zona actualizada");
       }
     }
   );
@@ -52,12 +52,12 @@ const updateZona = (req, res) => {
 
 const deleteZona = (req, res) => {
   //aqui
-  const Id = req.body.Id;
+  const Id = req.params.id;
   db.query("Delete from zonas where id=?", [Id], (err, result) => {
     if (err) {
       res.status(500).send("Hubo un error en el servidor");
     } else {
-      res.send("Arrendatario eliminado");
+      res.send("Zona eliminada");
     }
   });
 };

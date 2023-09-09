@@ -116,7 +116,6 @@ const Componentes = () => {
                     <td>{val.descripcion}</td>
                     <td>{val.observacion}</td>
                     <td>{val.habitacion}</td>
-
                     <td>
                       <i
                         type="button"
@@ -138,7 +137,6 @@ const Componentes = () => {
                           Descripcion:Descripcion,
                           Observacion:Observacion,
                           Habitacion:Habitacion,
-
                         }}
                         getComponentes={getComponentes}
                       />

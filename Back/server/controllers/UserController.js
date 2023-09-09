@@ -79,7 +79,7 @@ const updateUser = (req, res) => {
 };
 
 const deleteUser = (req, res) => {
-  const IDUsuario = req.body.IDUsuario;
+  const IDUsuario = req.params.IDUsuario;
   db.query("Delete from usuario where id=?", [IDUsuario], (err, result) => {
     if (err) {
       res.status(500).send("Hubo un error en el servidor");

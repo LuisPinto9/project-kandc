@@ -1,21 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const userController = require("../controllers/HabitacionController");
+const RoomController = require("../controllers/HabitacionController");
+const check = require("../middleware/auth");
 
-router.get("/get-habitaciones", (req, res) => {
-  userController.getUsers(req, res);
+router.get("/get-habitaciones", check.auth, (req, res) => {
+  RoomController.getRooms(req, res);
 });
 
-router.post("/create", (req, res) => {
-  userController.createUser(req, res);
+router.post("/create", check.auth, (req, res) => {
+  RoomController.createRoom(req, res);
 });
 
-router.put("/update", (req, res) => {
-  userController.updateUser(req, res);
+router.put("/update", check.auth, (req, res) => {
+  RoomController.updateRoom(req, res);
 });
 
-router.delete("/delete", (req, res) => {
-  userController.deleteUser(req, res);
+router.delete("/delete/:id", check.auth, (req, res) => {
+  RoomController.deleteRoom(req, res);
 });
 
 module.exports = router;

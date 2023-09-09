@@ -1,19 +1,30 @@
 import Axios from "axios";
 import Swal from "sweetalert2";
 
+const token = JSON.parse(localStorage.getItem("auth"));
+const config = {
+  headers: {
+    Authorization: token,
+  },
+};
+
 //aqui
 export const add = (datos) => {
-  Axios.post("http://localhost:3001/user/create", {
-    IDUsuario: datos.IDUsuario,
-    Nombre: datos.Nombre,
-    MetodoRenta: datos.MetodoRenta,
-    ExtensionDias: datos.ExtensionDias,
-    Telefono: datos.Telefono,
-    NombreUsuario: datos.NombreUsuario,
-    Contraseña: datos.Contraseña,
-    Correo: datos.Correo,
-    TipoUsuario: datos.TipoUsuario,
-  }).then(() => {
+  Axios.post(
+    "http://localhost:3001/user/create",
+    {
+      IDUsuario: datos.IDUsuario,
+      Nombre: datos.Nombre,
+      MetodoRenta: datos.MetodoRenta,
+      ExtensionDias: datos.ExtensionDias,
+      Telefono: datos.Telefono,
+      NombreUsuario: datos.NombreUsuario,
+      Contraseña: datos.Contraseña,
+      Correo: datos.Correo,
+      TipoUsuario: datos.TipoUsuario,
+    },
+    config
+  ).then(() => {
     Swal.fire({
       title: "<strong>Registro exitoso</strong>",
       html:
@@ -27,19 +38,23 @@ export const add = (datos) => {
 };
 
 export const update = (datos) => {
-  Axios.put("http://localhost:3001/user/update", {
-    IDUsuario: datos.IDUsuario,
-    Nombre: datos.Nombre,
-    MetodoRenta: datos.MetodoRenta,
-    ExtensionDias: datos.ExtensionDias,
-    Telefono: datos.Telefono,
-    NombreUsuario: datos.NombreUsuario,
-    Contraseña: datos.Contraseña,
-    Correo: datos.Correo,
-    TipoUsuario: datos.TipoUsuario,
-  }).then(() => {
+  Axios.put(
+    "http://localhost:3001/user/update",
+    {
+      IDUsuario: datos.IDUsuario,
+      Nombre: datos.Nombre,
+      MetodoRenta: datos.MetodoRenta,
+      ExtensionDias: datos.ExtensionDias,
+      Telefono: datos.Telefono,
+      NombreUsuario: datos.NombreUsuario,
+      Contraseña: datos.Contraseña,
+      Correo: datos.Correo,
+      TipoUsuario: datos.TipoUsuario,
+    },
+    config
+  ).then(() => {
     Swal.fire({
-      title: "<strong>Actualizacion exitosa</strong>",
+      title: "<strong>Actualización exitosa</strong>",
       html:
         "<i>El arrendatario: <strong>" +
         datos.Nombre +
@@ -54,25 +69,20 @@ export const eliminar = ({ val, getArrendatarios }) => {
   Swal.fire({
     title: "ELIMINAR",
     html:
-      "<i>Desea eliminar al usuario <strong>" +
-      val.nombre +
-      "</strong> ?  </i>",
+      "<i>¿Desea eliminar al usuario <strong>" + val.nombre + "</strong>?</i>",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Si, eliminar",
+    confirmButtonText: "Sí, eliminar",
   }).then((result) => {
     if (result.isConfirmed) {
       /* aqui es donde se elimina */
-      const IDUsuario = val.id;
-      Axios.delete("http://localhost:3001/user/delete", {
-        data: { IDUsuario: IDUsuario },
-      })
+      Axios.delete(`http://localhost:3001/user/delete/${val.id}`, config)
         .then(() => {
           getArrendatarios();
           Swal.fire({
-            title: "<strong>Eliminacion exitosa</strong>",
+            title: "<strong>Eliminación exitosa</strong>",
             html:
               "<i>El arrendatario: <strong>" +
               val.nombre +
@@ -98,7 +108,8 @@ export const eliminar = ({ val, getArrendatarios }) => {
 export const arrendatarios = async () => {
   try {
     const response = await Axios.get(
-      "http://localhost:3001/user/get-users"
+      "http://localhost:3001/user/get-users",
+      config
     );
     return response.data;
   } catch (error) {
