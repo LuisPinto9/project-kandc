@@ -5,6 +5,11 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 
 const Navbarinicio = () => {
   const location = useLocation();
+
+  const cerrarSesion = () => {
+    localStorage.clear();
+  };
+
   return (
     <div>
       <nav className="navbar navbar-principal">
@@ -37,7 +42,12 @@ const Navbarinicio = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
-                    <Link as={Link} to="/login" className="inicio-sesion">
+                    <Link
+                      as={Link}
+                      to="/login"
+                      className="inicio-sesion"
+                      onClick={cerrarSesion}
+                    >
                       Cerrar Sesión
                     </Link>
                   </Nav>
@@ -51,7 +61,12 @@ const Navbarinicio = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
-                    <Link as={Link} to="/login" className="inicio-sesion">
+                    <Link
+                      as={Link}
+                      to="/login"
+                      className="inicio-sesion"
+                      onClick={cerrarSesion}
+                    >
                       Cerrar Sesión
                     </Link>
                   </Nav>
@@ -65,7 +80,12 @@ const Navbarinicio = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
-                    <Link as={Link} to="/login" className="inicio-sesion">
+                    <Link
+                      as={Link}
+                      to="/login"
+                      className="inicio-sesion"
+                      onClick={cerrarSesion}
+                    >
                       Cerrar Sesión
                     </Link>
                   </Nav>
@@ -79,7 +99,12 @@ const Navbarinicio = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
-                    <Link as={Link} to="/login" className="inicio-sesion">
+                    <Link
+                      as={Link}
+                      to="/login"
+                      className="inicio-sesion"
+                      onClick={cerrarSesion}
+                    >
                       Cerrar Sesión
                     </Link>
                   </Nav>
@@ -93,7 +118,12 @@ const Navbarinicio = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
-                    <Link as={Link} to="/login" className="inicio-sesion">
+                    <Link
+                      as={Link}
+                      to="/login"
+                      className="inicio-sesion"
+                      onClick={cerrarSesion}
+                    >
                       Cerrar Sesión
                     </Link>
                   </Nav>
@@ -107,7 +137,12 @@ const Navbarinicio = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
-                    <Link as={Link} to="/login" className="inicio-sesion">
+                    <Link
+                      as={Link}
+                      to="/login"
+                      className="inicio-sesion"
+                      onClick={cerrarSesion}
+                    >
                       Cerrar Sesión
                     </Link>
                   </Nav>
@@ -121,7 +156,12 @@ const Navbarinicio = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
-                    <Link as={Link} to="/login" className="inicio-sesion">
+                    <Link
+                      as={Link}
+                      to="/login"
+                      className="inicio-sesion"
+                      onClick={cerrarSesion}
+                    >
                       Cerrar Sesión
                     </Link>
                   </Nav>
@@ -135,7 +175,12 @@ const Navbarinicio = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
-                    <Link as={Link} to="/login" className="inicio-sesion">
+                    <Link
+                      as={Link}
+                      to="/login"
+                      className="inicio-sesion"
+                      onClick={cerrarSesion}
+                    >
                       Cerrar Sesión
                     </Link>
                   </Nav>

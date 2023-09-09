@@ -31,8 +31,6 @@ const getUser = (req, res) => {
             tipo: result[0].tipo,
           };
           const token = jwt.createToken(formattedData);
-          console.log(token);
-
           res.status(200).send({
             id: result[0].id,
             nombre: result[0].nombre,

@@ -57,7 +57,6 @@ const updateUser = (req, res) => {
 
   db.query(
     "update componentes set nombre=?, marca=?,cantidad=?,costo=?,estado=?,descripcion=?,observacion=?,habitacion=? where id=?",
-
     [
       Nombre,
       Marca,

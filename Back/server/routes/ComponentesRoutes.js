@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/ComponentesController");
-const { auth } = require("../middleware/auth");
+const check = require("../middleware/auth");
 
-router.get("/get-componentes", auth, (req, res) => {
+router.get("/get-componentes", check.auth, (req, res) => {
   userController.getUsers(req, res);
 });
 

@@ -1,45 +1,47 @@
 const jwt = require("jwt-simple");
 const moment = require("moment");
+const libjwt = require("../services/jwt");
 
-// Importar clave secreta desde una configuración segura
-const config = require("../services/jwt"); // Asegúrate de tener un archivo de configuración seguro
-const secret = config.secret;
+const secret = libjwt.secret;
 
-// Función de autenticación
-exports.auth = (req, res, next) => {
-  // Comprobar si llega la cabecera de autenticación
+const auth = (req, res, next) => {
+  // Verifica si llega la cabecera de autenticación
   if (!req.headers.authorization) {
-    return res.status(401).json({
+    return res.status(403).json({
       status: "error",
       message: "La petición no tiene la cabecera de autenticación",
     });
   }
 
-  // Limpiar el token
+  // Limpia el token
   const token = req.headers.authorization.replace(/['"]+/g, "");
 
-  // Decodificar el token y manejar errores
+  // Decodifica el token y maneja errores
   try {
     const payload = jwt.decode(token, secret);
 
-    // Comprobar la expiración del token
+    // Comprueba la expiración del token
     if (payload.exp <= moment().unix()) {
-      return res.status(401).json({
+      return res.status(404).json({
         status: "error",
         message: "Token expirado",
       });
     }
 
-    // Agregar los datos de usuario a la solicitud
+    // Agrega los datos del usuario a la solicitud
     req.user = payload;
 
-    // Continuar con la ejecución de la acción
+    // Continúa con la ejecución de la acción
     next();
   } catch (error) {
-    return res.status(401).json({
+    return res.status(404).json({
       status: "error",
       message: "Token inválido",
-      error: error.message, // Proporcionar detalles del error
+      error: error.message, // Proporciona detalles del error
     });
   }
 };
+
+module.exports ={
+  auth
+}

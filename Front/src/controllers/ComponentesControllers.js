@@ -1,6 +1,12 @@
 import Axios from "axios";
 import Swal from "sweetalert2";
 
+const token = JSON.parse(localStorage.getItem("auth"));
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
 //aqui
 export const add = (datos) => {
   Axios.post("http://localhost:3001/componentes/create", {
@@ -94,11 +100,12 @@ export const eliminar = ({ val, getComponentes }) => {
   });
 };
 
-/* traer la infromacion de los arrendatarios */
+/* traer la informacion de los arrendatarios */
 export const componentes = async () => {
   try {
     const response = await Axios.get(
-      "http://localhost:3001/componentes/get-componentes"
+      "http://localhost:3001/componentes/get-componentes",
+      config
     );
     return response.data;
   } catch (error) {
