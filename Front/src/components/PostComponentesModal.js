@@ -3,6 +3,7 @@ import { add } from "../controllers/ComponentesControllers";
 import "../css/modal.css";
 import Swal from "sweetalert2";
 
+
 const PostComponentesModal = ({ getComponentes }) => {
   const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
@@ -13,6 +14,10 @@ const PostComponentesModal = ({ getComponentes }) => {
   const [Descripcion, setDescripcion] = useState("");
   const [Observacion, setObservacion] = useState("");
   const [Habitacion, setHabitacion] = useState("");
+
+  const [formularioVisible, setFormularioVisible] = useState(true);
+  
+    
 
   const limpiarCampos = () => {
     setId("");
@@ -169,7 +174,7 @@ const PostComponentesModal = ({ getComponentes }) => {
       });
       getComponentes();
       limpiarCampos();
-      // setFormularioVisible(false);
+     setFormularioVisible(false);
     } else {
       mostrarMensajeError();
     }

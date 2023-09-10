@@ -17,6 +17,31 @@ const FormRegistroPost = ({ getArrendatarios }) => {
 
   const [formularioVisible, setFormularioVisible] = useState(true);
   
+    
+
+  const limpiarCampos = () => {
+    setIDUsuario("");
+    setNombre("");
+    setMetodoRenta("");
+    setExtensionDias("");
+    setTelefono("");
+    setNombreUsuario("");
+    setContraseña("");
+    setCorreo("");
+    setTipoUsuario("");
+    setErrorMessages({
+      IDUsuario: "",
+      Nombre: "",
+      MetodoRenta: "",
+      ExtensionDias: "",
+      Telefono: "",
+      NombreUsuario: "",
+      Contraseña: "",
+      Correo: "",
+      TipoUsuario: "",
+    });
+  };
+
   const [errorMessages, setErrorMessages] = useState({
     IDUsuario: "",
     Nombre: "",
@@ -113,9 +138,9 @@ const FormRegistroPost = ({ getArrendatarios }) => {
     setErrorMessages(newErrorMessages);
     return isValid;
   };
+ */
 
-
-   */
+  
 
   const validateField = (fieldName) => {
     switch (fieldName) {
@@ -247,30 +272,6 @@ const FormRegistroPost = ({ getArrendatarios }) => {
     });
   };
 
-  
-
-  const limpiarCampos = () => {
-    setIDUsuario("");
-    setNombre("");
-    setMetodoRenta("");
-    setExtensionDias("");
-    setTelefono("");
-    setNombreUsuario("");
-    setContraseña("");
-    setCorreo("");
-    setTipoUsuario("");
-    setErrorMessages({
-      IDUsuario: "",
-      Nombre: "",
-      MetodoRenta: "",
-      ExtensionDias: "",
-      Telefono: "",
-      NombreUsuario: "",
-      Contraseña: "",
-      Correo: "",
-      TipoUsuario: "",
-    });
-  };
 
   const AddPost = () => {
     validateFields(); // Validar campos antes de agregar
