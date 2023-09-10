@@ -21,14 +21,14 @@ const createUser = (req, res) => {
   const Correo = req.body.Correo;
   const TipoUsuario = req.body.TipoUsuario;
 
-   //validar
+ /*   //validar
    const nombreValidationRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ]+$/;
    if (!nombreValidationRegex.test(Nombre) || Nombre.length < 3) {
      res.status(400).send("Nombre no cumple con los requisitos");
      return;
    }
-   //validar
-   
+   //validar */
+
   db.query(
     "insert into usuario(id,nombre,metodo_renta,extension_dias,telefono,nombre_usuario,contraseña,correo,tipo) values(?,?,?,?,?,?,?,?,?)",
     [
