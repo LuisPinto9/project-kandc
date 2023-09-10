@@ -221,17 +221,18 @@ const FormRegistroPost = ({ getArrendatarios }) => {
           }
           break;
   
-        case "Correo":
-          const correoPattern = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
-          if (!correoPattern.test(Correo)) {
-            setErrorMessages({
-              ...errorMessages,
-              Correo: "El campo Correo debe ser una dirección de correo electrónico válida que termine en @gmail.com.",
-            });
-          } else {
-            setErrorMessages({ ...errorMessages, Correo: "" });
-          }
-          break;
+          case "Correo":
+            const correoPattern = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
+            const correoParts = Correo.split("@");
+            if (!correoPattern.test(Correo) || correoParts[0].length > 20) {
+              setErrorMessages({
+                ...errorMessages,
+                Correo: "El campo Correo debe ser una dirección de correo electrónico válida que termine en @gmail.com y con menos de 20 caracteres antes del '@'.",
+              });
+            } else {
+              setErrorMessages({ ...errorMessages, Correo: "" });
+            }
+            break;
   
         case "TipoUsuario":
           const tipoUsuarioPattern = /^(arrendatario|administrador)$/;
@@ -280,6 +281,20 @@ const FormRegistroPost = ({ getArrendatarios }) => {
     const hasErrors = Object.values(errorMessages).some((message) => message !== "");
 
     if (!hasErrors) {
+
+      if(IDUsuario === "" ||
+      Nombre === "" ||
+      MetodoRenta === "" ||
+      ExtensionDias === "" ||
+      Telefono === "" ||
+      NombreUsuario === "" ||
+      Contraseña === "" ||
+      Correo === "" ||
+      TipoUsuario === ""
+    ) {
+      mostrarMensajeError();
+    }else{
+
       add({
         IDUsuario,
         Nombre,
@@ -294,6 +309,8 @@ const FormRegistroPost = ({ getArrendatarios }) => {
       getArrendatarios();
       limpiarCampos();
       setFormularioVisible(false);
+    }
+     
     } else {
       mostrarMensajeError();
     }

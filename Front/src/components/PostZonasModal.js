@@ -63,6 +63,18 @@ const PostZonasModal = ({ getZonas }) => {
     const hasErrors = Object.values(errorMessages).some((message) => message !== "");
 
     if (!hasErrors) {
+
+      
+
+        if(Id === "" ||
+        Nombre === "" ||
+        Descripcion === "" ||
+        Precio === "" ||
+        Acceso === ""         
+      ) {
+        mostrarMensajeError();
+      }else{
+  
       add({
         Id,
         Nombre,
@@ -75,6 +87,7 @@ const PostZonasModal = ({ getZonas }) => {
       limpiarCampos();
       
       setFormularioVisible(false);
+    }
     } else {
       mostrarMensajeError(); }
   };

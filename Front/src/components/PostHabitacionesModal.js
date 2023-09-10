@@ -85,6 +85,15 @@ const PostHabitacionesModal = ({ getHabitaciones }) => {
 
 
     if (!hasErrors) {
+
+      if(Id === "" ||
+      Nombre === "" ||
+      Estado === "" ||
+      Precio === "" ||
+      Zona === ""
+    ) {
+      mostrarMensajeError();
+    }else{
       add({
         Id,
         Nombre,
@@ -96,6 +105,8 @@ const PostHabitacionesModal = ({ getHabitaciones }) => {
       getHabitaciones();
       limpiarCampos();
       setFormularioVisible(false);
+    }
+
     } else {
       mostrarMensajeError();
      }

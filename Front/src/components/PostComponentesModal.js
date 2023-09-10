@@ -3,6 +3,7 @@ import { add } from "../controllers/ComponentesControllers";
 import "../css/modal.css";
 import Swal from "sweetalert2";
 
+
 const PostComponentesModal = ({ getComponentes }) => {
   const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
@@ -13,7 +14,10 @@ const PostComponentesModal = ({ getComponentes }) => {
   const [Descripcion, setDescripcion] = useState("");
   const [Observacion, setObservacion] = useState("");
   const [Habitacion, setHabitacion] = useState("");
-  const [setFormularioVisible] = useState(true);
+
+  const [formularioVisible, setFormularioVisible] = useState(true);
+  
+    
 
   const limpiarCampos = () => {
     setId("");
@@ -46,16 +50,9 @@ const PostComponentesModal = ({ getComponentes }) => {
     switch (fieldName) {
       case "Id":
         const idPattern = /^[0-9]+$/;
-        if (
-          !idPattern.test(Id) ||
-          parseInt(Id, 10) < 0 ||
-          parseInt(Id, 10) > 200
-        ) {
-          setErrorMessages({
-            ...errorMessages,
-            Id: "El campo ID debe contener solo números y no ser igual a cero.",
-          });
-        } else {
+        if (!idPattern.test(Id) || parseInt(Id, 10) < 0 || parseInt(Id, 10) > 200) {
+          setErrorMessages({ ...errorMessages, Id: "El campo ID debe contener solo números y no ser igual a cero." });
+        }else {
           setErrorMessages({ ...errorMessages, Id: "" });
         }
         break;
@@ -86,43 +83,37 @@ const PostComponentesModal = ({ getComponentes }) => {
         }
         break;
 
-      case "Cantidad":
-        const cantidadPattern = /^[0-9]+(\.[0-9]+)?$/;
-        if (
-          !cantidadPattern.test(Cantidad) ||
-          parseInt(Cantidad, 10) < 0 ||
-          parseInt(Cantidad, 10) > 20
-        ) {
-          setErrorMessages({
-            ...errorMessages,
-            Cantidad: "Este campo debe contener solo números.",
-          });
-        } else {
-          setErrorMessages({ ...errorMessages, Cantidad: "" });
-        }
-        break;
+        case "Cantidad":
+          const cantidadPattern = /^[0-9]+$/;
+          const cantidadValue = parseInt(Cantidad, 10);
+          if (!cantidadPattern.test(Cantidad) || cantidadValue < 1 || cantidadValue > 20) {
+            setErrorMessages({
+              ...errorMessages,
+              Cantidad: "Este campo debe contener solo números y estar en el rango de 1 a 20.",
+            });
+          } else {
+            setErrorMessages({ ...errorMessages, Cantidad: "" });
+          }
+          break;
 
-      case "Costo":
-        const costoPattern = /^[0-9]+(\.[0-9]+)?$/;
-        if (!costoPattern.test(Costo)) {
-          setErrorMessages({
-            ...errorMessages,
-            Costo: "Este campo debe contener solo números.",
-          });
-        } else {
-          setErrorMessages({ ...errorMessages, Costo: "" });
-        }
-        break;
+        case "Costo":
+          const costoPattern = /^[0-9]+(\.[0-9]+)?$/;
+          const costoValue = parseFloat(Costo.replace(",", ".")); // Reemplaza comas por puntos y convierte a número decimal
+          if (!costoPattern.test(Costo) || costoValue < 100 || costoValue > 20000000) {
+            setErrorMessages({
+              ...errorMessages,
+              Costo: "Este campo debe contener solo números y estar en el rango de 100 a 20,000,000.",
+            });
+          } else {
+            setErrorMessages({ ...errorMessages, Costo: "" });
+          }
+          break;
 
       case "Estado":
         const estadoPattern = /^[A-Za-z]+$/;
         if (!estadoPattern.test(Estado)) {
-          setErrorMessages({
-            ...errorMessages,
-            Estado:
-              "Este campo debe contener solo letras y tener al menos 3 caracteres.",
-          });
-        } else {
+          setErrorMessages({ ...errorMessages, Estado: "Este campo debe contener solo letras y tener al menos 3 caracteres." });
+         }else {
           setErrorMessages({ ...errorMessages, Estado: "" });
         }
         break;
@@ -135,21 +126,18 @@ const PostComponentesModal = ({ getComponentes }) => {
         // Lógica de validación para el campo Observacion
         break;
 
-      case "Habitacion":
-        const habitacionPattern = /^[0-9]+$/;
-        if (
-          !habitacionPattern.test(Habitacion) ||
-          parseInt(Habitacion, 10) < 0 ||
-          parseInt(Habitacion, 10) > 100
-        ) {
-          setErrorMessages({
-            ...errorMessages,
-            Habitacion: "Este campo debe contener solo números.",
-          });
-        } else {
-          setErrorMessages({ ...errorMessages, Habitacion: "" });
-        }
-        break;
+        case "Habitacion":
+          const habitacionPattern = /^[0-9]+$/;
+          const habitacionValue = parseInt(Habitacion, 10);
+          if (!habitacionPattern.test(Habitacion) || habitacionValue < 1 || habitacionValue > 50) {
+            setErrorMessages({
+              ...errorMessages,
+              Habitacion: "Este campo debe contener solo números y estar en el rango de 1 a 50.",
+            });
+          } else {
+            setErrorMessages({ ...errorMessages, Habitacion: "" });
+          }
+          break;
 
       default:
         break;
@@ -163,8 +151,9 @@ const PostComponentesModal = ({ getComponentes }) => {
     validateField("Cantidad");
     validateField("Costo");
     validateField("Estado");
-    validateField("Habitacion");
+     validateField("Habitacion");
   };
+
 
   const mostrarMensajeError = () => {
     Swal.fire({
@@ -176,13 +165,14 @@ const PostComponentesModal = ({ getComponentes }) => {
     });
   };
 
+
   const AddPost = () => {
+
     validateFields(); // Validar campos antes de agregar
 
     // Verificar si hay algún mensaje de error en los campos
-    const hasErrors = Object.values(errorMessages).some(
-      (message) => message !== ""
-    );
+    const hasErrors = Object.values(errorMessages).some((message) => message !== "");
+
 
     if (!hasErrors) {
       add({
@@ -198,9 +188,7 @@ const PostComponentesModal = ({ getComponentes }) => {
       });
       getComponentes();
       limpiarCampos();
-      setFormularioVisible(false);
-    } else {
-      mostrarMensajeError();
+     setFormularioVisible(false);
     }
   };
 
@@ -377,6 +365,7 @@ const PostComponentesModal = ({ getComponentes }) => {
                   aria-label="descripcion"
                   aria-describedby="basic-addon1"
                 />
+                
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
