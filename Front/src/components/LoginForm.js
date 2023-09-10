@@ -52,16 +52,16 @@ const LoginForm = () => {
       });
     limpiarCampos();
   };
+
 const mostrarMensajeError = () => {
     Swal.fire({
       title: "No puede ingresar",
-      text: "usuario y contraseña invalidos",
+      text: "Usuario o contraseña invalido",
       icon: "error",
       showCancelButton: true,
       confirmButtonText: "Aceptar",
     });
   };
-
 
   return (
     <div

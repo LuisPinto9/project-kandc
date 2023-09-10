@@ -1,38 +1,70 @@
-import { arrendatarios } from "./UserControllers";
+import Axios from "axios";
 
-test("should return users", () => {
-  arrendatarios().then((data) =>{
-    expect(data).toBe([
-      {
-        id: 4,
-        nombre: 'diana',
-        metodo_renta: 'pago',
-        extension_dias: 1,
-        telefono: 2147483647,
-        nombre_usuario: 'diana',
-        'contraseña': '123456',
-        correo: 'diana.diaz@gmail.com',
-        tipo: 'Arrendatario'
-      },
-      {
-        id: 1002459597,
-        nombre: 'luis',
-        metodo_renta: 'arriendo',
-        extension_dias: 12,
-        telefono: 2147483647,
-        nombre_usuario: 'luis',
-        'contraseña': '123',
-        correo: 'luis.pinto04@gmail.com',
-        tipo: 'Administrador'
-      }
-    ])
-  });
+const config = {
+  headers: {
+    Authorization:
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMjQ1OTU5NywiaWF0IjoxNjk0MzY4OTM3LCJleHAiOjE2OTQ0NTUzMzd9.wU_iYK8nqDJvnJl3xY-3NKjJPHAxUdTZOQZHtS8qiSA",
+  },
+};
+
+test("Get usuarios", async () => {
+  const response = await Axios.get(
+    "http://localhost:3001/user/get-users",
+    config
+  );
+  expect(response.status).toBe(200);
 });
-// import axios from 'axios';
 
-// test('Ejemplo de prueba con Axios', async () => {
-//   const response = await axios.get('https://jsonplaceholder.typicode.com/posts/1');
-//   expect(response.status).toBe(200);
-//   console.log(response.data);
-//   // Realiza más aserciones según tus necesidades
-// });
+test("Post usuarios", async () => {
+  let status = 404;
+  await Axios.post(
+    "http://localhost:3001/user/create",
+    {
+      IDUsuario: 3,
+      Nombre: "lui",
+      MetodoRenta: "asdsda",
+      ExtensionDias: 23,
+      Telefono: 123,
+      NombreUsuario: "asd",
+      Contraseña: "asd",
+      Correo: "asd",
+      TipoUsuario: "arrendatario",
+    },
+    config
+  ).then((data) => {
+    status = data.status;
+  });
+  expect(status).toBe(200);
+});
+
+test("Put usuarios", async () => {
+  let status = 404;
+  await Axios.put(
+    "http://localhost:3001/user/update",
+    {
+      IDUsuario: 3,
+      Nombre: "luiasdasd",
+      MetodoRenta: "asdsda",
+      ExtensionDias: 23,
+      Telefono: 123,
+      NombreUsuario: "asd",
+      Contraseña: "asd",
+      Correo: "asd",
+      TipoUsuario: "arrendatario",
+    },
+    config
+  ).then((data) => {
+    status = data.status;
+  });
+  expect(status).toBe(200);
+});
+
+test("Delete usuarios", async () => {
+  let status = 404;
+  await Axios.delete(`http://localhost:3001/user/delete/${3}`, config).then(
+    (data) => {
+      status = data.status;
+    }
+  );
+  expect(status).toBe(200);
+});
