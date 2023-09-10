@@ -13,6 +13,10 @@ import PostHabitacionesModal from "../../components/PostHabitacionesModal";
 import PutHabitacionesModal from "../../components/PutHabitacionesModal";
 import "../../css/tabla.css";
 
+//verificar
+import { zonas  } from "../../controllers/ZonasControllers";
+
+
 const Habitaciones = () => {
   const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
@@ -20,6 +24,8 @@ const Habitaciones = () => {
   const [Precio, setPrecio] = useState("");
   const [Zona, setZona] = useState("");
   const [HabitacionesList, setHabitaciones] = useState([]);
+
+  const [ZonasList, setZonas] = useState([]); 
 
   const getHabitaciones = () => {
     habitaciones()
@@ -39,8 +45,21 @@ const Habitaciones = () => {
     setZona(val.zonas);
   };
 
+//verificar
+  const getZonas = () => {
+    //aqui
+    zonas()
+      .then((data) => {
+        setZonas(data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener las zonas:", error);
+      });
+  };
+
   useEffect(() => {
     getHabitaciones();
+    getZonas();
   }, []);
 
   let autoIncrementa = 1;
@@ -69,7 +88,9 @@ const Habitaciones = () => {
             />
           </div>
           <div>
-            <PostHabitacionesModal getHabitaciones={getHabitaciones} />
+           {/*  <PostHabitacionesModal getHabitaciones={getHabitaciones} /> */}
+            <PostHabitacionesModal getHabitaciones={getHabitaciones} ZonasList={ZonasList} />
+      
           </div>
         </div>
         {/* aqui empieza la tabla  */}

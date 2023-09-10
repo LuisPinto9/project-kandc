@@ -3,8 +3,8 @@ import { add } from "../controllers/ComponentesControllers";
 import "../css/modal.css";
 import Swal from "sweetalert2";
 
-
-const PostComponentesModal = ({ getComponentes }) => {
+const PostComponentesModal = ({ getComponentes,  HabitacionesList  }) => {
+/* const PostComponentesModal = ({ getComponentes }) => { */
   const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
   const [Marca, setMarca] = useState("");
@@ -16,8 +16,9 @@ const PostComponentesModal = ({ getComponentes }) => {
   const [Habitacion, setHabitacion] = useState("");
 
   const [formularioVisible, setFormularioVisible] = useState(true);
+
   
-    
+
 
   const limpiarCampos = () => {
     setId("");
@@ -124,7 +125,7 @@ const PostComponentesModal = ({ getComponentes }) => {
           if (!habitacionPattern.test(Habitacion) || habitacionValue < 1 || habitacionValue > 50) {
             setErrorMessages({
               ...errorMessages,
-              Habitacion: "Este campo debe contener solo números y estar en el rango de 1 a 50.",
+              Habitacion: "Este campo debe contener solo números y estar en el rango de 1 a 50, recuerde que la habitacion debe existir",
             });
           } else {
             setErrorMessages({ ...errorMessages, Habitacion: "" });
@@ -394,6 +395,7 @@ const PostComponentesModal = ({ getComponentes }) => {
                   aria-describedby="basic-addon1"
                 />
               </div>
+{/* 
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                   Habitación
@@ -415,7 +417,38 @@ const PostComponentesModal = ({ getComponentes }) => {
                   <div className="text-danger">{errorMessages.Habitacion}</div>
                 )}
               </div>
+ */}
+ <div className="input-group mb-3">
+                <label className="input-group-text" htmlFor="inputGroupSelectHabitacion">
+                  Habitación
+                </label>
+                <select
+                  className="form-select"
+                  id="inputGroupSelectHabitacion"
+                  value={Habitacion}
+                  onChange={(event) => {
+                    setHabitacion(event.target.value);
+                  }}
+                  onBlur={() => {
+                    validateField("Habitacion");
+                  }}
+                >
+                  <option value="" disabled>
+                    Selecciona una habitación
+                  </option>
+                  {HabitacionesList.map((habitacion) => (
+                    <option key={habitacion.id} value={habitacion.id}>
+                      {habitacion.id}
+                    </option>
+                  ))}
+                </select>
+                {errorMessages.Habitacion && (
+                  <div className="text-danger">{errorMessages.Habitacion}</div>
+                )}
+              </div>
             </div>
+
+            
             <div className="modal-footer">
               <button
                 type="button"

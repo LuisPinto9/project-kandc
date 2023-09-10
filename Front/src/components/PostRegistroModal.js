@@ -16,8 +16,8 @@ const FormRegistroPost = ({ getArrendatarios }) => {
   const [TipoUsuario, setTipoUsuario] = useState("");
 
   const [formularioVisible, setFormularioVisible] = useState(true);
-  
-    
+
+
 
   const limpiarCampos = () => {
     setIDUsuario("");
@@ -47,100 +47,100 @@ const FormRegistroPost = ({ getArrendatarios }) => {
     Nombre: "",
     // Agrega más campos aquí
   });
-/* 
-  const validateFields = () => {
-    const idPattern = /^\d+$/;
-    //const nombrePattern = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
-    //const nombrePattern = /^([A-Za-zÁÉÍÓÚáéíóúÑñ\s]+ ?)+$/;
-    const nombrePattern = /^[\p{L}ÁÉÍÓÚáéíóúÑñ\s]+$/u;
-
-    const metodoRentaPattern = /^[A-Za-z]+$/; // Solo letras sin espacios
-    const extensionDiasPattern = /^\d+$/;
-    const telefonoPattern = /^\d{10}$/; // 10 dígitos
-    const nombreUsuarioPattern = /^[A-Za-z0-9]+$/; // Letras y números sin caracteres especiales
-    const correoPattern = /^[A-Za-z0-9._%+-]+@gmail\.com$/; // Correo debe terminar en @gmail.com
-    const tipoUsuarioPattern = /^(arrendatario|administrador)$/; // Solo 'arrendatario' o 'administrador'
-
-    // Contraseña debe cumplir con los requisitos
-    const contraseñaPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-
-
-    let isValid = true;
-    const newErrorMessages = {
-      IDUsuario: "",
-      Nombre: "",
-      MetodoRenta: "",
-      ExtensionDias: "",
-      Telefono: "",
-      NombreUsuario: "",
-      Contraseña: "",
-      Correo: "",
-      TipoUsuario: "",
-    };
+  /* 
+    const validateFields = () => {
+      const idPattern = /^\d+$/;
+      //const nombrePattern = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+      //const nombrePattern = /^([A-Za-zÁÉÍÓÚáéíóúÑñ\s]+ ?)+$/;
+      const nombrePattern = /^[\p{L}ÁÉÍÓÚáéíóúÑñ\s]+$/u;
   
-
+      const metodoRentaPattern = /^[A-Za-z]+$/; // Solo letras sin espacios
+      const extensionDiasPattern = /^\d+$/;
+      const telefonoPattern = /^\d{10}$/; // 10 dígitos
+      const nombreUsuarioPattern = /^[A-Za-z0-9]+$/; // Letras y números sin caracteres especiales
+      const correoPattern = /^[A-Za-z0-9._%+-]+@gmail\.com$/; // Correo debe terminar en @gmail.com
+      const tipoUsuarioPattern = /^(arrendatario|administrador)$/; // Solo 'arrendatario' o 'administrador'
+  
+      // Contraseña debe cumplir con los requisitos
+      const contraseñaPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  
+  
+  
+      let isValid = true;
+      const newErrorMessages = {
+        IDUsuario: "",
+        Nombre: "",
+        MetodoRenta: "",
+        ExtensionDias: "",
+        Telefono: "",
+        NombreUsuario: "",
+        Contraseña: "",
+        Correo: "",
+        TipoUsuario: "",
+      };
     
-    if (!idPattern.test(IDUsuario) || parseInt(IDUsuario, 10) === 0) {
-      newErrorMessages.IDUsuario =
-        "El campo IDUsuario debe contener solo números y no ser igual a cero.";
-      isValid = false;
-    }
-
-    if (!nombrePattern.test(Nombre) || Nombre.length < 3) {
-      newErrorMessages.Nombre =
-        "El campo Nombre debe contener solo letras y tener al menos 3 caracteres.";
-      isValid = false;
-    }
-
-    if (!metodoRentaPattern.test(MetodoRenta)) {
-      newErrorMessages.MetodoRenta =
-        "El campo Método de Renta debe contener solo letras sin espacios.";
-      isValid = false;
-    }
-
-    if (!extensionDiasPattern.test(ExtensionDias)) {
-      newErrorMessages.ExtensionDias =
-        "El campo Extensión de Días debe contener solo números.";
-      isValid = false;
-    }
-
-    if (!telefonoPattern.test(Telefono)) {
-      newErrorMessages.Telefono =
-        "El campo Teléfono debe contener exactamente 10 dígitos.";
-      isValid = false;
-    }
-
-    if (!nombreUsuarioPattern.test(NombreUsuario)) {
-      newErrorMessages.NombreUsuario =
-        "El campo Nombre de Usuario debe contener solo letras y números sin caracteres especiales.";
-      isValid = false;
-    }
-
-    if (!correoPattern.test(Correo)) {
-      newErrorMessages.Correo =
-        "El campo Correo debe ser una dirección de correo electrónico válida que termine en @gmail.com.";
-      isValid = false;
-    }
-
-    if (!tipoUsuarioPattern.test(TipoUsuario.toLowerCase())) { 
-      newErrorMessages.TipoUsuario =
-        "El campo Tipo de Usuario debe ser 'arrendatario' o 'administrador'.";
-      isValid = false;
-    }
-
-    if (!contraseñaPattern.test(Contraseña)) {
-      newErrorMessages.Contraseña =
-        "debe tener: 8 caracteres, 2 numeros, almenos una letra minuscula y mayuscula y un caracter especial";
-      isValid = false;
-    }
-
-    setErrorMessages(newErrorMessages);
-    return isValid;
-  };
- */
-
   
+      
+      if (!idPattern.test(IDUsuario) || parseInt(IDUsuario, 10) === 0) {
+        newErrorMessages.IDUsuario =
+          "El campo IDUsuario debe contener solo números y no ser igual a cero.";
+        isValid = false;
+      }
+  
+      if (!nombrePattern.test(Nombre) || Nombre.length < 3) {
+        newErrorMessages.Nombre =
+          "El campo Nombre debe contener solo letras y tener al menos 3 caracteres.";
+        isValid = false;
+      }
+  
+      if (!metodoRentaPattern.test(MetodoRenta)) {
+        newErrorMessages.MetodoRenta =
+          "El campo Método de Renta debe contener solo letras sin espacios.";
+        isValid = false;
+      }
+  
+      if (!extensionDiasPattern.test(ExtensionDias)) {
+        newErrorMessages.ExtensionDias =
+          "El campo Extensión de Días debe contener solo números.";
+        isValid = false;
+      }
+  
+      if (!telefonoPattern.test(Telefono)) {
+        newErrorMessages.Telefono =
+          "El campo Teléfono debe contener exactamente 10 dígitos.";
+        isValid = false;
+      }
+  
+      if (!nombreUsuarioPattern.test(NombreUsuario)) {
+        newErrorMessages.NombreUsuario =
+          "El campo Nombre de Usuario debe contener solo letras y números sin caracteres especiales.";
+        isValid = false;
+      }
+  
+      if (!correoPattern.test(Correo)) {
+        newErrorMessages.Correo =
+          "El campo Correo debe ser una dirección de correo electrónico válida que termine en @gmail.com.";
+        isValid = false;
+      }
+  
+      if (!tipoUsuarioPattern.test(TipoUsuario.toLowerCase())) { 
+        newErrorMessages.TipoUsuario =
+          "El campo Tipo de Usuario debe ser 'arrendatario' o 'administrador'.";
+        isValid = false;
+      }
+  
+      if (!contraseñaPattern.test(Contraseña)) {
+        newErrorMessages.Contraseña =
+          "debe tener: 8 caracteres, 2 numeros, almenos una letra minuscula y mayuscula y un caracter especial";
+        isValid = false;
+      }
+  
+      setErrorMessages(newErrorMessages);
+      return isValid;
+    };
+   */
+
+
 
   const validateField = (fieldName) => {
     switch (fieldName) {
@@ -171,97 +171,97 @@ const FormRegistroPost = ({ getArrendatarios }) => {
         }
         break;
 
-       
-        case "ExtensionDias":
-          const extensionDiasPattern = /^\d+$/;
-          if (!extensionDiasPattern.test(ExtensionDias)) {
-            setErrorMessages({
-              ...errorMessages,
-              ExtensionDias: "El campo Extensión de Días debe contener solo números.",
-            });
-          } else {
-            setErrorMessages({ ...errorMessages, ExtensionDias: "" });
-          }
-          break;
-  
-        case "Telefono":
-          const telefonoPattern = /^\d{10}$/;
-          if (!telefonoPattern.test(Telefono)) {
-            setErrorMessages({
-              ...errorMessages,
-              Telefono: "El campo Teléfono debe contener exactamente 10 dígitos.",
-            });
-          } else {
-            setErrorMessages({ ...errorMessages, Telefono: "" });
-          }
-          break;
-  
-        case "NombreUsuario":
-          const nombreUsuarioPattern = /^[A-Za-z0-9]+$/;
-          if (!nombreUsuarioPattern.test(NombreUsuario)) {
-            setErrorMessages({
-              ...errorMessages,
-              NombreUsuario: "El campo Nombre de Usuario debe contener solo letras y números sin caracteres especiales.",
-            });
-          } else {
-            setErrorMessages({ ...errorMessages, NombreUsuario: "" });
-          }
-          break;
-  
-        case "Contraseña":
-          // Contraseña debe cumplir con los requisitos
-          const contraseñaPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-          if (!contraseñaPattern.test(Contraseña)) {
-            setErrorMessages({
-              ...errorMessages,
-              Contraseña: "La contraseña debe cumplir con los requisitos de seguridad.",
-            });
-          } else {
-            setErrorMessages({ ...errorMessages, Contraseña: "" });
-          }
-          break;
-  
-          case "Correo":
-            const correoPattern = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
-            const correoParts = Correo.split("@");
-            if (!correoPattern.test(Correo) || correoParts[0].length > 20) {
-              setErrorMessages({
-                ...errorMessages,
-                Correo: "El campo Correo debe ser una dirección de correo electrónico válida que termine en @gmail.com y con menos de 20 caracteres antes del '@'.",
-              });
-            } else {
-              setErrorMessages({ ...errorMessages, Correo: "" });
-            }
-            break;
-  
-        case "TipoUsuario":
-          const tipoUsuarioPattern = /^(arrendatario|administrador)$/;
-          if (!tipoUsuarioPattern.test(TipoUsuario)) {
-            setErrorMessages({
-              ...errorMessages,
-              TipoUsuario: "El campo Tipo de Usuario debe ser 'arrendatario' o 'administrador'.",
-            });
-          } else {
-            setErrorMessages({ ...errorMessages, TipoUsuario: "" });
-          }
-          break;
-  
-        default:
-          break;
-      }
-    };
 
-    const validateFields = () => {
-      validateField("IDUsuario");
-      validateField("Nombre");
-      validateField("MetodoRenta");
-      validateField("ExtensionDias");
-      validateField("Telefono");
-      validateField("NombreUsuario");
-      validateField("Contraseña");
-      validateField("Correo");
-      validateField("TipoUsuario");
-    };
+      case "ExtensionDias":
+        const extensionDiasPattern = /^\d+$/;
+        if (!extensionDiasPattern.test(ExtensionDias)) {
+          setErrorMessages({
+            ...errorMessages,
+            ExtensionDias: "El campo Extensión de Días debe contener solo números.",
+          });
+        } else {
+          setErrorMessages({ ...errorMessages, ExtensionDias: "" });
+        }
+        break;
+
+      case "Telefono":
+        const telefonoPattern = /^\d{10}$/;
+        if (!telefonoPattern.test(Telefono)) {
+          setErrorMessages({
+            ...errorMessages,
+            Telefono: "El campo Teléfono debe contener exactamente 10 dígitos.",
+          });
+        } else {
+          setErrorMessages({ ...errorMessages, Telefono: "" });
+        }
+        break;
+
+      case "NombreUsuario":
+        const nombreUsuarioPattern = /^[A-Za-z0-9]+$/;
+        if (!nombreUsuarioPattern.test(NombreUsuario)) {
+          setErrorMessages({
+            ...errorMessages,
+            NombreUsuario: "El campo Nombre de Usuario debe contener solo letras y números sin caracteres especiales.",
+          });
+        } else {
+          setErrorMessages({ ...errorMessages, NombreUsuario: "" });
+        }
+        break;
+
+      case "Contraseña":
+        // Contraseña debe cumplir con los requisitos
+        const contraseñaPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (!contraseñaPattern.test(Contraseña)) {
+          setErrorMessages({
+            ...errorMessages,
+            Contraseña: "La contraseña debe cumplir con los requisitos de seguridad.",
+          });
+        } else {
+          setErrorMessages({ ...errorMessages, Contraseña: "" });
+        }
+        break;
+
+      case "Correo":
+        const correoPattern = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
+        const correoParts = Correo.split("@");
+        if (!correoPattern.test(Correo) || correoParts[0].length > 20) {
+          setErrorMessages({
+            ...errorMessages,
+            Correo: "El campo Correo debe ser una dirección de correo electrónico válida que termine en @gmail.com y con menos de 20 caracteres antes del '@'.",
+          });
+        } else {
+          setErrorMessages({ ...errorMessages, Correo: "" });
+        }
+        break;
+
+      case "TipoUsuario":
+        const tipoUsuarioPattern = /^(Arrendatario|Administrador)$/;
+        if (!tipoUsuarioPattern.test(TipoUsuario)) {
+          setErrorMessages({
+            ...errorMessages,
+            TipoUsuario: "El campo Tipo de Usuario debe ser 'arrendatario' o 'administrador'.",
+          });
+        } else {
+          setErrorMessages({ ...errorMessages, TipoUsuario: "" });
+        }
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const validateFields = () => {
+    validateField("IDUsuario");
+    validateField("Nombre");
+    validateField("MetodoRenta");
+    validateField("ExtensionDias");
+    validateField("Telefono");
+    validateField("NombreUsuario");
+    validateField("Contraseña");
+    validateField("Correo");
+    validateField("TipoUsuario");
+  };
 
   const mostrarMensajeError = () => {
     Swal.fire({
@@ -282,35 +282,35 @@ const FormRegistroPost = ({ getArrendatarios }) => {
 
     if (!hasErrors) {
 
-      if(IDUsuario === "" ||
-      Nombre === "" ||
-      MetodoRenta === "" ||
-      ExtensionDias === "" ||
-      Telefono === "" ||
-      NombreUsuario === "" ||
-      Contraseña === "" ||
-      Correo === "" ||
-      TipoUsuario === ""
-    ) {
-      mostrarMensajeError();
-    }else{
+      if (IDUsuario === "" ||
+        Nombre === "" ||
+        MetodoRenta === "" ||
+        ExtensionDias === "" ||
+        Telefono === "" ||
+        NombreUsuario === "" ||
+        Contraseña === "" ||
+        Correo === "" ||
+        TipoUsuario === ""
+      ) {
+        mostrarMensajeError();
+      } else {
 
-      add({
-        IDUsuario,
-        Nombre,
-        MetodoRenta,
-        ExtensionDias,
-        Telefono,
-        NombreUsuario,
-        Contraseña,
-        Correo,
-        TipoUsuario: TipoUsuario.charAt(0).toUpperCase() + TipoUsuario.slice(1), // Hacer que la primera letra sea mayúscula
-      });
-      getArrendatarios();
-      limpiarCampos();
-      setFormularioVisible(false);
-    }
-     
+        add({
+          IDUsuario,
+          Nombre,
+          MetodoRenta,
+          ExtensionDias,
+          Telefono,
+          NombreUsuario,
+          Contraseña,
+          Correo,
+          TipoUsuario: TipoUsuario.charAt(0).toUpperCase() + TipoUsuario.slice(1), // Hacer que la primera letra sea mayúscula
+        });
+        getArrendatarios();
+        limpiarCampos();
+        setFormularioVisible(false);
+      }
+
     } else {
       mostrarMensajeError();
     }
@@ -369,7 +369,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   <div className="text-danger">{errorMessages.IDUsuario}</div>
                 )}
               </div>
-  
+
               <div className="input-group mb-3">
                 <span className="input-group-text">Nombre</span>
                 <input
@@ -389,7 +389,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   <div className="text-danger">{errorMessages.Nombre}</div>
                 )}
               </div>
-  
+
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                   Método de Renta
@@ -411,7 +411,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   <div className="text-danger">{errorMessages.MetodoRenta}</div>
                 )}
               </div>
-  
+
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                   Extensión de Días
@@ -433,7 +433,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   <div className="text-danger">{errorMessages.ExtensionDias}</div>
                 )}
               </div>
-  
+
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                   Teléfono
@@ -455,7 +455,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   <div className="text-danger">{errorMessages.Telefono}</div>
                 )}
               </div>
-  
+
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                   Nombre de Usuario
@@ -477,7 +477,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   <div className="text-danger">{errorMessages.NombreUsuario}</div>
                 )}
               </div>
-  
+
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                   Contraseña
@@ -499,8 +499,8 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   <div className="text-danger">{errorMessages.Contraseña}</div>
                 )}
               </div>
-              
-  
+
+
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                   Correo
@@ -522,13 +522,16 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   <div className="text-danger">{errorMessages.Correo}</div>
                 )}
               </div>
-  
+
+
+
               <div className="input-group mb-3">
-                <span className="input-group-text" id="basic-addon1">
+                <label className="input-group-text" htmlFor="inputGroupSelectTipoUsuario">
                   Tipo de Usuario
-                </span>
-                <input
-                  type="text"
+                </label>
+                <select
+                  className="form-select"
+                  id="inputGroupSelectTipoUsuario"
                   value={TipoUsuario}
                   onChange={(event) => {
                     setTipoUsuario(event.target.value);
@@ -536,14 +539,18 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   onBlur={() => {
                     validateField("TipoUsuario");
                   }}
-                  className="form-control"
-                  aria-label="tipo-usuario"
-                  aria-describedby="basic-addon1"
-                />
+                >
+                  <option value="" disabled>
+                    Selecciona un tipo de usuario
+                  </option>
+                  <option value="Arrendatario">Arrendatario</option>
+                  <option value="Administrador">Administrador</option>
+                </select>
                 {errorMessages.TipoUsuario && (
                   <div className="text-danger">{errorMessages.TipoUsuario}</div>
                 )}
               </div>
+
             </div>
 
 
@@ -559,7 +566,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
               <button
                 type="button"
                 className="btn btn-primary"
-               // data-bs-dismiss="modal"
+                // data-bs-dismiss="modal"
                 onClick={AddPost}
               >
                 Agregar

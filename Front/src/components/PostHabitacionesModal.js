@@ -4,16 +4,16 @@ import "../css/modal.css";
 
 import Swal from "sweetalert2";
 
-const PostHabitacionesModal = ({ getHabitaciones }) => {
+const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
   const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
   const [Estado, setEstado] = useState("");
   const [Precio, setPrecio] = useState("");
   const [Zona, setZona] = useState("");
-  
+
   const [formularioVisible, setFormularioVisible] = useState(true);
-  
-    
+
+
   const limpiarCampos = () => {
     setId("");
     setNombre("");
@@ -86,30 +86,30 @@ const PostHabitacionesModal = ({ getHabitaciones }) => {
 
     if (!hasErrors) {
 
-      if(Id === "" ||
-      Nombre === "" ||
-      Estado === "" ||
-      Precio === "" ||
-      Zona === ""
-    ) {
-      mostrarMensajeError();
-    }else{
-      add({
-        Id,
-        Nombre,
-        Estado,
-        Precio,
-        Zona,
-      });
+      if (Id === "" ||
+        Nombre === "" ||
+        Estado === "" ||
+        Precio === "" ||
+        Zona === ""
+      ) {
+        mostrarMensajeError();
+      } else {
+        add({
+          Id,
+          Nombre,
+          Estado,
+          Precio,
+          Zona,
+        });
 
-      getHabitaciones();
-      limpiarCampos();
-      setFormularioVisible(false);
-    }
+        getHabitaciones();
+        limpiarCampos();
+        setFormularioVisible(false);
+      }
 
     } else {
       mostrarMensajeError();
-     }
+    }
   };
 
   const validateFields = () => {
@@ -161,114 +161,148 @@ const PostHabitacionesModal = ({ getHabitaciones }) => {
               ></button>
             </div>
             <div className="modal-body">
-  <div className="input-group mb-3">
-    <span className="input-group-text" id="basic-addon1">
-      ID
-    </span>
-    <input
-      type="text"
-      value={Id}
-      onChange={(event) => {
-        setId(event.target.value);
-      }}
-      onBlur={() => {
-        validateField("Id");
-      }}
-      className="form-control"
-      aria-label="id"
-      aria-describedby="basic-addon1"
-    />
-    {errorMessages.Id && (
-      <div className="text-danger">{errorMessages.Id}</div>
-    )}
-  </div>
+              <div className="input-group mb-3">
+                <span className="input-group-text" id="basic-addon1">
+                  ID
+                </span>
+                <input
+                  type="text"
+                  value={Id}
+                  onChange={(event) => {
+                    setId(event.target.value);
+                  }}
+                  onBlur={() => {
+                    validateField("Id");
+                  }}
+                  className="form-control"
+                  aria-label="id"
+                  aria-describedby="basic-addon1"
+                />
+                {errorMessages.Id && (
+                  <div className="text-danger">{errorMessages.Id}</div>
+                )}
+              </div>
 
-  <div className="input-group mb-3">
-    <span className="input-group-text">Nombre</span>
-    <input
-      type="text"
-      value={Nombre}
-      onChange={(event) => {
-        setNombre(event.target.value);
-      }}
-      onBlur={() => {
-        validateField("Nombre");
-      }}
-      className="form-control"
-      aria-label="nombre"
-      aria-describedby="basic-addon1"
-    />
-    {errorMessages.Nombre && (
-      <div className="text-danger">{errorMessages.Nombre}</div>
-    )}
-  </div>
+              <div className="input-group mb-3">
+                <span className="input-group-text">Nombre</span>
+                <input
+                  type="text"
+                  value={Nombre}
+                  onChange={(event) => {
+                    setNombre(event.target.value);
+                  }}
+                  onBlur={() => {
+                    validateField("Nombre");
+                  }}
+                  className="form-control"
+                  aria-label="nombre"
+                  aria-describedby="basic-addon1"
+                />
+                {errorMessages.Nombre && (
+                  <div className="text-danger">{errorMessages.Nombre}</div>
+                )}
+              </div>
 
-  <div className="input-group mb-3">
-    <span className="input-group-text" id="basic-addon1">
-      Estado
-    </span>
-    <input
-      type="text"
-      value={Estado}
-      onChange={(event) => {
-        setEstado(event.target.value);
-      }}
-      onBlur={() => {
-        validateField("Estado");
-      }}
-      className="form-control"
-      aria-label="estado"
-      aria-describedby="basic-addon1"
-    />
-    {errorMessages.Estado && (
-      <div className="text-danger">{errorMessages.Estado}</div>
-    )}
-  </div>
+              <div className="input-group mb-3">
+                <span className="input-group-text" id="basic-addon1">
+                  Estado
+                </span>
+                <input
+                  type="text"
+                  value={Estado}
+                  onChange={(event) => {
+                    setEstado(event.target.value);
+                  }}
+                  onBlur={() => {
+                    validateField("Estado");
+                  }}
+                  className="form-control"
+                  aria-label="estado"
+                  aria-describedby="basic-addon1"
+                />
+                {errorMessages.Estado && (
+                  <div className="text-danger">{errorMessages.Estado}</div>
+                )}
+              </div>
 
-  <div className="input-group mb-3">
-    <span className="input-group-text" id="basic-addon1">
-      Precio
-    </span>
-    <input
-      type="text"
-      value={Precio}
-      onChange={(event) => {
-        setPrecio(event.target.value);
-      }}
-      onBlur={() => {
-        validateField("Precio");
-      }}
-      className="form-control"
-      aria-label="Precio"
-      aria-describedby="basic-addon1"
-    />
-    {errorMessages.Precio && (
-      <div className="text-danger">{errorMessages.Precio}</div>
-    )}
-  </div>
+              <div className="input-group mb-3">
+                <span className="input-group-text" id="basic-addon1">
+                  Precio
+                </span>
+                <input
+                  type="text"
+                  value={Precio}
+                  onChange={(event) => {
+                    setPrecio(event.target.value);
+                  }}
+                  onBlur={() => {
+                    validateField("Precio");
+                  }}
+                  className="form-control"
+                  aria-label="Precio"
+                  aria-describedby="basic-addon1"
+                />
+                {errorMessages.Precio && (
+                  <div className="text-danger">{errorMessages.Precio}</div>
+                )}
+              </div>
+{/* 
+              <div className="input-group mb-3">
+                <span className="input-group-text" id="basic-addon1">
+                  Zona
+                </span>
+                <input
+                  type="text"
+                  value={Zona}
+                  onChange={(event) => {
+                    setZona(event.target.value);
+                  }}
+                  onBlur={() => {
+                    validateField("Zona");
+                  }}
+                  className="form-control"
+                  aria-label="Zona"
+                  aria-describedby="basic-addon1"
+                />
+                {errorMessages.Zona && (
+                  <div className="text-danger">{errorMessages.Zona}</div>
+                )}
+              </div>
+ */}
 
-  <div className="input-group mb-3">
-    <span className="input-group-text" id="basic-addon1">
-      Zona
-    </span>
-    <input
-      type="text"
-      value={Zona}
-      onChange={(event) => {
-        setZona(event.target.value);
-      }}
-      onBlur={() => {
-        validateField("Zona");
-      }}
-      className="form-control"
-      aria-label="Zona"
-      aria-describedby="basic-addon1"
-    />
-    {errorMessages.Zona && (
-      <div className="text-danger">{errorMessages.Zona}</div>
-    )}
-  </div>
-</div>
+              <div className="input-group mb-3">
+                <label className="input-group-text" htmlFor="inputGroupSelectZona">
+                  Zona
+                </label>
+                <select
+                  className="form-select"
+                  id="inputGroupSelectZona"
+                  value={Zona}
+                  onChange={(event) => {
+                    setZona(event.target.value);
+                  }}
+                  onBlur={() => {
+                    validateField("Zona");
+                  }}
+                >
+                  <option value="" disabled>
+                    Selecciona una zona
+                  </option>
+                  {ZonasList.map((Zona) => (
+                    <option key={Zona.id} value={Zona.id}>
+                      {Zona.id}
+                    </option>
+                  ))}
+                </select>
+                {errorMessages.Zona && (
+                  <div className="text-danger">{errorMessages.Zona}</div>
+                )}
+              </div>
+
+
+
+
+            </div>
             <div className="modal-footer">
               <button
                 type="button"

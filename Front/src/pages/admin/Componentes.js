@@ -9,6 +9,9 @@ import PostComponentesModal from "../../components/PostComponentesModal";
 import PutComponentesModal from "../../components/PutComponentesModal";
 import "../../css/tabla.css";
 
+//verificar
+import { habitaciones  } from "../../controllers/HabitacionControllers";
+
 const Componentes = () => {
   const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
@@ -21,6 +24,9 @@ const Componentes = () => {
   const [Habitacion, setHabitacion] = useState("");
   const [ComponentesList, setComponentes] = useState([]);
 
+
+  const [HabitacionesList, setHabitaciones] = useState([]); 
+
   const getComponentes = () => {
     componentes()
       .then((data) => {
@@ -29,7 +35,27 @@ const Componentes = () => {
       .catch((error) => {
         console.error("Error al obtener los componentes:", error);
       });
+
+      
   };
+//verificar
+
+  const getHabitaciones = () => {
+    habitaciones()
+      .then((data) => {
+        setHabitaciones(data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener las habitaciones:", error);
+      });
+  };
+
+ useEffect(() => {
+    getComponentes();
+    getHabitaciones(); // Llama a la función para obtener las habitaciones cuando se monta el componente
+  }, []);
+
+
 
   const EditarComponentes = (val) => {
     setId(val.id);
@@ -43,9 +69,10 @@ const Componentes = () => {
     setHabitacion(val.habitacion);
   };
 
-  useEffect(() => {
+ /*  useEffect(() => {
     getComponentes();
-  }, []);
+  }, []); */
+  
 
   let autoIncrementar = 1;
 
@@ -73,8 +100,7 @@ const Componentes = () => {
             />
           </div>
           <div>
-            <PostComponentesModal getComponentes={getComponentes} />
-          </div>
+          <PostComponentesModal getComponentes={getComponentes} HabitacionesList={HabitacionesList} /></div>
         </div>
         {/* aqui empieza la tabla  */}
         <div className="table-responsive">
