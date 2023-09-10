@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { add } from "../controllers/ComponentesControllers";
 import "../css/modal.css";
+import Swal from "sweetalert2";
 
 const PostComponentesModal = ({ getComponentes }) => {
   const [Id, setId] = useState("");
@@ -23,13 +24,155 @@ const PostComponentesModal = ({ getComponentes }) => {
     setDescripcion("");
     setObservacion("");
     setHabitacion("");
+    setErrorMessages({
+      Id: "",
+      Nombre: "",
+      Marca: "",
+      Cantidad: "",
+      Costo: "",
+      Estado: "",
+      Descripcion: "",
+      Observacion: "",
+      Habitacion: "",
+    });
+  };
+  const [errorMessages, setErrorMessages] = useState({
+    Id: "",
+    Nombre: "",
+    // Agrega más campos aquí
+  });
+  const validateField = (fieldName) => {
+    switch (fieldName) {
+      case "Id":
+        const idPattern = /^[0-9]+$/;
+        if (!idPattern.test(Id) || parseInt(Id, 10) < 0 || parseInt(Id, 10) > 200) {
+          setErrorMessages({ ...errorMessages, Id: "El campo ID debe contener solo números y no ser igual a cero." });
+        }else {
+          setErrorMessages({ ...errorMessages, Id: "" });
+        }
+        break;
+
+      case "Nombre":
+        const nombrePattern = /^[A-Za-z\sÁÉÍÓÚáéíóúÑñ]+$/u;
+        if (!nombrePattern.test(Nombre)) {
+          setErrorMessages({ ...errorMessages, Nombre: "Este campo debe contener solo letras y tener al menos 3 caracteres." });
+        }else {
+          setErrorMessages({ ...errorMessages, Nombre: "" });
+        }
+        break;
+
+      case "Marca":
+        const marcaPattern = /^[A-Za-z]+$/;
+        if (!marcaPattern.test(Marca)) {
+          setErrorMessages({ ...errorMessages, Marca: "Este campo debe contener solo letras y tener al menos 3 caracteres." });
+         }else {
+          setErrorMessages({ ...errorMessages, Marca: "" });
+        }
+        break;
+
+      case "Cantidad":
+        const cantidadPattern =  /^[0-9]+(\.[0-9]+)?$/;
+        if (!cantidadPattern.test(Cantidad) || parseInt(Cantidad, 10) < 0 || parseInt(Cantidad, 10) > 20) {
+          setErrorMessages({
+            ...errorMessages,
+            Cantidad: "Este campo debe contener solo números.",
+          }); }else {
+            setErrorMessages({ ...errorMessages, Cantidad: "" });
+          }
+        break;
+
+      case "Costo":
+        const costoPattern = /^[0-9]+(\.[0-9]+)?$/;
+        if (!costoPattern.test(Costo)) {
+          setErrorMessages({
+            ...errorMessages,
+            Costo: "Este campo debe contener solo números.",
+          });  }else {
+            setErrorMessages({ ...errorMessages, Costo: "" });
+          }
+        break;
+
+      case "Estado":
+        const estadoPattern = /^[A-Za-z]+$/;
+        if (!estadoPattern.test(Estado)) {
+          setErrorMessages({ ...errorMessages, Estado: "Este campo debe contener solo letras y tener al menos 3 caracteres." });
+         }else {
+          setErrorMessages({ ...errorMessages, Estado: "" });
+        }
+        break;
+
+      case "Descripcion":
+        // Lógica de validación para el campo Descripcion
+        break;
+
+      case "Observacion":
+        // Lógica de validación para el campo Observacion
+        break;
+
+      case "Habitacion":
+        const habitacionPattern = /^[0-9]+$/;
+        if (!habitacionPattern.test(Habitacion) || parseInt(Habitacion, 10) < 0 || parseInt(Habitacion, 10) > 100) {
+          setErrorMessages({
+            ...errorMessages,
+            Habitacion: "Este campo debe contener solo números.",
+          }); }else {
+            setErrorMessages({ ...errorMessages, Habitacion: "" });
+          }
+        break;
+
+      default:
+        break;
+    }
   };
 
+  const validateFields = () => {
+    validateField("Id");
+    validateField("Nombre");
+    validateField("Marca");
+    validateField("Cantidad");
+    validateField("Costo");
+    validateField("Estado");
+     validateField("Habitacion");
+  };
+
+
+  const mostrarMensajeError = () => {
+    Swal.fire({
+      title: "Campos inválidos",
+      text: "Uno o más campos contienen datos inválidos. Por favor, corrige los errores.",
+      icon: "error",
+      showCancelButton: true,
+      confirmButtonText: "Aceptar",
+    });
+  };
+
+
   const AddPost = () => {
-    add({ Id, Nombre, Marca, Cantidad,Costo,Estado,Descripcion,Observacion,Habitacion });
-    getComponentes();
-    getComponentes();
-    limpiarCampos();
+
+    validateFields(); // Validar campos antes de agregar
+
+    // Verificar si hay algún mensaje de error en los campos
+    const hasErrors = Object.values(errorMessages).some((message) => message !== "");
+
+
+    if (!hasErrors) {
+      add({
+        Id,
+        Nombre,
+        Marca,
+        Cantidad,
+        Costo,
+        Estado,
+        Descripcion,
+        Observacion,
+        Habitacion,
+      });
+      getComponentes();
+      limpiarCampos();
+      // setFormularioVisible(false);
+    } else {
+      mostrarMensajeError();
+    }
   };
 
   return (
@@ -74,10 +217,16 @@ const PostComponentesModal = ({ getComponentes }) => {
                   onChange={(event) => {
                     setId(event.target.value);
                   }}
+                  onBlur={() => {
+                    validateField("Id");
+                  }}
                   className="form-control"
                   aria-label="id"
                   aria-describedby="basic-addon1"
                 />
+                {errorMessages.Id && (
+                  <div className="text-danger">{errorMessages.Id}</div>
+                )}
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text">Nombre</span>
@@ -87,10 +236,16 @@ const PostComponentesModal = ({ getComponentes }) => {
                   onChange={(event) => {
                     setNombre(event.target.value);
                   }}
+                  onBlur={() => {
+                    validateField("Nombre");
+                  }}
                   className="form-control"
                   aria-label="nombre"
                   aria-describedby="basic-addon1"
                 />
+                {errorMessages.Nombre && (
+                  <div className="text-danger">{errorMessages.Nombre}</div>
+                )}
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
@@ -102,10 +257,16 @@ const PostComponentesModal = ({ getComponentes }) => {
                   onChange={(event) => {
                     setMarca(event.target.value);
                   }}
+                  onBlur={() => {
+                    validateField("Marca");
+                  }}
                   className="form-control"
                   aria-label="marca"
                   aria-describedby="basic-addon1"
                 />
+                {errorMessages.Marca && (
+                  <div className="text-danger">{errorMessages.Marca}</div>
+                )}
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
@@ -117,10 +278,16 @@ const PostComponentesModal = ({ getComponentes }) => {
                   onChange={(event) => {
                     setCantidad(event.target.value);
                   }}
+                  onBlur={() => {
+                    validateField("Cantidad");
+                  }}
                   className="form-control"
                   aria-label="cantidad"
                   aria-describedby="basic-addon1"
                 />
+                {errorMessages.Cantidad && (
+                  <div className="text-danger">{errorMessages.Cantidad}</div>
+                )}
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
@@ -132,10 +299,16 @@ const PostComponentesModal = ({ getComponentes }) => {
                   onChange={(event) => {
                     setCosto(event.target.value);
                   }}
+                  onBlur={() => {
+                    validateField("Costo");
+                  }}
                   className="form-control"
                   aria-label="costo"
                   aria-describedby="basic-addon1"
                 />
+                {errorMessages.Costo && (
+                  <div className="text-danger">{errorMessages.Costo}</div>
+                )}
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
@@ -147,10 +320,16 @@ const PostComponentesModal = ({ getComponentes }) => {
                   onChange={(event) => {
                     setEstado(event.target.value);
                   }}
+                  onBlur={() => {
+                    validateField("Estado");
+                  }}
                   className="form-control"
                   aria-label="estado"
                   aria-describedby="basic-addon1"
                 />
+                {errorMessages.Estado && (
+                  <div className="text-danger">{errorMessages.Estado}</div>
+                )}
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
@@ -162,10 +341,14 @@ const PostComponentesModal = ({ getComponentes }) => {
                   onChange={(event) => {
                     setDescripcion(event.target.value);
                   }}
+                  onBlur={() => {
+                    validateField("Descripcion");
+                  }}
                   className="form-control"
                   aria-label="descripcion"
                   aria-describedby="basic-addon1"
                 />
+                
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
@@ -176,6 +359,9 @@ const PostComponentesModal = ({ getComponentes }) => {
                   value={Observacion}
                   onChange={(event) => {
                     setObservacion(event.target.value);
+                  }}
+                  onBlur={() => {
+                    validateField("Observacion");
                   }}
                   className="form-control"
                   aria-label="observacion"
@@ -192,10 +378,16 @@ const PostComponentesModal = ({ getComponentes }) => {
                   onChange={(event) => {
                     setHabitacion(event.target.value);
                   }}
+                  onBlur={() => {
+                    validateField("Habitacion");
+                  }}
                   className="form-control"
                   aria-label="habitacion"
                   aria-describedby="basic-addon1"
                 />
+                {errorMessages.Habitacion && (
+                  <div className="text-danger">{errorMessages.Habitacion}</div>
+                )}
               </div>
             </div>
             <div className="modal-footer">
@@ -210,7 +402,7 @@ const PostComponentesModal = ({ getComponentes }) => {
               <button
                 type="button"
                 className="btn btn-primary"
-                data-bs-dismiss="modal"
+                //data-bs-dismiss="modal"
                 onClick={AddPost}
               >
                 Agregar
@@ -222,5 +414,4 @@ const PostComponentesModal = ({ getComponentes }) => {
     </div>
   );
 };
-
 export default PostComponentesModal;
