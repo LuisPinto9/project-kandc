@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { add } from "../controllers/UserControllers";
 import "../css/modal.css";
 
+import Swal from "sweetalert2";
+
 const FormRegistroPost = ({ getArrendatarios }) => {
   const [IDUsuario, setIDUsuario] = useState("");
   const [Nombre, setNombre] = useState("");
@@ -12,6 +14,47 @@ const FormRegistroPost = ({ getArrendatarios }) => {
   const [Contraseña, setContraseña] = useState("");
   const [Correo, setCorreo] = useState("");
   const [TipoUsuario, setTipoUsuario] = useState("");
+
+  const [formularioVisible, setFormularioVisible] = useState(true);
+  
+  const [errorMessages, setErrorMessages] = useState({
+    IDUsuario: "",
+    Nombre: "",
+    // Agrega más campos aquí
+  });
+  const validateFields = () => {
+    const idPattern = /^\d+$/;
+    const nombrePattern = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+    let isValid = true;
+    const newErrorMessages = { IDUsuario: "", Nombre: "" };
+  
+    if (!idPattern.test(IDUsuario) || parseInt(IDUsuario, 10) === 0) {
+      newErrorMessages.IDUsuario =
+        "El campo IDUsuario debe contener solo números y no ser igual a cero.";
+      isValid = false;
+    }
+  
+    if (!nombrePattern.test(Nombre) || Nombre.length < 3) {
+      newErrorMessages.Nombre =
+        "El campo Nombre debe contener solo letras y tener al menos 3 caracteres.";
+      isValid = false;
+    }
+  
+    // Agrega más validaciones aquí...
+  
+    setErrorMessages(newErrorMessages);
+    return isValid;
+  };
+  
+  const mostrarMensajeError = () => {
+    Swal.fire({
+      title: "Campos inválidos",
+      text: "Uno o más campos contienen datos inválidos. Por favor, corrige los errores.",
+      icon: "error",
+      showCancelButton: true,
+      confirmButtonText: "Aceptar",
+    });
+  };
 
   const limpiarCampos = () => {
     setIDUsuario("");
@@ -26,11 +69,28 @@ const FormRegistroPost = ({ getArrendatarios }) => {
   };
 
   const AddPost = () => {
-    add({ IDUsuario, Nombre, MetodoRenta,ExtensionDias, Telefono,NombreUsuario,Contraseña, Correo,TipoUsuario });
-    getArrendatarios();
-    getArrendatarios();
-    limpiarCampos();
+    const camposValidos = validateFields(); // Reemplaza esto con tu lógica de validación
+  
+    if (camposValidos) {
+      add({
+        IDUsuario,
+        Nombre,
+        MetodoRenta,
+        ExtensionDias,
+        Telefono,
+        NombreUsuario,
+        Contraseña,
+        Correo,
+        TipoUsuario,
+      });
+      getArrendatarios();
+      limpiarCampos();
+      setFormularioVisible(false);
+    } else {
+      mostrarMensajeError();
+    }
   };
+
 
   return (
     <div>
@@ -74,11 +134,19 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   onChange={(event) => {
                     setIDUsuario(event.target.value);
                   }}
+                  onBlur={() => {
+                    validateFields();
+                  }}
                   className="form-control"
                   aria-label="id"
                   aria-describedby="basic-addon1"
                 />
+                {errorMessages.IDUsuario && (
+                  <div className="text-danger">{errorMessages.IDUsuario}</div>
+                )}
               </div>
+
+
               <div className="input-group mb-3">
                 <span className="input-group-text">Nombre</span>
                 <input
@@ -87,11 +155,18 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   onChange={(event) => {
                     setNombre(event.target.value);
                   }}
+                  onBlur={() => {
+                    validateFields();
+                  }}
                   className="form-control"
                   aria-label="nombre"
                   aria-describedby="basic-addon1"
                 />
+                {errorMessages.Nombre && (
+                  <div className="text-danger">{errorMessages.Nombre}</div>
+                )}
               </div>
+
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                   Método de Renta
@@ -214,7 +289,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
               <button
                 type="button"
                 className="btn btn-primary"
-                data-bs-dismiss="modal"
+               // data-bs-dismiss="modal"
                 onClick={AddPost}
               >
                 Agregar
