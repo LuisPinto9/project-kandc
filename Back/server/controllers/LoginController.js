@@ -1,5 +1,5 @@
 const db = require("../db");
-const jwt = require("../services/jwt")
+const jwt = require("../middleware/jwt")
 
 const getUser = (req, res) => {
   const NombreUsuario = req.body.NombreUsuario;

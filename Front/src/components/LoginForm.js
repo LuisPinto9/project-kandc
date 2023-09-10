@@ -15,6 +15,11 @@ const LoginForm = () => {
     setShowPassword(!showPassword);
   };
 
+  const limpiarCampos = () => {
+    setNombreUsuario("");
+    setContraseña("");
+  };
+
   const handleClick = (e) => {
     e.preventDefault();
     verificar({ nombreUsuario, contraseña })
@@ -30,6 +35,7 @@ const LoginForm = () => {
         // Maneja cualquier error que pueda ocurrir
         console.error("Usuario o contraseña incorrectos");
       });
+    limpiarCampos();
   };
 
   return (

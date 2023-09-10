@@ -1,6 +1,6 @@
 const jwt = require("jwt-simple");
 const moment = require("moment");
-const libjwt = require("../services/jwt");
+const libjwt = require("./jwt");
 
 const secret = libjwt.secret;
 
