@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../css/form.css";
 import { verificar } from "../controllers/LoginController";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -46,10 +47,21 @@ const LoginForm = () => {
       })
       .catch(() => {
         // Maneja cualquier error que pueda ocurrir
+        mostrarMensajeError();
         console.error("Usuario o contraseña incorrectos");
       });
     limpiarCampos();
   };
+const mostrarMensajeError = () => {
+    Swal.fire({
+      title: "No puede ingresar",
+      text: "usuario y contraseña invalidos",
+      icon: "error",
+      showCancelButton: true,
+      confirmButtonText: "Aceptar",
+    });
+  };
+
 
   return (
     <div
@@ -84,7 +96,7 @@ const LoginForm = () => {
                   className="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
-                  placeholder="user@example.com"
+                  placeholder="user123"
                   onChange={(event) => {
                     setNombreUsuario(event.target.value);
                   }}
