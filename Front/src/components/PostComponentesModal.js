@@ -3,7 +3,6 @@ import { add } from "../controllers/ComponentesControllers";
 import "../css/modal.css";
 import Swal from "sweetalert2";
 
-
 const PostComponentesModal = ({ getComponentes }) => {
   const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
@@ -14,10 +13,7 @@ const PostComponentesModal = ({ getComponentes }) => {
   const [Descripcion, setDescripcion] = useState("");
   const [Observacion, setObservacion] = useState("");
   const [Habitacion, setHabitacion] = useState("");
-
-  const [formularioVisible, setFormularioVisible] = useState(true);
-  
-    
+  const [setFormularioVisible] = useState(true);
 
   const limpiarCampos = () => {
     setId("");
@@ -50,9 +46,16 @@ const PostComponentesModal = ({ getComponentes }) => {
     switch (fieldName) {
       case "Id":
         const idPattern = /^[0-9]+$/;
-        if (!idPattern.test(Id) || parseInt(Id, 10) < 0 || parseInt(Id, 10) > 200) {
-          setErrorMessages({ ...errorMessages, Id: "El campo ID debe contener solo números y no ser igual a cero." });
-        }else {
+        if (
+          !idPattern.test(Id) ||
+          parseInt(Id, 10) < 0 ||
+          parseInt(Id, 10) > 200
+        ) {
+          setErrorMessages({
+            ...errorMessages,
+            Id: "El campo ID debe contener solo números y no ser igual a cero.",
+          });
+        } else {
           setErrorMessages({ ...errorMessages, Id: "" });
         }
         break;
@@ -60,8 +63,12 @@ const PostComponentesModal = ({ getComponentes }) => {
       case "Nombre":
         const nombrePattern = /^[A-Za-z\sÁÉÍÓÚáéíóúÑñ]+$/u;
         if (!nombrePattern.test(Nombre)) {
-          setErrorMessages({ ...errorMessages, Nombre: "Este campo debe contener solo letras y tener al menos 3 caracteres." });
-        }else {
+          setErrorMessages({
+            ...errorMessages,
+            Nombre:
+              "Este campo debe contener solo letras y tener al menos 3 caracteres.",
+          });
+        } else {
           setErrorMessages({ ...errorMessages, Nombre: "" });
         }
         break;
@@ -69,21 +76,30 @@ const PostComponentesModal = ({ getComponentes }) => {
       case "Marca":
         const marcaPattern = /^[A-Za-z]+$/;
         if (!marcaPattern.test(Marca)) {
-          setErrorMessages({ ...errorMessages, Marca: "Este campo debe contener solo letras y tener al menos 3 caracteres." });
-         }else {
+          setErrorMessages({
+            ...errorMessages,
+            Marca:
+              "Este campo debe contener solo letras y tener al menos 3 caracteres.",
+          });
+        } else {
           setErrorMessages({ ...errorMessages, Marca: "" });
         }
         break;
 
       case "Cantidad":
-        const cantidadPattern =  /^[0-9]+(\.[0-9]+)?$/;
-        if (!cantidadPattern.test(Cantidad) || parseInt(Cantidad, 10) < 0 || parseInt(Cantidad, 10) > 20) {
+        const cantidadPattern = /^[0-9]+(\.[0-9]+)?$/;
+        if (
+          !cantidadPattern.test(Cantidad) ||
+          parseInt(Cantidad, 10) < 0 ||
+          parseInt(Cantidad, 10) > 20
+        ) {
           setErrorMessages({
             ...errorMessages,
             Cantidad: "Este campo debe contener solo números.",
-          }); }else {
-            setErrorMessages({ ...errorMessages, Cantidad: "" });
-          }
+          });
+        } else {
+          setErrorMessages({ ...errorMessages, Cantidad: "" });
+        }
         break;
 
       case "Costo":
@@ -92,16 +108,21 @@ const PostComponentesModal = ({ getComponentes }) => {
           setErrorMessages({
             ...errorMessages,
             Costo: "Este campo debe contener solo números.",
-          });  }else {
-            setErrorMessages({ ...errorMessages, Costo: "" });
-          }
+          });
+        } else {
+          setErrorMessages({ ...errorMessages, Costo: "" });
+        }
         break;
 
       case "Estado":
         const estadoPattern = /^[A-Za-z]+$/;
         if (!estadoPattern.test(Estado)) {
-          setErrorMessages({ ...errorMessages, Estado: "Este campo debe contener solo letras y tener al menos 3 caracteres." });
-         }else {
+          setErrorMessages({
+            ...errorMessages,
+            Estado:
+              "Este campo debe contener solo letras y tener al menos 3 caracteres.",
+          });
+        } else {
           setErrorMessages({ ...errorMessages, Estado: "" });
         }
         break;
@@ -116,13 +137,18 @@ const PostComponentesModal = ({ getComponentes }) => {
 
       case "Habitacion":
         const habitacionPattern = /^[0-9]+$/;
-        if (!habitacionPattern.test(Habitacion) || parseInt(Habitacion, 10) < 0 || parseInt(Habitacion, 10) > 100) {
+        if (
+          !habitacionPattern.test(Habitacion) ||
+          parseInt(Habitacion, 10) < 0 ||
+          parseInt(Habitacion, 10) > 100
+        ) {
           setErrorMessages({
             ...errorMessages,
             Habitacion: "Este campo debe contener solo números.",
-          }); }else {
-            setErrorMessages({ ...errorMessages, Habitacion: "" });
-          }
+          });
+        } else {
+          setErrorMessages({ ...errorMessages, Habitacion: "" });
+        }
         break;
 
       default:
@@ -137,9 +163,8 @@ const PostComponentesModal = ({ getComponentes }) => {
     validateField("Cantidad");
     validateField("Costo");
     validateField("Estado");
-     validateField("Habitacion");
+    validateField("Habitacion");
   };
-
 
   const mostrarMensajeError = () => {
     Swal.fire({
@@ -151,14 +176,13 @@ const PostComponentesModal = ({ getComponentes }) => {
     });
   };
 
-
   const AddPost = () => {
-
     validateFields(); // Validar campos antes de agregar
 
     // Verificar si hay algún mensaje de error en los campos
-    const hasErrors = Object.values(errorMessages).some((message) => message !== "");
-
+    const hasErrors = Object.values(errorMessages).some(
+      (message) => message !== ""
+    );
 
     if (!hasErrors) {
       add({
@@ -174,7 +198,7 @@ const PostComponentesModal = ({ getComponentes }) => {
       });
       getComponentes();
       limpiarCampos();
-     setFormularioVisible(false);
+      setFormularioVisible(false);
     } else {
       mostrarMensajeError();
     }
@@ -353,7 +377,6 @@ const PostComponentesModal = ({ getComponentes }) => {
                   aria-label="descripcion"
                   aria-describedby="basic-addon1"
                 />
-                
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">

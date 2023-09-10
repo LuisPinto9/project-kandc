@@ -8,22 +8,24 @@ const config = {
   },
 };
 
-export const add = (datos) => {
-  Axios.post(
-    "http://localhost:3001/componentes/create",
-    {
-      Id: datos.Id,
-      Nombre: datos.Nombre,
-      Marca: datos.Marca,
-      Cantidad: datos.Cantidad,
-      Costo: datos.Costo,
-      Estado: datos.Estado,
-      Descripcion: datos.Descripcion,
-      Observacion: datos.Observacion,
-      Habitacion: datos.Habitacion,
-    },
-    config
-  ).then(() => {
+export const add = async (datos) => {
+  try {
+    await Axios.post(
+      "http://localhost:3001/componentes/create",
+      {
+        Id: datos.Id,
+        Nombre: datos.Nombre,
+        Marca: datos.Marca,
+        Cantidad: datos.Cantidad,
+        Costo: datos.Costo,
+        Estado: datos.Estado,
+        Descripcion: datos.Descripcion,
+        Observacion: datos.Observacion,
+        Habitacion: datos.Habitacion,
+      },
+      config
+    );
+
     Swal.fire({
       title: "<strong>Registro exitoso</strong>",
       html:
@@ -33,25 +35,29 @@ export const add = (datos) => {
       icon: "success",
       timer: 2000,
     });
-  });
+  } catch (error) {
+    console.error("Error al agregar componente:", error);
+  }
 };
 
-export const update = (datos) => {
-  Axios.put(
-    "http://localhost:3001/componentes/update",
-    {
-      Id: datos.Id,
-      Nombre: datos.Nombre,
-      Marca: datos.Marca,
-      Cantidad: datos.Cantidad,
-      Costo: datos.Costo,
-      Estado: datos.Estado,
-      Descripcion: datos.Descripcion,
-      Observacion: datos.Observacion,
-      Habitacion: datos.Habitacion,
-    },
-    config
-  ).then(() => {
+export const update = async (datos) => {
+  try {
+    await Axios.put(
+      "http://localhost:3001/componentes/update",
+      {
+        Id: datos.Id,
+        Nombre: datos.Nombre,
+        Marca: datos.Marca,
+        Cantidad: datos.Cantidad,
+        Costo: datos.Costo,
+        Estado: datos.Estado,
+        Descripcion: datos.Descripcion,
+        Observacion: datos.Observacion,
+        Habitacion: datos.Habitacion,
+      },
+      config
+    );
+
     Swal.fire({
       title: "<strong>Actualización exitosa</strong>",
       html:
@@ -61,51 +67,48 @@ export const update = (datos) => {
       icon: "success",
       timer: 2000,
     });
-  });
+  } catch (error) {
+    console.error("Error al actualizar componente:", error);
+  }
 };
 
-export const eliminar = ({ val, getComponentes }) => {
-  Swal.fire({
-    title: "ELIMINAR",
-    html:
-      "<i>¿Desea eliminar el componente <strong>" +
-      val.nombre +
-      "</strong>?</i>",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Sí, eliminar",
-  }).then((result) => {
+export const eliminar = async ({ val, getComponentes }) => {
+  try {
+    const result = await Swal.fire({
+      title: "ELIMINAR",
+      html:
+        "<i>¿Desea eliminar el componente <strong>" +
+        val.nombre +
+        "</strong>?</i>",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+    });
+
     if (result.isConfirmed) {
       // Hacer la solicitud DELETE con el ID en la URL
-      Axios.delete(`http://localhost:3001/componentes/delete/${val.id}`, config)
-        .then(() => {
-          getComponentes();
-          Swal.fire({
-            title: "<strong>Eliminación exitosa</strong>",
-            html:
-              "<i>El componente: <strong>" +
-              val.nombre +
-              "</strong> fue eliminado</i>",
-            icon: "success",
-            timer: 2000,
-            showConfirmButton: false,
-          });
-        })
-        .catch(function (error) {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "No se pudo eliminar. Intente más tarde",
-            showConfirmButton: false,
-          });
-        });
+      await Axios.delete(`http://localhost:3001/componentes/delete/${val.id}`, config);
+      getComponentes();
+
+      Swal.fire({
+        title: "<strong>Eliminación exitosa</strong>",
+        html:
+          "<i>El componente: <strong>" +
+          val.nombre +
+          "</strong> fue eliminado</i>",
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false,
+      });
     }
-  });
+  } catch (error) {
+    console.error("Error al eliminar componente:", error);
+  }
 };
 
-/* traer la informacion de los arrendatarios */
+/* traer la información de los arrendatarios */
 export const componentes = async () => {
   try {
     const response = await Axios.get(

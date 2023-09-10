@@ -8,23 +8,24 @@ const config = {
   },
 };
 
-//aqui
-export const add = (datos) => {
-  Axios.post(
-    "http://localhost:3001/user/create",
-    {
-      IDUsuario: datos.IDUsuario,
-      Nombre: datos.Nombre,
-      MetodoRenta: datos.MetodoRenta,
-      ExtensionDias: datos.ExtensionDias,
-      Telefono: datos.Telefono,
-      NombreUsuario: datos.NombreUsuario,
-      Contraseña: datos.Contraseña,
-      Correo: datos.Correo,
-      TipoUsuario: datos.TipoUsuario,
-    },
-    config
-  ).then(() => {
+export const add = async (datos) => {
+  try {
+    await Axios.post(
+      "http://localhost:3001/user/create",
+      {
+        IDUsuario: datos.IDUsuario,
+        Nombre: datos.Nombre,
+        MetodoRenta: datos.MetodoRenta,
+        ExtensionDias: datos.ExtensionDias,
+        Telefono: datos.Telefono,
+        NombreUsuario: datos.NombreUsuario,
+        Contraseña: datos.Contraseña,
+        Correo: datos.Correo,
+        TipoUsuario: datos.TipoUsuario,
+      },
+      config
+    );
+
     Swal.fire({
       title: "<strong>Registro exitoso</strong>",
       html:
@@ -34,25 +35,29 @@ export const add = (datos) => {
       icon: "success",
       timer: 2000,
     });
-  });
+  } catch (error) {
+    console.error("Error al agregar arrendatario:", error);
+  }
 };
 
-export const update = (datos) => {
-  Axios.put(
-    "http://localhost:3001/user/update",
-    {
-      IDUsuario: datos.IDUsuario,
-      Nombre: datos.Nombre,
-      MetodoRenta: datos.MetodoRenta,
-      ExtensionDias: datos.ExtensionDias,
-      Telefono: datos.Telefono,
-      NombreUsuario: datos.NombreUsuario,
-      Contraseña: datos.Contraseña,
-      Correo: datos.Correo,
-      TipoUsuario: datos.TipoUsuario,
-    },
-    config
-  ).then(() => {
+export const update = async (datos) => {
+  try {
+    await Axios.put(
+      "http://localhost:3001/user/update",
+      {
+        IDUsuario: datos.IDUsuario,
+        Nombre: datos.Nombre,
+        MetodoRenta: datos.MetodoRenta,
+        ExtensionDias: datos.ExtensionDias,
+        Telefono: datos.Telefono,
+        NombreUsuario: datos.NombreUsuario,
+        Contraseña: datos.Contraseña,
+        Correo: datos.Correo,
+        TipoUsuario: datos.TipoUsuario,
+      },
+      config
+    );
+
     Swal.fire({
       title: "<strong>Actualización exitosa</strong>",
       html:
@@ -62,49 +67,45 @@ export const update = (datos) => {
       icon: "success",
       timer: 2000,
     });
-  });
+  } catch (error) {
+    console.error("Error al actualizar arrendatario:", error);
+  }
 };
 
-export const eliminar = ({ val, getArrendatarios }) => {
-  Swal.fire({
-    title: "ELIMINAR",
-    html:
-      "<i>¿Desea eliminar al usuario <strong>" + val.nombre + "</strong>?</i>",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Sí, eliminar",
-  }).then((result) => {
+export const eliminar = async ({ val, getArrendatarios }) => {
+  try {
+    const result = await Swal.fire({
+      title: "ELIMINAR",
+      html:
+        "<i>¿Desea eliminar al usuario <strong>" + val.nombre + "</strong>?</i>",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+    });
+
     if (result.isConfirmed) {
-      /* aqui es donde se elimina */
-      Axios.delete(`http://localhost:3001/user/delete/${val.id}`, config)
-        .then(() => {
-          getArrendatarios();
-          Swal.fire({
-            title: "<strong>Eliminación exitosa</strong>",
-            html:
-              "<i>El arrendatario: <strong>" +
-              val.nombre +
-              "</strong> fue eliminado</i>",
-            icon: "success",
-            timer: 2000,
-            showConfirmButton: false,
-          });
-        })
-        .catch(function (error) {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "No se pudo eliminar. Intente más tarde",
-            showConfirmButton: false,
-          });
-        });
+      await Axios.delete(`http://localhost:3001/user/delete/${val.id}`, config);
+      getArrendatarios();
+
+      Swal.fire({
+        title: "<strong>Eliminación exitosa</strong>",
+        html:
+          "<i>El arrendatario: <strong>" +
+          val.nombre +
+          "</strong> fue eliminado</i>",
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false,
+      });
     }
-  });
+  } catch (error) {
+    console.error("Error al eliminar arrendatario:", error);
+  }
 };
 
-/* traer la infromacion de los arrendatarios */
+/* traer la información de los arrendatarios */
 export const arrendatarios = async () => {
   try {
     const response = await Axios.get(
@@ -113,7 +114,7 @@ export const arrendatarios = async () => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos:", error);
+    console.error("Error al obtener los datos de arrendatarios:", error);
     return null;
   }
 };
