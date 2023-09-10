@@ -3,8 +3,8 @@ import { add } from "../controllers/ComponentesControllers";
 import "../css/modal.css";
 import Swal from "sweetalert2";
 
-const PostComponentesModal = ({ getComponentes,  HabitacionesList  }) => {
-/* const PostComponentesModal = ({ getComponentes }) => { */
+const PostComponentesModal = ({ getComponentes, HabitacionesList }) => {
+  /* const PostComponentesModal = ({ getComponentes }) => { */
   const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
   const [Marca, setMarca] = useState("");
@@ -17,7 +17,7 @@ const PostComponentesModal = ({ getComponentes,  HabitacionesList  }) => {
 
   const [formularioVisible, setFormularioVisible] = useState(true);
 
-  
+
 
 
   const limpiarCampos = () => {
@@ -53,7 +53,7 @@ const PostComponentesModal = ({ getComponentes,  HabitacionesList  }) => {
         const idPattern = /^[0-9]+$/;
         if (!idPattern.test(Id) || parseInt(Id, 10) < 0 || parseInt(Id, 10) > 200) {
           setErrorMessages({ ...errorMessages, Id: "El campo ID debe contener solo números y no ser igual a cero." });
-        }else {
+        } else {
           setErrorMessages({ ...errorMessages, Id: "" });
         }
         break;
@@ -61,11 +61,7 @@ const PostComponentesModal = ({ getComponentes,  HabitacionesList  }) => {
       case "Nombre":
         const nombrePattern = /^[A-Za-z\sÁÉÍÓÚáéíóúÑñ]+$/u;
         if (!nombrePattern.test(Nombre)) {
-          setErrorMessages({
-            ...errorMessages,
-            Nombre:
-              "Este campo debe contener solo letras y tener al menos 3 caracteres.",
-          });
+          setErrorMessages({ ...errorMessages, Nombre: "Este campo debe contener solo letras y tener al menos 3 caracteres." });
         } else {
           setErrorMessages({ ...errorMessages, Nombre: "" });
         }
@@ -75,46 +71,46 @@ const PostComponentesModal = ({ getComponentes,  HabitacionesList  }) => {
         const marcaPattern = /^[A-Za-z]+$/;
         if (!marcaPattern.test(Marca)) {
           setErrorMessages({
-            ...errorMessages,
-            Marca:
-              "Este campo debe contener solo letras y tener al menos 3 caracteres.",
-          });
+             ...errorMessages,
+              Marca:
+               "Este campo debe contener solo letras y tener al menos 3 caracteres."
+               });
         } else {
           setErrorMessages({ ...errorMessages, Marca: "" });
         }
         break;
 
-        case "Cantidad":
-          const cantidadPattern = /^[0-9]+$/;
-          const cantidadValue = parseInt(Cantidad, 10);
-          if (!cantidadPattern.test(Cantidad) || cantidadValue < 1 || cantidadValue > 20) {
-            setErrorMessages({
-              ...errorMessages,
-              Cantidad: "Este campo debe contener solo números y estar en el rango de 1 a 20.",
-            });
-          } else {
-            setErrorMessages({ ...errorMessages, Cantidad: "" });
-          }
-          break;
+      case "Cantidad":
+        const cantidadPattern = /^[0-9]+$/;
+        const cantidadValue = parseInt(Cantidad, 10);
+        if (!cantidadPattern.test(Cantidad) || cantidadValue < 1 || cantidadValue > 20) {
+          setErrorMessages({
+            ...errorMessages,
+            Cantidad: "Este campo debe contener solo números y estar en el rango de 1 a 20.",
+          });
+        } else {
+          setErrorMessages({ ...errorMessages, Cantidad: "" });
+        }
+        break;
 
-        case "Costo":
-          const costoPattern = /^[0-9]+(\.[0-9]+)?$/;
-          const costoValue = parseFloat(Costo.replace(",", ".")); // Reemplaza comas por puntos y convierte a número decimal
-          if (!costoPattern.test(Costo) || costoValue < 100 || costoValue > 20000000) {
-            setErrorMessages({
-              ...errorMessages,
-              Costo: "Este campo debe contener solo números y estar en el rango de 100 a 20,000,000.",
-            });
-          } else {
-            setErrorMessages({ ...errorMessages, Costo: "" });
-          }
-          break;
+      case "Costo":
+        const costoPattern = /^[0-9]+(\.[0-9]+)?$/;
+        const costoValue = parseFloat(Costo.replace(",", ".")); // Reemplaza comas por puntos y convierte a número decimal
+        if (!costoPattern.test(Costo) || costoValue < 100 || costoValue > 20000000) {
+          setErrorMessages({
+            ...errorMessages,
+            Costo: "Este campo debe contener solo números y estar en el rango de 100 a 20,000,000.",
+          });
+        } else {
+          setErrorMessages({ ...errorMessages, Costo: "" });
+        }
+        break;
 
       case "Estado":
         const estadoPattern = /^[A-Za-z]+$/;
         if (!estadoPattern.test(Estado)) {
           setErrorMessages({ ...errorMessages, Estado: "Este campo debe contener solo letras y tener al menos 3 caracteres." });
-         }else {
+        } else {
           setErrorMessages({ ...errorMessages, Estado: "" });
         }
         break;
@@ -127,18 +123,18 @@ const PostComponentesModal = ({ getComponentes,  HabitacionesList  }) => {
         // Lógica de validación para el campo Observacion
         break;
 
-        case "Habitacion":
-          const habitacionPattern = /^[0-9]+$/;
-          const habitacionValue = parseInt(Habitacion, 10);
-          if (!habitacionPattern.test(Habitacion) || habitacionValue < 1 || habitacionValue > 50) {
-            setErrorMessages({
-              ...errorMessages,
-              Habitacion: "Este campo debe contener solo números y estar en el rango de 1 a 50, recuerde que la habitacion debe existir",
-            });
-          } else {
-            setErrorMessages({ ...errorMessages, Habitacion: "" });
-          }
-          break;
+      case "Habitacion":
+        const habitacionPattern = /^[0-9]+$/;
+        const habitacionValue = parseInt(Habitacion, 10);
+        if (!habitacionPattern.test(Habitacion) || habitacionValue < 1 || habitacionValue > 50) {
+          setErrorMessages({
+            ...errorMessages,
+            Habitacion: "Este campo debe contener solo números y estar en el rango de 1 a 50, recuerde que la habitacion debe existir",
+          });
+        } else {
+          setErrorMessages({ ...errorMessages, Habitacion: "" });
+        }
+        break;
 
       default:
         break;
@@ -152,7 +148,7 @@ const PostComponentesModal = ({ getComponentes,  HabitacionesList  }) => {
     validateField("Cantidad");
     validateField("Costo");
     validateField("Estado");
-     validateField("Habitacion");
+    validateField("Habitacion");
   };
 
 
@@ -176,20 +172,37 @@ const PostComponentesModal = ({ getComponentes,  HabitacionesList  }) => {
 
 
     if (!hasErrors) {
-      add({
-        Id,
-        Nombre,
-        Marca,
-        Cantidad,
-        Costo,
-        Estado,
-        Descripcion,
-        Observacion,
-        Habitacion,
-      });
-      getComponentes();
-      limpiarCampos();
-     setFormularioVisible(false);
+
+      if (Id === "" ||
+        Nombre === "" ||
+        Marca === "" ||
+        Cantidad === "" ||
+        Costo === "" ||
+        Estado === "" ||
+        Descripcion === "" ||
+        Observacion === "" ||
+        Habitacion === ""
+      ) {
+        mostrarMensajeError();
+      } else {
+        add({
+          Id,
+          Nombre,
+          Marca,
+          Cantidad,
+          Costo,
+          Estado,
+          Descripcion,
+          Observacion,
+          Habitacion,
+        });
+        getComponentes();
+        limpiarCampos();
+        setFormularioVisible(false);
+      }
+
+    } else {
+      mostrarMensajeError();
     }
   };
 
@@ -366,7 +379,7 @@ const PostComponentesModal = ({ getComponentes,  HabitacionesList  }) => {
                   aria-label="descripcion"
                   aria-describedby="basic-addon1"
                 />
-                
+
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
@@ -386,7 +399,7 @@ const PostComponentesModal = ({ getComponentes,  HabitacionesList  }) => {
                   aria-describedby="basic-addon1"
                 />
               </div>
-{/* 
+              {/* 
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                   Habitación
@@ -409,7 +422,7 @@ const PostComponentesModal = ({ getComponentes,  HabitacionesList  }) => {
                 )}
               </div>
  */}
- <div className="input-group mb-3">
+              <div className="input-group mb-3">
                 <label className="input-group-text" htmlFor="inputGroupSelectHabitacion">
                   Habitación
                 </label>
@@ -439,7 +452,7 @@ const PostComponentesModal = ({ getComponentes,  HabitacionesList  }) => {
               </div>
             </div>
 
-            
+
             <div className="modal-footer">
               <button
                 type="button"
