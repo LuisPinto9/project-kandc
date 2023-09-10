@@ -34,32 +34,50 @@ const LoginForm = () => {
     setContraseña("");
   };
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    verificar({ nombreUsuario, contraseña })
-      .then((data) => {
-        SaveLocalStorage("auth", data.token);
-        if (data.tipo.toLowerCase() === "administrador") {
+    try {
+      const data = await verificar({ nombreUsuario, contraseña });
+
+      SaveLocalStorage("auth", data.token);
+
+      if (data.tipo.toLowerCase() === "administrador") {
+        mostrarMensajeCarga(data.tipo.toLowerCase());
+        setTimeout(() => {
           navigate("/dashboard-admin");
-        } else if (data.tipo.toLowerCase() === "arrendatario") {
+        }, 1000); // Espera 2 segundos antes de redirigir
+      } else if (data.tipo.toLowerCase() === "arrendatario") {
+        mostrarMensajeCarga(data.tipo.toLowerCase());
+        setTimeout(() => {
           navigate("/dashboard-usuario");
-        }
-      })
-      .catch(() => {
-        // Maneja cualquier error que pueda ocurrir
-        mostrarMensajeError();
-        console.error("Usuario o contraseña incorrectos");
-      });
+        }, 1000); // Espera 2 segundos antes de redirigir
+      }
+    } catch (error) {
+      // Maneja cualquier error que pueda ocurrir
+      mostrarMensajeError();
+      console.error("Usuario o contraseña incorrectos");
+    }
+
     limpiarCampos();
   };
 
-const mostrarMensajeError = () => {
+  const mostrarMensajeError = () => {
     Swal.fire({
       title: "No puede ingresar",
       text: "Usuario o contraseña invalido",
       icon: "error",
       showCancelButton: true,
       confirmButtonText: "Aceptar",
+    });
+  };
+
+  const mostrarMensajeCarga = (datos) => {
+    Swal.fire({
+      title: "<strong>Bienvenido</strong>",
+      html: "<i>Será redirigido al modulo de <strong>" + datos,
+      icon: "success",
+      showConfirmButton: false,
+      timer: 1000,
     });
   };
 
@@ -96,7 +114,7 @@ const mostrarMensajeError = () => {
                   className="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
-                  placeholder="user123"
+                  placeholder="Usuario"
                   onChange={(event) => {
                     setNombreUsuario(event.target.value);
                   }}
@@ -126,6 +144,7 @@ const mostrarMensajeError = () => {
                   className="form-control"
                   id="InputPassword"
                   value={contraseña}
+                  placeholder="Contraseña"
                   onChange={(event) => {
                     setContraseña(event.target.value);
                   }}

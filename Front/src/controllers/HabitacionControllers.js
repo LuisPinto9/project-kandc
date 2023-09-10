@@ -8,19 +8,20 @@ const config = {
   },
 };
 
-//aqui
-export const add = (datos) => {
-  Axios.post(
-    "http://localhost:3001/habitaciones/create",
-    {
-      Id: datos.Id,
-      Nombre: datos.Nombre,
-      Estado: datos.Estado,
-      Precio: datos.Precio,
-      Zona: datos.Zona,
-    },
-    config
-  ).then(() => {
+export const add = async (datos) => {
+  try {
+    await Axios.post(
+      "http://localhost:3001/habitaciones/create",
+      {
+        Id: datos.Id,
+        Nombre: datos.Nombre,
+        Estado: datos.Estado,
+        Precio: datos.Precio,
+        Zona: datos.Zona,
+      },
+      config
+    );
+
     Swal.fire({
       title: "<strong>Registro exitoso</strong>",
       html:
@@ -30,21 +31,25 @@ export const add = (datos) => {
       icon: "success",
       timer: 2000,
     });
-  });
+  } catch (error) {
+    console.error("Error al agregar habitación:", error);
+  }
 };
 
-export const update = (datos) => {
-  Axios.put(
-    "http://localhost:3001/habitaciones/update",
-    {
-      Id: datos.Id,
-      Nombre: datos.Nombre,
-      Estado: datos.Estado,
-      Precio: datos.Precio,
-      Zona: datos.Zona,
-    },
-    config
-  ).then(() => {
+export const update = async (datos) => {
+  try {
+    await Axios.put(
+      "http://localhost:3001/habitaciones/update",
+      {
+        Id: datos.Id,
+        Nombre: datos.Nombre,
+        Estado: datos.Estado,
+        Precio: datos.Precio,
+        Zona: datos.Zona,
+      },
+      config
+    );
+
     Swal.fire({
       title: "<strong>Actualización exitosa</strong>",
       html:
@@ -54,54 +59,50 @@ export const update = (datos) => {
       icon: "success",
       timer: 2000,
     });
-  });
+  } catch (error) {
+    console.error("Error al actualizar habitación:", error);
+  }
 };
 
-export const eliminar = ({ val, getHabitaciones }) => {
-  Swal.fire({
-    title: "ELIMINAR",
-    html:
-      "<i>¿Desea eliminar la habitación <strong>" +
-      val.nombre +
-      "</strong>?</i>",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Sí, eliminar",
-  }).then((result) => {
+export const eliminar = async ({ val, getHabitaciones }) => {
+  try {
+    const result = await Swal.fire({
+      title: "ELIMINAR",
+      html:
+        "<i>¿Desea eliminar la habitación <strong>" +
+        val.nombre +
+        "</strong>?</i>",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+    });
+
     if (result.isConfirmed) {
-      /* aqui es donde se elimina */
-      Axios.delete(
+      await Axios.delete(
         `http://localhost:3001/habitaciones/delete/${val.id}`,
         config
-      )
-        .then(() => {
-          getHabitaciones();
-          Swal.fire({
-            title: "<strong>Eliminación exitosa</strong>",
-            html:
-              "<i>La habitación: <strong>" +
-              val.nombre +
-              "</strong> fue eliminada</i>",
-            icon: "success",
-            timer: 2000,
-            showConfirmButton: false,
-          });
-        })
-        .catch(function (error) {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "No se pudo eliminar. Intente más tarde",
-            showConfirmButton: false,
-          });
-        });
+      );
+      getHabitaciones();
+
+      Swal.fire({
+        title: "<strong>Eliminación exitosa</strong>",
+        html:
+          "<i>La habitación: <strong>" +
+          val.nombre +
+          "</strong> fue eliminada</i>",
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false,
+      });
     }
-  });
+  } catch (error) {
+    console.error("Error al eliminar habitación:", error);
+  }
 };
 
-/* traer la infromacion de los arrendatarios */
+/* traer la información de las habitaciones */
 export const habitaciones = async () => {
   try {
     const response = await Axios.get(
@@ -110,7 +111,7 @@ export const habitaciones = async () => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos:", error);
+    console.error("Error al obtener los datos de las habitaciones:", error);
     return null;
   }
 };

@@ -1,7 +1,6 @@
 const jwt = require("jwt-simple");
 const moment = require("moment");
 const libjwt = require("./jwt");
-
 const secret = libjwt.secret;
 
 const auth = (req, res, next) => {
@@ -12,14 +11,12 @@ const auth = (req, res, next) => {
       message: "La petición no tiene la cabecera de autenticación",
     });
   }
-
   // Limpia el token
   const token = req.headers.authorization.replace(/['"]+/g, "");
 
   // Decodifica el token y maneja errores
   try {
     const payload = jwt.decode(token, secret);
-
     // Comprueba la expiración del token
     if (payload.exp <= moment().unix()) {
       return res.status(404).json({
@@ -42,6 +39,6 @@ const auth = (req, res, next) => {
   }
 };
 
-module.exports ={
-  auth
-}
+module.exports = {
+  auth,
+};

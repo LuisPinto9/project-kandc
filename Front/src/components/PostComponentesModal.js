@@ -61,8 +61,12 @@ const PostComponentesModal = ({ getComponentes,  HabitacionesList  }) => {
       case "Nombre":
         const nombrePattern = /^[A-Za-z\sÁÉÍÓÚáéíóúÑñ]+$/u;
         if (!nombrePattern.test(Nombre)) {
-          setErrorMessages({ ...errorMessages, Nombre: "Este campo debe contener solo letras y tener al menos 3 caracteres." });
-        }else {
+          setErrorMessages({
+            ...errorMessages,
+            Nombre:
+              "Este campo debe contener solo letras y tener al menos 3 caracteres.",
+          });
+        } else {
           setErrorMessages({ ...errorMessages, Nombre: "" });
         }
         break;
@@ -70,8 +74,12 @@ const PostComponentesModal = ({ getComponentes,  HabitacionesList  }) => {
       case "Marca":
         const marcaPattern = /^[A-Za-z]+$/;
         if (!marcaPattern.test(Marca)) {
-          setErrorMessages({ ...errorMessages, Marca: "Este campo debe contener solo letras y tener al menos 3 caracteres." });
-         }else {
+          setErrorMessages({
+            ...errorMessages,
+            Marca:
+              "Este campo debe contener solo letras y tener al menos 3 caracteres.",
+          });
+        } else {
           setErrorMessages({ ...errorMessages, Marca: "" });
         }
         break;
@@ -168,19 +176,6 @@ const PostComponentesModal = ({ getComponentes,  HabitacionesList  }) => {
 
 
     if (!hasErrors) {
-
-      if(Id === "" ||
-      Nombre === "" ||
-      Marca === "" ||
-      Cantidad=== "" ||
-      Costo === "" ||
-      Estado === "" ||
-      Descripcion === "" ||
-      Observacion === "" ||
-      Habitacion === ""
-    ) {
-      mostrarMensajeError();
-    }else{
       add({
         Id,
         Nombre,
@@ -195,10 +190,6 @@ const PostComponentesModal = ({ getComponentes,  HabitacionesList  }) => {
       getComponentes();
       limpiarCampos();
      setFormularioVisible(false);
-    }
-
-    } else {
-      mostrarMensajeError();
     }
   };
 
