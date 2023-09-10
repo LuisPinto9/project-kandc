@@ -3,13 +3,26 @@ import { Link } from "react-router-dom";
 import "../css/form.css";
 import { verificar } from "../controllers/LoginController";
 import { useNavigate } from "react-router-dom";
-import { SaveLocalStorage } from "../resources/SaveLocalStorage";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [nombreUsuario, setNombreUsuario] = useState("");
   const [contraseña, setContraseña] = useState("");
   const navigate = useNavigate();
+
+  const SaveLocalStorage = (key, item) => {
+    //conseguir elementos en localStorage
+    let elementos = JSON.parse(localStorage.getItem(key));
+    //comprar si es un array
+    if (Array.isArray(elementos)) {
+      elementos.push(item);
+    } else {
+      //crear array
+      elementos = [item];
+    }
+    //guardar en el localStorage
+    localStorage.setItem(key, JSON.stringify([elementos]));
+  };
 
   const handleCheckChange = () => {
     setShowPassword(!showPassword);
