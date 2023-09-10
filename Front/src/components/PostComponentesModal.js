@@ -75,27 +75,31 @@ const PostComponentesModal = ({ getComponentes }) => {
         }
         break;
 
-      case "Cantidad":
-        const cantidadPattern =  /^[0-9]+(\.[0-9]+)?$/;
-        if (!cantidadPattern.test(Cantidad) || parseInt(Cantidad, 10) < 0 || parseInt(Cantidad, 10) > 20) {
-          setErrorMessages({
-            ...errorMessages,
-            Cantidad: "Este campo debe contener solo números.",
-          }); }else {
+        case "Cantidad":
+          const cantidadPattern = /^[0-9]+$/;
+          const cantidadValue = parseInt(Cantidad, 10);
+          if (!cantidadPattern.test(Cantidad) || cantidadValue < 1 || cantidadValue > 20) {
+            setErrorMessages({
+              ...errorMessages,
+              Cantidad: "Este campo debe contener solo números y estar en el rango de 1 a 20.",
+            });
+          } else {
             setErrorMessages({ ...errorMessages, Cantidad: "" });
           }
-        break;
+          break;
 
-      case "Costo":
-        const costoPattern = /^[0-9]+(\.[0-9]+)?$/;
-        if (!costoPattern.test(Costo)) {
-          setErrorMessages({
-            ...errorMessages,
-            Costo: "Este campo debe contener solo números.",
-          });  }else {
+        case "Costo":
+          const costoPattern = /^[0-9]+(\.[0-9]+)?$/;
+          const costoValue = parseFloat(Costo.replace(",", ".")); // Reemplaza comas por puntos y convierte a número decimal
+          if (!costoPattern.test(Costo) || costoValue < 100 || costoValue > 20000000) {
+            setErrorMessages({
+              ...errorMessages,
+              Costo: "Este campo debe contener solo números y estar en el rango de 100 a 20,000,000.",
+            });
+          } else {
             setErrorMessages({ ...errorMessages, Costo: "" });
           }
-        break;
+          break;
 
       case "Estado":
         const estadoPattern = /^[A-Za-z]+$/;
@@ -114,16 +118,18 @@ const PostComponentesModal = ({ getComponentes }) => {
         // Lógica de validación para el campo Observacion
         break;
 
-      case "Habitacion":
-        const habitacionPattern = /^[0-9]+$/;
-        if (!habitacionPattern.test(Habitacion) || parseInt(Habitacion, 10) < 0 || parseInt(Habitacion, 10) > 100) {
-          setErrorMessages({
-            ...errorMessages,
-            Habitacion: "Este campo debe contener solo números.",
-          }); }else {
+        case "Habitacion":
+          const habitacionPattern = /^[0-9]+$/;
+          const habitacionValue = parseInt(Habitacion, 10);
+          if (!habitacionPattern.test(Habitacion) || habitacionValue < 1 || habitacionValue > 50) {
+            setErrorMessages({
+              ...errorMessages,
+              Habitacion: "Este campo debe contener solo números y estar en el rango de 1 a 50.",
+            });
+          } else {
             setErrorMessages({ ...errorMessages, Habitacion: "" });
           }
-        break;
+          break;
 
       default:
         break;
@@ -161,6 +167,19 @@ const PostComponentesModal = ({ getComponentes }) => {
 
 
     if (!hasErrors) {
+
+      if(Id === "" ||
+      Nombre === "" ||
+      Marca === "" ||
+      Cantidad=== "" ||
+      Costo === "" ||
+      Estado === "" ||
+      Descripcion === "" ||
+      Observacion === "" ||
+      Habitacion === ""
+    ) {
+      mostrarMensajeError();
+    }else{
       add({
         Id,
         Nombre,
@@ -175,6 +194,8 @@ const PostComponentesModal = ({ getComponentes }) => {
       getComponentes();
       limpiarCampos();
      setFormularioVisible(false);
+    }
+
     } else {
       mostrarMensajeError();
     }
