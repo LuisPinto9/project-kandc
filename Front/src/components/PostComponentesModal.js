@@ -15,7 +15,7 @@ const PostComponentesModal = ({ getComponentes, HabitacionesList }) => {
   const [Observacion, setObservacion] = useState("");
   const [Habitacion, setHabitacion] = useState("");
 
-  const [formularioVisible, setFormularioVisible] = useState(true);
+  const [ setFormularioVisible] = useState(true);
 
 
 

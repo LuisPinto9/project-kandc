@@ -11,7 +11,7 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
   const [Precio, setPrecio] = useState("");
   const [Zona, setZona] = useState("");
 
-  const [formularioVisible, setFormularioVisible] = useState(true);
+  const [ setFormularioVisible] = useState(true);
 
 
   const limpiarCampos = () => {

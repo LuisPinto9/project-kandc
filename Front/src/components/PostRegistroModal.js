@@ -15,7 +15,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
   const [Correo, setCorreo] = useState("");
   const [TipoUsuario, setTipoUsuario] = useState("");
 
-  const [formularioVisible, setFormularioVisible] = useState(true);
+  const [ setFormularioVisible] = useState(true);
 
 
 

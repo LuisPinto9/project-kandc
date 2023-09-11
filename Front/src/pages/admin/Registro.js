@@ -4,7 +4,11 @@ import "../../css/styles.css";
 import "../../css/registro.css";
 import "../../css/tabla.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { arrendatarios, eliminar } from "../../controllers/UserControllers";
+import {
+  arrendatarios,
+  eliminar,
+  buscarUsuario,
+} from "../../controllers/UserControllers";
 import PostRegistroModal from "../../components/PostRegistroModal";
 import PutRegistroModal from "../../components/PutRegistroModal";
 
@@ -20,6 +24,8 @@ function Registro() {
   const [Correo, setCorreo] = useState("");
   const [TipoUsuario, setTipoUsuario] = useState("");
   const [ArrendatariosList, setArrendatarios] = useState([]);
+  const [idBuscar, setIdBuscar] = useState("");
+  const [buscarState, setBuscarState] = useState(false);
 
   const getArrendatarios = () => {
     arrendatarios()
@@ -29,6 +35,12 @@ function Registro() {
       .catch((error) => {
         console.error("Error al obtener los arrendatarios:", error);
       });
+  };
+
+  const buscarId = () => {
+    buscarUsuario(idBuscar).then((data) => {
+      setArrendatarios(data);
+    });
   };
 
   const EditarArrendatarios = (val) => {
@@ -58,19 +70,35 @@ function Registro() {
         <div className="d-flex mb-2 justify-content-center align-items-center">
           <div className="input-registro-search d-flex align-items-center pe-2">
             <input
-              type="text"
+              type="text"              
               className="form-control"
-              placeholder="Nombre del arrendatario"
-              aria-label="Nombre de usuario del destinatario"
+              value={idBuscar}
+              placeholder="Comienze a escribir números para filtrar los ID"
+              aria-label="Id de usuario del destinatario"
               aria-describedby="basic-addon1"
+              onChange={(event) => {
+                const newValue = event.target.value.replace(/[^0-9]/g, '');
+                setIdBuscar(newValue);
+              }}
+              onKeyUp={() => {
+                if (idBuscar !== "") {
+                  buscarId();
+                  setBuscarState(true); 
+                }
+              }}
             />
-          </div>
-          <div className="ps-1 pe-2">
-            <i
-              type="button"
-              className="bi bi-search"
-              style={{ fontSize: "2rem", color: "black" }}
-            />
+            {buscarState && (
+              <i
+                type="button"
+                className="bi bi-x ps-1"
+                style={{ fontSize: "2rem", color: "black" }}
+                onClick={() => {
+                  getArrendatarios();
+                  setIdBuscar("");
+                  setBuscarState(false);
+                }}
+              />
+            )}
           </div>
           <div>
             <PostRegistroModal getArrendatarios={getArrendatarios} />

@@ -84,7 +84,6 @@ export const eliminar = async ({ val, getArrendatarios }) => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Sí, eliminar",
     });
-
     if (result.isConfirmed) {
       await Axios.delete(`http://localhost:3001/user/delete/${val.id}`, config);
       getArrendatarios();
@@ -115,6 +114,20 @@ export const arrendatarios = async () => {
     return response.data;
   } catch (error) {
     console.error("Error al obtener los datos de arrendatarios:", error);
+    return null;
+  }
+};
+
+export const buscarUsuario = async (idBuscar) => {
+  try {
+    const response = await Axios.get(
+      `http://localhost:3001/user/find-user/${idBuscar}`,
+      config
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener los datos del arrendatario", error);
     return null;
   }
 };

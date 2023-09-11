@@ -97,9 +97,21 @@ const deleteUser = (req, res) => {
   });
 };
 
+const findById = (req, res) =>{
+  const id = req.params.idBuscar
+  db.query("select * from usuario where id = ?",[id],(err,result) =>{
+    if (err) {
+      res.status(500).send("Hubo un error en el servidor")
+    } else {
+      res.send(result)
+    }
+  })
+}
+
 module.exports = {
   getUsers,
   createUser,
   updateUser,
   deleteUser,
+  findById,
 };
