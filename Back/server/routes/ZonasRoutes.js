@@ -19,4 +19,9 @@ router.delete("/delete/:id", check.auth, (req, res) => {
   ZonaController.deleteZona(req, res);
 });
 
+router.get("/find-zona/:idBuscar", check.auth, (req, res) => {
+  ZonaController.findById(req, res);
+});
+
+
 module.exports = router;

@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {
   habitaciones,
   eliminar,
+  buscarHabitacion,
 } from "../../controllers/HabitacionControllers";
 import PostHabitacionesModal from "../../components/PostHabitacionesModal";
 import PutHabitacionesModal from "../../components/PutHabitacionesModal";
@@ -22,6 +23,8 @@ const Habitaciones = () => {
   const [Zona, setZona] = useState("");
   const [HabitacionesList, setHabitaciones] = useState([]);
   const [ZonasList, setZonas] = useState([]);
+  const [NombreBuscar, setNombreBuscar] = useState("");
+  const [buscarState, setBuscarState] = useState(false);
 
   const getHabitaciones = async () => {
     await habitaciones()
@@ -53,6 +56,12 @@ const Habitaciones = () => {
       });
   };
 
+  const buscarNombre = () => {
+    buscarHabitacion(NombreBuscar).then((data) => {
+      setHabitaciones(data);
+    });
+  };
+
   useEffect(() => {
     getHabitaciones();
     getZonas();
@@ -71,17 +80,37 @@ const Habitaciones = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Nombre de la habitación"
-              aria-label="Nombre de la habitacion"
+              value={NombreBuscar}
+              placeholder="Comienze a escribir letras para filtrar los nombres"
+              aria-label="Id de usuario del destinatario"
               aria-describedby="basic-addon1"
+              onChange={(event) => {
+                const newValue = event.target.value.replace(/[^a-zA-Z]/g, "");
+                setNombreBuscar(newValue);
+              }}
+              onKeyUp={() => {
+                if (NombreBuscar !== "") {
+                  buscarNombre();
+                  setBuscarState(true);
+                } else if (NombreBuscar === "") {
+                  getHabitaciones();
+                  setNombreBuscar("");
+                  setBuscarState(false);
+                }
+              }}
             />
-          </div>
-          <div className="ps-1 pe-2">
-            <i
-              type="button"
-              className="bi bi-search"
-              style={{ fontSize: "2rem", color: "black" }}
-            />
+            {buscarState && (
+              <i
+                type="button"
+                className="bi bi-x ps-1"
+                style={{ fontSize: "2rem", color: "black" }}
+                onClick={() => {
+                  getHabitaciones();
+                  setNombreBuscar("");
+                  setBuscarState(false);
+                }}
+              />
+            )}
           </div>
           <div>
             {/*  <PostHabitacionesModal getHabitaciones={getHabitaciones} /> */}

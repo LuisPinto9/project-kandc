@@ -19,4 +19,8 @@ router.delete("/delete/:id", check.auth, (req, res) => {
   ComponentController.deleteComponent(req, res);
 });
 
+router.get("/find-componente/:nombreBuscar", check.auth, (req, res) => {
+  ComponentController.findByName(req, res);
+});
+
 module.exports = router;

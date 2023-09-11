@@ -91,9 +91,25 @@ const deleteComponent = (req, res) => {
   });
 };
 
+const findByName = (req, res) => {
+  const nombre = req.params.nombreBuscar;
+  db.query(
+    "SELECT * FROM componentes WHERE nombre LIKE ? OR nombre LIKE ? OR nombre LIKE ?",
+    [`%${nombre}`, `%${nombre}%`, `${nombre}%`],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Hubo un error en el servidor");
+      } else {
+        res.send(result);
+      }
+    }
+  );
+};
+
 module.exports = {
   getComponents,
   createComponent,
   updateComponent,
   deleteComponent,
+  findByName,
 };

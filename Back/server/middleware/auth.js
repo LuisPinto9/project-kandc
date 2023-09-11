@@ -5,7 +5,6 @@ const secret = libjwt.secret;
 
 exports.auth = (req, res, next) => {
   const localStorageKey = req.headers.authorization;
-  console.log(localStorageKey);
 
   if (!localStorageKey) {
     // console.log("hola")

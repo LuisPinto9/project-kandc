@@ -21,7 +21,7 @@ const createUser = (req, res) => {
   const Correo = req.body.Correo;
   const TipoUsuario = req.body.TipoUsuario;
 
- /*   //validar
+  /*   //validar
    const nombreValidationRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ]+$/;
    if (!nombreValidationRegex.test(Nombre) || Nombre.length < 3) {
      res.status(400).send("Nombre no cumple con los requisitos");
@@ -97,16 +97,20 @@ const deleteUser = (req, res) => {
   });
 };
 
-const findById = (req, res) =>{
-  const id = req.params.idBuscar
-  db.query("select * from usuario where id = ?",[id],(err,result) =>{
-    if (err) {
-      res.status(500).send("Hubo un error en el servidor")
-    } else {
-      res.send(result)
+const findById = (req, res) => {
+  const id = req.params.idBuscar;
+  db.query(
+    "SELECT * FROM usuario WHERE id LIKE ? OR id LIKE ? OR id LIKE ?",
+    [`%${id}`, `%${id}%`, `${id}%`],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Hubo un error en el servidor");
+      } else {
+        res.send(result);
+      }
     }
-  })
-}
+  );
+};
 
 module.exports = {
   getUsers,

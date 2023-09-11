@@ -84,6 +84,10 @@ function Registro() {
                 if (idBuscar !== "") {
                   buscarId();
                   setBuscarState(true);
+                } else if (idBuscar === "") {
+                  getArrendatarios();
+                  setIdBuscar("");
+                  setBuscarState(false);
                 }
               }}
             />
@@ -173,8 +177,8 @@ function Registro() {
                       <td className="row-border-right">
                         <i
                           type="button"
-                          onClick={() => {
-                            eliminar({ val, getArrendatarios });
+                          onClick={async () => {
+                            await eliminar({ val, getArrendatarios });
                           }}
                           className="bi bi-x-octagon-fill px-2 btn-delete"
                         />

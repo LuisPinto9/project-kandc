@@ -19,4 +19,8 @@ router.delete("/delete/:id", check.auth, (req, res) => {
   RoomController.deleteRoom(req, res);
 });
 
+router.get("/find-habitacion/:nombreBuscar", check.auth, (req, res) => {
+  RoomController.findByName(req, res);
+});
+
 module.exports = router;

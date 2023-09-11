@@ -95,7 +95,7 @@ const PostZonasModal = ({ getZonas }) => {
           Acceso,
         });
 
-        await getZonas();
+        getZonas();
         limpiarCampos();
 
         setFormularioVisible(false);

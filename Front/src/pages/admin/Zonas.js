@@ -4,7 +4,11 @@ import "../../css/styles.css";
 import "../../css/registro.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../css/tabla.css";
-import { zonas, eliminar } from "../../controllers/ZonasControllers";
+import {
+  zonas,
+  eliminar,
+  buscarZona,
+} from "../../controllers/ZonasControllers";
 import PostZonasModal from "../../components/PostZonasModal";
 import PutZonasModal from "../../components/PutZonasModal";
 
@@ -15,6 +19,8 @@ const Zonas = () => {
   const [Precio, setPrecio] = useState("");
   const [Acceso, setAcceso] = useState("");
   const [ZonasList, setZonas] = useState([]);
+  const [idBuscar, setIdBuscar] = useState("");
+  const [buscarState, setBuscarState] = useState(false);
 
   const getZonas = async () => {
     //aqui
@@ -25,6 +31,12 @@ const Zonas = () => {
       .catch((error) => {
         console.error("Error al obtener las zonas:", error);
       });
+  };
+
+  const buscarId = () => {
+    buscarZona(idBuscar).then((data) => {
+      setZonas(data);
+    });
   };
 
   const EditarZonas = (val) => {
@@ -52,17 +64,37 @@ const Zonas = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Nombre de la zona"
-              aria-label="Nombre de la zona"
+              value={idBuscar}
+              placeholder="Comienze a escribir números para filtrar los ID"
+              aria-label="Id de la zona"
               aria-describedby="basic-addon1"
+              onChange={(event) => {
+                const newValue = event.target.value.replace(/[^0-9]/g, "");
+                setIdBuscar(newValue);
+              }}
+              onKeyUp={() => {
+                if (idBuscar !== "") {
+                  buscarId();
+                  setBuscarState(true);
+                } else if (idBuscar === "") {
+                  getZonas();
+                  setIdBuscar("");
+                  setBuscarState(false);
+                }
+              }}
             />
-          </div>
-          <div className="ps-1 pe-2">
-            <i
-              type="button"
-              className="bi bi-search"
-              style={{ fontSize: "2rem", color: "black" }}
-            />
+            {buscarState && (
+              <i
+                type="button"
+                className="bi bi-x ps-1"
+                style={{ fontSize: "2rem", color: "black" }}
+                onClick={() => {
+                  getZonas();
+                  setIdBuscar("");
+                  setBuscarState(false);
+                }}
+              />
+            )}
           </div>
           <div>
             <PostZonasModal getZonas={getZonas} />
@@ -125,8 +157,8 @@ const Zonas = () => {
                       <td className="row-border-right">
                         <i
                           type="button"
-                          onClick={() => {
-                            eliminar({ val, getZonas });
+                          onClick={async () => {
+                            await eliminar({ val, getZonas });
                           }}
                           className="bi bi-x-octagon-fill px-2 btn-delete"
                         />

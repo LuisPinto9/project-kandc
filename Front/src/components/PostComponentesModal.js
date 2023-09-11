@@ -220,7 +220,7 @@ const PostComponentesModal = ({ getComponentes, HabitacionesList }) => {
           Observacion,
           Habitacion,
         });
-        await getComponentes();
+        getComponentes();
         limpiarCampos();
         setFormularioVisible(false);
       }

@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {
   componentes,
   eliminar,
+  buscarComponente,
 } from "../../controllers/ComponentesControllers";
 import PostComponentesModal from "../../components/PostComponentesModal";
 import PutComponentesModal from "../../components/PutComponentesModal";
@@ -25,6 +26,8 @@ const Componentes = () => {
   const [Habitacion, setHabitacion] = useState("");
   const [ComponentesList, setComponentes] = useState([]);
   const [HabitacionesList, setHabitaciones] = useState([]);
+  const [NombreBuscar, setNombreBuscar] = useState("");
+  const [buscarState, setBuscarState] = useState(false);
 
   const getComponentes = async () => {
     await componentes()
@@ -47,6 +50,12 @@ const Componentes = () => {
       });
   };
 
+  const buscarNombre = () => {
+    buscarComponente(NombreBuscar).then((data) => {
+      setComponentes(data);
+    });
+  };
+
   useEffect(() => {
     getComponentes();
     getHabitaciones(); // Llama a la función para obtener las habitaciones cuando se monta el componente
@@ -64,10 +73,6 @@ const Componentes = () => {
     setHabitacion(val.habitacion);
   };
 
-  /*  useEffect(() => {
-    getComponentes();
-  }, []); */
-
   let autoIncrementar = 1;
 
   return (
@@ -81,17 +86,37 @@ const Componentes = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Nombre del componente"
-              aria-label="Nombre de componente"
+              value={NombreBuscar}
+              placeholder="Comienze a escribir letras para filtrar los nombres"
+              aria-label="Id de usuario del destinatario"
               aria-describedby="basic-addon1"
+              onChange={(event) => {
+                const newValue = event.target.value.replace(/[^a-zA-Z]/g, "");
+                setNombreBuscar(newValue);
+              }}
+              onKeyUp={() => {
+                if (NombreBuscar !== "") {
+                  buscarNombre();
+                  setBuscarState(true);
+                } else if (NombreBuscar === "") {
+                  getComponentes();
+                  setNombreBuscar("");
+                  setBuscarState(false);
+                }
+              }}
             />
-          </div>
-          <div className="ps-1 pe-2">
-            <i
-              type="button"
-              className="bi bi-search"
-              style={{ fontSize: "2rem", color: "black" }}
-            />
+            {buscarState && (
+              <i
+                type="button"
+                className="bi bi-x ps-1"
+                style={{ fontSize: "2rem", color: "black" }}
+                onClick={() => {
+                  getComponentes();
+                  setNombreBuscar("");
+                  setBuscarState(false);
+                }}
+              />
+            )}
           </div>
           <div>
             <PostComponentesModal
@@ -169,8 +194,8 @@ const Componentes = () => {
                       <td className="row-border-right">
                         <i
                           type="button"
-                          onClick={() => {
-                            eliminar({ val, getComponentes });
+                          onClick={async () => {
+                            await eliminar({ val, getComponentes });
                           }}
                           className="bi bi-x-octagon-fill px-2 btn-delete"
                         />

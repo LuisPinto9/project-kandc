@@ -124,3 +124,20 @@ export const habitaciones = async () => {
     return null;
   }
 };
+
+export const buscarHabitacion = async (nombreBuscar) => {
+  try {
+    const response = await Axios.get(
+      `http://localhost:4000/habitaciones/find-habitacion/${nombreBuscar}`,
+      {
+        headers: {
+          Authorization: localStorage.getItem("auth"),
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener los datos de la habitacion", error);
+    return null;
+  }
+};

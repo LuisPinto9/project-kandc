@@ -319,7 +319,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
           TipoUsuario:
             TipoUsuario.charAt(0).toUpperCase() + TipoUsuario.slice(1), // Hacer que la primera letra sea mayúscula
         });
-        await getArrendatarios();
+        getArrendatarios();
         limpiarCampos();
         setFormularioVisible(false);
       }

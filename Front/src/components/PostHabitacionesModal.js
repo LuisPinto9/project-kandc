@@ -118,7 +118,7 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
           Zona,
         });
 
-        await getHabitaciones();
+        getHabitaciones();
         limpiarCampos();
         setFormularioVisible(false);
       }

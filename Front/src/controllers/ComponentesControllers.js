@@ -130,3 +130,20 @@ export const componentes = async () => {
     return null;
   }
 };
+
+export const buscarComponente = async (nombreBuscar) => {
+  try {
+    const response = await Axios.get(
+      `http://localhost:4000/componentes/find-componente/${nombreBuscar}`,
+      {
+        headers: {
+          Authorization: localStorage.getItem("auth"),
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener los datos del componente", error);
+    return null;
+  }
+};

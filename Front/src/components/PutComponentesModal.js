@@ -37,7 +37,7 @@ const PutComponentesModal = ({ values, getComponentes }) => {
       Observacion,
       Habitacion,
     });
-    await getComponentes();
+    getComponentes();
     limpiarCampos();
   };
 
@@ -51,7 +51,6 @@ const PutComponentesModal = ({ values, getComponentes }) => {
     setDescripcion(values.Descripcion);
     setObservacion(values.Observacion);
     setHabitacion(values.Habitacion);
-    getComponentes("");
   };
 
   return (

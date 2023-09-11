@@ -37,7 +37,7 @@ const PutRegistroModal = ({ values, getArrendatarios }) => {
       Correo,
       TipoUsuario,
     });
-    await getArrendatarios();
+    getArrendatarios();
     limpiarCampos();
   };
 
@@ -48,10 +48,9 @@ const PutRegistroModal = ({ values, getArrendatarios }) => {
     setExtensionDias(values.ExtensionDias);
     setTelefono(values.Telefono);
     setNombreUsuario(values.NombreUsuario);
-    setContraseña("");
-    setCorreo("");
-    setTipoUsuario("");
-    getArrendatarios();
+    setContraseña(values.Contraseña);
+    setCorreo(values.Correo);
+    setTipoUsuario(values.TipoUsuario);
   };
 
   return (

@@ -62,9 +62,25 @@ const deleteZona = (req, res) => {
   });
 };
 
+const findById = (req, res) => {
+  const id = req.params.idBuscar;
+  db.query(
+    "SELECT * FROM zonas WHERE id LIKE ? OR id LIKE ? OR id LIKE ?",
+    [`%${id}`, `%${id}%`, `${id}%`],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Hubo un error en el servidor");
+      } else {
+        res.send(result);
+      }
+    }
+  );
+};
+
 module.exports = {
   getZonas,
   createZona,
   updateZona,
   deleteZona,
+  findById,
 };

@@ -110,3 +110,20 @@ export const zonas = async () => {
     return null;
   }
 };
+
+export const buscarZona = async (idBuscar) => {
+  try {
+    const response = await Axios.get(
+      `http://localhost:4000/zonas/find-zona/${idBuscar}`,
+      {
+        headers: {
+          Authorization: localStorage.getItem("auth"),
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener los datos de las zonas", error);
+    return null;
+  }
+};

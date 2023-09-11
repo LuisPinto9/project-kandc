@@ -135,7 +135,6 @@ export const buscarUsuario = async (idBuscar) => {
         },
       }
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Error al obtener los datos del arrendatario", error);

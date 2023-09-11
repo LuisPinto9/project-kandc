@@ -1,16 +1,16 @@
 const db = require("../db");
-const jwt = require("../middleware/jwt")
+const jwt = require("../middleware/jwt");
 
 const getUser = (req, res) => {
   const NombreUsuario = req.body.NombreUsuario;
   const Contraseña = req.body.Contraseña;
 
-  if(!NombreUsuario|| !Contraseña){
+  if (!NombreUsuario || !Contraseña) {
     return res.status(400).send({
-        status: "error",
-        message: "Faltan datos por enviar"
-    })
-}
+      status: "error",
+      message: "Faltan datos por enviar",
+    });
+  }
   db.query(
     "select * from usuario where nombre_usuario = ? and contraseña= ?",
     [NombreUsuario, Contraseña],
@@ -26,7 +26,7 @@ const getUser = (req, res) => {
             extension_dias: result[0].extension_dias,
             telefono: result[0].telefono,
             nombre_usuario: result[0].nombre_usuario,
-            contraseña: result[0]['contraseña'], // Usando notación de corchetes debido al nombre de la propiedad con comillas
+            contraseña: result[0]["contraseña"], // Usando notación de corchetes debido al nombre de la propiedad con comillas
             correo: result[0].correo,
             tipo: result[0].tipo,
           };
@@ -35,7 +35,7 @@ const getUser = (req, res) => {
             id: result[0].id,
             nombre: result[0].nombre,
             tipo: result[0].tipo,
-            token: token
+            token: token,
           });
         } else {
           res.status(400).send("Usuario no existe");
