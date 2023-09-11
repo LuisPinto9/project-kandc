@@ -45,12 +45,12 @@ const LoginForm = () => {
         mostrarMensajeCarga(data.tipo.toLowerCase());
         setTimeout(() => {
           navigate("/dashboard-admin");
-        }, 1000); // Espera 2 segundos antes de redirigir
+        }, 1000); // Espera 1 segundos antes de redirigir
       } else if (data.tipo.toLowerCase() === "arrendatario") {
         mostrarMensajeCarga(data.tipo.toLowerCase());
         setTimeout(() => {
           navigate("/dashboard-usuario");
-        }, 1000); // Espera 2 segundos antes de redirigir
+        }, 1000); // Espera 1 segundos antes de redirigir
       }
     } catch (error) {
       // Maneja cualquier error que pueda ocurrir

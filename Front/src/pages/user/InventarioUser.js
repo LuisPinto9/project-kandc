@@ -7,14 +7,7 @@ import PutRegistroModal from "../../components/PutRegistroModal";
 const InventarioUser = () => {
   const [IDUsuario, setIDUsuario] = useState("");
   const [Nombre, setNombre] = useState("");
-  const [Apellido, setApellido] = useState("");
-  const [TypeUser, setTypeUser] = useState("");
-  const [Identification, setIdentification] = useState("");
-  const [Contraseña, setContraseña] = useState("");
   const [Telefono, setTelefono] = useState("");
-  const [Gmail, setGmail] = useState("");
-  const [LeaseDate, setLeaseDate] = useState("");
-  const [State1, setState1] = useState("");
   const [ArrendatarioList, setArrendatario] = useState([]);
 
   const getArrendatario = () => {

@@ -3,8 +3,6 @@ import BarraLateral from "../../components/BarraLateral";
 import "../../css/styles.css";
 import "../../css/registro.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../../App.css";
-
 import {
   habitaciones,
   eliminar,

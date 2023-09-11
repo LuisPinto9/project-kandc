@@ -3,7 +3,6 @@ import BarraLateral from "../../components/BarraLateral";
 import "../../css/styles.css";
 import "../../css/registro.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../../App.css";
 import { componentes, eliminar } from "../../controllers/ComponentesControllers";
 import PostComponentesModal from "../../components/PostComponentesModal";
 import PutComponentesModal from "../../components/PutComponentesModal";
