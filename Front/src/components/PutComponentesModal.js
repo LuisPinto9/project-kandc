@@ -25,17 +25,23 @@ const PutComponentesModal = ({ values, getComponentes }) => {
     setHabitacion(values.Habitacion);
   }, [values]);
 
-  const putUser = () => {
-  
-
-    update({ Id, Nombre, Marca, Cantidad,Costo,Estado,Descripcion,Observacion,Habitacion});
-    getComponentes();
+  const putUser = async () => {
+    await update({
+      Id,
+      Nombre,
+      Marca,
+      Cantidad,
+      Costo,
+      Estado,
+      Descripcion,
+      Observacion,
+      Habitacion,
+    });
+    await getComponentes();
     limpiarCampos();
   };
 
   const limpiarCampos = () => {
-
-
     setId(values.Id);
     setNombre(values.Nombre);
     setMarca(values.Marca);

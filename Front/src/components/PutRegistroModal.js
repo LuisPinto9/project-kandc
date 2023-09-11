@@ -25,9 +25,19 @@ const PutRegistroModal = ({ values, getArrendatarios }) => {
     setTipoUsuario(values.TipoUsuario);
   }, [values]);
 
-  const putUser = () => {
-    update({ IDUsuario, Nombre, MetodoRenta,ExtensionDias, Telefono, NombreUsuario,Contraseña, Correo,TipoUsuario});
-    getArrendatarios();
+  const putUser = async () => {
+    await update({
+      IDUsuario,
+      Nombre,
+      MetodoRenta,
+      ExtensionDias,
+      Telefono,
+      NombreUsuario,
+      Contraseña,
+      Correo,
+      TipoUsuario,
+    });
+    await getArrendatarios();
     limpiarCampos();
   };
 

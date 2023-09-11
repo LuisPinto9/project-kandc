@@ -3,13 +3,15 @@ import BarraLateral from "../../components/BarraLateral";
 import "../../css/styles.css";
 import "../../css/registro.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { componentes, eliminar } from "../../controllers/ComponentesControllers";
+import {
+  componentes,
+  eliminar,
+} from "../../controllers/ComponentesControllers";
 import PostComponentesModal from "../../components/PostComponentesModal";
 import PutComponentesModal from "../../components/PutComponentesModal";
 import "../../css/tabla.css";
-
 //verificar
-import { habitaciones  } from "../../controllers/HabitacionControllers";
+import { habitaciones } from "../../controllers/HabitacionControllers";
 
 const Componentes = () => {
   const [Id, setId] = useState("");
@@ -22,25 +24,21 @@ const Componentes = () => {
   const [Observacion, setObservacion] = useState("");
   const [Habitacion, setHabitacion] = useState("");
   const [ComponentesList, setComponentes] = useState([]);
+  const [HabitacionesList, setHabitaciones] = useState([]);
 
-
-  const [HabitacionesList, setHabitaciones] = useState([]); 
-
-  const getComponentes = () => {
-    componentes()
+  const getComponentes = async () => {
+    await componentes()
       .then((data) => {
         setComponentes(data);
       })
       .catch((error) => {
         console.error("Error al obtener los componentes:", error);
       });
-
-      
   };
-//verificar
+  //verificar
 
-  const getHabitaciones = () => {
-    habitaciones()
+  const getHabitaciones = async () => {
+    await habitaciones()
       .then((data) => {
         setHabitaciones(data);
       })
@@ -49,12 +47,10 @@ const Componentes = () => {
       });
   };
 
- useEffect(() => {
+  useEffect(() => {
     getComponentes();
     getHabitaciones(); // Llama a la función para obtener las habitaciones cuando se monta el componente
   }, []);
-
-
 
   const EditarComponentes = (val) => {
     setId(val.id);
@@ -68,10 +64,9 @@ const Componentes = () => {
     setHabitacion(val.habitacion);
   };
 
- /*  useEffect(() => {
+  /*  useEffect(() => {
     getComponentes();
   }, []); */
-  
 
   let autoIncrementar = 1;
 
@@ -99,7 +94,11 @@ const Componentes = () => {
             />
           </div>
           <div>
-          <PostComponentesModal getComponentes={getComponentes} HabitacionesList={HabitacionesList} /></div>
+            <PostComponentesModal
+              getComponentes={getComponentes}
+              HabitacionesList={HabitacionesList}
+            />
+          </div>
         </div>
         {/* aqui empieza la tabla  */}
         <div className="table-responsive">
@@ -125,59 +124,60 @@ const Componentes = () => {
               </tr>
             </thead>
             <tbody>
-              {ComponentesList&&ComponentesList.map((val, key) => {
-                return (
-                  <tr key={key}>
-                    <th className="row-border-left" scope="row">
-                      {autoIncrementar++}
-                    </th>
-                    {/* van los nombres de la base de datos en si */}
-                    <td>{val.id}</td>
-                    <td>{val.nombre}</td>
-                    <td>{val.marca}</td>
-                    <td>{val.cantidad}</td>
-                    <td>{val.cantidad}</td>
-                    <td>{val.estado}</td>
-                    <td>{val.descripcion}</td>
-                    <td>{val.observacion}</td>
-                    <td>{val.habitacion}</td>
-                    <td>
-                      <i
-                        type="button"
-                        className="bi bi-pencil-square px-2 btn-update"
-                        data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop-put"
-                        onClick={() => {
-                          EditarComponentes(val);
-                        }}
-                      />
-                      <PutComponentesModal
-                        values={{
-                          Id: Id,
-                          Nombre: Nombre,
-                          Marca:Marca,
-                          Cantidad:Cantidad,
-                          Costo:Costo,
-                          Estado:Estado,
-                          Descripcion:Descripcion,
-                          Observacion:Observacion,
-                          Habitacion:Habitacion,
-                        }}
-                        getComponentes={getComponentes}
-                      />
-                    </td>
-                    <td className="row-border-right">
-                      <i
-                        type="button"
-                        onClick={() => {
-                          eliminar({ val, getComponentes });
-                        }}
-                        className="bi bi-x-octagon-fill px-2 btn-delete"
-                      />
-                    </td>
-                  </tr>
-                );
-              })}
+              {ComponentesList &&
+                ComponentesList.map((val, key) => {
+                  return (
+                    <tr key={key}>
+                      <th className="row-border-left" scope="row">
+                        {autoIncrementar++}
+                      </th>
+                      {/* van los nombres de la base de datos en si */}
+                      <td>{val.id}</td>
+                      <td>{val.nombre}</td>
+                      <td>{val.marca}</td>
+                      <td>{val.cantidad}</td>
+                      <td>{val.cantidad}</td>
+                      <td>{val.estado}</td>
+                      <td>{val.descripcion}</td>
+                      <td>{val.observacion}</td>
+                      <td>{val.habitacion}</td>
+                      <td>
+                        <i
+                          type="button"
+                          className="bi bi-pencil-square px-2 btn-update"
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdrop-put"
+                          onClick={() => {
+                            EditarComponentes(val);
+                          }}
+                        />
+                        <PutComponentesModal
+                          values={{
+                            Id: Id,
+                            Nombre: Nombre,
+                            Marca: Marca,
+                            Cantidad: Cantidad,
+                            Costo: Costo,
+                            Estado: Estado,
+                            Descripcion: Descripcion,
+                            Observacion: Observacion,
+                            Habitacion: Habitacion,
+                          }}
+                          getComponentes={getComponentes}
+                        />
+                      </td>
+                      <td className="row-border-right">
+                        <i
+                          type="button"
+                          onClick={() => {
+                            eliminar({ val, getComponentes });
+                          }}
+                          className="bi bi-x-octagon-fill px-2 btn-delete"
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>

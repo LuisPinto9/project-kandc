@@ -3,16 +3,14 @@ import { add } from "../controllers/ZonasControllers";
 import "../css/modal.css";
 import Swal from "sweetalert2";
 
-
 const PostZonasModal = ({ getZonas }) => {
   const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
   const [Descripcion, setDescripcion] = useState("");
   const [Precio, setPrecio] = useState("");
   const [Acceso, setAcceso] = useState("");
-  const [ setFormularioVisible] = useState(true);
-  
-  
+  const [setFormularioVisible] = useState(true);
+
   const limpiarCampos = () => {
     setId("");
     setNombre("");
@@ -25,7 +23,10 @@ const PostZonasModal = ({ getZonas }) => {
       case "Id":
         const idPattern = /^\d+$/;
         if (!idPattern.test(Id) || parseInt(Id, 10) === 0) {
-          setErrorMessages({ ...errorMessages, Id: "El campo Id debe contener solo números y no ser igual a cero." });
+          setErrorMessages({
+            ...errorMessages,
+            Id: "El campo Id debe contener solo números y no ser igual a cero.",
+          });
         } else {
           setErrorMessages({ ...errorMessages, Id: "" });
         }
@@ -33,7 +34,11 @@ const PostZonasModal = ({ getZonas }) => {
       case "Nombre":
         const nombrePattern = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/u;
         if (!nombrePattern.test(Nombre) || Nombre.trim().length < 1) {
-          setErrorMessages({ ...errorMessages, Nombre: "El campo Nombre debe contener solo letras y no puede estar vacío." });
+          setErrorMessages({
+            ...errorMessages,
+            Nombre:
+              "El campo Nombre debe contener solo letras y no puede estar vacío.",
+          });
         } else {
           setErrorMessages({ ...errorMessages, Nombre: "" });
         }
@@ -41,7 +46,11 @@ const PostZonasModal = ({ getZonas }) => {
       case "Precio":
         const precioPattern = /^\d+$/;
         if (!precioPattern.test(Precio) || parseInt(Precio, 10) <= 0) {
-          setErrorMessages({ ...errorMessages, Precio: "El campo Precio debe contener solo números y ser mayor que cero." });
+          setErrorMessages({
+            ...errorMessages,
+            Precio:
+              "El campo Precio debe contener solo números y ser mayor que cero.",
+          });
         } else {
           setErrorMessages({ ...errorMessages, Precio: "" });
         }
@@ -49,7 +58,11 @@ const PostZonasModal = ({ getZonas }) => {
       case "Acceso":
         const accesoPattern = /^[A-Za-z\s]+$/;
         if (!accesoPattern.test(Acceso) || Acceso.trim().length < 1) {
-          setErrorMessages({ ...errorMessages, Acceso: "El campo Acceso debe contener solo letras y no puede estar vacío." });
+          setErrorMessages({
+            ...errorMessages,
+            Acceso:
+              "El campo Acceso debe contener solo letras y no puede estar vacío.",
+          });
         } else {
           setErrorMessages({ ...errorMessages, Acceso: "" });
         }
@@ -58,38 +71,38 @@ const PostZonasModal = ({ getZonas }) => {
         break;
     }
   };
-  const AddPost = () => {
+  const AddPost = async () => {
     validateFields();
-    const hasErrors = Object.values(errorMessages).some((message) => message !== "");
+    const hasErrors = Object.values(errorMessages).some(
+      (message) => message !== ""
+    );
 
     if (!hasErrors) {
-
-      
-
-        if(Id === "" ||
+      if (
+        Id === "" ||
         Nombre === "" ||
         Descripcion === "" ||
         Precio === "" ||
-        Acceso === ""         
+        Acceso === ""
       ) {
         mostrarMensajeError();
-      }else{
-  
-      add({
-        Id,
-        Nombre,
-        Descripcion,
-        Precio,
-        Acceso,
-      });
+      } else {
+        await add({
+          Id,
+          Nombre,
+          Descripcion,
+          Precio,
+          Acceso,
+        });
 
-      getZonas();
-      limpiarCampos();
-      
-      setFormularioVisible(false);
-    }
+        await getZonas();
+        limpiarCampos();
+
+        setFormularioVisible(false);
+      }
     } else {
-      mostrarMensajeError(); }
+      mostrarMensajeError();
+    }
   };
 
   const validateFields = () => {
@@ -166,7 +179,7 @@ const PostZonasModal = ({ getZonas }) => {
                   <div className="text-danger">{errorMessages.Id}</div>
                 )}
               </div>
-  
+
               <div className="input-group mb-3">
                 <span className="input-group-text">Nombre</span>
                 <input
@@ -186,7 +199,7 @@ const PostZonasModal = ({ getZonas }) => {
                   <div className="text-danger">{errorMessages.Nombre}</div>
                 )}
               </div>
-  
+
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                   Descripción
@@ -202,7 +215,7 @@ const PostZonasModal = ({ getZonas }) => {
                   aria-describedby="basic-addon1"
                 />
               </div>
-  
+
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                   Precio
@@ -224,7 +237,7 @@ const PostZonasModal = ({ getZonas }) => {
                   <div className="text-danger">{errorMessages.Precio}</div>
                 )}
               </div>
-  
+
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                   Tipo de acceso

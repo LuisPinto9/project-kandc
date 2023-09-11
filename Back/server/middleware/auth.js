@@ -3,42 +3,45 @@ const moment = require("moment");
 const libjwt = require("./jwt");
 const secret = libjwt.secret;
 
-const auth = (req, res, next) => {
-  // Verifica si llega la cabecera de autenticación
-  if (!req.headers.authorization) {
-    return res.status(403).json({
+exports.auth = (req, res, next) => {
+  const localStorageKey = req.headers.authorization;
+  console.log(localStorageKey);
+
+  if (!localStorageKey) {
+    // console.log("hola")
+    return res.status(403).send({
       status: "error",
-      message: "La petición no tiene la cabecera de autenticación",
+      message: "La clave de autenticación no está presente en localStorage.",
     });
   }
-  // Limpia el token
-  const token = req.headers.authorization.replace(/['"]+/g, "");
 
-  // Decodifica el token y maneja errores
+  // Comprueba si llega la cabecera de autenticación
+  if (!req.headers.authorization) {
+    return res.status(403).send({
+      status: "error",
+      message: "La petición no tiene la cabecera de autenticación.",
+    });
+  }
+  // Decodificar el token
   try {
-    const payload = jwt.decode(token, secret);
-    // Comprueba la expiración del token
+    let payload = jwt.decode(localStorageKey, secret);
+    // Comprobar expiración
     if (payload.exp <= moment().unix()) {
-      return res.status(404).json({
+      return res.status(404).send({
         status: "error",
         message: "Token expirado",
       });
     }
 
-    // Agrega los datos del usuario a la solicitud
+    // Datos de usuario a la request
     req.user = payload;
-
-    // Continúa con la ejecución de la acción
-    next();
   } catch (error) {
-    return res.status(404).json({
+    return res.status(401).send({
       status: "error",
       message: "Token inválido",
-      error: error.message, // Proporciona detalles del error
     });
   }
-};
 
-module.exports = {
-  auth,
+  // Pasar la ejecución de la acción
+  next();
 };

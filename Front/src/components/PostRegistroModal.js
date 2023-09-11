@@ -14,10 +14,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
   const [Contraseña, setContraseña] = useState("");
   const [Correo, setCorreo] = useState("");
   const [TipoUsuario, setTipoUsuario] = useState("");
-
-  const [ setFormularioVisible] = useState(true);
-
-
+  const [setFormularioVisible] = useState(true);
 
   const limpiarCampos = () => {
     setIDUsuario("");
@@ -140,14 +137,16 @@ const FormRegistroPost = ({ getArrendatarios }) => {
     };
    */
 
-
-
   const validateField = (fieldName) => {
     switch (fieldName) {
       case "IDUsuario":
         const idPattern = /^\d+$/;
         if (!idPattern.test(IDUsuario) || parseInt(IDUsuario, 10) === 0) {
-          setErrorMessages({ ...errorMessages, IDUsuario: "El campo IDUsuario debe contener solo números y no ser igual a cero." });
+          setErrorMessages({
+            ...errorMessages,
+            IDUsuario:
+              "El campo IDUsuario debe contener solo números y no ser igual a cero.",
+          });
         } else {
           setErrorMessages({ ...errorMessages, IDUsuario: "" });
         }
@@ -156,7 +155,11 @@ const FormRegistroPost = ({ getArrendatarios }) => {
       case "Nombre":
         const nombrePattern = /^[\p{L}ÁÉÍÓÚáéíóúÑñ\s]+$/u;
         if (!nombrePattern.test(Nombre) || Nombre.length < 3) {
-          setErrorMessages({ ...errorMessages, Nombre: "El campo Nombre debe contener solo letras y tener al menos 3 caracteres." });
+          setErrorMessages({
+            ...errorMessages,
+            Nombre:
+              "El campo Nombre debe contener solo letras y tener al menos 3 caracteres.",
+          });
         } else {
           setErrorMessages({ ...errorMessages, Nombre: "" });
         }
@@ -165,19 +168,23 @@ const FormRegistroPost = ({ getArrendatarios }) => {
       case "MetodoRenta":
         const metodoRentaPattern = /^[A-Za-z]+$/;
         if (!metodoRentaPattern.test(MetodoRenta)) {
-          setErrorMessages({ ...errorMessages, MetodoRenta: "El campo Método de Renta debe contener solo letras sin espacios." });
+          setErrorMessages({
+            ...errorMessages,
+            MetodoRenta:
+              "El campo Método de Renta debe contener solo letras sin espacios.",
+          });
         } else {
           setErrorMessages({ ...errorMessages, MetodoRenta: "" });
         }
         break;
-
 
       case "ExtensionDias":
         const extensionDiasPattern = /^\d+$/;
         if (!extensionDiasPattern.test(ExtensionDias)) {
           setErrorMessages({
             ...errorMessages,
-            ExtensionDias: "El campo Extensión de Días debe contener solo números.",
+            ExtensionDias:
+              "El campo Extensión de Días debe contener solo números.",
           });
         } else {
           setErrorMessages({ ...errorMessages, ExtensionDias: "" });
@@ -201,7 +208,8 @@ const FormRegistroPost = ({ getArrendatarios }) => {
         if (!nombreUsuarioPattern.test(NombreUsuario)) {
           setErrorMessages({
             ...errorMessages,
-            NombreUsuario: "El campo Nombre de Usuario debe contener solo letras y números sin caracteres especiales.",
+            NombreUsuario:
+              "El campo Nombre de Usuario debe contener solo letras y números sin caracteres especiales.",
           });
         } else {
           setErrorMessages({ ...errorMessages, NombreUsuario: "" });
@@ -210,11 +218,13 @@ const FormRegistroPost = ({ getArrendatarios }) => {
 
       case "Contraseña":
         // Contraseña debe cumplir con los requisitos
-        const contraseñaPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        const contraseñaPattern =
+          /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
         if (!contraseñaPattern.test(Contraseña)) {
           setErrorMessages({
             ...errorMessages,
-            Contraseña: "La contraseña debe cumplir con los requisitos de seguridad.",
+            Contraseña:
+              "La contraseña debe cumplir con los requisitos de seguridad.",
           });
         } else {
           setErrorMessages({ ...errorMessages, Contraseña: "" });
@@ -227,7 +237,8 @@ const FormRegistroPost = ({ getArrendatarios }) => {
         if (!correoPattern.test(Correo) || correoParts[0].length > 20) {
           setErrorMessages({
             ...errorMessages,
-            Correo: "El campo Correo debe ser una dirección de correo electrónico válida que termine en @gmail.com y con menos de 20 caracteres antes del '@'.",
+            Correo:
+              "El campo Correo debe ser una dirección de correo electrónico válida que termine en @gmail.com y con menos de 20 caracteres antes del '@'.",
           });
         } else {
           setErrorMessages({ ...errorMessages, Correo: "" });
@@ -239,7 +250,8 @@ const FormRegistroPost = ({ getArrendatarios }) => {
         if (!tipoUsuarioPattern.test(TipoUsuario)) {
           setErrorMessages({
             ...errorMessages,
-            TipoUsuario: "El campo Tipo de Usuario debe ser 'arrendatario' o 'administrador'.",
+            TipoUsuario:
+              "El campo Tipo de Usuario debe ser 'arrendatario' o 'administrador'.",
           });
         } else {
           setErrorMessages({ ...errorMessages, TipoUsuario: "" });
@@ -273,16 +285,17 @@ const FormRegistroPost = ({ getArrendatarios }) => {
     });
   };
 
-
-  const AddPost = () => {
+  const AddPost = async () => {
     validateFields(); // Validar campos antes de agregar
 
     // Verificar si hay algún mensaje de error en los campos
-    const hasErrors = Object.values(errorMessages).some((message) => message !== "");
+    const hasErrors = Object.values(errorMessages).some(
+      (message) => message !== ""
+    );
 
     if (!hasErrors) {
-
-      if (IDUsuario === "" ||
+      if (
+        IDUsuario === "" ||
         Nombre === "" ||
         MetodoRenta === "" ||
         ExtensionDias === "" ||
@@ -294,7 +307,6 @@ const FormRegistroPost = ({ getArrendatarios }) => {
       ) {
         mostrarMensajeError();
       } else {
-
         add({
           IDUsuario,
           Nombre,
@@ -304,13 +316,13 @@ const FormRegistroPost = ({ getArrendatarios }) => {
           NombreUsuario,
           Contraseña,
           Correo,
-          TipoUsuario: TipoUsuario.charAt(0).toUpperCase() + TipoUsuario.slice(1), // Hacer que la primera letra sea mayúscula
+          TipoUsuario:
+            TipoUsuario.charAt(0).toUpperCase() + TipoUsuario.slice(1), // Hacer que la primera letra sea mayúscula
         });
-        getArrendatarios();
+        await getArrendatarios();
         limpiarCampos();
         setFormularioVisible(false);
       }
-
     } else {
       mostrarMensajeError();
     }
@@ -430,7 +442,9 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   aria-describedby="basic-addon1"
                 />
                 {errorMessages.ExtensionDias && (
-                  <div className="text-danger">{errorMessages.ExtensionDias}</div>
+                  <div className="text-danger">
+                    {errorMessages.ExtensionDias}
+                  </div>
                 )}
               </div>
 
@@ -474,7 +488,9 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   aria-describedby="basic-addon1"
                 />
                 {errorMessages.NombreUsuario && (
-                  <div className="text-danger">{errorMessages.NombreUsuario}</div>
+                  <div className="text-danger">
+                    {errorMessages.NombreUsuario}
+                  </div>
                 )}
               </div>
 
@@ -500,7 +516,6 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                 )}
               </div>
 
-
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                   Correo
@@ -523,10 +538,11 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                 )}
               </div>
 
-
-
               <div className="input-group mb-3">
-                <label className="input-group-text" htmlFor="inputGroupSelectTipoUsuario">
+                <label
+                  className="input-group-text"
+                  htmlFor="inputGroupSelectTipoUsuario"
+                >
                   Tipo de Usuario
                 </label>
                 <select
@@ -550,9 +566,7 @@ const FormRegistroPost = ({ getArrendatarios }) => {
                   <div className="text-danger">{errorMessages.TipoUsuario}</div>
                 )}
               </div>
-
             </div>
-
 
             <div className="modal-footer">
               <button

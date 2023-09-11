@@ -12,8 +12,7 @@ import PutHabitacionesModal from "../../components/PutHabitacionesModal";
 import "../../css/tabla.css";
 
 //verificar
-import { zonas  } from "../../controllers/ZonasControllers";
-
+import { zonas } from "../../controllers/ZonasControllers";
 
 const Habitaciones = () => {
   const [Id, setId] = useState("");
@@ -22,11 +21,10 @@ const Habitaciones = () => {
   const [Precio, setPrecio] = useState("");
   const [Zona, setZona] = useState("");
   const [HabitacionesList, setHabitaciones] = useState([]);
+  const [ZonasList, setZonas] = useState([]);
 
-  const [ZonasList, setZonas] = useState([]); 
-
-  const getHabitaciones = () => {
-    habitaciones()
+  const getHabitaciones = async () => {
+    await habitaciones()
       .then((data) => {
         setHabitaciones(data);
       })
@@ -43,10 +41,10 @@ const Habitaciones = () => {
     setZona(val.zonas);
   };
 
-//verificar
-  const getZonas = () => {
+  //verificar
+  const getZonas = async () => {
     //aqui
-    zonas()
+    await zonas()
       .then((data) => {
         setZonas(data);
       })
@@ -86,9 +84,11 @@ const Habitaciones = () => {
             />
           </div>
           <div>
-           {/*  <PostHabitacionesModal getHabitaciones={getHabitaciones} /> */}
-            <PostHabitacionesModal getHabitaciones={getHabitaciones} ZonasList={ZonasList} />
-      
+            {/*  <PostHabitacionesModal getHabitaciones={getHabitaciones} /> */}
+            <PostHabitacionesModal
+              getHabitaciones={getHabitaciones}
+              ZonasList={ZonasList}
+            />
           </div>
         </div>
         {/* aqui empieza la tabla  */}

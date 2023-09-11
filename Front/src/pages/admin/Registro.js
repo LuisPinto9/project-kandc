@@ -27,8 +27,8 @@ function Registro() {
   const [idBuscar, setIdBuscar] = useState("");
   const [buscarState, setBuscarState] = useState(false);
 
-  const getArrendatarios = () => {
-    arrendatarios()
+  const getArrendatarios = async () => {
+    await arrendatarios()
       .then((data) => {
         setArrendatarios(data);
       })
@@ -70,20 +70,20 @@ function Registro() {
         <div className="d-flex mb-2 justify-content-center align-items-center">
           <div className="input-registro-search d-flex align-items-center pe-2">
             <input
-              type="text"              
+              type="text"
               className="form-control"
               value={idBuscar}
               placeholder="Comienze a escribir números para filtrar los ID"
               aria-label="Id de usuario del destinatario"
               aria-describedby="basic-addon1"
               onChange={(event) => {
-                const newValue = event.target.value.replace(/[^0-9]/g, '');
+                const newValue = event.target.value.replace(/[^0-9]/g, "");
                 setIdBuscar(newValue);
               }}
               onKeyUp={() => {
                 if (idBuscar !== "") {
                   buscarId();
-                  setBuscarState(true); 
+                  setBuscarState(true);
                 }
               }}
             />

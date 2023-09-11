@@ -17,9 +17,9 @@ const PutZonasModal = ({ values, getZonas }) => {
     setAcceso(values.Acceso);
   }, [values]);
 
-  const putUser = () => {
-    update({ Id, Nombre,Descripcion, Precio,Acceso });
-    getZonas();
+  const putUser = async () => {
+    await update({ Id, Nombre, Descripcion, Precio, Acceso });
+    await getZonas();
     limpiarCampos();
   };
 

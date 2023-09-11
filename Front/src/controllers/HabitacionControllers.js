@@ -1,17 +1,10 @@
 import Axios from "axios";
 import Swal from "sweetalert2";
 
-const token = JSON.parse(localStorage.getItem("auth"));
-const config = {
-  headers: {
-    Authorization: token,
-  },
-};
-
 export const add = async (datos) => {
   try {
     await Axios.post(
-      "http://localhost:3001/habitaciones/create",
+      "http://localhost:4000/habitaciones/create",
       {
         Id: datos.Id,
         Nombre: datos.Nombre,
@@ -19,7 +12,11 @@ export const add = async (datos) => {
         Precio: datos.Precio,
         Zona: datos.Zona,
       },
-      config
+      {
+        headers: {
+          Authorization: localStorage.getItem("auth"),
+        },
+      }
     );
 
     Swal.fire({
@@ -39,7 +36,7 @@ export const add = async (datos) => {
 export const update = async (datos) => {
   try {
     await Axios.put(
-      "http://localhost:3001/habitaciones/update",
+      "http://localhost:4000/habitaciones/update",
       {
         Id: datos.Id,
         Nombre: datos.Nombre,
@@ -47,7 +44,11 @@ export const update = async (datos) => {
         Precio: datos.Precio,
         Zona: datos.Zona,
       },
-      config
+      {
+        headers: {
+          Authorization: localStorage.getItem("auth"),
+        },
+      }
     );
 
     Swal.fire({
@@ -81,10 +82,14 @@ export const eliminar = async ({ val, getHabitaciones }) => {
 
     if (result.isConfirmed) {
       await Axios.delete(
-        `http://localhost:3001/habitaciones/delete/${val.id}`,
-        config
+        `http://localhost:4000/habitaciones/delete/${val.id}`,
+        {
+          headers: {
+            Authorization: localStorage.getItem("auth"),
+          },
+        }
       );
-      getHabitaciones();
+      await getHabitaciones();
 
       Swal.fire({
         title: "<strong>Eliminación exitosa</strong>",
@@ -106,8 +111,12 @@ export const eliminar = async ({ val, getHabitaciones }) => {
 export const habitaciones = async () => {
   try {
     const response = await Axios.get(
-      "http://localhost:3001/habitaciones/get-habitaciones",
-      config
+      "http://localhost:4000/habitaciones/get-habitaciones",
+      {
+        headers: {
+          Authorization: localStorage.getItem("auth"),
+        },
+      }
     );
     return response.data;
   } catch (error) {

@@ -10,9 +10,7 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
   const [Estado, setEstado] = useState("");
   const [Precio, setPrecio] = useState("");
   const [Zona, setZona] = useState("");
-
-  const [ setFormularioVisible] = useState(true);
-
+  const [setFormularioVisible] = useState(true);
 
   const limpiarCampos = () => {
     setId("");
@@ -38,7 +36,10 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
       case "Id":
         const idPattern = /^\d+$/;
         if (!idPattern.test(Id) || parseInt(Id, 10) === 0) {
-          setErrorMessages({ ...errorMessages, Id: "El campo Id debe contener solo números y no ser igual a cero." });
+          setErrorMessages({
+            ...errorMessages,
+            Id: "El campo Id debe contener solo números y no ser igual a cero.",
+          });
         } else {
           setErrorMessages({ ...errorMessages, Id: "" });
         }
@@ -46,7 +47,11 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
       case "Nombre":
         const nombrePattern = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/u;
         if (!nombrePattern.test(Nombre) || Nombre.trim().length < 1) {
-          setErrorMessages({ ...errorMessages, Nombre: "El campo Nombre debe contener solo letras y no puede estar vacío." });
+          setErrorMessages({
+            ...errorMessages,
+            Nombre:
+              "El campo Nombre debe contener solo letras y no puede estar vacío.",
+          });
         } else {
           setErrorMessages({ ...errorMessages, Nombre: "" });
         }
@@ -54,7 +59,11 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
       case "Estado":
         const estadoPattern = /^[A-Za-z\s]+$/;
         if (!estadoPattern.test(Estado) || Estado.trim().length < 1) {
-          setErrorMessages({ ...errorMessages, Estado: "El campo Estado debe contener solo letras y no puede estar vacío." });
+          setErrorMessages({
+            ...errorMessages,
+            Estado:
+              "El campo Estado debe contener solo letras y no puede estar vacío.",
+          });
         } else {
           setErrorMessages({ ...errorMessages, Estado: "" });
         }
@@ -62,7 +71,11 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
       case "Precio":
         const precioPattern = /^\d+$/;
         if (!precioPattern.test(Precio) || parseInt(Precio, 10) <= 0) {
-          setErrorMessages({ ...errorMessages, Precio: "El campo Precio debe contener solo números y ser mayor que cero." });
+          setErrorMessages({
+            ...errorMessages,
+            Precio:
+              "El campo Precio debe contener solo números y ser mayor que cero.",
+          });
         } else {
           setErrorMessages({ ...errorMessages, Precio: "" });
         }
@@ -70,7 +83,10 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
       case "Zona":
         const zonaPattern = /^\d+$/;
         if (!zonaPattern.test(Zona) || Zona.trim().length < 1) {
-          setErrorMessages({ ...errorMessages, Zona: "El campo Zona debe contener numeros" });
+          setErrorMessages({
+            ...errorMessages,
+            Zona: "El campo Zona debe contener numeros",
+          });
         } else {
           setErrorMessages({ ...errorMessages, Zona: "" });
         }
@@ -79,14 +95,14 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
         break;
     }
   };
-  const AddPost = () => {
+  const AddPost = async () => {
     validateFields();
-    const hasErrors = Object.values(errorMessages).some((message) => message !== "");
-
-
+    const hasErrors = Object.values(errorMessages).some(
+      (message) => message !== ""
+    );
     if (!hasErrors) {
-
-      if (Id === "" ||
+      if (
+        Id === "" ||
         Nombre === "" ||
         Estado === "" ||
         Precio === "" ||
@@ -94,7 +110,7 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
       ) {
         mostrarMensajeError();
       } else {
-        add({
+        await add({
           Id,
           Nombre,
           Estado,
@@ -102,11 +118,10 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
           Zona,
         });
 
-        getHabitaciones();
+        await getHabitaciones();
         limpiarCampos();
         setFormularioVisible(false);
       }
-
     } else {
       mostrarMensajeError();
     }
@@ -246,7 +261,7 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
                   <div className="text-danger">{errorMessages.Precio}</div>
                 )}
               </div>
-{/* 
+              {/* 
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                   Zona
@@ -271,7 +286,10 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
  */}
 
               <div className="input-group mb-3">
-                <label className="input-group-text" htmlFor="inputGroupSelectZona">
+                <label
+                  className="input-group-text"
+                  htmlFor="inputGroupSelectZona"
+                >
                   Zona
                 </label>
                 <select
@@ -298,10 +316,6 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
                   <div className="text-danger">{errorMessages.Zona}</div>
                 )}
               </div>
-
-
-
-
             </div>
             <div className="modal-footer">
               <button

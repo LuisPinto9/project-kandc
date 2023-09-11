@@ -11,20 +11,6 @@ const LoginForm = () => {
   const [contraseña, setContraseña] = useState("");
   const navigate = useNavigate();
 
-  const SaveLocalStorage = (key, item) => {
-    //conseguir elementos en localStorage
-    let elementos = JSON.parse(localStorage.getItem(key));
-    //comprar si es un array
-    if (Array.isArray(elementos)) {
-      elementos.push(item);
-    } else {
-      //crear array
-      elementos = [item];
-    }
-    //guardar en el localStorage
-    localStorage.setItem(key, JSON.stringify([elementos]));
-  };
-
   const handleCheckChange = () => {
     setShowPassword(!showPassword);
   };
@@ -38,9 +24,6 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       const data = await verificar({ nombreUsuario, contraseña });
-
-      SaveLocalStorage("auth", data.token);
-
       if (data.tipo.toLowerCase() === "administrador") {
         mostrarMensajeCarga(data.tipo.toLowerCase());
         setTimeout(() => {
@@ -57,7 +40,6 @@ const LoginForm = () => {
       mostrarMensajeError();
       console.error("Usuario o contraseña incorrectos");
     }
-
     limpiarCampos();
   };
 

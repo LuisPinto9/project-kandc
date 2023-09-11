@@ -9,7 +9,7 @@ const config = {
 
 test("Get usuarios", async () => {
   const response = await Axios.get(
-    "http://localhost:3001/user/get-users",
+    "http://localhost:4000/user/get-users",
     config
   );
   expect(response.status).toBe(200);
@@ -18,7 +18,7 @@ test("Get usuarios", async () => {
 test("Post usuarios", async () => {
   let status = 404;
   await Axios.post(
-    "http://localhost:3001/user/create",
+    "http://localhost:4000/user/create",
     {
       IDUsuario: 3,
       Nombre: "lui",
@@ -40,7 +40,7 @@ test("Post usuarios", async () => {
 test("Put usuarios", async () => {
   let status = 404;
   await Axios.put(
-    "http://localhost:3001/user/update",
+    "http://localhost:4000/user/update",
     {
       IDUsuario: 3,
       Nombre: "luiasdasd",
@@ -61,7 +61,7 @@ test("Put usuarios", async () => {
 
 test("Delete usuarios", async () => {
   let status = 404;
-  await Axios.delete(`http://localhost:3001/user/delete/${3}`, config).then(
+  await Axios.delete(`http://localhost:4000/user/delete/${3}`, config).then(
     (data) => {
       status = data.status;
     }

@@ -17,9 +17,9 @@ const PutHabitacionesModal = ({ values, getHabitaciones }) => {
     setZona(values.Zona);
   }, [values]);
 
-  const putUser = () => {
-    update({  Id, Nombre, Estado,Precio, Zona });
-    getHabitaciones();
+  const putUser = async () => {
+    await update({ Id, Nombre, Estado, Precio, Zona });
+    await getHabitaciones();
     limpiarCampos();
   };
 

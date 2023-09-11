@@ -1,17 +1,10 @@
 import Axios from "axios";
 import Swal from "sweetalert2";
 
-const token = JSON.parse(localStorage.getItem("auth"));
-const config = {
-  headers: {
-    Authorization: token,
-  },
-};
-
 export const add = async (datos) => {
   try {
     await Axios.post(
-      "http://localhost:3001/user/create",
+      "http://localhost:4000/user/create",
       {
         IDUsuario: datos.IDUsuario,
         Nombre: datos.Nombre,
@@ -23,7 +16,11 @@ export const add = async (datos) => {
         Correo: datos.Correo,
         TipoUsuario: datos.TipoUsuario,
       },
-      config
+      {
+        headers: {
+          Authorization: localStorage.getItem("auth"),
+        },
+      }
     );
 
     Swal.fire({
@@ -43,7 +40,7 @@ export const add = async (datos) => {
 export const update = async (datos) => {
   try {
     await Axios.put(
-      "http://localhost:3001/user/update",
+      "http://localhost:4000/user/update",
       {
         IDUsuario: datos.IDUsuario,
         Nombre: datos.Nombre,
@@ -55,7 +52,11 @@ export const update = async (datos) => {
         Correo: datos.Correo,
         TipoUsuario: datos.TipoUsuario,
       },
-      config
+      {
+        headers: {
+          Authorization: localStorage.getItem("auth"),
+        },
+      }
     );
 
     Swal.fire({
@@ -77,7 +78,9 @@ export const eliminar = async ({ val, getArrendatarios }) => {
     const result = await Swal.fire({
       title: "ELIMINAR",
       html:
-        "<i>¿Desea eliminar al usuario <strong>" + val.nombre + "</strong>?</i>",
+        "<i>¿Desea eliminar al usuario <strong>" +
+        val.nombre +
+        "</strong>?</i>",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -85,9 +88,12 @@ export const eliminar = async ({ val, getArrendatarios }) => {
       confirmButtonText: "Sí, eliminar",
     });
     if (result.isConfirmed) {
-      await Axios.delete(`http://localhost:3001/user/delete/${val.id}`, config);
-      getArrendatarios();
-
+      await Axios.delete(`http://localhost:4000/user/delete/${val.id}`, {
+        headers: {
+          Authorization: localStorage.getItem("auth"),
+        },
+      });
+      await getArrendatarios();
       Swal.fire({
         title: "<strong>Eliminación exitosa</strong>",
         html:
@@ -107,10 +113,11 @@ export const eliminar = async ({ val, getArrendatarios }) => {
 /* traer la información de los arrendatarios */
 export const arrendatarios = async () => {
   try {
-    const response = await Axios.get(
-      "http://localhost:3001/user/get-users",
-      config
-    );
+    const response = await Axios.get("http://localhost:4000/user/get-users", {
+      headers: {
+        Authorization: localStorage.getItem("auth"),
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error al obtener los datos de arrendatarios:", error);
@@ -121,8 +128,12 @@ export const arrendatarios = async () => {
 export const buscarUsuario = async (idBuscar) => {
   try {
     const response = await Axios.get(
-      `http://localhost:3001/user/find-user/${idBuscar}`,
-      config
+      `http://localhost:4000/user/find-user/${idBuscar}`,
+      {
+        headers: {
+          Authorization: localStorage.getItem("auth"),
+        },
+      }
     );
     console.log(response.data);
     return response.data;

@@ -16,9 +16,9 @@ const Zonas = () => {
   const [Acceso, setAcceso] = useState("");
   const [ZonasList, setZonas] = useState([]);
 
-  const getZonas = () => {
+  const getZonas = async () => {
     //aqui
-    zonas()
+    await zonas()
       .then((data) => {
         setZonas(data);
       })

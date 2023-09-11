@@ -1,17 +1,10 @@
 import Axios from "axios";
 import Swal from "sweetalert2";
 
-const token = JSON.parse(localStorage.getItem("auth"));
-const config = {
-  headers: {
-    Authorization: token,
-  },
-};
-
 export const add = async (datos) => {
   try {
     await Axios.post(
-      "http://localhost:3001/componentes/create",
+      "http://localhost:4000/componentes/create",
       {
         Id: datos.Id,
         Nombre: datos.Nombre,
@@ -23,7 +16,11 @@ export const add = async (datos) => {
         Observacion: datos.Observacion,
         Habitacion: datos.Habitacion,
       },
-      config
+      {
+        headers: {
+          Authorization: localStorage.getItem("auth"),
+        },
+      }
     );
 
     Swal.fire({
@@ -43,7 +40,7 @@ export const add = async (datos) => {
 export const update = async (datos) => {
   try {
     await Axios.put(
-      "http://localhost:3001/componentes/update",
+      "http://localhost:4000/componentes/update",
       {
         Id: datos.Id,
         Nombre: datos.Nombre,
@@ -55,7 +52,11 @@ export const update = async (datos) => {
         Observacion: datos.Observacion,
         Habitacion: datos.Habitacion,
       },
-      config
+      {
+        headers: {
+          Authorization: localStorage.getItem("auth"),
+        },
+      }
     );
 
     Swal.fire({
@@ -89,8 +90,12 @@ export const eliminar = async ({ val, getComponentes }) => {
 
     if (result.isConfirmed) {
       // Hacer la solicitud DELETE con el ID en la URL
-      await Axios.delete(`http://localhost:3001/componentes/delete/${val.id}`, config);
-      getComponentes();
+      await Axios.delete(`http://localhost:4000/componentes/delete/${val.id}`, {
+        headers: {
+          Authorization: localStorage.getItem("auth"),
+        },
+      });
+      await getComponentes();
 
       Swal.fire({
         title: "<strong>Eliminación exitosa</strong>",
@@ -112,8 +117,12 @@ export const eliminar = async ({ val, getComponentes }) => {
 export const componentes = async () => {
   try {
     const response = await Axios.get(
-      "http://localhost:3001/componentes/get-componentes",
-      config
+      "http://localhost:4000/componentes/get-componentes",
+      {
+        headers: {
+          Authorization: localStorage.getItem("auth"),
+        },
+      }
     );
     return response.data;
   } catch (error) {
