@@ -51,9 +51,11 @@ const Componentes = () => {
   };
 
   const buscarNombre = async () => {
-    await buscarComponente(NombreBuscar).then((data) => {
-      setComponentes(data);
-    });
+    try {
+      await buscarComponente(NombreBuscar).then((data) => {
+        setComponentes(data);
+      });
+    } catch (error) {}
   };
 
   useEffect(() => {

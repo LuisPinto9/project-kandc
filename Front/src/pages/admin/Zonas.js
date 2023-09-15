@@ -23,7 +23,6 @@ const Zonas = () => {
   const [buscarState, setBuscarState] = useState(false);
 
   const getZonas = async () => {
-    //aqui
     await zonas()
       .then((data) => {
         setZonas(data);
@@ -34,9 +33,11 @@ const Zonas = () => {
   };
 
   const buscarId = async () => {
-    await buscarZona(idBuscar).then((data) => {
-      setZonas(data);
-    });
+    try {
+      await buscarZona(idBuscar).then((data) => {
+        setZonas(data);
+      });
+    } catch (error) {}
   };
 
   const EditarZonas = (val) => {

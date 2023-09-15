@@ -7,7 +7,7 @@ router.get("/get-users", check.auth, (req, res) => {
   userController.getUsers(req, res);
 });
 
-router.get("/find-user/:idBuscar", check.auth, (req, res) => {
+router.get("/find-users/:idBuscar", check.auth, (req, res) => {
   userController.findById(req, res);
 });
 

@@ -128,7 +128,7 @@ export const arrendatarios = async () => {
 export const buscarUsuario = async (idBuscar) => {
   try {
     const response = await Axios.get(
-      `http://localhost:4000/user/find-user/${idBuscar}`,
+      `http://localhost:4000/user/find-users/${idBuscar}`,
       {
         headers: {
           Authorization: localStorage.getItem("auth"),

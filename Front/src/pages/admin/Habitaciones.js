@@ -57,9 +57,11 @@ const Habitaciones = () => {
   };
 
   const buscarNombre = async () => {
-    await buscarHabitacion(NombreBuscar).then((data) => {
-      setHabitaciones(data);
-    });
+    try {
+      await buscarHabitacion(NombreBuscar).then((data) => {
+        setHabitaciones(data);
+      });
+    } catch (error) {}
   };
 
   useEffect(() => {
