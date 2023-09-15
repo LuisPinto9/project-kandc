@@ -36,6 +36,7 @@ const updateZona = (req, res) => {
   const Descripcion = req.body.Descripcion;
   const Precio = req.body.Precio;
   const Acceso = req.body.Acceso;
+  
 
   db.query(
     "update zonas set nombre=?,descripcion=?,precio=?,acceso=? where id=?",

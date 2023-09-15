@@ -98,7 +98,7 @@ const PostZonasModal = ({ getZonas }) => {
         getZonas();
         limpiarCampos();
 
-        setFormularioVisible(false);
+       // setFormularioVisible(false);
       }
     } else {
       mostrarMensajeError();

@@ -222,7 +222,7 @@ const PostComponentesModal = ({ getComponentes, HabitacionesList }) => {
         });
         getComponentes();
         limpiarCampos();
-        setFormularioVisible(false);
+        //setFormularioVisible(false);
       }
     } else {
       mostrarMensajeError();

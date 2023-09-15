@@ -16,10 +16,10 @@ const createRoom = (req, res) => {
   const Estado = req.body.Estado;
   const Precio = req.body.Precio;
   const Zona = req.body.Zona;
-
+  const IdUsuarios = req.body.IdUsuarios;  
   db.query(
-    "insert into habitaciones(id, nombre, estado,precio, zonas) values(?,?,?,?,?)",
-    [Id, Nombre, Estado, Precio, Zona],
+    "insert into habitaciones(id, nombre, estado,precio, zonas, idUsuarios) values(?,?,?,?,?,?)",
+    [Id, Nombre, Estado, Precio, Zona, IdUsuarios],
     (err, result) => {
       if (err) {
         res.status(500).send("Hubo un error en el servidor");
@@ -36,10 +36,11 @@ const updateRoom = (req, res) => {
   const Estado = req.body.Estado;
   const Precio = req.body.Precio;
   const Zona = req.body.Zona;
+  const IdUsuarios = req.body.IdUsuarios; 
 
   db.query(
-    "update habitaciones set nombre=?,estado=?,precio=?,zonas=? where id=?",
-    [Nombre, Estado, Precio, Zona, Id],
+    "update habitaciones set nombre=?,estado=?,precio=?,zonas=? ,idUsuarios=?where id=?",
+    [Nombre, Estado, Precio, Zona, Id, IdUsuarios],
     (err, result) => {
       if (err) {
         res.status(500).send("Hubo un error en el servidor");

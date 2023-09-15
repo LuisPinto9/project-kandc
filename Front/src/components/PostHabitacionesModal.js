@@ -4,12 +4,13 @@ import "../css/modal.css";
 
 import Swal from "sweetalert2";
 
-const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
+const PostHabitacionesModal = ({ getHabitaciones, ZonasList,  UsuarioList }) => {
   const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
   const [Estado, setEstado] = useState("");
   const [Precio, setPrecio] = useState("");
   const [Zona, setZona] = useState("");
+  const [IdUsuarios, setIdUsuarios] = useState("");
   const [setFormularioVisible] = useState(true);
 
   const limpiarCampos = () => {
@@ -18,12 +19,14 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
     setEstado("");
     setPrecio("");
     setZona("");
+    setIdUsuarios("");
     setErrorMessages({
       Id: "",
       Nombre: "",
       Estado: "",
       Precio: "",
       Zona: "",
+      IdUsuarios:"",
     });
   };
   const [errorMessages, setErrorMessages] = useState({
@@ -91,6 +94,19 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
           setErrorMessages({ ...errorMessages, Zona: "" });
         }
         break;
+        case "IdUsuarios":
+          const idUsuariosPattern = /^\d+$/;
+          if (!idUsuariosPattern.test(IdUsuarios) || parseInt(IdUsuarios, 10) === 0) {
+            setErrorMessages({
+              ...errorMessages,
+              IdUsuarios: "El campo Id debe contener solo números y no ser igual a cero.",
+            });
+          } else {
+            setErrorMessages({ ...errorMessages, IdUsuarios: "" });
+          }
+          break;
+
+
       default:
         break;
     }
@@ -106,7 +122,8 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
         Nombre === "" ||
         Estado === "" ||
         Precio === "" ||
-        Zona === ""
+        Zona === "" ||
+        IdUsuarios === ""
       ) {
         mostrarMensajeError();
       } else {
@@ -116,11 +133,12 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
           Estado,
           Precio,
           Zona,
+          IdUsuarios,
         });
 
         getHabitaciones();
         limpiarCampos();
-        setFormularioVisible(false);
+        //setFormularioVisible(false);
       }
     } else {
       mostrarMensajeError();
@@ -133,6 +151,7 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
     validateField("Estado");
     validateField("Precio");
     validateField("Zona");
+    validateField("IdUsuarios");
   };
   const mostrarMensajeError = () => {
     Swal.fire({
@@ -316,6 +335,64 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList }) => {
                   <div className="text-danger">{errorMessages.Zona}</div>
                 )}
               </div>
+
+              <div className="input-group mb-3">
+                <label
+                  className="input-group-text"
+                  htmlFor="inputGroupSelectZona"
+                >
+                  Usuario
+                </label>
+                <select
+                  className="form-select"
+                  id="inputGroupSelectUsuario"
+                  value={IdUsuarios}
+                  onChange={(event) => {
+                    setIdUsuarios(event.target.value);
+                  }}
+                  onBlur={() => {
+                    validateField("IdUsuarios");
+                  }}
+                >
+                  <option value="" disabled>
+                    Selecciona un usuario
+                  </option>
+                  {UsuarioList.map((IdUsuarios) => (
+                    <option key={IdUsuarios.id} value={IdUsuarios.id}>
+                      {IdUsuarios.id}
+                    </option>
+                  ))}
+                </select>
+                {errorMessages.IdUsuarios && (
+                  <div className="text-danger">{errorMessages.IdUsuarios}</div>
+                )}
+              </div>
+
+
+              {/* <div className="input-group mb-3">
+                <span className="input-group-text" id="basic-addon1">
+                  Usuario
+                </span>
+                <input
+                  type="text"
+                  value={IdUsuarios}
+                  onChange={(event) => {
+                    setIdUsuarios(event.target.value);
+                  }}
+                  onBlur={() => {
+                    validateField("IdUsuarios");
+                  }}
+                  className="form-control"
+                  aria-label="IdUsuarios"
+                  aria-describedby="basic-addon1"
+                />
+                {errorMessages.IdUsuarios && (
+                  <div className="text-danger">{errorMessages.IdUsuarios}</div>
+                )}
+              </div>
+
+ */}
+
             </div>
             <div className="modal-footer">
               <button

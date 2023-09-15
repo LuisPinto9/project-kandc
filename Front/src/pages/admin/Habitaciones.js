@@ -14,6 +14,7 @@ import "../../css/tabla.css";
 
 //verificar
 import { zonas } from "../../controllers/ZonasControllers";
+import { arrendatarios } from "../../controllers/UserControllers";
 
 const Habitaciones = () => {
   const [Id, setId] = useState("");
@@ -21,8 +22,13 @@ const Habitaciones = () => {
   const [Estado, setEstado] = useState("");
   const [Precio, setPrecio] = useState("");
   const [Zona, setZona] = useState("");
+ 
   const [HabitacionesList, setHabitaciones] = useState([]);
   const [ZonasList, setZonas] = useState([]);
+  //usuarios
+  const [UsuarioList, setUsuarios] = useState([]);
+  const [IdUsuarios, setIdUsuarios] = useState("");
+
   const [NombreBuscar, setNombreBuscar] = useState("");
   const [buscarState, setBuscarState] = useState(false);
 
@@ -42,6 +48,7 @@ const Habitaciones = () => {
     setEstado(val.estado);
     setPrecio(val.precio);
     setZona(val.zonas);
+    setIdUsuarios(val.IdUsuarios);
   };
 
   //verificar
@@ -56,6 +63,17 @@ const Habitaciones = () => {
       });
   };
 
+  const getArrendatarios = async () => {
+    //aqui
+    await arrendatarios()
+      .then((data) => {
+        setUsuarios(data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los usuarios:", error);
+      });
+  };
+
   const buscarNombre = async () => {
     try {
       await buscarHabitacion(NombreBuscar).then((data) => {
@@ -67,6 +85,7 @@ const Habitaciones = () => {
   useEffect(() => {
     getHabitaciones();
     getZonas();
+    getArrendatarios();
   }, []);
 
   let autoIncrementa = 1;
@@ -119,6 +138,7 @@ const Habitaciones = () => {
             <PostHabitacionesModal
               getHabitaciones={getHabitaciones}
               ZonasList={ZonasList}
+              UsuarioList={UsuarioList}
             />
           </div>
         </div>
@@ -135,6 +155,7 @@ const Habitaciones = () => {
                 <th scope="col">Estado</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Zona</th>
+                <th scope="col">IdUsuarios</th>
                 <th scope="col">Editar</th>
                 <th className="row-border-right" scope="col">
                   Borrar
@@ -155,6 +176,7 @@ const Habitaciones = () => {
                       <td>{val.estado}</td>
                       <td>{val.precio}</td>
                       <td>{val.zonas}</td>
+                      <td>{val.idUsuarios}</td>
                       <td>
                         <i
                           type="button"
@@ -172,6 +194,7 @@ const Habitaciones = () => {
                             Estado: Estado,
                             Precio: Precio,
                             Zona: Zona,
+                            IdUsuarios: IdUsuarios,
                           }}
                           getHabitaciones={getHabitaciones}
                         />

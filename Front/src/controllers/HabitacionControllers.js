@@ -11,6 +11,7 @@ export const add = async (datos) => {
         Estado: datos.Estado,
         Precio: datos.Precio,
         Zona: datos.Zona,
+        IdUsuarios: datos.IdUsuarios,
       },
       {
         headers: {
@@ -43,6 +44,7 @@ export const update = async (datos) => {
         Estado: datos.Estado,
         Precio: datos.Precio,
         Zona: datos.Zona,
+        IdUsuarios: datos.IdUsuarios,
       },
       {
         headers: {
