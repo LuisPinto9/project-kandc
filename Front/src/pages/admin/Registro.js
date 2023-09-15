@@ -37,8 +37,8 @@ function Registro() {
       });
   };
 
-  const buscarId = () => {
-    buscarUsuario(idBuscar).then((data) => {
+  const buscarId = async () => {
+    await buscarUsuario(idBuscar).then((data) => {
       setArrendatarios(data);
     });
   };

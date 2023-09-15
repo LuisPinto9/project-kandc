@@ -33,8 +33,8 @@ const Zonas = () => {
       });
   };
 
-  const buscarId = () => {
-    buscarZona(idBuscar).then((data) => {
+  const buscarId = async () => {
+    await buscarZona(idBuscar).then((data) => {
       setZonas(data);
     });
   };

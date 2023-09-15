@@ -141,3 +141,20 @@ export const buscarUsuario = async (idBuscar) => {
     return null;
   }
 };
+
+export const buscarUsuarioId = async (idBuscar) => {
+  try {
+    const response = await Axios.get(
+      `http://localhost:4000/user/find-user-id/${idBuscar}`,
+      {
+        headers: {
+          Authorization: localStorage.getItem("auth"),
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener los datos del arrendatario", error);
+    return null;
+  }
+};

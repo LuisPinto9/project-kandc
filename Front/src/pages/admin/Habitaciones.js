@@ -56,8 +56,8 @@ const Habitaciones = () => {
       });
   };
 
-  const buscarNombre = () => {
-    buscarHabitacion(NombreBuscar).then((data) => {
+  const buscarNombre = async () => {
+    await buscarHabitacion(NombreBuscar).then((data) => {
       setHabitaciones(data);
     });
   };

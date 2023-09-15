@@ -50,8 +50,8 @@ const Componentes = () => {
       });
   };
 
-  const buscarNombre = () => {
-    buscarComponente(NombreBuscar).then((data) => {
+  const buscarNombre = async () => {
+    await buscarComponente(NombreBuscar).then((data) => {
       setComponentes(data);
     });
   };

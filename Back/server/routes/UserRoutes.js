@@ -11,6 +11,10 @@ router.get("/find-user/:idBuscar", check.auth, (req, res) => {
   userController.findById(req, res);
 });
 
+router.get("/find-user-id/:idBuscar", check.auth, (req, res) => {
+  userController.findByUser(req, res);
+});
+
 router.post("/create", check.auth, (req, res) => {
   userController.createUser(req, res);
 });

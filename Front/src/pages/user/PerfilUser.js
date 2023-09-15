@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import BarraLateral from "../../components/BarraLateral";
 import "../../css/perfil.css";
+import { buscarUsuarioId } from "../../controllers/UserControllers";
 
 const PerfilUser = () => {
+  const [arrendatario, setArrendatario] = useState([]);
+
+  const getArrendatario = async () => {
+    await buscarUsuarioId(parseInt(localStorage.getItem("id"))).then((data) => {
+      setArrendatario(data);
+    });
+    console.log(arrendatario);
+  };
+
   return (
     <div className="d-flex" style={{ minHeight: "78.6vh" }}>
       <div className="div-barra">
@@ -14,7 +24,7 @@ const PerfilUser = () => {
             <div className="mb-2 pt-4 pb-2 d-flex">
               <div className="info-div ps-5">
                 <label className="mb-2">Usuario</label>
-                <div className="form-control">Contenido del div</div>
+                <div className="form-control">{arrendatario.nombre_usuario}</div>
               </div>
               <div className="info-div ps-5">
                 <label className="mb-2">Identificación</label>
@@ -37,17 +47,13 @@ const PerfilUser = () => {
             </div>
             <div className="mb-4 d-flex">
               <div className="info-div ps-5">
-                <label className="mb-2">Fecha de pago del arriendo</label>
-                <div className="form-control">Contenido del div</div>
-              </div>
-              <div className="info-div ps-5">
                 <label className="mb-2">Estado</label>
                 <div className="form-control">Contenido del div</div>
               </div>
-            </div>
-            <div className="info-div ps-5">
-              <label className="mb-2">Valor del arriendo</label>
-              <div className="form-control">Contenido del div</div>
+              <div className="info-div ps-5">
+                <label className="mb-2">Valor del arriendo</label>
+                <div className="form-control">Contenido del div</div>
+              </div>
             </div>
           </div>
         </div>
