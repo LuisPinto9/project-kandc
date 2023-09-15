@@ -1,17 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BarraLateral from "../../components/BarraLateral";
 import "../../css/perfil.css";
 import { buscarUsuarioId } from "../../controllers/UserControllers";
 
 const PerfilUser = () => {
-  const [arrendatario, setArrendatario] = useState([]);
+  const [nombreUsuario, setNombreUsuario] = useState("");
+  const [nombre, setNombre] = useState("");
+  const [identificacion, setIdentificacion] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [email, setEmail] = useState("");
+  const [estado] = useState("");
+  const [value] = useState("");
 
-  const getArrendatario = async () => {
-    await buscarUsuarioId(parseInt(localStorage.getItem("id"))).then((data) => {
-      setArrendatario(data);
-    });
-    console.log(arrendatario);
+  const obtenerInformacionArrendatario = async () => {
+    try {
+      const data = await buscarUsuarioId(parseInt(localStorage.getItem("id")));
+      if (data) {
+        console.log(data);
+        setNombreUsuario(data[0].nombre_usuario)
+        setNombre(data[0].nombre)
+        setIdentificacion(data[0].id)
+        setTelefono(data[0].telefono)
+        setEmail(data[0].correo)
+      } else {
+        console.error("No se encontraron datos del arrendatario.");
+      }
+    } catch (error) {
+      console.error("Error al obtener los datos del arrendatario", error);
+    }
   };
+
+  useEffect(() => {
+    obtenerInformacionArrendatario();
+  }, []);
 
   return (
     <div className="d-flex" style={{ minHeight: "78.6vh" }}>
@@ -24,35 +45,49 @@ const PerfilUser = () => {
             <div className="mb-2 pt-4 pb-2 d-flex">
               <div className="info-div ps-5">
                 <label className="mb-2">Usuario</label>
-                <div className="form-control">{arrendatario.nombre_usuario}</div>
+                <div className="form-control">
+                  {nombreUsuario ? nombreUsuario : "Cargando..."}
+                </div>
               </div>
               <div className="info-div ps-5">
                 <label className="mb-2">Identificación</label>
-                <div className="form-control">Contenido del div</div>
+                <div className="form-control">
+                  {identificacion ? identificacion : "Cargando..."}
+                </div>
               </div>
             </div>
             <div className="info-div1 ps-5">
               <label className="mb-2">Nombre</label>
-              <div className="form-control">Contenido del div</div>
+              <div className="form-control">
+                {nombre ? nombre : "Cargando..."}
+              </div>
             </div>
             <div className="mb-2 py-3 d-flex">
               <div className="info-div ps-5">
                 <label className="mb-2">Teléfono</label>
-                <div className="form-control">Contenido del div</div>
+                <div className="form-control">
+                  {telefono ? telefono : "Cargando..."}
+                </div>
               </div>
               <div className="info-div ps-5">
                 <label className="mb-2">Correo electrónico</label>
-                <div className="form-control">Contenido del div</div>
+                <div className="form-control">
+                  {email ? email : "Cargando..."}
+                </div>
               </div>
             </div>
             <div className="mb-4 d-flex">
               <div className="info-div ps-5">
                 <label className="mb-2">Estado</label>
-                <div className="form-control">Contenido del div</div>
+                <div className="form-control">
+                  {estado ? estado : "Cargando..."}
+                </div>
               </div>
               <div className="info-div ps-5">
                 <label className="mb-2">Valor del arriendo</label>
-                <div className="form-control">Contenido del div</div>
+                <div className="form-control">
+                  {value ? value : "Cargando..."}
+                </div>
               </div>
             </div>
           </div>
