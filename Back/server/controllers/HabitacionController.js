@@ -16,7 +16,7 @@ const createRoom = (req, res) => {
   const Estado = req.body.Estado;
   const Precio = req.body.Precio;
   const Zona = req.body.Zona;
-  const IdUsuarios = req.body.IdUsuarios;  
+  const IdUsuarios = req.body.IdUsuarios;
   db.query(
     "insert into habitaciones(id, nombre, estado,precio, zonas, idUsuarios) values(?,?,?,?,?,?)",
     [Id, Nombre, Estado, Precio, Zona, IdUsuarios],
@@ -36,7 +36,7 @@ const updateRoom = (req, res) => {
   const Estado = req.body.Estado;
   const Precio = req.body.Precio;
   const Zona = req.body.Zona;
-  const IdUsuarios = req.body.IdUsuarios; 
+  const IdUsuarios = req.body.IdUsuarios;
 
   db.query(
     "update habitaciones set nombre=?,estado=?,precio=?,zonas=? ,idUsuarios=?where id=?",

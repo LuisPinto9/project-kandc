@@ -7,20 +7,23 @@ app.use(cors());
 app.use(express.json());
 app.set("port", process.env.PORT);
 
-const crudRoutes = require("./routes/UserRoutes.js");
-app.use("/user", crudRoutes);
+const userRoutes = require("./routes/UserRoutes.js");
+app.use("/user", userRoutes);
 
-const crudRoutes2 = require("./routes/HabitacionRoutes.js");
-app.use("/habitaciones", crudRoutes2);
+const roomsRoutes = require("./routes/HabitacionRoutes.js");
+app.use("/habitaciones", roomsRoutes);
 
-const crudRoutes3 = require("./routes/ComponentesRoutes.js");
-app.use("/componentes", crudRoutes3);
+const componentsRoutes = require("./routes/ComponentesRoutes.js");
+app.use("/componentes", componentsRoutes);
 
-const crudRoutes4 = require("./routes/ZonasRoutes.js");
-app.use("/zonas", crudRoutes4);
+const zonesRoutes = require("./routes/ZonasRoutes.js");
+app.use("/zonas", zonesRoutes);
 
 const loginRoutes = require("./routes/LoginRoutes.js");
 app.use("/login", loginRoutes);
+
+const userRoomsRoutes = require("./routes/UserRoomsRoutes.js");
+app.use("/user-rooms", userRoomsRoutes);
 
 app.listen(app.get("port"), () => {
   console.log(`Corriendo en el puerto ${app.get("port")}`);

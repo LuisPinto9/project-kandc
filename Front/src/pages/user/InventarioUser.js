@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import BarraLateral from "../../components/BarraLateral";
-import { zonas, buscarZona } from "../../controllers/ZonasControllers";
 import zonasImage from "../../images/Company.png";
 import habitacionesImage from "../../images/Living Room.png";
 import componentesImage from "../../images/TV.png";
 import {
-  habitaciones,
-  buscarHabitacion,
-} from "../../controllers/HabitacionControllers";
-import {
-  componentes,
-  buscarComponente,
-} from "../../controllers/ComponentesControllers";
+  getRooms,
+  getComponents,
+  getZona,
+  findComponentes,
+  findHabitacion,
+  findZona,
+} from "../../controllers/UserRoomsController";
 
 const InventarioUser = () => {
   const [showZonas, setShowZonas] = useState(true);
@@ -27,7 +26,7 @@ const InventarioUser = () => {
   //Zonas
   const [ZonasList, setZonas] = useState([]);
   const getZonas = async () => {
-    await zonas()
+    await getZona()
       .then((data) => {
         setZonas(data);
       })
@@ -38,7 +37,7 @@ const InventarioUser = () => {
 
   const buscarIdZonas = async () => {
     try {
-      await buscarZona(idBuscar).then((data) => {
+      await findZona(idBuscar).then((data) => {
         setZonas(data);
       });
     } catch (error) {}
@@ -47,7 +46,7 @@ const InventarioUser = () => {
   //Habitaciones
   const [HabitacionesList, setHabitaciones] = useState([]);
   const getHabitaciones = async () => {
-    await habitaciones()
+    await getRooms()
       .then((data) => {
         setHabitaciones(data);
       })
@@ -58,7 +57,7 @@ const InventarioUser = () => {
 
   const buscarNombreHabitaciones = async () => {
     try {
-      await buscarHabitacion(NombreBuscarHabitacion).then((data) => {
+      await findHabitacion(NombreBuscarHabitacion).then((data) => {
         setHabitaciones(data);
       });
     } catch (error) {}
@@ -67,7 +66,7 @@ const InventarioUser = () => {
   //Componentes
   const [ComponentesList, setComponentes] = useState([]);
   const getComponentes = async () => {
-    await componentes()
+    await getComponents()
       .then((data) => {
         setComponentes(data);
       })
@@ -78,7 +77,7 @@ const InventarioUser = () => {
 
   const buscarNombreComponentes = async () => {
     try {
-      await buscarComponente(NombreBuscar).then((data) => {
+      await findComponentes(NombreBuscar).then((data) => {
         setComponentes(data);
       });
     } catch (error) {}
@@ -105,12 +104,12 @@ const InventarioUser = () => {
               setShowHabitaciones(false);
               setShowComponentes(false);
               setBuscarState(false);
-              setIdBuscar("")
-              setNombreBuscarHabitacion("")
-              setNombreBuscar("")
-              getComponentes()
-              getZonas()
-              getHabitaciones()
+              setIdBuscar("");
+              setNombreBuscarHabitacion("");
+              setNombreBuscar("");
+              getComponentes();
+              getZonas();
+              getHabitaciones();
             }}
           >
             <div>
@@ -125,12 +124,12 @@ const InventarioUser = () => {
               setShowHabitaciones(true);
               setShowComponentes(false);
               setBuscarState(false);
-              setIdBuscar("")
-              setNombreBuscarHabitacion("")
-              setNombreBuscar("")
-              getComponentes()
-              getZonas()
-              getHabitaciones()
+              setIdBuscar("");
+              setNombreBuscarHabitacion("");
+              setNombreBuscar("");
+              getComponentes();
+              getZonas();
+              getHabitaciones();
             }}
           >
             <div>
@@ -145,12 +144,12 @@ const InventarioUser = () => {
               setShowHabitaciones(false);
               setShowComponentes(true);
               setBuscarState(false);
-              setIdBuscar("")
-              setNombreBuscarHabitacion("")
-              setNombreBuscar("")
-              getComponentes()
-              getZonas()
-              getHabitaciones()
+              setIdBuscar("");
+              setNombreBuscarHabitacion("");
+              setNombreBuscar("");
+              getComponentes();
+              getZonas();
+              getHabitaciones();
             }}
           >
             <div>
