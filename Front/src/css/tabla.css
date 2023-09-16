@@ -27,3 +27,19 @@
   font-size: 1.05rem !important;
   line-height: 1 !important; 
 }
+
+.table-responsive{
+  max-height: 62vh !important;
+  overflow-y: auto !important;
+  overflow-x: auto !important;
+  padding-right: 3px !important;
+  /* Estilos para navegadores basados en WebKit (Chrome, Safari, etc.) */
+  &::-webkit-scrollbar {
+    width: 10px; /* Ancho de la barra de desplazamiento */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #aaa9a9; /* Color de la barra de desplazamiento */
+  }
+}
