@@ -10,6 +10,16 @@ const getZonas = (req, res) => {
   });
 };
 
+const getZonasInicio = (req, res) => {
+  db.query("SELECT id, nombre, precio FROM zonas", (err, result) => {
+    if (err) {
+      res.status(500).send("Hubo un error en el servidor");
+    } else {
+      res.send(result);
+    }
+  });
+};
+
 const createZona = (req, res) => {
   const Id = req.body.Id;
   const Nombre = req.body.Nombre;
@@ -36,7 +46,6 @@ const updateZona = (req, res) => {
   const Descripcion = req.body.Descripcion;
   const Precio = req.body.Precio;
   const Acceso = req.body.Acceso;
-  
 
   db.query(
     "update zonas set nombre=?,descripcion=?,precio=?,acceso=? where id=?",
@@ -80,6 +89,7 @@ const findById = (req, res) => {
 
 module.exports = {
   getZonas,
+  getZonasInicio,
   createZona,
   updateZona,
   deleteZona,

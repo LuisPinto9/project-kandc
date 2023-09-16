@@ -111,6 +111,16 @@ export const zonas = async () => {
   }
 };
 
+export const getZonasInicio = async () => {
+  try {
+    const response = await Axios.get("http://localhost:4000/zonas/get-zonas-inicio");
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener los datos de las zonas:", error);
+    return null;
+  }
+};
+
 export const buscarZona = async (idBuscar) => {
   try {
     const response = await Axios.get(
