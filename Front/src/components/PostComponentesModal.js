@@ -4,7 +4,6 @@ import "../css/modal.css";
 import Swal from "sweetalert2";
 
 const PostComponentesModal = ({ getComponentes, HabitacionesList }) => {
-  /* const PostComponentesModal = ({ getComponentes }) => { */
   const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
   const [Marca, setMarca] = useState("");
@@ -14,7 +13,6 @@ const PostComponentesModal = ({ getComponentes, HabitacionesList }) => {
   const [Descripcion, setDescripcion] = useState("");
   const [Observacion, setObservacion] = useState("");
   const [Habitacion, setHabitacion] = useState("");
-  const [setFormularioVisible] = useState(true);
 
   const limpiarCampos = () => {
     setId("");

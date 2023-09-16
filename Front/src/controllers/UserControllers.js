@@ -22,7 +22,6 @@ export const add = async (datos) => {
         },
       }
     );
-
     Swal.fire({
       title: "<strong>Registro exitoso</strong>",
       html:
@@ -33,7 +32,13 @@ export const add = async (datos) => {
       timer: 2000,
     });
   } catch (error) {
-    console.error("Error al agregar arrendatario:", error);
+    Swal.fire({
+      title: "Error al registrar los datos",
+      text: "Por favor intentelo más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
   }
 };
 
@@ -69,7 +74,13 @@ export const update = async (datos) => {
       timer: 2000,
     });
   } catch (error) {
-    console.error("Error al actualizar arrendatario:", error);
+    Swal.fire({
+      title: "Error al actualizar el registro",
+      text: "Por favor intentelo más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
   }
 };
 
@@ -106,7 +117,13 @@ export const eliminar = async ({ val, getArrendatarios }) => {
       });
     }
   } catch (error) {
-    console.error("Error al eliminar arrendatario:", error);
+    Swal.fire({
+      title: "Error al eliminar el registro",
+      text: "Por favor intentelo más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
   }
 };
 
@@ -120,7 +137,13 @@ export const arrendatarios = async () => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos de arrendatarios:", error);
+    Swal.fire({
+      title: "Error al obtener los datos",
+      text: "Por favor intente ingresar más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
     return null;
   }
 };
@@ -137,7 +160,13 @@ export const buscarUsuario = async (idBuscar) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos del arrendatario", error);
+    Swal.fire({
+      title: "Error al obtener los datos",
+      text: "Por favor intente ingresar más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
     return null;
   }
 };
@@ -154,7 +183,13 @@ export const buscarUsuarioId = async (idBuscar) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos del arrendatario", error);
+    Swal.fire({
+      title: "Error al obtener los datos",
+      text: "Por favor intente ingresar más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
     return null;
   }
 };

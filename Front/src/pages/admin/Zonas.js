@@ -97,9 +97,7 @@ const Zonas = () => {
               />
             )}
           </div>
-          <div>
-            <PostZonasModal getZonas={getZonas} />
-          </div>
+          <div>{ZonasList && <PostZonasModal getZonas={getZonas} />}</div>
         </div>
         {/* aqui empieza la tabla  */}
         <div className="table-responsive">

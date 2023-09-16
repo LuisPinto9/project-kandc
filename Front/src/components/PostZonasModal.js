@@ -9,7 +9,6 @@ const PostZonasModal = ({ getZonas }) => {
   const [Descripcion, setDescripcion] = useState("");
   const [Precio, setPrecio] = useState("");
   const [Acceso, setAcceso] = useState("");
-  const [setFormularioVisible] = useState(true);
 
   const limpiarCampos = () => {
     setId("");

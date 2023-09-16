@@ -107,7 +107,9 @@ function Registro() {
             )}
           </div>
           <div>
-            <PostRegistroModal getArrendatarios={getArrendatarios} />
+            {ArrendatariosList && (
+              <PostRegistroModal getArrendatarios={getArrendatarios} />
+            )}
           </div>
         </div>
         {/* aqui empieza la tabla  */}

@@ -27,7 +27,13 @@ export const add = async (datos) => {
       timer: 2000,
     });
   } catch (error) {
-    console.error("Error al agregar zona:", error);
+    Swal.fire({
+      title: "Error al registrar los datos",
+      text: "Por favor intentelo más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
   }
 };
 
@@ -57,7 +63,13 @@ export const update = async (datos) => {
       timer: 2000,
     });
   } catch (error) {
-    console.error("Error al actualizar zona:", error);
+    Swal.fire({
+      title: "Error al actualizar el registro",
+      text: "Por favor intentelo más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
   }
 };
 
@@ -92,7 +104,13 @@ export const eliminar = async ({ val, getZonas }) => {
       });
     }
   } catch (error) {
-    console.error("Error al eliminar zona:", error);
+    Swal.fire({
+      title: "Error al eliminar el registro",
+      text: "Por favor intentelo más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
   }
 };
 
@@ -106,7 +124,13 @@ export const zonas = async () => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos de las zonas:", error);
+    Swal.fire({
+      title: "Error al obtener los datos",
+      text: "Por favor intente ingresar más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
     return null;
   }
 };
@@ -116,7 +140,13 @@ export const getZonasInicio = async () => {
     const response = await Axios.get("http://localhost:4000/zonas/get-zonas-inicio");
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos de las zonas:", error);
+    Swal.fire({
+      title: "Error al obtener los datos",
+      text: "Por favor intente ingresar más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
     return null;
   }
 };
@@ -133,7 +163,13 @@ export const buscarZona = async (idBuscar) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos de las zonas", error);
+    Swal.fire({
+      title: "Error al obtener los datos",
+      text: "Por favor intente ingresar más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
     return null;
   }
 };

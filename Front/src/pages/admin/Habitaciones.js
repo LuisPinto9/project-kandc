@@ -22,7 +22,7 @@ const Habitaciones = () => {
   const [Estado, setEstado] = useState("");
   const [Precio, setPrecio] = useState("");
   const [Zona, setZona] = useState("");
- 
+
   const [HabitacionesList, setHabitaciones] = useState([]);
   const [ZonasList, setZonas] = useState([]);
   //usuarios
@@ -134,12 +134,13 @@ const Habitaciones = () => {
             )}
           </div>
           <div>
-            {/*  <PostHabitacionesModal getHabitaciones={getHabitaciones} /> */}
-            <PostHabitacionesModal
-              getHabitaciones={getHabitaciones}
-              ZonasList={ZonasList}
-              UsuarioList={UsuarioList}
-            />
+            {HabitacionesList && (
+              <PostHabitacionesModal
+                getHabitaciones={getHabitaciones}
+                ZonasList={ZonasList}
+                UsuarioList={UsuarioList}
+              />
+            )}
           </div>
         </div>
         {/* aqui empieza la tabla  */}

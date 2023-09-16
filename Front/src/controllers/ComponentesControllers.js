@@ -33,7 +33,13 @@ export const add = async (datos) => {
       timer: 2000,
     });
   } catch (error) {
-    console.error("Error al agregar componente:", error);
+    Swal.fire({
+      title: "Error al registrar los datos",
+      text: "Por favor intentelo más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
   }
 };
 
@@ -69,7 +75,13 @@ export const update = async (datos) => {
       timer: 2000,
     });
   } catch (error) {
-    console.error("Error al actualizar componente:", error);
+    Swal.fire({
+      title: "Error al actualizar el registro",
+      text: "Por favor intentelo más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
   }
 };
 
@@ -87,7 +99,6 @@ export const eliminar = async ({ val, getComponentes }) => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Sí, eliminar",
     });
-
     if (result.isConfirmed) {
       // Hacer la solicitud DELETE con el ID en la URL
       await Axios.delete(`http://localhost:4000/componentes/delete/${val.id}`, {
@@ -109,7 +120,13 @@ export const eliminar = async ({ val, getComponentes }) => {
       });
     }
   } catch (error) {
-    console.error("Error al eliminar componente:", error);
+    Swal.fire({
+      title: "Error al eliminar el registro",
+      text: "Por favor intentelo más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
   }
 };
 
@@ -126,7 +143,13 @@ export const componentes = async () => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos:", error);
+    Swal.fire({
+      title: "Error al obtener los datos",
+      text: "Por favor intente ingresar más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
     return null;
   }
 };
@@ -143,7 +166,13 @@ export const buscarComponente = async (nombreBuscar) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos del componente", error);
+    Swal.fire({
+      title: "Error al obtener los datos",
+      text: "Por favor intente ingresar más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
     return null;
   }
 };

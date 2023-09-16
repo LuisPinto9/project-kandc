@@ -14,7 +14,6 @@ const FormRegistroPost = ({ getArrendatarios }) => {
   const [Contraseña, setContraseña] = useState("");
   const [Correo, setCorreo] = useState("");
   const [TipoUsuario, setTipoUsuario] = useState("");
- // const [setFormularioVisible] = useState(true);
 
   const limpiarCampos = () => {
     setIDUsuario("");

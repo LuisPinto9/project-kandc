@@ -121,10 +121,12 @@ const Componentes = () => {
             )}
           </div>
           <div>
-            <PostComponentesModal
-              getComponentes={getComponentes}
-              HabitacionesList={HabitacionesList}
-            />
+            {ComponentesList && (
+              <PostComponentesModal
+                getComponentes={getComponentes}
+                HabitacionesList={HabitacionesList}
+              />
+            )}
           </div>
         </div>
         {/* aqui empieza la tabla  */}

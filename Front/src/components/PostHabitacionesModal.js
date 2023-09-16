@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { add } from "../controllers/HabitacionControllers";
 import "../css/modal.css";
-
 import Swal from "sweetalert2";
 
 const PostHabitacionesModal = ({ getHabitaciones, ZonasList,  UsuarioList }) => {
@@ -11,7 +10,6 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList,  UsuarioList }) => 
   const [Precio, setPrecio] = useState("");
   const [Zona, setZona] = useState("");
   const [IdUsuarios, setIdUsuarios] = useState("");
-  const [setFormularioVisible] = useState(true);
 
   const limpiarCampos = () => {
     setId("");

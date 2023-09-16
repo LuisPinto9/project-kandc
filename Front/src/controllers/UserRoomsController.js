@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { Swal } from "sweetalert2";
 
 export const getRooms = async () => {
   try {
@@ -14,7 +15,13 @@ export const getRooms = async () => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos de las habitaciones:", error);
+    Swal.fire({
+      title: "Error al obtener los datos",
+      text: "Por favor intente ingresar más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
     return null;
   }
 };
@@ -33,7 +40,13 @@ export const getComponents = async () => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos de las habitaciones:", error);
+    Swal.fire({
+      title: "Error al obtener los datos",
+      text: "Por favor intente ingresar más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
     return null;
   }
 };
@@ -50,7 +63,13 @@ export const getZona = async () => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos de las habitaciones:", error);
+    Swal.fire({
+      title: "Error al obtener los datos",
+      text: "Por favor intente ingresar más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
     return null;
   }
 };
@@ -69,7 +88,13 @@ export const findHabitacion = async (nombreBuscar) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos de la habitacion", error);
+    Swal.fire({
+      title: "Error al obtener los datos",
+      text: "Por favor intente ingresar más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
     return null;
   }
 };
@@ -88,7 +113,13 @@ export const findComponentes = async (nombreBuscar) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos de la habitacion", error);
+    Swal.fire({
+      title: "Error al obtener los datos",
+      text: "Por favor intente ingresar más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
     return null;
   }
 };
@@ -107,7 +138,13 @@ export const findZona = async (idZona) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos de la habitacion", error);
+    Swal.fire({
+      title: "Error al obtener los datos",
+      text: "Por favor intente ingresar más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
     return null;
   }
 };

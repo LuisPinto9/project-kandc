@@ -30,7 +30,13 @@ export const add = async (datos) => {
       timer: 2000,
     });
   } catch (error) {
-    console.error("Error al agregar habitación:", error);
+    Swal.fire({
+      title: "Error al registrar los datos",
+      text: "Por favor intentelo más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
   }
 };
 
@@ -63,7 +69,13 @@ export const update = async (datos) => {
       timer: 2000,
     });
   } catch (error) {
-    console.error("Error al actualizar habitación:", error);
+    Swal.fire({
+      title: "Error al actualizar el registro",
+      text: "Por favor intentelo más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
   }
 };
 
@@ -105,7 +117,13 @@ export const eliminar = async ({ val, getHabitaciones }) => {
       });
     }
   } catch (error) {
-    console.error("Error al eliminar habitación:", error);
+    Swal.fire({
+      title: "Error al eliminar el registro",
+      text: "Por favor intentelo más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
   }
 };
 
@@ -122,7 +140,13 @@ export const habitaciones = async () => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos de las habitaciones:", error);
+    Swal.fire({
+      title: "Error al obtener los datos",
+      text: "Por favor intente ingresar más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
     return null;
   }
 };
@@ -139,7 +163,13 @@ export const buscarHabitacion = async (nombreBuscar) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error al obtener los datos de la habitacion", error);
+    Swal.fire({
+      title: "Error al obtener los datos",
+      text: "Por favor intente ingresar más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
     return null;
   }
 };
