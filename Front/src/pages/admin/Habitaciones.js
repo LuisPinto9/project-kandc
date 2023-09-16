@@ -155,7 +155,7 @@ const Habitaciones = () => {
                 <th scope="col">Estado</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Zona</th>
-                <th scope="col">IdUsuarios</th>
+                <th scope="col">ID de propietario</th>
                 <th scope="col">Editar</th>
                 <th className="row-border-right" scope="col">
                   Borrar

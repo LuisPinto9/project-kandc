@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import BarraLateral from "../../components/BarraLateral";
 import "../../css/perfil.css";
 import { buscarUsuarioId } from "../../controllers/UserControllers";
+import { getRooms } from "../../controllers/UserRoomsController";
 
 const PerfilUser = () => {
   const [nombreUsuario, setNombreUsuario] = useState("");
@@ -9,18 +10,18 @@ const PerfilUser = () => {
   const [identificacion, setIdentificacion] = useState("");
   const [telefono, setTelefono] = useState("");
   const [email, setEmail] = useState("");
-  const [estado] = useState("");
-  const [value] = useState("");
+  const [estado, setEstado] = useState("");
+  const [value, setValue] = useState("");
 
   const obtenerInformacionArrendatario = async () => {
     try {
       const data = await buscarUsuarioId(parseInt(localStorage.getItem("id")));
       if (data) {
-        setNombreUsuario(data[0].nombre_usuario)
-        setNombre(data[0].nombre)
-        setIdentificacion(data[0].id)
-        setTelefono(data[0].telefono)
-        setEmail(data[0].correo)
+        setNombreUsuario(data[0].nombre_usuario);
+        setNombre(data[0].nombre);
+        setIdentificacion(data[0].id);
+        setTelefono(data[0].telefono);
+        setEmail(data[0].correo);
       } else {
         console.error("No se encontraron datos del arrendatario.");
       }
@@ -29,8 +30,42 @@ const PerfilUser = () => {
     }
   };
 
+  const calcularValorArriendo = async () => {
+    let precioTotal = 0;
+    try {
+      const data = await getRooms();
+      data.forEach((room) => {
+        precioTotal += room.precio;
+      });
+    } catch (error) {
+      // Manejo de errores aquí
+    }
+    // Formatear el precioTotal como una cadena con separadores de miles
+    const precioTotalFormateado = precioTotal.toLocaleString();
+    // Agregar el símbolo de dólar
+    const precioTotalConDolar = "$" + precioTotalFormateado;
+    setValue(precioTotalConDolar);
+  };
+  
+
+  const estadoArriendo = async () => {
+    try {
+      const data = await getRooms();
+      // Verificar si data no está vacío
+      if (data && data.length > 0) {
+        setEstado("Arrendador activo");
+      } else {
+        setEstado("Arrendador inactivo");
+      }
+    } catch (error) {
+      // Manejo de errores aquí
+    }
+  };
+
   useEffect(() => {
     obtenerInformacionArrendatario();
+    calcularValorArriendo();
+    estadoArriendo();
   }, []);
 
   return (
@@ -43,7 +78,7 @@ const PerfilUser = () => {
           <div className="d-flex flex-column">
             <div className="mb-2 pt-4 pb-2 d-flex">
               <div className="info-div ps-5">
-                <label className="mb-2">Usuario</label>
+                <label className="mb-2">Nombre de usuario</label>
                 <div className="form-control">
                   {nombreUsuario ? nombreUsuario : "Cargando..."}
                 </div>
