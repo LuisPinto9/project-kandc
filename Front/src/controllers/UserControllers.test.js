@@ -3,7 +3,7 @@ import Axios from "axios";
 const config = {
   headers: {
     Authorization:
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMjQ1OTU5NywiaWF0IjoxNjk0MzY4OTM3LCJleHAiOjE2OTQ0NTUzMzd9.wU_iYK8nqDJvnJl3xY-3NKjJPHAxUdTZOQZHtS8qiSA",
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMjQ1OTU5NywiaWF0IjoxNjk0OTAzMjU2LCJleHAiOjE2OTQ5ODk2NTZ9.0LRoHWtn5ZlxDcZpHTWVw8fiXAkHJj3RZDuVege_ViA",
   },
 };
 
@@ -62,6 +62,16 @@ test("Put usuarios", async () => {
 test("Delete usuarios", async () => {
   let status = 404;
   await Axios.delete(`http://localhost:4000/user/delete/${3}`, config).then(
+    (data) => {
+      status = data.status;
+    }
+  );
+  expect(status).toBe(200);
+});
+
+test("Buscar usuario", async () => {
+  let status = 404;
+  await Axios.get(`http://localhost:4000/user/find-user-id/${4}`, config).then(
     (data) => {
       status = data.status;
     }

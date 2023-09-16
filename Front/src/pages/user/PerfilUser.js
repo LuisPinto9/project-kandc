@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import BarraLateral from "../../components/BarraLateral";
 import "../../css/perfil.css";
 import { buscarUsuarioId } from "../../controllers/UserControllers";
-import { getRooms } from "../../controllers/UserRoomsController";
+import { getRooms } from "../../controllers/UserRoomsControllers";
 
 const PerfilUser = () => {
   const [nombreUsuario, setNombreUsuario] = useState("");

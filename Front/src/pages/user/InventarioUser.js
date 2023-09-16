@@ -10,7 +10,7 @@ import {
   findComponentes,
   findHabitacion,
   findZona,
-} from "../../controllers/UserRoomsController";
+} from "../../controllers/UserRoomsControllers";
 
 const InventarioUser = () => {
   const [showZonas, setShowZonas] = useState(true);
