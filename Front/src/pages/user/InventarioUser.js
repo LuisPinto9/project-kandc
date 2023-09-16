@@ -4,24 +4,28 @@ import { zonas, buscarZona } from "../../controllers/ZonasControllers";
 import zonasImage from "../../images/Company.png";
 import habitacionesImage from "../../images/Living Room.png";
 import componentesImage from "../../images/TV.png";
+import {
+  habitaciones,
+  buscarHabitacion,
+} from "../../controllers/HabitacionControllers";
+import {
+  componentes,
+  buscarComponente,
+} from "../../controllers/ComponentesControllers";
 
 const InventarioUser = () => {
   const [showZonas, setShowZonas] = useState(true);
   const [showComponentes, setShowComponentes] = useState(false);
   const [showHabitaciones, setShowHabitaciones] = useState(false);
-  const [NombreBuscar, setNombreBuscar] = useState("");  
-  const [idBuscar, setIdBuscar] = useState("");  
+  const [NombreBuscarHabitacion, setNombreBuscarHabitacion] = useState("");
+  const [NombreBuscar, setNombreBuscar] = useState("");
+  const [idBuscar, setIdBuscar] = useState("");
   const [buscarState, setBuscarState] = useState(false);
 
   let autoIncrementa = 1;
 
   //Zonas
   const [ZonasList, setZonas] = useState([]);
-  //Habitaciones
-  const [HabitacionesList, setHabitaciones] = useState([]);
-  //Componentes
-  const [ComponentesList, setComponentes] = useState([]);
-
   const getZonas = async () => {
     await zonas()
       .then((data) => {
@@ -40,8 +44,50 @@ const InventarioUser = () => {
     } catch (error) {}
   };
 
+  //Habitaciones
+  const [HabitacionesList, setHabitaciones] = useState([]);
+  const getHabitaciones = async () => {
+    await habitaciones()
+      .then((data) => {
+        setHabitaciones(data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener las habitaciones:", error);
+      });
+  };
+
+  const buscarNombreHabitaciones = async () => {
+    try {
+      await buscarHabitacion(NombreBuscarHabitacion).then((data) => {
+        setHabitaciones(data);
+      });
+    } catch (error) {}
+  };
+
+  //Componentes
+  const [ComponentesList, setComponentes] = useState([]);
+  const getComponentes = async () => {
+    await componentes()
+      .then((data) => {
+        setComponentes(data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los componentes:", error);
+      });
+  };
+
+  const buscarNombreComponentes = async () => {
+    try {
+      await buscarComponente(NombreBuscar).then((data) => {
+        setComponentes(data);
+      });
+    } catch (error) {}
+  };
+
   useEffect(() => {
     getZonas();
+    getHabitaciones();
+    getComponentes();
   }, []);
 
   return (
@@ -53,11 +99,18 @@ const InventarioUser = () => {
       <div className="container pt-3 col-sm-7 col-md-9 col-xl-10">
         <div className="d-flex justify-content-evenly pb-1">
           <button
-            className="btn button-selection-user link-to d-flex align-items-center"
+            className="btn button-selection-user link-to d-flex align-items-center justify-content-center"
             onClick={() => {
               setShowZonas(true);
               setShowHabitaciones(false);
               setShowComponentes(false);
+              setBuscarState(false);
+              setIdBuscar("")
+              setNombreBuscarHabitacion("")
+              setNombreBuscar("")
+              getComponentes()
+              getZonas()
+              getHabitaciones()
             }}
           >
             <div>
@@ -66,11 +119,18 @@ const InventarioUser = () => {
             <div className="ps-1">Zonas</div>
           </button>
           <button
-            className="btn button-selection-user link-to d-flex align-items-center"
+            className="btn button-selection-user link-to d-flex align-items-center justify-content-center"
             onClick={() => {
               setShowZonas(false);
               setShowHabitaciones(true);
               setShowComponentes(false);
+              setBuscarState(false);
+              setIdBuscar("")
+              setNombreBuscarHabitacion("")
+              setNombreBuscar("")
+              getComponentes()
+              getZonas()
+              getHabitaciones()
             }}
           >
             <div>
@@ -79,11 +139,18 @@ const InventarioUser = () => {
             <div className="ps-1">Habitaciones</div>
           </button>
           <button
-            className="btn button-selection-user link-to d-flex align-items-center"
+            className="btn button-selection-user link-to d-flex align-items-center justify-content-center"
             onClick={() => {
               setShowZonas(false);
               setShowHabitaciones(false);
               setShowComponentes(true);
+              setBuscarState(false);
+              setIdBuscar("")
+              setNombreBuscarHabitacion("")
+              setNombreBuscar("")
+              getComponentes()
+              getZonas()
+              getHabitaciones()
             }}
           >
             <div>
@@ -177,21 +244,24 @@ const InventarioUser = () => {
                 <input
                   type="text"
                   className="form-control"
-                  value={idBuscar}
-                  placeholder="Comienze a escribir números para filtrar los ID"
-                  aria-label="Id de la zona"
+                  value={NombreBuscarHabitacion}
+                  placeholder="Comienze a escribir letras para filtrar los nombres"
+                  aria-label="Id de usuario del destinatario"
                   aria-describedby="basic-addon1"
                   onChange={(event) => {
-                    const newValue = event.target.value.replace(/[^0-9]/g, "");
-                    setIdBuscar(newValue);
+                    const newValue = event.target.value.replace(
+                      /[^a-zA-Z]/g,
+                      ""
+                    );
+                    setNombreBuscarHabitacion(newValue);
                   }}
                   onKeyUp={() => {
-                    if (idBuscar !== "") {
-                      buscarIdZonas();
+                    if (NombreBuscarHabitacion !== "") {
+                      buscarNombreHabitaciones();
                       setBuscarState(true);
-                    } else if (idBuscar === "") {
-                      getZonas();
-                      setIdBuscar("");
+                    } else if (NombreBuscarHabitacion === "") {
+                      getHabitaciones();
+                      setNombreBuscarHabitacion("");
                       setBuscarState(false);
                     }
                   }}
@@ -202,14 +272,15 @@ const InventarioUser = () => {
                     className="bi bi-x ps-1"
                     style={{ fontSize: "2rem", color: "black" }}
                     onClick={() => {
-                      getZonas();
-                      setIdBuscar("");
+                      getHabitaciones();
+                      setNombreBuscarHabitacion("");
                       setBuscarState(false);
                     }}
                   />
                 )}
               </div>
             </div>
+            {/* aqui empieza la tabla  */}
             <div className="table-responsive">
               <table className="table tabla-get text-center">
                 <thead>
@@ -217,18 +288,18 @@ const InventarioUser = () => {
                     <th className="row-border-left" scope="col">
                       #
                     </th>
-                    <th scope="col">ID zona</th>
+                    <th scope="col">ID habitación</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Descripción</th>
+                    <th scope="col">Estado</th>
                     <th scope="col">Precio</th>
                     <th className="row-border-right" scope="col">
-                      Tipo de acceso
+                      Zona
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {ZonasList &&
-                    ZonasList.map((val, key) => {
+                  {HabitacionesList &&
+                    HabitacionesList.map((val, key) => {
                       return (
                         <tr key={key}>
                           <th className="row-border-left" scope="row">
@@ -237,9 +308,9 @@ const InventarioUser = () => {
                           {/* van los nombres de la base de datos en si */}
                           <td>{val.id}</td>
                           <td>{val.nombre}</td>
-                          <td>{val.descripcion}</td>
+                          <td>{val.estado}</td>
                           <td>{val.precio}</td>
-                          <td className="row-border-right">{val.acceso}</td>
+                          <td className="row-border-right">{val.zonas}</td>
                         </tr>
                       );
                     })}
@@ -255,21 +326,24 @@ const InventarioUser = () => {
                 <input
                   type="text"
                   className="form-control"
-                  value={idBuscar}
-                  placeholder="Comienze a escribir números para filtrar los ID"
-                  aria-label="Id de la zona"
+                  value={NombreBuscar}
+                  placeholder="Comienze a escribir letras para filtrar los nombres"
+                  aria-label="Id de usuario del destinatario"
                   aria-describedby="basic-addon1"
                   onChange={(event) => {
-                    const newValue = event.target.value.replace(/[^0-9]/g, "");
-                    setIdBuscar(newValue);
+                    const newValue = event.target.value.replace(
+                      /[^a-zA-Z]/g,
+                      ""
+                    );
+                    setNombreBuscar(newValue);
                   }}
                   onKeyUp={() => {
-                    if (idBuscar !== "") {
-                      buscarIdZonas();
+                    if (NombreBuscar !== "") {
+                      buscarNombreComponentes();
                       setBuscarState(true);
-                    } else if (idBuscar === "") {
-                      getZonas();
-                      setIdBuscar("");
+                    } else if (NombreBuscar === "") {
+                      getComponentes();
+                      setNombreBuscar("");
                       setBuscarState(false);
                     }
                   }}
@@ -280,14 +354,15 @@ const InventarioUser = () => {
                     className="bi bi-x ps-1"
                     style={{ fontSize: "2rem", color: "black" }}
                     onClick={() => {
-                      getZonas();
-                      setIdBuscar("");
+                      getComponentes();
+                      setNombreBuscar("");
                       setBuscarState(false);
                     }}
                   />
                 )}
               </div>
             </div>
+            {/* aqui empieza la tabla  */}
             <div className="table-responsive">
               <table className="table tabla-get text-center">
                 <thead>
@@ -295,18 +370,22 @@ const InventarioUser = () => {
                     <th className="row-border-left" scope="col">
                       #
                     </th>
-                    <th scope="col">ID zona</th>
+                    <th scope="col">ID componente</th>
                     <th scope="col">Nombre</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Costo</th>
+                    <th scope="col">Estado</th>
                     <th scope="col">Descripción</th>
-                    <th scope="col">Precio</th>
+                    <th scope="col">Observación</th>
                     <th className="row-border-right" scope="col">
-                      Tipo de acceso
+                      Habitación
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {ZonasList &&
-                    ZonasList.map((val, key) => {
+                  {ComponentesList &&
+                    ComponentesList.map((val, key) => {
                       return (
                         <tr key={key}>
                           <th className="row-border-left" scope="row">
@@ -315,9 +394,13 @@ const InventarioUser = () => {
                           {/* van los nombres de la base de datos en si */}
                           <td>{val.id}</td>
                           <td>{val.nombre}</td>
+                          <td>{val.marca}</td>
+                          <td>{val.cantidad}</td>
+                          <td>{val.cantidad}</td>
+                          <td>{val.estado}</td>
                           <td>{val.descripcion}</td>
-                          <td>{val.precio}</td>
-                          <td className="row-border-right">{val.acceso}</td>
+                          <td>{val.observacion}</td>
+                          <td className="row-border-right">{val.habitacion}</td>
                         </tr>
                       );
                     })}

@@ -16,7 +16,6 @@ const PerfilUser = () => {
     try {
       const data = await buscarUsuarioId(parseInt(localStorage.getItem("id")));
       if (data) {
-        console.log(data);
         setNombreUsuario(data[0].nombre_usuario)
         setNombre(data[0].nombre)
         setIdentificacion(data[0].id)
