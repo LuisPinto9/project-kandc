@@ -11,6 +11,7 @@ import {
 } from "../../controllers/UserControllers";
 import PostRegistroModal from "../../components/PostRegistroModal";
 import PutRegistroModal from "../../components/PutRegistroModal";
+import UserForm from "../../components/RegistroPostPut";
 
 function Registro() {
   /* datos de los arrendatarios */
@@ -42,7 +43,7 @@ function Registro() {
       await buscarUsuario(idBuscar).then((data) => {
         setArrendatarios(data);
       });
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const EditarArrendatarios = (val) => {
@@ -107,9 +108,23 @@ function Registro() {
             )}
           </div>
           <div>
+            {/*  <PostRegistroModal getArrendatarios={getArrendatarios} />*/}
+
+
             {ArrendatariosList && (
-              <PostRegistroModal getArrendatarios={getArrendatarios} />
+              <UserForm
+                modoEdicion={false} // Establece el modo de edición a false para agregar
+                usuario={null} // Puedes pasar null o un objeto vacío para agregar
+                getArrendatarios={getArrendatarios}
+              />
             )}
+
+            <i
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop-post"
+              className="bi bi-plus-circle-fill btn-add"
+            />
           </div>
         </div>
         {/* aqui empieza la tabla  */}
@@ -163,8 +178,10 @@ function Registro() {
                             EditarArrendatarios(val);
                           }}
                         />
-                        <PutRegistroModal
-                          values={{
+                        {/*  /aqui */}
+                        <UserForm
+                          modoEdicion={true} // Establece el modo de edición a true
+                          usuario={{
                             IDUsuario: IDUsuario,
                             Nombre: Nombre,
                             MetodoRenta: MetodoRenta,
@@ -177,6 +194,7 @@ function Registro() {
                           }}
                           getArrendatarios={getArrendatarios}
                         />
+
                       </td>
                       <td className="row-border-right">
                         <i
