@@ -12,6 +12,7 @@ export const verificar = async (datos) => {
     );
     localStorage.setItem("auth", response.data.token);
     localStorage.setItem("id", response.data.id);
+    localStorage.setItem("tipo", response.data.tipo);
     return response.data; // Devuelve los datos si la solicitud fue exitosa
   } catch (error) {
     Swal.fire({

@@ -12,6 +12,7 @@ import "../../css/tabla.css";
 //verificar
 import { habitaciones } from "../../controllers/HabitacionControllers";
 import ComponentesForm from "../../components/ComponentesModal";
+import PDFGenerator from "../../components/PDFGenerator";
 
 
 const Componentes = () => {
@@ -220,6 +221,13 @@ const Componentes = () => {
                 })}
             </tbody>
           </table>
+        </div>
+        <div className="py-3">
+          <PDFGenerator
+            lista={ComponentesList}
+            nombreLista={"componentes"}
+            multiList={false}
+          />
         </div>
       </div>
     </div>

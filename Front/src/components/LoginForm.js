@@ -38,7 +38,6 @@ const LoginForm = () => {
     } catch (error) {
       // Maneja cualquier error que pueda ocurrir
       mostrarMensajeError();
-      console.error("Usuario o contraseña incorrectos");
     }
     limpiarCampos();
   };

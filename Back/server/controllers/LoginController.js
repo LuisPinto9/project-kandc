@@ -12,7 +12,7 @@ const getUser = (req, res) => {
     });
   }
   db.query(
-    "select * from usuario where nombre_usuario = ? and contraseña= ?",
+    "select id, nombre_usuario, contraseña, tipo from usuario where nombre_usuario = ? and contraseña= ?",
     [NombreUsuario, Contraseña],
     (err, result) => {
       if (err) {
@@ -21,13 +21,8 @@ const getUser = (req, res) => {
         if (result.length > 0) {
           const formattedData = {
             id: result[0].id,
-            nombre: result[0].nombre,
-            metodo_renta: result[0].metodo_renta,
-            extension_dias: result[0].extension_dias,
-            telefono: result[0].telefono,
             nombre_usuario: result[0].nombre_usuario,
-            contraseña: result[0]["contraseña"], // Usando notación de corchetes debido al nombre de la propiedad con comillas
-            correo: result[0].correo,
+            contraseña: result[0]["contraseña"],
             tipo: result[0].tipo,
           };
           const token = jwt.createToken(formattedData);

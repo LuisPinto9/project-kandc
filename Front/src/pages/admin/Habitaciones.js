@@ -13,6 +13,7 @@ import HabitacionesForm from "../../components/HabitacionesModal";
 //verificar
 import { zonas } from "../../controllers/ZonasControllers";
 import { arrendatarios } from "../../controllers/UserControllers";
+import PDFGenerator from "../../components/PDFGenerator";
 
 const Habitaciones = () => {
   const [Id, setId] = useState("");
@@ -77,7 +78,7 @@ const Habitaciones = () => {
       await buscarHabitacion(NombreBuscar).then((data) => {
         setHabitaciones(data);
       });
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -147,9 +148,6 @@ const Habitaciones = () => {
               data-bs-target="#staticBackdrop-post"
               className="bi bi-plus-circle-fill btn-add"
             />
-
-
-
           </div>
         </div>
         {/* aqui empieza la tabla  */}
@@ -226,6 +224,13 @@ const Habitaciones = () => {
                 })}
             </tbody>
           </table>
+        </div>
+        <div className="py-3">
+          <PDFGenerator
+            lista={HabitacionesList}
+            nombreLista={"habitaciones"}
+            multiList={false}
+          />
         </div>
       </div>
     </div>
