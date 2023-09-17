@@ -14,7 +14,6 @@ import { habitaciones } from "../../controllers/HabitacionControllers";
 import ComponentesForm from "../../components/ComponentesModal";
 import PDFGenerator from "../../components/PDFGenerator";
 
-
 const Componentes = () => {
   const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
@@ -56,7 +55,7 @@ const Componentes = () => {
       await buscarComponente(NombreBuscar).then((data) => {
         setComponentes(data);
       });
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -138,6 +137,13 @@ const Componentes = () => {
               className="bi bi-plus-circle-fill btn-add"
             />
           </div>
+          <div className="ps-2">
+            <PDFGenerator
+              lista={ComponentesList}
+              nombreLista={"componentes"}
+              multiList={false}
+            />
+          </div>
         </div>
         {/* aqui empieza la tabla  */}
         <div className="table-responsive">
@@ -191,7 +197,7 @@ const Componentes = () => {
                           }}
                         />
                         <ComponentesForm
-                        modoEdicion={true}
+                          modoEdicion={true}
                           componente={{
                             Id: Id,
                             Nombre: Nombre,
@@ -221,13 +227,6 @@ const Componentes = () => {
                 })}
             </tbody>
           </table>
-        </div>
-        <div className="py-3">
-          <PDFGenerator
-            lista={ComponentesList}
-            nombreLista={"componentes"}
-            multiList={false}
-          />
         </div>
       </div>
     </div>

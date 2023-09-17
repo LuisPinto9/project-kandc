@@ -197,6 +197,13 @@ const InventarioUser = () => {
                   />
                 )}
               </div>
+              <div className="px-1">
+                <PDFGenerator
+                  lista={[ZonasList, HabitacionesList, ComponentesList]}
+                  nombreLista={"zona"}
+                  multiList={true}
+                />
+              </div>
             </div>
             <div className="table-responsive">
               <table className="table tabla-get text-center">
@@ -277,6 +284,13 @@ const InventarioUser = () => {
                     }}
                   />
                 )}
+              </div>
+              <div className="px-1">
+                <PDFGenerator
+                  lista={[ZonasList, HabitacionesList, ComponentesList]}
+                  nombreLista={"zona"}
+                  multiList={true}
+                />
               </div>
             </div>
             {/* aqui empieza la tabla  */}
@@ -360,6 +374,13 @@ const InventarioUser = () => {
                   />
                 )}
               </div>
+              <div className="px-1">
+                <PDFGenerator
+                  lista={[ZonasList, HabitacionesList, ComponentesList]}
+                  nombreLista={"zona"}
+                  multiList={true}
+                />
+              </div>
             </div>
             {/* aqui empieza la tabla  */}
             <div className="table-responsive">
@@ -408,13 +429,6 @@ const InventarioUser = () => {
             </div>
           </>
         )}
-        <div className="pt-3">
-          <PDFGenerator
-            lista={[ZonasList, HabitacionesList, ComponentesList]}
-            nombreLista={"zona"}
-            multiList={true}
-          />
-        </div>
       </div>
     </div>
   );

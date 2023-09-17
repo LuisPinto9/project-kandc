@@ -149,6 +149,13 @@ const Habitaciones = () => {
               className="bi bi-plus-circle-fill btn-add"
             />
           </div>
+          <div className="ps-2">
+            <PDFGenerator
+              lista={HabitacionesList}
+              nombreLista={"habitaciones"}
+              multiList={false}
+            />
+          </div>
         </div>
         {/* aqui empieza la tabla  */}
         <div className="table-responsive">
@@ -224,13 +231,6 @@ const Habitaciones = () => {
                 })}
             </tbody>
           </table>
-        </div>
-        <div className="py-3">
-          <PDFGenerator
-            lista={HabitacionesList}
-            nombreLista={"habitaciones"}
-            multiList={false}
-          />
         </div>
       </div>
     </div>

@@ -105,12 +105,18 @@ const Zonas = () => {
                 getZonas={getZonas}
               />
             )}
-
             <i
               type="button"
               data-bs-toggle="modal"
               data-bs-target="#staticBackdrop-post"
               className="bi bi-plus-circle-fill btn-add"
+            />
+          </div>
+          <div className="ps-2">
+            <PDFGenerator
+              lista={ZonasList}
+              nombreLista={"zonas"}
+              multiList={false}
             />
           </div>
         </div>
@@ -183,13 +189,6 @@ const Zonas = () => {
                 })}
             </tbody>
           </table>
-        </div>
-        <div className="py-3">
-          <PDFGenerator
-            lista={ZonasList}
-            nombreLista={"zonas"}
-            multiList={false}
-          />
         </div>
       </div>
     </div>
