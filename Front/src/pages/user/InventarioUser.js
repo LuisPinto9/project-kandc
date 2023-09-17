@@ -11,6 +11,7 @@ import {
   findHabitacion,
   findZona,
 } from "../../controllers/UserRoomsControllers";
+import PDFGenerator from "../../components/PDFGenerator";
 
 const InventarioUser = () => {
   const [showZonas, setShowZonas] = useState(true);
@@ -94,7 +95,6 @@ const InventarioUser = () => {
       <div className="div-barra">
         <BarraLateral />
       </div>
-
       <div className="container pt-3 col-sm-7 col-md-9 col-xl-10">
         <div className="d-flex justify-content-evenly pb-1">
           <button
@@ -408,6 +408,13 @@ const InventarioUser = () => {
             </div>
           </>
         )}
+        <div className="pt-3">
+          <PDFGenerator
+            lista={[ZonasList, HabitacionesList, ComponentesList]}
+            nombreLista={"zona"}
+            multiList={true}
+          />
+        </div>
       </div>
     </div>
   );

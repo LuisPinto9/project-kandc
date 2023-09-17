@@ -11,6 +11,7 @@ import {
 } from "../../controllers/ZonasControllers";
 import PostZonasModal from "../../components/PostZonasModal";
 import PutZonasModal from "../../components/PutZonasModal";
+import PDFGenerator from "../../components/PDFGenerator";
 
 const Zonas = () => {
   const [Id, setId] = useState("");
@@ -167,6 +168,13 @@ const Zonas = () => {
                 })}
             </tbody>
           </table>
+        </div>
+        <div className="py-3">
+          <PDFGenerator
+            lista={ZonasList}
+            nombreLista={"zonas"}
+            multiList={false}
+          />
         </div>
       </div>
     </div>
