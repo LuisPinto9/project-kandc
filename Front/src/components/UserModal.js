@@ -29,7 +29,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
   }, [modoEdicion, usuario]);
 
 
-  
+
   const validateField = (fieldName) => {
     const value = values[fieldName];
     const updatedErrorMessages = { ...errorMessages };
@@ -127,12 +127,12 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
         }
         break;
 
-        default:
-          break;
-      }
-  
-      setErrorMessages(updatedErrorMessages);
-    };
+      default:
+        break;
+    }
+
+    setErrorMessages(updatedErrorMessages);
+  };
 
 
   const validateFields = () => {
@@ -145,7 +145,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
     validateField("Contraseña");
     validateField("Correo");
     validateField("TipoUsuario");
-  }; 
+  };
 
   const mostrarMensajeError = () => {
     Swal.fire({
@@ -198,7 +198,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
 
   return (
     <div>
-   
+
       <div
         className="modal fade"
         id={modoEdicion ? "staticBackdrop-put" : "staticBackdrop-post"}
@@ -252,7 +252,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.Nombre}
                   onChange={(event) => {
                     setValues({ ...values, Nombre: event.target.value });
-               
+
                   }}
                   onBlur={() => {
                     validateField("Nombre");
@@ -275,7 +275,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.MetodoRenta}
                   onChange={(event) => {
                     setValues({ ...values, MetodoRenta: event.target.value });
-               
+
                   }}
                   onBlur={() => {
                     validateField("MetodoRenta");
@@ -298,7 +298,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.ExtensionDias}
                   onChange={(event) => {
                     setValues({ ...values, ExtensionDias: event.target.value });
-               
+
                   }}
                   onBlur={() => {
                     validateField("ExtensionDias");
@@ -322,8 +322,9 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   type="text"
                   value={values.Telefono}
                   onChange={(event) => {
+                    console.log("Nuevo valor del campo Teléfono:", event.target.value);
                     setValues({ ...values, Telefono: event.target.value });
-               
+
                   }}
                   onBlur={() => {
                     validateField("Telefono");
@@ -346,7 +347,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.NombreUsuario}
                   onChange={(event) => {
                     setValues({ ...values, NombreUsuario: event.target.value });
-               
+
                   }}
                   onBlur={() => {
                     validateField("NombreUsuario");
@@ -371,7 +372,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.Contraseña}
                   onChange={(event) => {
                     setValues({ ...values, Contraseña: event.target.value });
-               
+
                   }}
                   onBlur={() => {
                     validateField("Contraseña");
@@ -394,7 +395,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.Correo}
                   onChange={(event) => {
                     setValues({ ...values, Correo: event.target.value });
-               
+
                   }}
                   onBlur={() => {
                     validateField("Correo");
@@ -421,7 +422,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.TipoUsuario}
                   onChange={(event) => {
                     setValues({ ...values, TipoUsuario: event.target.value });
-               
+
                   }}
                   onBlur={() => {
                     validateField("TipoUsuario");

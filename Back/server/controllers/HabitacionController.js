@@ -39,8 +39,8 @@ const updateRoom = (req, res) => {
   const IdUsuarios = req.body.IdUsuarios;
 
   db.query(
-    "update habitaciones set nombre=?,estado=?,precio=?,zonas=? ,idUsuarios=?where id=?",
-    [Nombre, Estado, Precio, Zona, Id, IdUsuarios],
+    "update habitaciones set nombre=?,estado=?,precio=?,zonas=?,idUsuarios=? where id=?",
+    [Nombre, Estado, Precio, Zona,  IdUsuarios,Id],
     (err, result) => {
       if (err) {
         res.status(500).send("Hubo un error en el servidor");

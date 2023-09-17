@@ -11,6 +11,7 @@ import {
 import PostHabitacionesModal from "../../components/PostHabitacionesModal";
 import PutHabitacionesModal from "../../components/PutHabitacionesModal";
 import "../../css/tabla.css";
+import HabitacionesForm from "../../components/HabitacionesModal";
 
 //verificar
 import { zonas } from "../../controllers/ZonasControllers";
@@ -48,7 +49,7 @@ const Habitaciones = () => {
     setEstado(val.estado);
     setPrecio(val.precio);
     setZona(val.zonas);
-    setIdUsuarios(val.IdUsuarios);
+    setIdUsuarios(val.idUsuarios);
   };
 
   //verificar
@@ -79,7 +80,7 @@ const Habitaciones = () => {
       await buscarHabitacion(NombreBuscar).then((data) => {
         setHabitaciones(data);
       });
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -135,12 +136,23 @@ const Habitaciones = () => {
           </div>
           <div>
             {HabitacionesList && (
-              <PostHabitacionesModal
+              <HabitacionesForm
+                modoEdicion={false}
+                habitacion={null}
                 getHabitaciones={getHabitaciones}
                 ZonasList={ZonasList}
                 UsuarioList={UsuarioList}
               />
             )}
+            <i
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop-post"
+              className="bi bi-plus-circle-fill btn-add"
+            />
+
+
+
           </div>
         </div>
         {/* aqui empieza la tabla  */}
@@ -188,8 +200,9 @@ const Habitaciones = () => {
                             EditarHabitaciones(val);
                           }}
                         />
-                        <PutHabitacionesModal
-                          values={{
+                        <HabitacionesForm
+                          modoEdicion={true}
+                          habitacion={{
                             Id: Id,
                             Nombre: Nombre,
                             Estado: Estado,
@@ -198,12 +211,14 @@ const Habitaciones = () => {
                             IdUsuarios: IdUsuarios,
                           }}
                           getHabitaciones={getHabitaciones}
+                          ZonasList={ZonasList}
+                          UsuarioList={UsuarioList}
                         />
                       </td>
                       <td className="row-border-right">
                         <i
                           type="button"
-                          onClick={() => {
+                          onClick={async () => {
                             eliminar({ val, getHabitaciones });
                           }}
                           className="bi bi-x-octagon-fill px-2 btn-delete"
