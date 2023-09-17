@@ -8,8 +8,6 @@ import {
   eliminar,
   buscarComponente,
 } from "../../controllers/ComponentesControllers";
-import PostComponentesModal from "../../components/PostComponentesModal";
-import PutComponentesModal from "../../components/PutComponentesModal";
 import "../../css/tabla.css";
 //verificar
 import { habitaciones } from "../../controllers/HabitacionControllers";

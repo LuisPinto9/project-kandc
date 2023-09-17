@@ -24,6 +24,7 @@ const HabitacionesForm = ({ modoEdicion, habitacion, getHabitaciones, ZonasList,
         } else {
             setValues(initialState);
         }
+        // eslint-disable-next-line
     }, [modoEdicion, habitacion]);
 
     const validateField = (fieldName) => {

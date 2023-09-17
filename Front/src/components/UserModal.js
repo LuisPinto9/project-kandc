@@ -26,6 +26,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
     } else {
       setValues(initialState);
     }
+    // eslint-disable-next-line
   }, [modoEdicion, usuario]);
 
 

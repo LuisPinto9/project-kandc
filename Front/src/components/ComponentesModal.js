@@ -26,6 +26,7 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
         } else {
             setValues(initialState);
         }
+        // eslint-disable-next-line
     }, [modoEdicion, componente]);
 
 

@@ -8,9 +8,6 @@ import {
   eliminar,
   buscarHabitacion,
 } from "../../controllers/HabitacionControllers";
-import PostHabitacionesModal from "../../components/PostHabitacionesModal";
-import PutHabitacionesModal from "../../components/PutHabitacionesModal";
-import "../../css/tabla.css";
 import HabitacionesForm from "../../components/HabitacionesModal";
 
 //verificar

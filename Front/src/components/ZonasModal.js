@@ -21,6 +21,7 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
     } else {
       setValues(initialState);
     }
+    // eslint-disable-next-line
   }, [modoEdicion, zona]);
 
 
