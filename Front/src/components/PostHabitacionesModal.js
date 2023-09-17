@@ -3,7 +3,7 @@ import { add } from "../controllers/HabitacionControllers";
 import "../css/modal.css";
 import Swal from "sweetalert2";
 
-const PostHabitacionesModal = ({ getHabitaciones, ZonasList,  UsuarioList }) => {
+const PostHabitacionesModal = ({ getHabitaciones, ZonasList, UsuarioList }) => {
   const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
   const [Estado, setEstado] = useState("");
@@ -24,7 +24,7 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList,  UsuarioList }) => 
       Estado: "",
       Precio: "",
       Zona: "",
-      IdUsuarios:"",
+      IdUsuarios: "",
     });
   };
   const [errorMessages, setErrorMessages] = useState({
@@ -92,17 +92,17 @@ const PostHabitacionesModal = ({ getHabitaciones, ZonasList,  UsuarioList }) => 
           setErrorMessages({ ...errorMessages, Zona: "" });
         }
         break;
-        case "IdUsuarios":
-          const idUsuariosPattern = /^\d+$/;
-          if (!idUsuariosPattern.test(IdUsuarios) || parseInt(IdUsuarios, 10) === 0) {
-            setErrorMessages({
-              ...errorMessages,
-              IdUsuarios: "El campo Id debe contener solo números y no ser igual a cero.",
-            });
-          } else {
-            setErrorMessages({ ...errorMessages, IdUsuarios: "" });
-          }
-          break;
+      case "IdUsuarios":
+        const idUsuariosPattern = /^\d+$/;
+        if (!idUsuariosPattern.test(IdUsuarios) || parseInt(IdUsuarios, 10) === 0) {
+          setErrorMessages({
+            ...errorMessages,
+            IdUsuarios: "El campo Id debe contener solo números y no ser igual a cero.",
+          });
+        } else {
+          setErrorMessages({ ...errorMessages, IdUsuarios: "" });
+        }
+        break;
 
 
       default:

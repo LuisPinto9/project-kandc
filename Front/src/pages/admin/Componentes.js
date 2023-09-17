@@ -13,6 +13,8 @@ import PutComponentesModal from "../../components/PutComponentesModal";
 import "../../css/tabla.css";
 //verificar
 import { habitaciones } from "../../controllers/HabitacionControllers";
+import ComponentesForm from "../../components/ComponentesModal";
+
 
 const Componentes = () => {
   const [Id, setId] = useState("");
@@ -55,7 +57,7 @@ const Componentes = () => {
       await buscarComponente(NombreBuscar).then((data) => {
         setComponentes(data);
       });
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -122,11 +124,20 @@ const Componentes = () => {
           </div>
           <div>
             {ComponentesList && (
-              <PostComponentesModal
+              <ComponentesForm
+                modoEdicion={false}
+                componente={null}
                 getComponentes={getComponentes}
                 HabitacionesList={HabitacionesList}
               />
             )}
+
+            <i
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop-post"
+              className="bi bi-plus-circle-fill btn-add"
+            />
           </div>
         </div>
         {/* aqui empieza la tabla  */}
@@ -165,7 +176,7 @@ const Componentes = () => {
                       <td>{val.nombre}</td>
                       <td>{val.marca}</td>
                       <td>{val.cantidad}</td>
-                      <td>{val.cantidad}</td>
+                      <td>{val.costo}</td>
                       <td>{val.estado}</td>
                       <td>{val.descripcion}</td>
                       <td>{val.observacion}</td>
@@ -180,8 +191,9 @@ const Componentes = () => {
                             EditarComponentes(val);
                           }}
                         />
-                        <PutComponentesModal
-                          values={{
+                        <ComponentesForm
+                        modoEdicion={true}
+                          componente={{
                             Id: Id,
                             Nombre: Nombre,
                             Marca: Marca,
@@ -193,6 +205,7 @@ const Componentes = () => {
                             Habitacion: Habitacion,
                           }}
                           getComponentes={getComponentes}
+                          HabitacionesList={HabitacionesList}
                         />
                       </td>
                       <td className="row-border-right">

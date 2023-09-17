@@ -9,9 +9,7 @@ import {
   eliminar,
   buscarUsuario,
 } from "../../controllers/UserControllers";
-import PostRegistroModal from "../../components/PostRegistroModal";
-import PutRegistroModal from "../../components/PutRegistroModal";
-import UserForm from "../../components/RegistroPostPut";
+import UserForm from "../../components/UserModal";
 
 function Registro() {
   /* datos de los arrendatarios */

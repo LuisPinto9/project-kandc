@@ -9,9 +9,8 @@ import {
   eliminar,
   buscarZona,
 } from "../../controllers/ZonasControllers";
-import PostZonasModal from "../../components/PostZonasModal";
-import PutZonasModal from "../../components/PutZonasModal";
 import PDFGenerator from "../../components/PDFGenerator";
+import ZonasForm from "../../components/ZonasModal";
 
 const Zonas = () => {
   const [Id, setId] = useState("");
@@ -38,7 +37,7 @@ const Zonas = () => {
       await buscarZona(idBuscar).then((data) => {
         setZonas(data);
       });
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const EditarZonas = (val) => {
@@ -98,7 +97,21 @@ const Zonas = () => {
               />
             )}
           </div>
-          <div>{ZonasList && <PostZonasModal getZonas={getZonas} />}</div>
+          <div>{
+            ZonasList && (<ZonasForm
+              modoEdicion={false} // Establece el modo de edición a false para agregar
+              zona={null} // Puedes pasar null o un objeto vacío para agregar
+              getZonas={getZonas}
+            />
+            )}
+
+            <i
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop-post"
+              className="bi bi-plus-circle-fill btn-add"
+            />
+          </div>
         </div>
         {/* aqui empieza la tabla  */}
         <div className="table-responsive">
@@ -143,8 +156,9 @@ const Zonas = () => {
                             EditarZonas(val);
                           }}
                         />
-                        <PutZonasModal
-                          values={{
+                        <ZonasForm
+                          modoEdicion={true}
+                          zona={{
                             Id: Id,
                             Nombre: Nombre,
                             Descripcion: Descripcion,
