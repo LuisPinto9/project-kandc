@@ -37,7 +37,8 @@ const updateRoom = (req, res) => {
   const Precio = req.body.Precio;
   const Zona = req.body.Zona;
   const IdUsuarios = req.body.IdUsuarios;
-
+  console.log('Creo habitacion:', req.body);
+  
   db.query(
     "update habitaciones set nombre=?,estado=?,precio=?,zonas=?,idUsuarios=? where id=?",
     [Nombre, Estado, Precio, Zona,  IdUsuarios,Id],

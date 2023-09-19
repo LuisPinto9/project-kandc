@@ -1,31 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { add, update } from "../controllers/HabitacionControllers";
+import { add, update } from "../controllers/HabitacionEvidenciaController";
 import "../css/modal.css";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
 
-
-const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList, UsuarioList }) => {
+const HabitacionEvidenciaForm = ({ modoEdicion, evidenciaHabitacionSeleccionada, getHabitacionesEvidencias }) => {
     const initialState = {
-        Id: "",
-        Nombre: "",
-        Estado: "",
-        Precio: "",
-        Zona: "",
-        IdUsuarios: "",
+        Id2: "",
+        Nombre2: "",
+        Descripcion: "",
+        Url: "",
+        Habitacion: "",
     };
 
     const [values, setValues] = useState(initialState);
     const [errorMessages, setErrorMessages] = useState({ ...initialState });
 
     useEffect(() => {
-        if (modoEdicion && habitacion2) {
-            setValues(habitacion2);
-            //console.log("Valor actual de IdUsuarios:", habitacion.IdUsuarios);
+        if (modoEdicion && evidenciaHabitacionSeleccionada) {
+            setValues(evidenciaHabitacionSeleccionada);
         } else {
             setValues(initialState);
         }
-        // eslint-disable-next-line
-    }, [modoEdicion, habitacion2]);
+    }, [modoEdicion, evidenciaHabitacionSeleccionada]);
 
     const validateField = (fieldName) => {
         const value = values[fieldName];
@@ -33,51 +29,23 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
 
         switch (fieldName) {
             case "Id":
-                const idPattern = /^[0-9]+$/;
-                if (!idPattern.test(value) || parseInt(value, 10) === 0) {
-                    updatedErrorMessages[fieldName] =
-                        "El campo ID debe contener solo números y no ser igual a cero.";
-                } else {
-                    updatedErrorMessages[fieldName] = "";
-                }
+                // Validación para el campo Id (similar a la de HabitacionesForm)
                 break;
 
             case "Nombre":
-                const nombrePattern = /^[\p{L}ÁÉÍÓÚáéíóúÑñ\s]+$/u;
-                if (!nombrePattern.test(value) || value.length < 3) {
-                    updatedErrorMessages[fieldName] =
-                        "El campo Nombre debe contener solo letras y tener al menos 3 caracteres.";
-                } else {
-                    updatedErrorMessages[fieldName] = "";
-                }
+                // Validación para el campo Nombre (similar a la de HabitacionesForm)
                 break;
 
-            case "Estado":
-                const estadoPattern = /^[A-Za-z]+$/;
-                if (!estadoPattern.test(value) || value.length < 3) {
-                    updatedErrorMessages[fieldName] =
-                        "El campo Estado debe contener solo letras y tener al menos 3 caracteres.";
-                } else {
-                    updatedErrorMessages[fieldName] = "";
-                }
+            case "Descripcion":
+                // Validación para el campo Descripcion (similar a la de HabitacionesForm)
                 break;
 
-            case "Precio":
-                const precioPattern = /^\d+(\.\d{1,2})?$/;
-                if (!precioPattern.test(value) || parseInt(value) <= 0) {
-                    updatedErrorMessages[fieldName] =
-                        "El campo Precio debe ser un número mayor que cero y puede contener hasta dos decimales.";
-                } else {
-                    updatedErrorMessages[fieldName] = "";
-                }
+            case "Url":
+                // Validación para el campo Url (similar a la de HabitacionesForm)
                 break;
 
-            case "Zona":
-                // Validación para el campo Zona de la habitación
-                break;
-
-            case "IdUsuarios":
-                // Validación para el campo IdUsuarios de la habitación
+            case "Habitacion":
+                // Validación para el campo Habitacion (similar a la de HabitacionesForm)
                 break;
 
             default:
@@ -87,15 +55,12 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
         setErrorMessages(updatedErrorMessages);
     };
 
-
-
     const validateFields = () => {
         validateField("Id");
         validateField("Nombre");
-        validateField("Estado");
-        validateField("Precio");
-        validateField("Zona");
-        validateField("IdUsuarios");
+        validateField("Descripcion");
+        validateField("Url");
+        validateField("Habitacion");
     };
 
     const mostrarMensajeError = () => {
@@ -116,14 +81,12 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
         );
 
         if (!hasErrors) {
-            // Validación adicional, verifica que los campos obligatorios estén llenos
             if (
-                values.Id === "" ||
-                values.Nombre === "" ||
-                values.Estado === "" ||
-                values.Precio === "" ||
-                values.Zona === "" ||
-                values.IdUsuarios === ""
+                values.Id2 === "" ||
+                values.Nombre2 === "" ||
+                values.Descripcion === "" ||
+                values.Url === "" ||
+                values.Habitacion === ""
             ) {
                 mostrarMensajeError();
             } else {
@@ -131,8 +94,12 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                     await update(values);
                 } else {
                     await add(values);
+                    //console.log("entro a agregar evidencia nombre");
+                    // console.log("entro a agregar evidencia nombre",values.Nombre2);
+                    //console.log("entro a agregar evidencia descripcion",values.Descripcion);
+                    //console.log("entro a agregar evidencia id",values.Id2);
                 }
-                getHabitaciones();
+                //getHabitacionEvidencias();
                 limpiarCampos();
             }
         } else {
@@ -145,11 +112,29 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
         setErrorMessages({ ...initialState });
     };
 
+    //para imagen
+    /*     const [url, setUrl] = useState(""); // Agregar estado para la URL de la imagen
+    
+        // Manejar la carga de archivos
+        const handleFileChange = (e) => {
+            const file = e.target.files[0]; // Obtener el archivo seleccionado
+            const reader = new FileReader();
+    
+            reader.onload = (event) => {
+                // Cuando se carga el archivo, obtener la URL de la imagen
+                setUrl(event.target.result);
+            };
+    
+            if (file) {
+                reader.readAsDataURL(file); // Leer el archivo como una URL de datos
+            }
+        }; */
+
     return (
         <div>
             <div
                 className="modal fade"
-                id={modoEdicion ? "staticBackdrop-put" : "staticBackdrop-post"}
+                id={modoEdicion ? "staticBackdrop-put-evidencia" : "staticBackdrop-post-evidencia"}
                 data-bs-backdrop="static"
                 data-bs-keyboard="false"
                 tabIndex="-1"
@@ -160,7 +145,7 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                     <div className="modal-content">
                         <div className="modal-header">
                             <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                                {modoEdicion ? "Actualizar habitacion" : "Agregar habitacion"}
+                                {modoEdicion ? "Actualizar evidencia de habitación" : "Agregar evidencia de habitación"}
                             </h1>
                             <button
                                 type="button"
@@ -169,8 +154,8 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                                 aria-label="Close"
                                 onClick={limpiarCampos}
                             ></button>
-
                         </div>
+
                         <div className="modal-body">
                             <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">
@@ -178,9 +163,9 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                                 </span>
                                 <input
                                     type="text"
-                                    value={values.Id}
+                                    value={values.Id2}
                                     onChange={(event) => {
-                                        setValues({ ...values, Id: event.target.value });
+                                        setValues({ ...values, Id2: event.target.value });
                                     }}
                                     onBlur={() => {
                                         validateField("Id");
@@ -189,8 +174,8 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                                     aria-label="id"
                                     aria-describedby="basic-addon1"
                                 />
-                                {errorMessages.Id && (
-                                    <div className="text-danger">{errorMessages.Id}</div>
+                                {errorMessages.Id2 && (
+                                    <div className="text-danger">{errorMessages.Id2}</div>
                                 )}
                             </div>
 
@@ -198,9 +183,9 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                                 <span className="input-group-text">Nombre</span>
                                 <input
                                     type="text"
-                                    value={values.Nombre}
+                                    value={values.Nombre2}
                                     onChange={(event) => {
-                                        setValues({ ...values, Nombre: event.target.value });
+                                        setValues({ ...values, Nombre2: event.target.value });
                                     }}
                                     onBlur={() => {
                                         validateField("Nombre");
@@ -209,120 +194,118 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                                     aria-label="nombre"
                                     aria-describedby="basic-addon1"
                                 />
-                                {errorMessages.Nombre && (
-                                    <div className="text-danger">{errorMessages.Nombre}</div>
+                                {errorMessages.Nombre2 && (
+                                    <div className="text-danger">{errorMessages.Nombre2}</div>
                                 )}
                             </div>
 
                             <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">
-                                    Estado
+                                    Descripción
                                 </span>
                                 <input
                                     type="text"
-                                    value={values.Estado}
+                                    value={values.Descripcion}
                                     onChange={(event) => {
-                                        setValues({ ...values, Estado: event.target.value });
+                                        setValues({ ...values, Descripcion: event.target.value });
                                     }}
                                     onBlur={() => {
-                                        validateField("Estado");
+                                        validateField("Descripcion");
                                     }}
                                     className="form-control"
-                                    aria-label="estado"
+                                    aria-label="descripcion"
                                     aria-describedby="basic-addon1"
                                 />
-                                {errorMessages.Estado && (
-                                    <div className="text-danger">{errorMessages.Estado}</div>
+                                {errorMessages.Descripcion && (
+                                    <div className="text-danger">{errorMessages.Descripcion}</div>
                                 )}
                             </div>
+                   
+                              <div className="input-group mb-3">
+                                <span className="input-group-text" id="basic-addon1">
+                                    URL
+                                </span>
+                                <input
+                                    type="text"
+                                    value={values.Url}
+                                    onChange={(event) => {
+                                        setValues({ ...values, Url: event.target.value });
+                                    }}
+                                    onBlur={() => {
+                                        validateField("Url");
+                                    }}
+                                    className="form-control"
+                                    aria-label="url"
+                                    aria-describedby="basic-addon1"
+                                />
+                                {errorMessages.Url && (
+                                    <div className="text-danger">{errorMessages.Url}</div>
+                                )}
+                            </div> 
+                        
+
 
                             <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">
-                                    Precio
+                                    Habitación
                                 </span>
                                 <input
                                     type="text"
-                                    value={values.Precio}
+                                    value={values.Habitacion}
                                     onChange={(event) => {
-                                        setValues({ ...values, Precio: event.target.value });
+                                        setValues({ ...values, Habitacion: event.target.value });
                                     }}
                                     onBlur={() => {
-                                        validateField("Precio");
+                                        validateField("Habitacion");
                                     }}
                                     className="form-control"
-                                    aria-label="Precio"
+                                    aria-label="url"
                                     aria-describedby="basic-addon1"
                                 />
-                                {errorMessages.Precio && (
-                                    <div className="text-danger">{errorMessages.Precio}</div>
+                                {errorMessages.Habitacion && (
+                                    <div className="text-danger">{errorMessages.Habitacion}</div>
                                 )}
                             </div>
 
+                            {/*
                             <div className="input-group mb-3">
                                 <label
                                     className="input-group-text"
-                                    htmlFor="inputGroupSelectZona"
+                                    htmlFor="inputGroupSelectHabitacion"
                                 >
-                                    Zona
+                                    Habitación
                                 </label>
                                 <select
                                     className="form-select"
-                                    id="inputGroupSelectZona"
-                                    value={values.Zona}
+                                    id="inputGroupSelectHabitacion"
+                                    value={values.Habitacion}
                                     onChange={(event) => {
-                                        setValues({ ...values, Zona: event.target.value });
+                                        setValues({ ...values, Habitacion: event.target.value });
                                     }}
                                     onBlur={() => {
-                                        validateField("Zona");
+                                        validateField("Habitacion");
                                     }}
                                 >
                                     <option value="" disabled>
-                                        Selecciona una zona
+                                        Selecciona una habitación
                                     </option>
-                                    {ZonasList.map((Zona) => (
-                                        <option key={Zona.id} value={Zona.id}>
-                                            {Zona.id}
+                                    {HabitacionesList.map((Habitacion) => (
+                                        <option key={Habitacion.id} value={Habitacion.id}>
+                                            {Habitacion.nombre}
                                         </option>
                                     ))}
                                 </select>
-                                {errorMessages.Zona && (
-                                    <div className="text-danger">{errorMessages.Zona}</div>
+                                {errorMessages.Habitacion && (
+                                    <div className="text-danger">{errorMessages.Habitacion}</div>
                                 )}
                             </div>
 
-                            <div className="input-group mb-3">
-                                <label
-                                    className="input-group-text"
-                                    htmlFor="inputGroupSelectZona"
-                                >
-                                    Usuario
-                                </label>
-                                <select
-                                    className="form-select"
-                                    id="inputGroupSelectUsuario"
-                                    value={values.IdUsuarios}
-                                    onChange={(event) => {
-                                        setValues({ ...values, IdUsuarios: event.target.value });
-                                    }}
-                                    onBlur={() => {
-                                        validateField("IdUsuarios");
-                                    }}
-                                >
-                                    <option value="" disabled>
-                                        Selecciona un usuario
-                                    </option>
-                                    {UsuarioList.map((IdUsuarios) => (
-                                        <option key={IdUsuarios.id} value={IdUsuarios.id}>
-                                            {IdUsuarios.id}
-                                        </option>
-                                    ))}
-                                </select>
-                                {errorMessages.IdUsuarios && (
-                                    <div className="text-danger">{errorMessages.IdUsuarios}</div>
-                                )}
-                            </div>
+                     */}
+
+
+
+
                         </div>
-
 
                         <div className="modal-footer">
                             <button
@@ -348,4 +331,5 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
         </div>
     );
 };
-export default HabitacionesForm;
+
+export default HabitacionEvidenciaForm;
