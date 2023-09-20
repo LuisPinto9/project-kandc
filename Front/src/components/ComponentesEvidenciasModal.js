@@ -4,7 +4,7 @@ import "../css/modal.css";
 import Swal from "sweetalert2";
 
 const ComponenteEvidenciaForm = ({ modoEdicion, evidenciaComponentesSeleccionada, getComponentesEvidencias }) => {
-    console.log(evidenciaComponentesSeleccionada);
+
     const initialState = {
         Id2: "",
         Nombre2: "",
@@ -115,7 +115,7 @@ const ComponenteEvidenciaForm = ({ modoEdicion, evidenciaComponentesSeleccionada
 
 
 
-/* 
+
     // Función para guardar la imagen en la carpeta del proyecto
     const guardarImagen = (id2) => {
         // Verifica si hay una imagen seleccionada
@@ -150,7 +150,7 @@ const ComponenteEvidenciaForm = ({ modoEdicion, evidenciaComponentesSeleccionada
         const file = event.target.files[0];
         setValues({ ...values, Url: file });
     };
- */
+/*  */
 
     return (
         <div>
@@ -243,6 +243,7 @@ const ComponenteEvidenciaForm = ({ modoEdicion, evidenciaComponentesSeleccionada
                                 )}
                             </div>
 
+                            
                             <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">
                                     URL
@@ -265,8 +266,31 @@ const ComponenteEvidenciaForm = ({ modoEdicion, evidenciaComponentesSeleccionada
                                 )}
                             </div>
 
+{/* 
+                            <div className="input-group mb-3">
+                                <span className="input-group-text" id="basic-addon1">
+                                    URL
+                                </span>
+                                <input
+                                    type="text"
+                                    value={values.Url}
+                                    onChange={(event) => {
+                                        setValues({ ...values, Url: event.target.value });
+                                    }}
+                                    onBlur={() => {
+                                        validateField("Url");
+                                    }}
+                                    className="form-control"
+                                    aria-label="url"
+                                    aria-describedby="basic-addon1"
+                                />
+                                {errorMessages.Url && (
+                                    <div className="text-danger">{errorMessages.Url}</div>
+                                )}
+                            </div>
+ */}
 
-
+{/* 
                             <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">
                                     Habitación
@@ -287,7 +311,7 @@ const ComponenteEvidenciaForm = ({ modoEdicion, evidenciaComponentesSeleccionada
                                 {errorMessages.Componente && (
                                     <div className="text-danger">{errorMessages.Componente}</div>
                                 )}
-                            </div>
+                            </div> */}
 
                             {/*
                             <div className="input-group mb-3">

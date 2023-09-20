@@ -13,12 +13,6 @@ import { zonas } from "../../controllers/ZonasControllers";
 import { arrendatarios } from "../../controllers/UserControllers";
 import PDFGenerator from "../../components/PDFGenerator";
 
-/* 
-import { habitacionesEvidencia } from "../../controllers/HabitacionEvidenciaController";
-import HabitacionEvidenciaForm from "../../components/ComponentesEvidenciasModal";
-
- */
-
 const Habitaciones = () => {
   const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");

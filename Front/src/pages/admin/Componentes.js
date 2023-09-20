@@ -13,12 +13,13 @@ import "../../css/tabla.css";
 import { habitaciones } from "../../controllers/HabitacionControllers";
 import ComponentesForm from "../../components/ComponentesModal";
 import PDFGenerator from "../../components/PDFGenerator";
-
 import { componentesEvidencia } from "../../controllers/ComponenteEvidenciaController";
 import ComponenteEvidenciaForm from "../../components/ComponentesEvidenciasModal";
 
 
 const Componentes = () => {
+  const [showEvidencias, setshowEvidencias] = useState(false);
+  const [showComponentes, setShowComponentes] = useState(true);
   const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
   const [Marca, setMarca] = useState("");
@@ -32,20 +33,13 @@ const Componentes = () => {
   const [HabitacionesList, setHabitaciones] = useState([]);
   const [NombreBuscar, setNombreBuscar] = useState("");
   const [buscarState, setBuscarState] = useState(false);
-
-
-  //..
   const [ComponentesEvidenciaList, setComponentesEvidencia] = useState([]);
-  // eslint-disable-next-line
-  const [evidenciaHabitacionSeleccionada, setEvidenciaHabitacionSeleccionada] = useState(null);
-
   const [Id2, setId2] = useState("");
   const [Nombre2, setNombre2] = useState("");
   const [Descripcion2, setDescripcion2] = useState("");
   const [Url, setUrl] = useState("");
   const [Componente, setComponente] = useState("");
 
-  //::
   const getComponentesEvidencias = async () => {
     //aqui
     await componentesEvidencia()
@@ -267,7 +261,8 @@ const Componentes = () => {
                           type="button"
                           data-bs-toggle="modal"
                           data-bs-target="#staticBackdrop-post-evidencia"
-                          className="bi bi-plus-circle-fill"
+                          className="bi bi-card-image"
+                          style={{ color: "blue", fontSize: "2rem" }}
                         />
                       </td>
 
@@ -276,17 +271,12 @@ const Componentes = () => {
                           type="button"
                           data-bs-toggle="modal"
                           data-bs-target="#staticBackdrop-put-evidencia"
-                          //data-bs-target="#staticBackdrop-post-evidencia"
                           className="bi bi-card-image px-2 btn-update"
                           onClick={() => {
-                            console.log(val.id);
                             const evidenciaEncontrada = ComponentesEvidenciaList.find(
                               (evidencia) => evidencia.componente === val.id
                             );
-                            console.log("entro a nooooo valido");
                             if (evidenciaEncontrada) {
-                              // Si se encontró evidencia, actualizar el estado
-                              setEvidenciaHabitacionSeleccionada(evidenciaEncontrada);
                               EditarComponentesEvidencias(evidenciaEncontrada);
                             } else {
                               // Si no se encontró evidencia, cargar campos en blanco con el ID de la habitación
@@ -297,7 +287,6 @@ const Componentes = () => {
                                 Url: "",
                                 Componente: val.id,
                               };
-                              setEvidenciaHabitacionSeleccionada(nuevaEvidencia);
                               EditarComponentesEvidencias(nuevaEvidencia);
                             }
                           }}
@@ -327,9 +316,159 @@ const Componentes = () => {
                     </tr>
                   );
                 })}
+
+              
+
+
+
+
+
             </tbody>
           </table>
         </div>
+
+        <div className="table-responsive">
+          <table className="table tabla-get text-center">
+            <thead>
+              <tr>
+                <th className="row-border-left" scope="col">
+                  #
+                </th>
+                <th scope="col">ID componente</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">descripcion</th>
+                <th scope="col">url</th>
+                <th scope="col">componente</th>
+                <th scope="col">Editar</th>
+                <th scope="col">IngresarHabitacionfoto</th>
+                <th scope="col">ActualizarFoto</th>
+                <th className="row-border-right" scope="col">
+                  Borrar
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {ComponentesEvidenciaList &&
+                ComponentesEvidenciaList.map((val, key) => {
+                  return (
+                    <tr key={key}>
+                      <th className="row-border-left" scope="row">
+                        {autoIncrementar++}
+                      </th>
+                      {/* van los nombres de la base de datos en si */}
+                      <td>{val.id}</td>
+                      <td>{val.nombre}</td>
+                      <td>{val.descripcion}</td>
+                      <td>{val.url}</td>
+                      <td>{val.componente}</td>                      
+                      <td>
+                        <i
+                          type="button"
+                          className="bi bi-pencil-square px-2 btn-update"
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdrop-put"
+                          onClick={() => {
+                            EditarComponentes(val);
+                          }}
+                        />
+                        <ComponentesForm
+                          modoEdicion={true}
+                          componente={{
+                            Id: Id,
+                            Nombre: Nombre,
+                            Marca: Marca,
+                            Cantidad: Cantidad,
+                            Costo: Costo,
+                            Estado: Estado,
+                            Descripcion: Descripcion,
+                            Observacion: Observacion,
+                            Habitacion: Habitacion,
+                          }}
+                          getComponentes={getComponentes}
+                          HabitacionesList={HabitacionesList}
+                        />
+                      </td>
+                      <td>
+                        {ComponentesEvidenciaList && (
+                          <ComponenteEvidenciaForm
+                            modoEdicion={false}
+                            evidenciaComponentesSeleccionada={null}
+                            getComponentesEvidencias={getComponentesEvidencias}
+                          />
+
+                        )}
+                        <i
+                          type="button"
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdrop-post-evidencia"
+                          className="bi bi-card-image"
+                          style={{ color: "blue", fontSize: "2rem" }}
+                        />
+                      </td>
+
+                      <td>
+                        <i
+                          type="button"
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdrop-put-evidencia"
+                          className="bi bi-card-image px-2 btn-update"
+                          onClick={() => {
+                            const evidenciaEncontrada = ComponentesEvidenciaList.find(
+                              (evidencia) => evidencia.componente === val.id
+                            );
+                            if (evidenciaEncontrada) {
+                              EditarComponentesEvidencias(evidenciaEncontrada);
+                            } else {
+                              // Si no se encontró evidencia, cargar campos en blanco con el ID de la habitación
+                              const nuevaEvidencia = {
+                                Id2: "",
+                                Nombre2: "",
+                                Descripcion2: "",
+                                Url: "",
+                                Componente: val.id,
+                              };
+                              EditarComponentesEvidencias(nuevaEvidencia);
+                            }
+                          }}
+                        />
+                        <ComponenteEvidenciaForm
+                          modoEdicion={true}
+                          evidenciaComponentesSeleccionada={{
+                            Id2: Id2,
+                            Nombre2: Nombre2,
+                            Descripcion2: Descripcion2,
+                            Url: Url,
+                            Componente: Componente,
+                          }}
+                          getComponentesEvidencias={getComponentesEvidencias}
+                        />
+                      </td>
+
+                      <td className="row-border-right">
+                        <i
+                          type="button"
+                          onClick={async () => {
+                            await eliminar({ val, getComponentes });
+                          }}
+                          className="bi bi-x-octagon-fill px-2 btn-delete"
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
+
+              
+
+
+
+
+
+            </tbody>
+          </table>
+        </div>
+
+
+
       </div>
     </div>
   );

@@ -26,6 +26,7 @@ const InventarioUser = () => {
 
   //Zonas
   const [ZonasList, setZonas] = useState([]);
+  
   const getZonas = async () => {
     await getZona()
       .then((data) => {
