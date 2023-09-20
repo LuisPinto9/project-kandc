@@ -25,9 +25,6 @@ app.use("/login", loginRoutes);
 const userRoomsRoutes = require("./routes/UserRoomsRoutes.js");
 app.use("/user-rooms", userRoomsRoutes);
 
-const ComponentesEvidenciaRoutes = require("./routes/ComponenteEvidenciasRoutes.js");
-app.use("/componentes-evidencias", ComponentesEvidenciaRoutes);
-
 app.listen(app.get("port"), () => {
   console.log(`Corriendo en el puerto ${app.get("port")}`);
 });
