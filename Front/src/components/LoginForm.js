@@ -73,7 +73,7 @@ const LoginForm = () => {
         </div>
         <div className="px-5 pt-4">
           <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">
+            <label className="form-label">
               Nombre de usuario
             </label>
             <div className="text-input-login">
@@ -90,7 +90,7 @@ const LoginForm = () => {
                   </span>
                 </div>
                 <input
-                  type="email"
+                  type="text"
                   value={nombreUsuario}
                   className="form-control"
                   id="exampleInputEmail1"

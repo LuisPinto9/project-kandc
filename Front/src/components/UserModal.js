@@ -275,20 +275,22 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                 <span className="input-group-text" id="basic-addon1">
                   Método de Renta
                 </span>
-                <input
-                  type="text"
+                <select
                   value={values.MetodoRenta}
                   onChange={(event) => {
                     setValues({ ...values, MetodoRenta: event.target.value });
-
                   }}
-                  onKeyUp={() => {
-                    validateField("MetodoRenta");
-                  }}
-                  className="form-control"
+                  className="form-select"
                   aria-label="metodo-renta"
                   aria-describedby="basic-addon1"
-                />
+                >
+                  <option value="">Selecciona el método de renta</option>
+                  <option value="Arriendo">Arriendo</option>
+                  <option value="Compra">Compra</option>
+                  <option value="Leasing">Leasing</option>
+                  <option value="Alquiler">Alquiler</option>
+                  {/* Agrega más opciones según tus necesidades */}
+                </select>
                 {errorMessages.MetodoRenta && (
                   <div className="text-danger">{errorMessages.MetodoRenta}</div>
                 )}

@@ -5,7 +5,7 @@ import Swal from "sweetalert2"
 
 
 const HabitacionesForm = ({ modoEdicion, habitacion, getHabitaciones, ZonasList, UsuarioList }) => {
-    
+
     const initialState = {
         Id: "",
         Nombre: "",
@@ -217,19 +217,19 @@ const HabitacionesForm = ({ modoEdicion, habitacion, getHabitaciones, ZonasList,
                                 <span className="input-group-text" id="basic-addon1">
                                     Estado
                                 </span>
-                                <input
-                                    type="text"
+                                <select
                                     value={values.Estado}
                                     onChange={(event) => {
                                         setValues({ ...values, Estado: event.target.value });
                                     }}
-                                    onBlur={() => {
-                                        validateField("Estado");
-                                    }}
-                                    className="form-control"
+                                    className="form-select"
                                     aria-label="estado"
                                     aria-describedby="basic-addon1"
-                                />
+                                >
+                                    <option value="">Selecciona el estado</option>
+                                    <option value="Ocupado">Ocupado</option>
+                                    <option value="Disponible">Disponible</option>
+                                </select>
                                 {errorMessages.Estado && (
                                     <div className="text-danger">{errorMessages.Estado}</div>
                                 )}

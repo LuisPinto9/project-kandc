@@ -242,19 +242,20 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
                 <span className="input-group-text" id="basic-addon1">
                   Acceso
                 </span>
-                <input
-                  type="text"
+                <select
                   value={values.Acceso}
                   onChange={(event) => {
                     setValues({ ...values, Acceso: event.target.value });
                   }}
-                  onKeyUp={() => {
-                    validateField("Acceso");
-                  }}
-                  className="form-control"
+                  className="form-select"
                   aria-label="acceso"
                   aria-describedby="basic-addon1"
-                />
+                >
+                  <option value="">Selecciona el método de acceso</option>
+                  <option value="Acceso Público">Acceso Público</option>
+                  <option value="Acceso Privado">Acceso Privado</option>
+                  {/* Agrega más opciones según tus necesidades */}
+                </select>
                 {errorMessages.Acceso && (
                   <div className="text-danger">{errorMessages.Acceso}</div>
                 )}

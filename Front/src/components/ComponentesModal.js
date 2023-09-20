@@ -322,23 +322,30 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                     <div className="text-danger">{errorMessages.Costo}</div>
                                 )}
                             </div>
+
+
+
                             <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">
                                     Estado
                                 </span>
-                                <input
-                                    type="text"
+                                <select
                                     value={values.Estado}
                                     onChange={(event) => {
                                         setValues({ ...values, Estado: event.target.value });
                                     }}
-                                    onKeyUp={() => {
-                                        validateField("Estado");
-                                    }}
-                                    className="form-control"
+                                    className="form-select"
                                     aria-label="estado"
                                     aria-describedby="basic-addon1"
-                                />
+                                >
+                                    <option value="">Selecciona el estado</option>
+                                    <option value="Dañado">Dañado</option>
+                                    <option value="Deteriorado">Deteriorado</option>
+                                    <option value="Buen estado">Buen estado</option>
+                                    <option value="Nuevo">Nuevo</option>
+                                    <option value="En reparación">En reparación</option>
+                                    {/* Agrega más opciones según tus necesidades */}
+                                </select>
                                 {errorMessages.Estado && (
                                     <div className="text-danger">{errorMessages.Estado}</div>
                                 )}
