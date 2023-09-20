@@ -30,14 +30,14 @@ const ComponenteEvidenciaForm = ({ modoEdicion, evidenciaComponentesSeleccionada
         const updatedErrorMessages = { ...errorMessages };
 
         switch (fieldName) {
-            case "Id":
+            case "Id2":
                 // Validación para el campo Id (similar a la de HabitacionesForm)
                 break;
 
-            case "Nombre":
+            case "Nombre2":
                 // Validación para el campo Nombre (similar a la de HabitacionesForm)
                 break;
-            case "Descripcion":
+            case "Descripcion2":
                 // Validación para el campo Descripcion (similar a la de HabitacionesForm)
                 break;
 
@@ -83,19 +83,20 @@ const ComponenteEvidenciaForm = ({ modoEdicion, evidenciaComponentesSeleccionada
 
         if (!hasErrors) {
             if (
-                values.Id2 === "" ||
-                values.Nombre2 === "" ||
+                values.Id2 === ""
+                /* values.Nombre2 === "" ||
                 values.Descripcion2 === "" ||
                 values.Url === "" ||
-                values.Componente === ""
+                values.Componente === "" */
             ) {
                 mostrarMensajeError();
             } else {
                 if (modoEdicion) {
                     await update(values);
                 } else {
+                   // guardarImagen(values.Url, `${values.Id2}.png`);
                     await add(values);
-                    //console.log("entro a agregar evidencia nombre");
+                    console.log("entro a agregar evidencia nombre");
                     // console.log("entro a agregar evidencia nombre",values.Nombre2);
                     //console.log("entro a agregar evidencia descripcion",values.Descripcion2);
                     //console.log("entro a agregar evidencia id",values.Id2);
@@ -117,40 +118,49 @@ const ComponenteEvidenciaForm = ({ modoEdicion, evidenciaComponentesSeleccionada
 
 
     // Función para guardar la imagen en la carpeta del proyecto
-    const guardarImagen = (id2) => {
+    const guardarImagen = (id2, formData) => {
         // Verifica si hay una imagen seleccionada
-        if (values.Url) {
-            // Aquí debes implementar la lógica para guardar la imagen en la carpeta del proyecto
-            // Puedes usar las API de JavaScript para trabajar con archivos o una biblioteca como 'axios' si es necesario enviarla al servidor
-            // Ejemplo:
-            const formData = new FormData();
-            formData.append("file", values.Url, `${id2}.png`); // El tercer argumento establece el nombre del archivo
-
-            // Realiza la solicitud para guardar la imagen en la carpeta del proyecto
-            // Reemplaza la URL de la carpeta con la ruta correcta de tu proyecto
-            fetch("../images/carpetaEvidenciaHabitacion", {
-                method: "POST", // Puedes usar 'PUT' o 'POST' según tus necesidades
-                body: formData,
+        if (formData.get("file")) {
+          // Aquí debes implementar la lógica para guardar la imagen en la carpeta del proyecto
+          // Puedes usar las API de JavaScript para trabajar con archivos o una biblioteca como 'axios' si es necesario enviarla al servidor
+          // Ejemplo:
+          // Reemplaza la URL de la carpeta con la ruta correcta de tu proyecto
+          fetch(`./images/carpetaHabitaciones/${id2}.png`, {
+            method: "POST", // Puedes usar 'PUT' o 'POST' según tus necesidades
+            body: formData,
+          })
+            .then((response) => {
+              if (response.ok) {
+                console.log("Imagen guardada con éxito");
+              } else {
+                console.error("Error al guardar la imagen");
+              }
             })
-                .then((response) => {
-                    if (response.ok) {
-                        console.log("Imagen guardada con éxito");
-                    } else {
-                        console.error("Error al guardar la imagen");
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error al guardar la imagen:", error);
-                });
+            .catch((error) => {
+              console.error("Error al guardar la imagen:", error);
+            });
         }
-    };
-
-    // Función para manejar la selección de la imagen
-    const handleImageChange = (event) => {
+      };
+    
+      // Función para manejar la selección de la imagen
+      const handleImageChange = (event) => {
         const file = event.target.files[0];
-        setValues({ ...values, Url: file });
-    };
-/*  */
+        if (file) {
+          // Genera la URL basada en el ID2 y el nombre de la imagen
+          const imageUrl = `./images/carpetaHabitaciones/${values.Id2}.png`;
+    
+          // Actualiza 'values.ImageUrl' con la URL generada
+          setValues({ ...values, ImageUrl: imageUrl });
+    
+          // Crea un objeto FormData y adjunta el archivo
+          const formData = new FormData();
+          formData.append("file", file);
+    
+          // Llama a la función para guardar la imagen en la carpeta del proyecto
+          guardarImagen(values.Id2, formData);
+        }
+      };
+    /*  */
 
     return (
         <div>
@@ -190,7 +200,7 @@ const ComponenteEvidenciaForm = ({ modoEdicion, evidenciaComponentesSeleccionada
                                         setValues({ ...values, Id2: event.target.value });
                                     }}
                                     onBlur={() => {
-                                        validateField("Id");
+                                        validateField("Id2");
                                     }}
                                     className="form-control"
                                     aria-label="id"
@@ -210,7 +220,7 @@ const ComponenteEvidenciaForm = ({ modoEdicion, evidenciaComponentesSeleccionada
                                         setValues({ ...values, Nombre2: event.target.value });
                                     }}
                                     onBlur={() => {
-                                        validateField("Nombre");
+                                        validateField("Nombre2");
                                     }}
                                     className="form-control"
                                     aria-label="nombre"
@@ -243,54 +253,21 @@ const ComponenteEvidenciaForm = ({ modoEdicion, evidenciaComponentesSeleccionada
                                 )}
                             </div>
 
-                            
+
                             <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">
                                     URL
                                 </span>
                                 <input
-                                    type="text"
-                                    value={values.Url}
-                                    onChange={(event) => {
-                                        setValues({ ...values, Url: event.target.value });
-                                    }}
-                                    onBlur={() => {
-                                        validateField("Url");
-                                    }}
+                                    type="file" // Cambiar a tipo 'file' para permitir la selección de archivos
+                                    onChange={handleImageChange}
                                     className="form-control"
                                     aria-label="url"
                                     aria-describedby="basic-addon1"
                                 />
-                                {errorMessages.Url && (
-                                    <div className="text-danger">{errorMessages.Url}</div>
-                                )}
+
                             </div>
 
-{/* 
-                            <div className="input-group mb-3">
-                                <span className="input-group-text" id="basic-addon1">
-                                    URL
-                                </span>
-                                <input
-                                    type="text"
-                                    value={values.Url}
-                                    onChange={(event) => {
-                                        setValues({ ...values, Url: event.target.value });
-                                    }}
-                                    onBlur={() => {
-                                        validateField("Url");
-                                    }}
-                                    className="form-control"
-                                    aria-label="url"
-                                    aria-describedby="basic-addon1"
-                                />
-                                {errorMessages.Url && (
-                                    <div className="text-danger">{errorMessages.Url}</div>
-                                )}
-                            </div>
- */}
-
-{/* 
                             <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">
                                     Habitación
@@ -311,45 +288,9 @@ const ComponenteEvidenciaForm = ({ modoEdicion, evidenciaComponentesSeleccionada
                                 {errorMessages.Componente && (
                                     <div className="text-danger">{errorMessages.Componente}</div>
                                 )}
-                            </div> */}
-
-                            {/*
-                            <div className="input-group mb-3">
-                                <label
-                                    className="input-group-text"
-                                    htmlFor="inputGroupSelectHabitacion"
-                                >
-                                    Habitación
-                                </label>
-                                <select
-                                    className="form-select"
-                                    id="inputGroupSelectHabitacion"
-                                    value={values.Habitacion}
-                                    onChange={(event) => {
-                                        setValues({ ...values, Habitacion: event.target.value });
-                                    }}
-                                    onBlur={() => {
-                                        validateField("Habitacion");
-                                    }}
-                                >
-                                    <option value="" disabled>
-                                        Selecciona una habitación
-                                    </option>
-                                    {HabitacionesList.map((Habitacion) => (
-                                        <option key={Habitacion.id} value={Habitacion.id}>
-                                            {Habitacion.nombre}
-                                        </option>
-                                    ))}
-                                </select>
-                                {errorMessages.Habitacion && (
-                                    <div className="text-danger">{errorMessages.Habitacion}</div>
-                                )}
                             </div>
 
-                     */}
-
-
-
+          
 
                         </div>
 

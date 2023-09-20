@@ -126,7 +126,6 @@ export const eliminar = async ({ val, getComponentesEvidencias }) => {
 
 // Obtener información de las componentes evidencia
 export const componentesEvidencia = async () => {
-
   try {
     const response = await Axios.get(
       "http://localhost:4000/componentes-evidencias/get-evidencias",
@@ -139,6 +138,29 @@ export const componentesEvidencia = async () => {
     return response.data;
   } catch (error) {
     console.error("Error al obtener los datos:", error);
+    Swal.fire({
+      title: "Error al obtener los datos",
+      text: "Por favor intente ingresar más tarde.",
+      icon: "error",
+      showCancelButton: false,
+      confirmButtonText: "Aceptar",
+    });
+    return null;
+  }
+};
+
+export const buscarEvideciaComponente = async (idBuscar) => {
+  try {
+    const response = await Axios.get(
+      `http://localhost:4000/componentes-evidencias/find-evidencias/${idBuscar}`,
+      {
+        headers: {
+          Authorization: localStorage.getItem("auth"),
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
     Swal.fire({
       title: "Error al obtener los datos",
       text: "Por favor intente ingresar más tarde.",

@@ -57,9 +57,25 @@ const deleteEvidencia = (req, res) => {
   });
 };
 
+const findEvidenciaByComponente = (req, res) =>{
+  const id = req.params.id
+  db.query(
+    "SELECT * FROM evidencia_componentes WHERE evidencia_componentes.componente LIKE ? OR evidencia_componentes.componente LIKE ? OR evidencia_componentes.componente LIKE ?",
+    [`%${id}`, `%${id}%`, `${id}%`],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Hubo un error en el servidor");
+      } else {
+        res.send(result);
+      }
+    }
+  );
+}
+
 module.exports = {
   getEvidenciasByComponente,
   createEvidencia,
   updateEvidencia,
   deleteEvidencia,
+  findEvidenciaByComponente,
 };

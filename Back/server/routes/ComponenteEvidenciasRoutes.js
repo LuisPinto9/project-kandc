@@ -19,4 +19,8 @@ router.delete("/delete/:id", check.auth, (req, res) => {
   ComponenteEvidenciaController.deleteEvidencia(req, res);
 });
 
+router.get("/find-evidencias/:id", check.auth, (req, res) =>{
+  ComponenteEvidenciaController.findEvidenciaByComponente(req, res);
+})
+
 module.exports = router;
