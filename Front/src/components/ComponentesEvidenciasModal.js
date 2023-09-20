@@ -1,30 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { add, update } from "../controllers/HabitacionEvidenciaController";
+import { add, update } from "../controllers/ComponenteEvidenciaController"
 import "../css/modal.css";
 import Swal from "sweetalert2";
 
-const HabitacionEvidenciaForm = ({ modoEdicion, evidenciaHabitacionSeleccionada, getHabitacionesEvidencias }) => {
+const ComponenteEvidenciaForm = ({ modoEdicion, evidenciaComponentesSeleccionada, getComponentesEvidencias }) => {
+    console.log(evidenciaComponentesSeleccionada);
     const initialState = {
         Id2: "",
         Nombre2: "",
-        Descripcion: "",
+        Descripcion2: "",
         Url: "",
-        Habitacion: "",
+        Componente: "",
     };
 
     const [values, setValues] = useState(initialState);
     const [errorMessages, setErrorMessages] = useState({ ...initialState });
 
     useEffect(() => {
-        if (modoEdicion && evidenciaHabitacionSeleccionada) {
-            setValues(evidenciaHabitacionSeleccionada);
+        if (modoEdicion) {
+            setValues(evidenciaComponentesSeleccionada);
         } else {
             setValues(initialState);
         }
-    }, [modoEdicion, evidenciaHabitacionSeleccionada]);
+        // eslint-disable-next-line
+    }, [modoEdicion, evidenciaComponentesSeleccionada]);
 
     const validateField = (fieldName) => {
-        const value = values[fieldName];
+        // const value = values[fieldName];
         const updatedErrorMessages = { ...errorMessages };
 
         switch (fieldName) {
@@ -35,7 +37,6 @@ const HabitacionEvidenciaForm = ({ modoEdicion, evidenciaHabitacionSeleccionada,
             case "Nombre":
                 // Validación para el campo Nombre (similar a la de HabitacionesForm)
                 break;
-
             case "Descripcion":
                 // Validación para el campo Descripcion (similar a la de HabitacionesForm)
                 break;
@@ -44,7 +45,7 @@ const HabitacionEvidenciaForm = ({ modoEdicion, evidenciaHabitacionSeleccionada,
                 // Validación para el campo Url (similar a la de HabitacionesForm)
                 break;
 
-            case "Habitacion":
+            case "Componente":
                 // Validación para el campo Habitacion (similar a la de HabitacionesForm)
                 break;
 
@@ -60,7 +61,7 @@ const HabitacionEvidenciaForm = ({ modoEdicion, evidenciaHabitacionSeleccionada,
         validateField("Nombre");
         validateField("Descripcion");
         validateField("Url");
-        validateField("Habitacion");
+        validateField("Componente");
     };
 
     const mostrarMensajeError = () => {
@@ -84,9 +85,9 @@ const HabitacionEvidenciaForm = ({ modoEdicion, evidenciaHabitacionSeleccionada,
             if (
                 values.Id2 === "" ||
                 values.Nombre2 === "" ||
-                values.Descripcion === "" ||
+                values.Descripcion2 === "" ||
                 values.Url === "" ||
-                values.Habitacion === ""
+                values.Componente === ""
             ) {
                 mostrarMensajeError();
             } else {
@@ -96,10 +97,10 @@ const HabitacionEvidenciaForm = ({ modoEdicion, evidenciaHabitacionSeleccionada,
                     await add(values);
                     //console.log("entro a agregar evidencia nombre");
                     // console.log("entro a agregar evidencia nombre",values.Nombre2);
-                    //console.log("entro a agregar evidencia descripcion",values.Descripcion);
+                    //console.log("entro a agregar evidencia descripcion",values.Descripcion2);
                     //console.log("entro a agregar evidencia id",values.Id2);
                 }
-                //getHabitacionEvidencias();
+                getComponentesEvidencias();
                 limpiarCampos();
             }
         } else {
@@ -112,23 +113,44 @@ const HabitacionEvidenciaForm = ({ modoEdicion, evidenciaHabitacionSeleccionada,
         setErrorMessages({ ...initialState });
     };
 
-    //para imagen
-    /*     const [url, setUrl] = useState(""); // Agregar estado para la URL de la imagen
-    
-        // Manejar la carga de archivos
-        const handleFileChange = (e) => {
-            const file = e.target.files[0]; // Obtener el archivo seleccionado
-            const reader = new FileReader();
-    
-            reader.onload = (event) => {
-                // Cuando se carga el archivo, obtener la URL de la imagen
-                setUrl(event.target.result);
-            };
-    
-            if (file) {
-                reader.readAsDataURL(file); // Leer el archivo como una URL de datos
-            }
-        }; */
+
+
+/* 
+    // Función para guardar la imagen en la carpeta del proyecto
+    const guardarImagen = (id2) => {
+        // Verifica si hay una imagen seleccionada
+        if (values.Url) {
+            // Aquí debes implementar la lógica para guardar la imagen en la carpeta del proyecto
+            // Puedes usar las API de JavaScript para trabajar con archivos o una biblioteca como 'axios' si es necesario enviarla al servidor
+            // Ejemplo:
+            const formData = new FormData();
+            formData.append("file", values.Url, `${id2}.png`); // El tercer argumento establece el nombre del archivo
+
+            // Realiza la solicitud para guardar la imagen en la carpeta del proyecto
+            // Reemplaza la URL de la carpeta con la ruta correcta de tu proyecto
+            fetch("../images/carpetaEvidenciaHabitacion", {
+                method: "POST", // Puedes usar 'PUT' o 'POST' según tus necesidades
+                body: formData,
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        console.log("Imagen guardada con éxito");
+                    } else {
+                        console.error("Error al guardar la imagen");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error al guardar la imagen:", error);
+                });
+        }
+    };
+
+    // Función para manejar la selección de la imagen
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        setValues({ ...values, Url: file });
+    };
+ */
 
     return (
         <div>
@@ -205,23 +227,23 @@ const HabitacionEvidenciaForm = ({ modoEdicion, evidenciaHabitacionSeleccionada,
                                 </span>
                                 <input
                                     type="text"
-                                    value={values.Descripcion}
+                                    value={values.Descripcion2}
                                     onChange={(event) => {
-                                        setValues({ ...values, Descripcion: event.target.value });
+                                        setValues({ ...values, Descripcion2: event.target.value });
                                     }}
                                     onBlur={() => {
                                         validateField("Descripcion");
                                     }}
                                     className="form-control"
-                                    aria-label="descripcion"
+                                    aria-label="descripcion2"
                                     aria-describedby="basic-addon1"
                                 />
-                                {errorMessages.Descripcion && (
-                                    <div className="text-danger">{errorMessages.Descripcion}</div>
+                                {errorMessages.Descripcion2 && (
+                                    <div className="text-danger">{errorMessages.Descripcion2}</div>
                                 )}
                             </div>
-                   
-                              <div className="input-group mb-3">
+
+                            <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">
                                     URL
                                 </span>
@@ -241,8 +263,8 @@ const HabitacionEvidenciaForm = ({ modoEdicion, evidenciaHabitacionSeleccionada,
                                 {errorMessages.Url && (
                                     <div className="text-danger">{errorMessages.Url}</div>
                                 )}
-                            </div> 
-                        
+                            </div>
+
 
 
                             <div className="input-group mb-3">
@@ -251,19 +273,19 @@ const HabitacionEvidenciaForm = ({ modoEdicion, evidenciaHabitacionSeleccionada,
                                 </span>
                                 <input
                                     type="text"
-                                    value={values.Habitacion}
+                                    value={values.Componente}
                                     onChange={(event) => {
-                                        setValues({ ...values, Habitacion: event.target.value });
+                                        setValues({ ...values, Componente: event.target.value });
                                     }}
                                     onBlur={() => {
-                                        validateField("Habitacion");
+                                        validateField("Componente");
                                     }}
                                     className="form-control"
                                     aria-label="url"
                                     aria-describedby="basic-addon1"
                                 />
-                                {errorMessages.Habitacion && (
-                                    <div className="text-danger">{errorMessages.Habitacion}</div>
+                                {errorMessages.Componente && (
+                                    <div className="text-danger">{errorMessages.Componente}</div>
                                 )}
                             </div>
 
@@ -332,4 +354,4 @@ const HabitacionEvidenciaForm = ({ modoEdicion, evidenciaHabitacionSeleccionada,
     );
 };
 
-export default HabitacionEvidenciaForm;
+export default ComponenteEvidenciaForm;

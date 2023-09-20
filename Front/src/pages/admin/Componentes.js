@@ -14,6 +14,10 @@ import { habitaciones } from "../../controllers/HabitacionControllers";
 import ComponentesForm from "../../components/ComponentesModal";
 import PDFGenerator from "../../components/PDFGenerator";
 
+import { componentesEvidencia } from "../../controllers/ComponenteEvidenciaController";
+import ComponenteEvidenciaForm from "../../components/ComponentesEvidenciasModal";
+
+
 const Componentes = () => {
   const [Id, setId] = useState("");
   const [Nombre, setNombre] = useState("");
@@ -28,6 +32,39 @@ const Componentes = () => {
   const [HabitacionesList, setHabitaciones] = useState([]);
   const [NombreBuscar, setNombreBuscar] = useState("");
   const [buscarState, setBuscarState] = useState(false);
+
+
+  //..
+  const [ComponentesEvidenciaList, setComponentesEvidencia] = useState([]);
+  // eslint-disable-next-line
+  const [evidenciaHabitacionSeleccionada, setEvidenciaHabitacionSeleccionada] = useState(null);
+
+  const [Id2, setId2] = useState("");
+  const [Nombre2, setNombre2] = useState("");
+  const [Descripcion2, setDescripcion2] = useState("");
+  const [Url, setUrl] = useState("");
+  const [Componente, setComponente] = useState("");
+
+  //::
+  const getComponentesEvidencias = async () => {
+    //aqui
+    await componentesEvidencia()
+      .then((data) => {
+        setComponentesEvidencia(data);
+        console.log("entro a obtener elementos", data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener las zonas:", error);
+      });
+  };
+  //..
+  const EditarComponentesEvidencias = (val2) => {
+    setId2(val2.id);
+    setNombre2(val2.nombre);
+    setDescripcion2(val2.descripcion);
+    setUrl(val2.url);
+    setComponente(val2.componente || "");
+  };
 
   const getComponentes = async () => {
     await componentes()
@@ -55,12 +92,14 @@ const Componentes = () => {
       await buscarComponente(NombreBuscar).then((data) => {
         setComponentes(data);
       });
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
     getComponentes();
     getHabitaciones(); // Llama a la función para obtener las habitaciones cuando se monta el componente
+    getComponentesEvidencias();
+
   }, []);
 
   const EditarComponentes = (val) => {
@@ -163,6 +202,8 @@ const Componentes = () => {
                 <th scope="col">Observación</th>
                 <th scope="col">Habitación</th>
                 <th scope="col">Editar</th>
+                <th scope="col">IngresarHabitacionfoto</th>
+                <th scope="col">ActualizarFoto</th>
                 <th className="row-border-right" scope="col">
                   Borrar
                 </th>
@@ -213,6 +254,69 @@ const Componentes = () => {
                           HabitacionesList={HabitacionesList}
                         />
                       </td>
+                      <td>
+                        {ComponentesEvidenciaList && (
+                          <ComponenteEvidenciaForm
+                            modoEdicion={false}
+                            evidenciaComponentesSeleccionada={null}
+                            getComponentesEvidencias={getComponentesEvidencias}
+                          />
+
+                        )}
+                        <i
+                          type="button"
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdrop-post-evidencia"
+                          className="bi bi-plus-circle-fill"
+                        />
+                      </td>
+
+                      <td>
+                        <i
+                          type="button"
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdrop-put-evidencia"
+                          //data-bs-target="#staticBackdrop-post-evidencia"
+                          className="bi bi-card-image px-2 btn-update"
+                          onClick={() => {
+                            const evidenciaEncontrada = ComponentesEvidenciaList.find(
+                              (evidencia) => evidencia.Componente === val.id
+                            );
+                            console.log("entro a nooooo valido");
+                            if (evidenciaEncontrada) {
+                              // Si se encontró evidencia, actualizar el estado
+                              setEvidenciaHabitacionSeleccionada(evidenciaEncontrada);
+                              EditarComponentesEvidencias(evidenciaEncontrada);
+                              console.log("entro a valido");
+                            } else {
+                              console.log("entro a nooooo valido", val.id);
+
+                              // Si no se encontró evidencia, cargar campos en blanco con el ID de la habitación
+                              const nuevaEvidencia = {
+                                Id2: "",
+                                Nombre2: "",
+                                Descripcion2: "",
+                                Url: "",
+                                Componente: val.id,
+                              };
+                              setEvidenciaHabitacionSeleccionada(nuevaEvidencia);
+                              EditarComponentesEvidencias(nuevaEvidencia);
+                            }
+                          }}
+                        />
+                        <ComponenteEvidenciaForm
+                          modoEdicion={true}
+                          evidenciaComponentesSeleccionada={{
+                            Id2: Id2,
+                            Nombre2: Nombre2,
+                            Descripcion2: Descripcion2,
+                            Url: Url,
+                            Componente: Componente,
+                          }}
+                          getComponentesEvidencias={getComponentesEvidencias}
+                        />
+                      </td>
+
                       <td className="row-border-right">
                         <i
                           type="button"

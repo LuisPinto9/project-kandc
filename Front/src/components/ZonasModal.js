@@ -4,6 +4,7 @@ import "../css/modal.css";
 import Swal from "sweetalert2";
 
 const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
+
   const initialState = {
     Id: "",
     Nombre: "",
@@ -14,17 +15,16 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
 
   const [values, setValues] = useState(initialState);
   const [errorMessages, setErrorMessages] = useState({ ...initialState });
+  const [editado, setEditado] = useState(false)
 
   useEffect(() => {
-    if (modoEdicion && zona) {
+    if (modoEdicion) {
       setValues(zona);
     } else {
       setValues(initialState);
     }
     // eslint-disable-next-line
-  }, [modoEdicion, zona]);
-
-
+  }, [zona, modoEdicion])
 
   const validateField = (fieldName) => {
     const value = values[fieldName];
@@ -41,10 +41,10 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
         break;
 
       case "Nombre":
-        const nombrePattern = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/u;
+        const nombrePattern = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s0-9]+$/u;
         if (!nombrePattern.test(value) || value.trim().length < 1) {
           updatedErrorMessages[fieldName] =
-            "El campo Nombre debe contener solo letras y no puede estar vacío.";
+            "El campo Nombre debe contener letras y números y no puede estar vacío.";
         } else {
           updatedErrorMessages[fieldName] = "";
         }
@@ -75,7 +75,6 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
     }
     setErrorMessages(updatedErrorMessages);
   };
-
 
   const validateFields = () => {
     validateField("Id");
@@ -117,6 +116,7 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
           await add(values);
         }
         getZonas();
+        setEditado(true)
         limpiarCampos();
       }
     } else {
@@ -125,8 +125,14 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
   };
 
   const limpiarCampos = () => {
-    setValues(initialState);
-    setErrorMessages({ ...initialState });
+    if (editado) {
+      setValues(initialState);
+      setErrorMessages({ ...initialState });
+    } else if (!editado && modoEdicion) {
+      setValues(zona)
+    } else if (!modoEdicion) {
+      setValues(initialState)
+    }
   };
 
   return (
@@ -162,21 +168,18 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
                 <input
                   type="text"
                   value={values.Id}
-                  onChange={(event) => {
-                    setValues({ ...values, Id: event.target.value });
-                  }}
-                  onBlur={() => {
-                    validateField("Id");
-                  }}
                   className="form-control"
                   aria-label="id"
                   aria-describedby="basic-addon1"
+                  disabled={modoEdicion}
+                  onChange={(event) => {
+                    setValues({ ...values, Id: event.target.value });
+                  }}
+                  onKeyUp={() => {
+                    validateField("Id");
+                  }}
                 />
-                {errorMessages.Id && (
-                  <div className="text-danger">{errorMessages.Id}</div>
-                )}
               </div>
-
               <div className="input-group mb-3">
                 <span className="input-group-text">Nombre</span>
                 <input
@@ -185,7 +188,7 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
                   onChange={(event) => {
                     setValues({ ...values, Nombre: event.target.value });
                   }}
-                  onBlur={() => {
+                  onKeyUp={() => {
                     validateField("Nombre");
                   }}
                   className="form-control"
@@ -223,7 +226,7 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
                   onChange={(event) => {
                     setValues({ ...values, Precio: event.target.value });
                   }}
-                  onBlur={() => {
+                  onKeyUp={() => {
                     validateField("Precio");
                   }}
                   className="form-control"
@@ -245,7 +248,7 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
                   onChange={(event) => {
                     setValues({ ...values, Acceso: event.target.value });
                   }}
-                  onBlur={() => {
+                  onKeyUp={() => {
                     validateField("Acceso");
                   }}
                   className="form-control"
@@ -269,7 +272,7 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
               <button
                 type="button"
                 className="btn btn-primary"
-                data-bs-dismiss="modal"
+                data-bs-dismiss={modoEdicion ? "modal" : null}
                 onClick={submitForm}
               >
                 {modoEdicion ? "Actualizar" : "Agregar"}

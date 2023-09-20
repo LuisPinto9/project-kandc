@@ -3,20 +3,15 @@ import Swal from "sweetalert2";
 
 // Agregar una habitación evidencia
 export const add = async (datos) => {
-  console.log("entro a agregar evidencia nombre");
-                    //console.log("controlerentro a agregar evidencia nombre noraml---",datos.Nombre2);
-                    //console.log("controlerentro a agregar evidencia descripcion",datos.Descripcion);
-                    //console.log("controlerentro a agregar evidencia id",datos.Id2);
   try {
     await Axios.post(
-      "http://localhost:4000/habitaciones-evidencias/create",
+      "http://localhost:4000/componentes-evidencias/create",
       {
-        
         Id2: datos.Id2,
         Nombre2: datos.Nombre2,
-        Descripcion: datos.Descripcion,
+        Descripcion2: datos.Descripcion2,
         Url: datos.Url,
-        Habitacion: datos.Habitacion,
+        Componente: datos.Componente,
       },
       {
         headers: {
@@ -24,7 +19,6 @@ export const add = async (datos) => {
         },
       }
     );
-
     Swal.fire({
       title: "<strong>Registro exitoso</strong>",
       html:
@@ -47,18 +41,15 @@ export const add = async (datos) => {
 
 // Actualizar una habitación evidencia
 export const update = async (datos) => {
-  console.log("actualizar---",datos.Nombre2);
-                    console.log("actualizar",datos.Descripcion);
-                    console.log("actualizar",datos.Id2);
   try {
     await Axios.put(
-      "http://localhost:4000/habitaciones-evidencias/update",
+      "http://localhost:4000/componentes-evidencias/update",
       {
         Id2: datos.Id2,
         Nombre2: datos.Nombre2,
-        Descripcion: datos.Descripcion,
+        Descripcion2: datos.Descripcion2,
         Url: datos.Url,
-        Habitacion: datos.Habitacion, 
+        Componente: datos.Componente,
       },
       {
         headers: {
@@ -66,9 +57,6 @@ export const update = async (datos) => {
         },
       }
     );
-
-
-    
     Swal.fire({
       title: "<strong>Actualización exitosa</strong>",
       html:
@@ -87,10 +75,9 @@ export const update = async (datos) => {
       confirmButtonText: "Aceptar",
     });
   }
-};
+}
 
-
-export const eliminar = async ({ val, getHabitacionesEvidencias }) => {
+export const eliminar = async ({ val, getComponentesEvidencias }) => {
   try {
     const result = await Swal.fire({
       title: "ELIMINAR",
@@ -107,15 +94,14 @@ export const eliminar = async ({ val, getHabitacionesEvidencias }) => {
 
     if (result.isConfirmed) {
       await Axios.delete(
-        `http://localhost:4000/habitaciones-evidencias/delete/${val.Id2}`,
+        `http://localhost:4000/componentes-evidencias/delete/${val.Id2}`,
         {
           headers: {
             Authorization: localStorage.getItem("auth"),
           },
         }
       );
-      await getHabitacionesEvidencias();
-
+      await getComponentesEvidencias();
       Swal.fire({
         title: "<strong>Eliminación exitosa</strong>",
         html:
@@ -138,11 +124,12 @@ export const eliminar = async ({ val, getHabitacionesEvidencias }) => {
   }
 };
 
-// Obtener información de las habitaciones evidencia
-export const habitacionesEvidencia = async () => {
+// Obtener información de las componentes evidencia
+export const componentesEvidencia = async () => {
+
   try {
     const response = await Axios.get(
-      "http://localhost:4000/habitaciones-evidencias/get-evidencias",
+      "http://localhost:4000/componentes-evidencias/get-evidencias",
       {
         headers: {
           Authorization: localStorage.getItem("auth"),
@@ -162,4 +149,3 @@ export const habitacionesEvidencia = async () => {
     return null;
   }
 };
-

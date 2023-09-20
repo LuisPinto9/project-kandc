@@ -9,17 +9,15 @@ import {
   buscarHabitacion,
 } from "../../controllers/HabitacionControllers";
 import HabitacionesForm from "../../components/HabitacionesModal";
-
-//verificar
 import { zonas } from "../../controllers/ZonasControllers";
 import { arrendatarios } from "../../controllers/UserControllers";
 import PDFGenerator from "../../components/PDFGenerator";
 
-
+/* 
 import { habitacionesEvidencia } from "../../controllers/HabitacionEvidenciaController";
-import HabitacionEvidenciaForm from "../../components/HabitacionEvidenciasModal";
+import HabitacionEvidenciaForm from "../../components/ComponentesEvidenciasModal";
 
-
+ */
 
 const Habitaciones = () => {
   const [Id, setId] = useState("");
@@ -27,24 +25,26 @@ const Habitaciones = () => {
   const [Estado, setEstado] = useState("");
   const [Precio, setPrecio] = useState("");
   const [Zona, setZona] = useState("");
-
   const [HabitacionesList, setHabitaciones] = useState([]);
   const [ZonasList, setZonas] = useState([]);
+
+  /*
   const [HabitacionesEvidenciaList, setHabitacionesEvidencia] = useState([]);
   const [evidenciaHabitacionSeleccionada, setEvidenciaHabitacionSeleccionada] = useState(null);
 
-
+ 
   const [Id2, setId2] = useState("");
   const [Nombre2, setNombre2] = useState("");
   const [Descripcion, setDescripcion] = useState("");
   const [Url, setUrl] = useState("");
   const [Habitacion, setHabitacion] = useState("");
 
+ */
+
 
   //usuarios
   const [UsuarioList, setUsuarios] = useState([]);
   const [IdUsuarios, setIdUsuarios] = useState("");
-
   const [NombreBuscar, setNombreBuscar] = useState("");
   const [buscarState, setBuscarState] = useState(false);
 
@@ -60,32 +60,12 @@ const Habitaciones = () => {
   //aqui
   const EditarHabitaciones = (val) => {
     setId(val.id);
-    console.log("valor de id", val.id);
     setNombre(val.nombre);
     setEstado(val.estado);
     setPrecio(val.precio);
     setZona(val.zonas);
     setIdUsuarios(val.idUsuarios);
   };
-  const getHabitacionesEvidencias = async () => {
-    //aqui
-    await habitacionesEvidencia()
-      .then((data) => {
-        setHabitacionesEvidencia(data);
-        console.log("entro a obtener habitaciones", data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener las zonas:", error);
-      });
-  };
-  const EditarHabitacionesEvidencias = (val2) => {
-    setId2(val2.id);
-    setNombre2(val2.nombre);
-    setDescripcion(val2.descripcion);
-    setUrl(val2.url);
-    setHabitacion(val2.habitacion || "");
-  };
-
   //verificar
   const getZonas = async () => {
     //aqui
@@ -121,9 +101,6 @@ const Habitaciones = () => {
     getHabitaciones();
     getZonas();
     getArrendatarios();
-    //..
-
-    getHabitacionesEvidencias();
   }, []);
 
   let autoIncrementa = 1;
@@ -211,8 +188,6 @@ const Habitaciones = () => {
                 <th scope="col">Zona</th>
                 <th scope="col">ID de propietario</th>
                 <th scope="col">Editar</th>
-                <th scope="col">IngresarHabitacionfoto</th>
-                <th scope="col">ActualizarFoto</th>
                 <th className="row-border-right" scope="col">
                   Borrar
                 </th>
@@ -221,11 +196,6 @@ const Habitaciones = () => {
             <tbody>
               {HabitacionesList &&
                 HabitacionesList.map((val, key) => {
-
-                  
-                  //console.log("Valor actual evidencia",val.id);
-                 // console.log("Valor actual evidencia", evidenciaHabitacionSeleccionada.id);
-
                   return (
                     <tr key={key}>
                       <th className="row-border-left" scope="row">
@@ -250,7 +220,7 @@ const Habitaciones = () => {
                         />
                         <HabitacionesForm
                           modoEdicion={true}
-                          habitacion2={{
+                          habitacion={{
                             Id: Id,
                             Nombre: Nombre,
                             Estado: Estado,
@@ -264,83 +234,6 @@ const Habitaciones = () => {
                         />
                       </td>
                       {/*/HabitacionEvidenciasModal*/}
-
-                      <td>
-                        {HabitacionesEvidenciaList && (
-                          <HabitacionEvidenciaForm
-                          modoEdicion={false}
-                          evidenciaHabitacionSeleccionada={null}
-                          getHabitacionesEvidencias={getHabitacionesEvidencias}
-                        />
-
-                        )}
-                        <i
-                          type="button"
-                          data-bs-toggle="modal"
-                          data-bs-target="#staticBackdrop-post-evidencia"
-                          className="bi bi-plus-circle-fill btn-add"
-                        />
-                     </td>
-
-
-                      <td>
-                        <i
-                          type="button"                          
-                          data-bs-toggle="modal"
-                          data-bs-target="#staticBackdrop-put-evidencia"
-                          //data-bs-target="#staticBackdrop-post-evidencia"
-                          className="bi bi-pencil-square px-2 btn-update"
-                         onClick={() => {
-                          const evidenciaEncontrada = HabitacionesEvidenciaList.find(
-                            (evidencia) => evidencia.habitacion === val.id
-                            
-                          );
-                          
-
-                          if (evidenciaEncontrada) {
-                            // Si se encontró evidencia, actualizar el estado
-                            setEvidenciaHabitacionSeleccionada(evidenciaEncontrada);
-                            EditarHabitacionesEvidencias(evidenciaEncontrada);
-                            console.log("entro a valido");
-                          } else {
-                            console.log("entro a nooooo valido", val.id);
-                      
-                            // Si no se encontró evidencia, cargar campos en blanco con el ID de la habitación
-                            const nuevaEvidencia = {
-                              Id2: "",
-                              Nombre2: "",
-                              Descripcion: "",
-                              Url: "",
-                              Habitacion: val.id,
-                            };
-                      
-                            setEvidenciaHabitacionSeleccionada(nuevaEvidencia);
-                            EditarHabitacionesEvidencias(nuevaEvidencia);
-                          }
-                        }}
-                        />
-
-                         <HabitacionEvidenciaForm
-                          modoEdicion={true}
-                          evidenciaHabitacionSeleccionada={{
-                            Id2: Id2,
-                            Nombre2: Nombre2,
-                            Descripcion: Descripcion,
-                            Precio: Precio,
-                            Url: Url,
-                            Habitacion: Habitacion,
-                          }}
-                         
-                          getHabitacionesEvidencias={getHabitacionesEvidencias}
-                        /> 
-
-
-                      </td>
-
-
-
-
-
                       <td className="row-border-right">
                         <i
                           type="button"

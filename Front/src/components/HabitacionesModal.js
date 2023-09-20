@@ -4,7 +4,8 @@ import "../css/modal.css";
 import Swal from "sweetalert2"
 
 
-const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList, UsuarioList }) => {
+const HabitacionesForm = ({ modoEdicion, habitacion, getHabitaciones, ZonasList, UsuarioList }) => {
+    
     const initialState = {
         Id: "",
         Nombre: "",
@@ -16,16 +17,16 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
 
     const [values, setValues] = useState(initialState);
     const [errorMessages, setErrorMessages] = useState({ ...initialState });
+    const [editado, setEditado] = useState(false)
 
     useEffect(() => {
-        if (modoEdicion && habitacion2) {
-            setValues(habitacion2);
-            //console.log("Valor actual de IdUsuarios:", habitacion.IdUsuarios);
+        if (modoEdicion) {
+            setValues(habitacion);
         } else {
             setValues(initialState);
         }
         // eslint-disable-next-line
-    }, [modoEdicion, habitacion2]);
+    }, [habitacion, modoEdicion]);
 
     const validateField = (fieldName) => {
         const value = values[fieldName];
@@ -41,7 +42,6 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                     updatedErrorMessages[fieldName] = "";
                 }
                 break;
-
             case "Nombre":
                 const nombrePattern = /^[\p{L}ÁÉÍÓÚáéíóúÑñ\s]+$/u;
                 if (!nombrePattern.test(value) || value.length < 3) {
@@ -51,7 +51,6 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                     updatedErrorMessages[fieldName] = "";
                 }
                 break;
-
             case "Estado":
                 const estadoPattern = /^[A-Za-z]+$/;
                 if (!estadoPattern.test(value) || value.length < 3) {
@@ -61,7 +60,6 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                     updatedErrorMessages[fieldName] = "";
                 }
                 break;
-
             case "Precio":
                 const precioPattern = /^\d+(\.\d{1,2})?$/;
                 if (!precioPattern.test(value) || parseInt(value) <= 0) {
@@ -79,15 +77,11 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
             case "IdUsuarios":
                 // Validación para el campo IdUsuarios de la habitación
                 break;
-
             default:
                 break;
         }
-
         setErrorMessages(updatedErrorMessages);
     };
-
-
 
     const validateFields = () => {
         validateField("Id");
@@ -133,6 +127,7 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                     await add(values);
                 }
                 getHabitaciones();
+                setEditado(true)
                 limpiarCampos();
             }
         } else {
@@ -141,8 +136,14 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
     };
 
     const limpiarCampos = () => {
-        setValues(initialState);
-        setErrorMessages({ ...initialState });
+        if (editado) {
+            setValues(initialState);
+            setErrorMessages({ ...initialState });
+        } else if (!editado && modoEdicion) {
+            setValues(habitacion)
+        } else if (!modoEdicion) {
+            setValues(initialState)
+        }
     };
 
     return (
@@ -169,7 +170,6 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                                 aria-label="Close"
                                 onClick={limpiarCampos}
                             ></button>
-
                         </div>
                         <div className="modal-body">
                             <div className="input-group mb-3">
@@ -179,6 +179,7 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                                 <input
                                     type="text"
                                     value={values.Id}
+                                    disabled={modoEdicion}
                                     onChange={(event) => {
                                         setValues({ ...values, Id: event.target.value });
                                     }}
@@ -193,7 +194,6 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                                     <div className="text-danger">{errorMessages.Id}</div>
                                 )}
                             </div>
-
                             <div className="input-group mb-3">
                                 <span className="input-group-text">Nombre</span>
                                 <input
@@ -213,7 +213,6 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                                     <div className="text-danger">{errorMessages.Nombre}</div>
                                 )}
                             </div>
-
                             <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">
                                     Estado
@@ -235,7 +234,6 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                                     <div className="text-danger">{errorMessages.Estado}</div>
                                 )}
                             </div>
-
                             <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">
                                     Precio
@@ -257,7 +255,6 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                                     <div className="text-danger">{errorMessages.Precio}</div>
                                 )}
                             </div>
-
                             <div className="input-group mb-3">
                                 <label
                                     className="input-group-text"
@@ -289,7 +286,6 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                                     <div className="text-danger">{errorMessages.Zona}</div>
                                 )}
                             </div>
-
                             <div className="input-group mb-3">
                                 <label
                                     className="input-group-text"
@@ -322,8 +318,6 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                                 )}
                             </div>
                         </div>
-
-
                         <div className="modal-footer">
                             <button
                                 type="button"
@@ -336,7 +330,7 @@ const HabitacionesForm = ({ modoEdicion, habitacion2, getHabitaciones, ZonasList
                             <button
                                 type="button"
                                 className="btn btn-primary"
-                                data-bs-dismiss="modal"
+                                data-bs-dismiss={modoEdicion ? "modal" : null}
                                 onClick={submitForm}
                             >
                                 {modoEdicion ? "Actualizar" : "Agregar"}

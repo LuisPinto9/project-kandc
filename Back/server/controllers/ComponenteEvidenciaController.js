@@ -1,8 +1,7 @@
 const db = require("../db");
 
-const getEvidenciasByHabitacion = (req, res) => {
-  console.log("ecibida solicitudpedirrrrrrrra:");
-  db.query("SELECT * FROM evidencia_habitaciones", (err, result) => {
+const getEvidenciasByComponente = (req, res) => {
+  db.query("SELECT * FROM evidencia_componentes", (err, result) => {
     if (err) {
       console.error("Error al obtener evidencias:", err);
       res.status(500).send("Hubo un error en el servidor");
@@ -10,17 +9,17 @@ const getEvidenciasByHabitacion = (req, res) => {
     } else {
       res.send(result);
       console.log("todobien", result.Id2);
-      
+
     }
   });
 };
 
 const createEvidencia = (req, res) => {
-  const { Id2, Nombre2, Descripcion, Url, Habitacion } = req.body;
+  const { Id2, Nombre2, Descripcion2, Url, Componente } = req.body;
   console.log('Creo evidencia:', req.body);
   db.query(
-    "INSERT INTO evidencia_habitaciones (id, nombre, descripcion, url, habitacion) VALUES (?, ?, ?, ?, ?)",
-    [Id2, Nombre2, Descripcion, Url, Habitacion],
+    "INSERT INTO evidencia_componentes (id, nombre, descripcion, url, componente) VALUES (?, ?, ?, ?, ?)",
+    [Id2, Nombre2, Descripcion2, Url, Componente],
     (err, result) => {
       if (err) {
         res.status(500).send("Hubo un error en el servidor");
@@ -32,12 +31,11 @@ const createEvidencia = (req, res) => {
 };
 
 const updateEvidencia = (req, res) => {
-  
-  const { Id2, Nombre2, Descripcion, Url, Habitacion } = req.body;
+  const { Id2, Nombre2, Descripcion2, Url, Componente } = req.body;
   console.log('Recibida solicitud de actualización de evidencia:', req.body);
   db.query(
-    "UPDATE evidencia_habitaciones SET nombre=?,descripcion=?,url=?,habitacion=? WHERE id=?",
-    [Nombre2, Descripcion, Url, Habitacion, Id2],
+    "UPDATE evidencia_componentes SET nombre=?,descripcion=?,url=?,componente=? WHERE id=?",
+    [Nombre2, Descripcion2, Url, Componente, Id2],
     (err, result) => {
       if (err) {
         res.status(500).send("Hubo un error en el servidor");
@@ -50,7 +48,7 @@ const updateEvidencia = (req, res) => {
 
 const deleteEvidencia = (req, res) => {
   const Id2 = req.params.id;
-  db.query("DELETE FROM evidencia_habitaciones WHERE id=?", [Id], (err, result) => {
+  db.query("DELETE FROM evidencia_componentes WHERE id=?", [Id2], (err, result) => {
     if (err) {
       res.status(500).send("Hubo un error en el servidor");
     } else {
@@ -60,7 +58,7 @@ const deleteEvidencia = (req, res) => {
 };
 
 module.exports = {
-  getEvidenciasByHabitacion,
+  getEvidenciasByComponente,
   createEvidencia,
   updateEvidencia,
   deleteEvidencia,

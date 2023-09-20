@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const HabitacionEvidenciaController = require("../controllers/HabitacionEvidenciaController");
+const HabitacionEvidenciaController = require("../controllers/ComponenteEvidenciaController");
 const check = require("../middleware/auth");
 
 
 
-router.get("/get-evidencias", check.auth, (req, res) => {
+router.get("/get-componentes", check.auth, (req, res) => {
     HabitacionEvidenciaController.getEvidenciasByHabitacion(req, res);
   });
   

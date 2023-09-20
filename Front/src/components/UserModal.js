@@ -19,17 +19,16 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
 
   const [values, setValues] = useState(initialState);
   const [errorMessages, setErrorMessages] = useState({ ...initialState });
+  const [editado, setEditado] = useState(false)
 
   useEffect(() => {
-    if (modoEdicion && usuario) {
+    if (modoEdicion) {
       setValues(usuario);
     } else {
       setValues(initialState);
     }
     // eslint-disable-next-line
-  }, [modoEdicion, usuario]);
-
-
+  }, [usuario, modoEdicion]);
 
   const validateField = (fieldName) => {
     const value = values[fieldName];
@@ -131,10 +130,8 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
       default:
         break;
     }
-
     setErrorMessages(updatedErrorMessages);
   };
-
 
   const validateFields = () => {
     validateField("IDUsuario");
@@ -185,6 +182,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
           await add(values);
         }
         getArrendatarios();
+        setEditado(true)
         limpiarCampos();
       }
     } else {
@@ -193,13 +191,18 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
   };
 
   const limpiarCampos = () => {
-    setValues(initialState);
-    setErrorMessages({ ...initialState });
+    if (editado) {
+      setValues(initialState);
+      setErrorMessages({ ...initialState });
+    } else if (!editado && modoEdicion) {
+      setValues(usuario)
+    } else if (!modoEdicion) {
+      setValues(initialState)
+    }
   };
 
   return (
     <div>
-
       <div
         className="modal fade"
         id={modoEdicion ? "staticBackdrop-put" : "staticBackdrop-post"}
@@ -231,10 +234,11 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                 <input
                   type="text"
                   value={values.IDUsuario}
+                  disabled={modoEdicion}
                   onChange={(event) => {
                     setValues({ ...values, IDUsuario: event.target.value });
                   }}
-                  onBlur={() => {
+                  onKeyUp={() => {
                     validateField("IDUsuario");
                   }}
                   className="form-control"
@@ -255,7 +259,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                     setValues({ ...values, Nombre: event.target.value });
 
                   }}
-                  onBlur={() => {
+                  onKeyUp={() => {
                     validateField("Nombre");
                   }}
                   className="form-control"
@@ -278,7 +282,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                     setValues({ ...values, MetodoRenta: event.target.value });
 
                   }}
-                  onBlur={() => {
+                  onKeyUp={() => {
                     validateField("MetodoRenta");
                   }}
                   className="form-control"
@@ -301,7 +305,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                     setValues({ ...values, ExtensionDias: event.target.value });
 
                   }}
-                  onBlur={() => {
+                  onKeyUp={() => {
                     validateField("ExtensionDias");
                   }}
                   className="form-control"
@@ -327,7 +331,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                     setValues({ ...values, Telefono: event.target.value });
 
                   }}
-                  onBlur={() => {
+                  onKeyUp={() => {
                     validateField("Telefono");
                   }}
                   className="form-control"
@@ -350,7 +354,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                     setValues({ ...values, NombreUsuario: event.target.value });
 
                   }}
-                  onBlur={() => {
+                  onKeyUp={() => {
                     validateField("NombreUsuario");
                   }}
                   className="form-control"
@@ -375,7 +379,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                     setValues({ ...values, Contraseña: event.target.value });
 
                   }}
-                  onBlur={() => {
+                  onKeyUp={() => {
                     validateField("Contraseña");
                   }}
                   className="form-control"
@@ -398,7 +402,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                     setValues({ ...values, Correo: event.target.value });
 
                   }}
-                  onBlur={() => {
+                  onKeyUp={() => {
                     validateField("Correo");
                   }}
                   className="form-control"
@@ -425,7 +429,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                     setValues({ ...values, TipoUsuario: event.target.value });
 
                   }}
-                  onBlur={() => {
+                  onKeyUp={() => {
                     validateField("TipoUsuario");
                   }}
                 >
@@ -452,7 +456,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
               <button
                 type="button"
                 className="btn btn-primary"
-                data-bs-dismiss="modal"
+                data-bs-dismiss={modoEdicion ? "modal" : null}
                 onClick={submitForm}
               >
                 {modoEdicion ? "Actualizar" : "Agregar"}

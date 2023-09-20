@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { add, update } from "../controllers/ComponentesControllers"; // Asegúrate de importar desde los controladores correctos
 import "../css/modal.css";
-
 import Swal from "sweetalert2";
 
 const ComponentesForm = ({ modoEdicion, componente, getComponentes, HabitacionesList }) => {
@@ -19,16 +18,16 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
 
     const [values, setValues] = useState(initialState);
     const [errorMessages, setErrorMessages] = useState({ ...initialState });
+    const [editado, setEditado] = useState(false)
 
     useEffect(() => {
-        if (modoEdicion && componente) {
+        if (modoEdicion) {
             setValues(componente);
         } else {
             setValues(initialState);
         }
         // eslint-disable-next-line
-    }, [modoEdicion, componente]);
-
+    }, [componente, modoEdicion]);
 
     const validateField = (fieldName) => {
         const value = values[fieldName];
@@ -174,6 +173,7 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                     await add(values);
                 }
                 getComponentes();
+                setEditado(true)
                 limpiarCampos();
             }
         } else {
@@ -181,11 +181,17 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
         }
     };
 
-
     const limpiarCampos = () => {
-        setValues(initialState);
-        setErrorMessages({ ...initialState });
+        if (editado) {
+            setValues(initialState);
+            setErrorMessages({ ...initialState });
+        } else if (!editado && modoEdicion) {
+            setValues(componente)
+        } else if (!modoEdicion) {
+            setValues(initialState)
+        }
     };
+
     return (
         <div>
             <div
@@ -219,10 +225,11 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                 <input
                                     type="text"
                                     value={values.Id}
+                                    disabled={modoEdicion}
                                     onChange={(event) => {
                                         setValues({ ...values, Id: event.target.value });
                                     }}
-                                    onBlur={() => {
+                                    onKeyUp={() => {
                                         validateField("Id");
                                     }}
                                     className="form-control"
@@ -233,7 +240,6 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                     <div className="text-danger">{errorMessages.Id}</div>
                                 )}
                             </div>
-
                             <div className="input-group mb-3">
                                 <span className="input-group-text">Nombre</span>
                                 <input
@@ -242,7 +248,7 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                     onChange={(event) => {
                                         setValues({ ...values, Nombre: event.target.value });
                                     }}
-                                    onBlur={() => {
+                                    onKeyUp={() => {
                                         validateField("Nombre");
                                     }}
                                     className="form-control"
@@ -253,7 +259,6 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                     <div className="text-danger">{errorMessages.Nombre}</div>
                                 )}
                             </div>
-
                             <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">
                                     Marca
@@ -264,7 +269,7 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                     onChange={(event) => {
                                         setValues({ ...values, Marca: event.target.value });
                                     }}
-                                    onBlur={() => {
+                                    onKeyUp={() => {
                                         validateField("Marca");
                                     }}
                                     className="form-control"
@@ -275,7 +280,6 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                     <div className="text-danger">{errorMessages.Marca}</div>
                                 )}
                             </div>
-
                             <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">
                                     Cantidad
@@ -286,7 +290,7 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                     onChange={(event) => {
                                         setValues({ ...values, Cantidad: event.target.value });
                                     }}
-                                    onBlur={() => {
+                                    onKeyUp={() => {
                                         validateField("Cantidad");
                                     }}
                                     className="form-control"
@@ -297,7 +301,6 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                     <div className="text-danger">{errorMessages.Cantidad}</div>
                                 )}
                             </div>
-
                             <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">
                                     Costo
@@ -308,7 +311,7 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                     onChange={(event) => {
                                         setValues({ ...values, Costo: event.target.value });
                                     }}
-                                    onBlur={() => {
+                                    onKeyUp={() => {
                                         validateField("Costo");
                                     }}
                                     className="form-control"
@@ -319,7 +322,6 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                     <div className="text-danger">{errorMessages.Costo}</div>
                                 )}
                             </div>
-
                             <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">
                                     Estado
@@ -330,7 +332,7 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                     onChange={(event) => {
                                         setValues({ ...values, Estado: event.target.value });
                                     }}
-                                    onBlur={() => {
+                                    onKeyUp={() => {
                                         validateField("Estado");
                                     }}
                                     className="form-control"
@@ -341,7 +343,6 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                     <div className="text-danger">{errorMessages.Estado}</div>
                                 )}
                             </div>
-
                             <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">
                                     Descripción
@@ -352,7 +353,7 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                     onChange={(event) => {
                                         setValues({ ...values, Descripcion: event.target.value });
                                     }}
-                                    onBlur={() => {
+                                    onKeyUp={() => {
                                         validateField("Descripcion");
                                     }}
                                     className="form-control"
@@ -363,7 +364,6 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                     <div className="text-danger">{errorMessages.Descripcion}</div>
                                 )}
                             </div>
-
                             <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">
                                     Observación
@@ -374,7 +374,7 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                     onChange={(event) => {
                                         setValues({ ...values, Observacion: event.target.value });
                                     }}
-                                    onBlur={() => {
+                                    onKeyUp={() => {
                                         validateField("Observacion");
                                     }}
                                     className="form-control"
@@ -385,7 +385,6 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                     <div className="text-danger">{errorMessages.Observacion}</div>
                                 )}
                             </div>
-
                             <div className="input-group mb-3">
                                 <label
                                     className="input-group-text"
@@ -401,7 +400,7 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                         setValues({ ...values, Habitacion: event.target.value });
 
                                     }}
-                                    onBlur={() => {
+                                    onKeyUp={() => {
                                         validateField("Habitacion");
                                     }}
                                 >
@@ -419,9 +418,6 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                                 )}
                             </div>
                         </div>
-
-
-
                         <div className="modal-footer">
                             <button
                                 type="button"
@@ -434,7 +430,7 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
                             <button
                                 type="button"
                                 className="btn btn-primary"
-                                data-bs-dismiss="modal"
+                                data-bs-dismiss={modoEdicion ? "modal" : null}
                                 onClick={submitForm}
                             >
                                 {modoEdicion ? "Actualizar" : "Agregar"}
