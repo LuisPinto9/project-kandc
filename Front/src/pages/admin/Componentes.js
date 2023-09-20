@@ -279,18 +279,16 @@ const Componentes = () => {
                           //data-bs-target="#staticBackdrop-post-evidencia"
                           className="bi bi-card-image px-2 btn-update"
                           onClick={() => {
+                            console.log(val.id);
                             const evidenciaEncontrada = ComponentesEvidenciaList.find(
-                              (evidencia) => evidencia.Componente === val.id
+                              (evidencia) => evidencia.componente === val.id
                             );
                             console.log("entro a nooooo valido");
                             if (evidenciaEncontrada) {
                               // Si se encontró evidencia, actualizar el estado
                               setEvidenciaHabitacionSeleccionada(evidenciaEncontrada);
                               EditarComponentesEvidencias(evidenciaEncontrada);
-                              console.log("entro a valido");
                             } else {
-                              console.log("entro a nooooo valido", val.id);
-
                               // Si no se encontró evidencia, cargar campos en blanco con el ID de la habitación
                               const nuevaEvidencia = {
                                 Id2: "",
