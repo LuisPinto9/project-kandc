@@ -83,6 +83,9 @@ const Habitaciones = () => {
 
   let autoIncrementa = 1;
 
+  const ultimoIdHabitacion = HabitacionesList.length > 0 ? HabitacionesList[HabitacionesList.length - 1].id : 0;
+
+
   return (
     <div className="d-flex" style={{ minHeight: "78.6vh" }}>
       <div className="div-barra">
@@ -134,6 +137,7 @@ const Habitaciones = () => {
                 getHabitaciones={getHabitaciones}
                 ZonasList={ZonasList}
                 UsuarioList={UsuarioList}
+                ultimoId={ultimoIdHabitacion}
               />
             )}
             <i
@@ -209,6 +213,7 @@ const Habitaciones = () => {
                           getHabitaciones={getHabitaciones}
                           ZonasList={ZonasList}
                           UsuarioList={UsuarioList}
+                          ultimoId={ultimoIdHabitacion}
                         />
                       </td>
                       {/*/HabitacionEvidenciasModal*/}

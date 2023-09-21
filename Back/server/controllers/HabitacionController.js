@@ -98,4 +98,5 @@ module.exports = {
   updateRoom,
   deleteRoom,
   findByName,
+  
 };
