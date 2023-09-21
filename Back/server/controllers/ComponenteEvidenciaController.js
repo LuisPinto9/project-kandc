@@ -8,21 +8,23 @@ const getEvidenciasByComponente = (req, res) => {
       console.log("bubo error al obtenerlos");
     } else {
       res.send(result);
-      console.log("todobien", result.Id2);
-
     }
   });
 };
 
 const createEvidencia = (req, res) => {
-  const { Id2, Nombre2, Descripcion2, Url, Componente } = req.body;
-  console.log('Creo evidencia:', req.body);
+  console.log("Creo evidencia:", req.body);
+  const id = req.body.id;
+  const nombre = req.body.nombre;
+  const descripcion = req.body.descripcion;
+  const url = req.body.url;
+  const componente = req.body.componente;
   db.query(
     "INSERT INTO evidencia_componentes (id, nombre, descripcion, url, componente) VALUES (?, ?, ?, ?, ?)",
-    [Id2, Nombre2, Descripcion2, Url, Componente],
+    [id, nombre, descripcion, url, componente],
     (err, result) => {
       if (err) {
-        res.status(500).send("Hubo un error en el servidor");
+        res.status(500).send("Hubo un error en el servidor ");
       } else {
         res.send("Evidencia registrada");
       }
@@ -31,11 +33,11 @@ const createEvidencia = (req, res) => {
 };
 
 const updateEvidencia = (req, res) => {
-  const { Id2, Nombre2, Descripcion2, Url, Componente } = req.body;
-  console.log('Recibida solicitud de actualización de evidencia:', req.body);
+  const { id, nombre, descripcion, url, componente } = req.body;
+  console.log("Recibida solicitud de actualización de evidencia:", req.body);
   db.query(
     "UPDATE evidencia_componentes SET nombre=?,descripcion=?,url=?,componente=? WHERE id=?",
-    [Nombre2, Descripcion2, Url, Componente, Id2],
+    [nombre, descripcion, url, componente, id],
     (err, result) => {
       if (err) {
         res.status(500).send("Hubo un error en el servidor");
@@ -47,18 +49,22 @@ const updateEvidencia = (req, res) => {
 };
 
 const deleteEvidencia = (req, res) => {
-  const Id2 = req.params.id;
-  db.query("DELETE FROM evidencia_componentes WHERE id=?", [Id2], (err, result) => {
-    if (err) {
-      res.status(500).send("Hubo un error en el servidor");
-    } else {
-      res.send("Evidencia eliminada");
+  const id = req.params.id;
+  db.query(
+    "DELETE FROM evidencia_componentes WHERE id=?",
+    [id],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Hubo un error en el servidor");
+      } else {
+        res.send("Evidencia eliminada");
+      }
     }
-  });
+  );
 };
 
-const findEvidenciaByComponente = (req, res) =>{
-  const id = req.params.id
+const findEvidenciaByComponente = (req, res) => {
+  const id = req.params.id;
   db.query(
     "SELECT * FROM evidencia_componentes WHERE evidencia_componentes.componente LIKE ? OR evidencia_componentes.componente LIKE ? OR evidencia_componentes.componente LIKE ?",
     [`%${id}`, `%${id}%`, `${id}%`],
@@ -70,7 +76,7 @@ const findEvidenciaByComponente = (req, res) =>{
       }
     }
   );
-}
+};
 
 module.exports = {
   getEvidenciasByComponente,

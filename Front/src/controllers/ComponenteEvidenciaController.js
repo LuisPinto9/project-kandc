@@ -2,16 +2,17 @@ import Axios from "axios";
 import Swal from "sweetalert2";
 
 // Agregar una habitación evidencia
-export const add = async (datos) => {
+export const addEvidencia = async (datos, file) => {
   try {
     await Axios.post(
       "http://localhost:4000/componentes-evidencias/create",
+
       {
-        Id2: datos.Id2,
-        Nombre2: datos.Nombre2,
-        Descripcion2: datos.Descripcion2,
-        Url: datos.Url,
-        Componente: datos.Componente,
+        id: datos.id,
+        nombre: datos.nombre,
+        descripcion: datos.descripcion,
+        url: datos.url,
+        componente: datos.componente,
       },
       {
         headers: {
@@ -23,11 +24,12 @@ export const add = async (datos) => {
       title: "<strong>Registro exitoso</strong>",
       html:
         "<i>La habitación evidencia: <strong>" +
-        datos.Nombre2 +
+        datos.nombre +
         "</strong> fue registrada</i>",
       icon: "success",
       timer: 2000,
     });
+    addFile(file);
   } catch (error) {
     Swal.fire({
       title: "Error al registrar los datos",
@@ -39,17 +41,29 @@ export const add = async (datos) => {
   }
 };
 
+export const addFile = async (file) => {
+  if (file) {
+    const formData = new FormData();
+    formData.append("image", file);
+    await Axios.post("http://localhost:4000/file", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }); // Mensaje de éxito del servidor para la imagen
+  }
+};
+
 // Actualizar una habitación evidencia
-export const update = async (datos) => {
+export const updateEvidencia = async (datos, file) => {
   try {
     await Axios.put(
       "http://localhost:4000/componentes-evidencias/update",
       {
-        Id2: datos.Id2,
-        Nombre2: datos.Nombre2,
-        Descripcion2: datos.Descripcion2,
-        Url: datos.Url,
-        Componente: datos.Componente,
+        id: datos.id,
+        nombre: datos.nombre,
+        descripcion: datos.descripcion,
+        url: datos.url,
+        componente: datos.componente,
       },
       {
         headers: {
@@ -61,11 +75,12 @@ export const update = async (datos) => {
       title: "<strong>Actualización exitosa</strong>",
       html:
         "<i>La habitación evidencia: <strong>" +
-        datos.Nombre2 +
+        datos.nombre +
         "</strong> fue actualizada</i>",
       icon: "success",
       timer: 2000,
     });
+    addFile(file);
   } catch (error) {
     Swal.fire({
       title: "Error al actualizar el registro",
@@ -75,15 +90,15 @@ export const update = async (datos) => {
       confirmButtonText: "Aceptar",
     });
   }
-}
+};
 
-export const eliminar = async ({ val, getComponentesEvidencias }) => {
+export const eliminarEvidencia = async ({ val, getComponentesEvidencias }) => {
   try {
     const result = await Swal.fire({
       title: "ELIMINAR",
       html:
         "<i>¿Desea eliminar la habitación evidencia <strong>" +
-        val.Nombre2 +
+        val.nombre +
         "</strong>?</i>",
       icon: "warning",
       showCancelButton: true,
@@ -91,10 +106,9 @@ export const eliminar = async ({ val, getComponentesEvidencias }) => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Sí, eliminar",
     });
-
     if (result.isConfirmed) {
       await Axios.delete(
-        `http://localhost:4000/componentes-evidencias/delete/${val.Id2}`,
+        `http://localhost:4000/componentes-evidencias/delete/${val.id}`,
         {
           headers: {
             Authorization: localStorage.getItem("auth"),
@@ -106,7 +120,7 @@ export const eliminar = async ({ val, getComponentesEvidencias }) => {
         title: "<strong>Eliminación exitosa</strong>",
         html:
           "<i>La habitación evidencia: <strong>" +
-          val.Nombre +
+          val.nombre +
           "</strong> fue eliminada</i>",
         icon: "success",
         timer: 2000,

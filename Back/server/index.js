@@ -7,6 +7,37 @@ app.use(cors());
 app.use(express.json());
 app.set("port", process.env.PORT);
 
+const multer = require("multer");
+const mimeTypes = require("mime-types");
+
+let url = "";
+let nameFile = "";
+
+const storage = multer.diskStorage({
+  destination: "images/evidencias/",
+  filename: function name(req, file, callback) {
+    let filename = file.originalname
+      .toLocaleLowerCase()
+      .split(".")[0]
+      .replace(/[^\w]/gi, "");
+    callback(
+      "",
+      filename + "." + mimeTypes.extension(file.mimetype),
+      (url = (
+        "/evidencias/" +
+        filename +
+        "." +
+        mimeTypes.extension(file.mimetype)
+      ).replaceAll("\\", "/"))
+    );
+  },
+});
+const upload = multer({ storage: storage });
+
+app.use(express.static("images"));
+
+app.post("/file", upload.single("image"), (req, res) => {});
+
 const userRoutes = require("./routes/UserRoutes.js");
 app.use("/user", userRoutes);
 
