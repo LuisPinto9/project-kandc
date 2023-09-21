@@ -4,10 +4,12 @@ import "../css/modal.css";
 import Swal from "sweetalert2"
 
 
-const HabitacionesForm = ({ modoEdicion, habitacion, getHabitaciones, ZonasList, UsuarioList }) => {
+const HabitacionesForm = ({ modoEdicion, habitacion, getHabitaciones, ZonasList, UsuarioList,ultimoId }) => {
     
+//Id: modoEdicion ? habitacion.Id : ultimoId.toString(),
+        //
     const initialState = {
-        Id: "",
+        Id: ultimoId.toString(),        
         Nombre: "",
         Estado: "",
         Precio: "",
@@ -23,6 +25,7 @@ const HabitacionesForm = ({ modoEdicion, habitacion, getHabitaciones, ZonasList,
         if (modoEdicion) {
             setValues(habitacion);
         } else {
+            //console.log("ddd",ultimoId);
             setValues(initialState);
         }
         // eslint-disable-next-line
@@ -33,7 +36,7 @@ const HabitacionesForm = ({ modoEdicion, habitacion, getHabitaciones, ZonasList,
         const updatedErrorMessages = { ...errorMessages };
 
         switch (fieldName) {
-            case "Id":
+            /* case "Id2":
                 const idPattern = /^[0-9]+$/;
                 if (!idPattern.test(value) || parseInt(value, 10) === 0) {
                     updatedErrorMessages[fieldName] =
@@ -41,7 +44,7 @@ const HabitacionesForm = ({ modoEdicion, habitacion, getHabitaciones, ZonasList,
                 } else {
                     updatedErrorMessages[fieldName] = "";
                 }
-                break;
+                break; */
             case "Nombre":
                 const nombrePattern = /^[\p{L}ÁÉÍÓÚáéíóúÑñ\s]+$/u;
                 if (!nombrePattern.test(value) || value.length < 3) {

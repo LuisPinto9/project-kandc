@@ -78,6 +78,19 @@ const findByName = (req, res) => {
     }
   );
 };
+/* const obtenerUltimoId = (req, res) => {
+  db.query("SELECT MAX(id) as ultimoId FROM habitaciones", (err, result) => {
+      if (err) {
+          res.status(500).send("Hubo un error en el servidor");
+      } else {
+          if (result.length > 0) {
+              res.send({ ultimoId: result[0].ultimoId });
+          } else {
+              res.send({ ultimoId: 0 }); // Si no hay registros, se devuelve 0 como último ID
+          }
+      }
+  });
+}; */
 
 module.exports = {
   getRooms,
@@ -85,4 +98,5 @@ module.exports = {
   updateRoom,
   deleteRoom,
   findByName,
+  
 };
