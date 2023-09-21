@@ -46,9 +46,15 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
 
       case "Nombre":
         const nombrePattern = /^[\p{L}ÁÉÍÓÚáéíóúÑñ\s]+$/u;
-        if (!nombrePattern.test(value) || value.length < 3) {
+        const nombreParts = value.trim().split(/\s+/); // Dividir el valor en palabras
+
+        if (
+          !nombrePattern.test(value) || // Comprueba que solo contiene letras y espacios
+          nombreParts.length < 2 || // Comprueba que haya al menos dos palabras (nombres y apellidos)
+          nombreParts.length > 4 // Limita a un máximo de cuatro palabras (por si hay doble apellido)
+        ) {
           updatedErrorMessages[fieldName] =
-            "El campo Nombre debe contener solo letras y tener al menos 3 caracteres.";
+            "Debe contener letras y espacios y ser Un nombre valido";
         } else {
           updatedErrorMessages[fieldName] = "";
         }
@@ -66,9 +72,10 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
 
       case "ExtensionDias":
         const extensionDiasPattern = /^\d+$/;
-        if (!extensionDiasPattern.test(value)) {
+        const numericValue = parseInt(value, 10); // Convertir el valor a un número entero
+        if (!extensionDiasPattern.test(value) || numericValue > 365) {
           updatedErrorMessages[fieldName] =
-            "El campo Extensión de Días debe contener solo números.";
+            "Debe contener solo números y no debe ser mayor de 365 días.";
         } else {
           updatedErrorMessages[fieldName] = "";
         }
@@ -78,7 +85,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
         const telefonoPattern = /^\d{10}$/;
         if (!telefonoPattern.test(value)) {
           updatedErrorMessages[fieldName] =
-            "El campo Teléfono debe contener exactamente 10 dígitos.";
+            "Debe contener exactamente 10 dígitos.";
         } else {
           updatedErrorMessages[fieldName] = "";
         }
@@ -88,7 +95,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
         const nombreUsuarioPattern = /^[A-Za-z0-9]+$/;
         if (!nombreUsuarioPattern.test(value)) {
           updatedErrorMessages[fieldName] =
-            "El campo Nombre de Usuario debe contener solo letras y números sin caracteres especiales.";
+            "Debe contener solo letras y números sin caracteres especiales.";
         } else {
           updatedErrorMessages[fieldName] = "";
         }
@@ -100,32 +107,29 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
           /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
         if (!contraseñaPattern.test(value)) {
           updatedErrorMessages[fieldName] =
+<<<<<<< HEAD
             "La contraseña debe tener por lo menos 8 caracteres, una mayúscula, un número y un caracter especial.";
+=======
+            "Debe contener: 8 caracteres: especiales, Mayuscula, Minuscula, Numeros";
+>>>>>>> a7c80dd5ca5325df52fbfb1a81e319f8ce948dc3
         } else {
           updatedErrorMessages[fieldName] = "";
         }
         break;
 
       case "Correo":
-        const correoPattern = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
-        const correoParts = value.split("@");
-        if (!correoPattern.test(value) || correoParts[0].length > 20) {
+        const gmailPattern = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
+        const yahooPattern = /^[A-Za-z0-9._%+-]+@yahoo\.com$/;
+        const hotmailPattern = /^[A-Za-z0-9._%+-]+@hotmail\.com$/;
+
+        if (!(gmailPattern.test(value) || yahooPattern.test(value) || hotmailPattern.test(value)) || value.length > 100) {
           updatedErrorMessages[fieldName] =
-            "El campo Correo debe ser una dirección de correo electrónico válida que termine en @gmail.com y con menos de 20 caracteres antes del '@'.";
+            "Debe ser una dirección de correo electrónico válida de Gmail, Yahoo Mail o Hotmail.";
         } else {
           updatedErrorMessages[fieldName] = "";
         }
         break;
 
-      case "TipoUsuario":
-        const tipoUsuarioPattern = /^(Arrendatario|Administrador)$/;
-        if (!tipoUsuarioPattern.test(value)) {
-          updatedErrorMessages[fieldName] =
-            "El campo Tipo de Usuario debe ser 'arrendatario' o 'administrador'.";
-        } else {
-          updatedErrorMessages[fieldName] = "";
-        }
-        break;
 
       default:
         break;
@@ -274,19 +278,29 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                 <span className="input-group-text" id="basic-addon1">
                   Método de Renta
                 </span>
-                <input
-                  type="text"
+                <select
                   value={values.MetodoRenta}
                   onChange={(event) => {
                     setValues({ ...values, MetodoRenta: event.target.value });
                   }}
+<<<<<<< HEAD
                   onBlur={() => {
                     validateField("MetodoRenta");
                   }}
                   className="form-control"
+=======
+                  className="form-select"
+>>>>>>> a7c80dd5ca5325df52fbfb1a81e319f8ce948dc3
                   aria-label="metodo-renta"
                   aria-describedby="basic-addon1"
-                />
+                >
+                  <option value="">Selecciona el método de renta</option>
+                  <option value="Arriendo">Arriendo</option>
+                  <option value="Compra">Compra</option>
+                  <option value="Leasing">Leasing</option>
+                  <option value="Alquiler">Alquiler</option>
+                  {/* Agrega más opciones según tus necesidades */}
+                </select>
                 {errorMessages.MetodoRenta && (
                   <div className="text-danger">{errorMessages.MetodoRenta}</div>
                 )}

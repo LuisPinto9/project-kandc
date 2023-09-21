@@ -50,16 +50,19 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
         break;
 
       case "Precio":
-        const precioPattern = /^\d+$/;
-        if (!precioPattern.test(value) || parseInt(value, 10) <= 0) {
+        const precioPattern = /^[0-9]+(\.[0-9]+)?$/;
+        const precioValue = parseInt(value, 10);
+
+        if (!precioPattern.test(value) ||
+          precioValue < 100 || precioValue > 10000000) {
           updatedErrorMessages[fieldName] =
-            "El campo Precio debe contener solo números y ser mayor que cero.";
+            "El campo Precio debe contener solo números y estar en el rango de 100 a 10,000,000.";
         } else {
           updatedErrorMessages[fieldName] = "";
         }
         break;
 
-      case "Acceso":
+      case "Acceso2":
         const accesoPattern = /^[A-Za-z\s]+$/;
         if (!accesoPattern.test(value) || value.trim().length < 1) {
           updatedErrorMessages[fieldName] =
@@ -241,19 +244,27 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
                 <span className="input-group-text" id="basic-addon1">
                   Acceso
                 </span>
-                <input
-                  type="text"
+                <select
                   value={values.Acceso}
                   onChange={(event) => {
                     setValues({ ...values, Acceso: event.target.value });
                   }}
+<<<<<<< HEAD
                   onBlur={() => {
                     validateField("Acceso");
                   }}
                   className="form-control"
+=======
+                  className="form-select"
+>>>>>>> a7c80dd5ca5325df52fbfb1a81e319f8ce948dc3
                   aria-label="acceso"
                   aria-describedby="basic-addon1"
-                />
+                >
+                  <option value="">Selecciona el método de acceso</option>
+                  <option value="Acceso Público">Acceso Público</option>
+                  <option value="Acceso Privado">Acceso Privado</option>
+                  {/* Agrega más opciones según tus necesidades */}
+                </select>
                 {errorMessages.Acceso && (
                   <div className="text-danger">{errorMessages.Acceso}</div>
                 )}
