@@ -51,16 +51,19 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
         break;
 
       case "Precio":
-        const precioPattern = /^\d+$/;
-        if (!precioPattern.test(value) || parseInt(value, 10) <= 0) {
+        const precioPattern = /^[0-9]+(\.[0-9]+)?$/;
+        const precioValue = parseInt(value, 10);
+
+        if (!precioPattern.test(value) ||
+          precioValue < 100 || precioValue > 10000000) {
           updatedErrorMessages[fieldName] =
-            "El campo Precio debe contener solo números y ser mayor que cero.";
+            "El campo Precio debe contener solo números y estar en el rango de 100 a 10,000,000.";
         } else {
           updatedErrorMessages[fieldName] = "";
         }
         break;
 
-      case "Acceso":
+      case "Acceso2":
         const accesoPattern = /^[A-Za-z\s]+$/;
         if (!accesoPattern.test(value) || value.trim().length < 1) {
           updatedErrorMessages[fieldName] =

@@ -78,7 +78,7 @@ const ComponentesForm = ({ modoEdicion, componente, getComponentes, Habitaciones
             case "Costo":
                 const costoPattern = /^[0-9]+(\.[0-9]+)?$/;
                 // const costoValue = parseFloat(value.replace(",", ".")); // Reemplaza comas por puntos y convierte a número decimal
-                const costoValue = parseInt(value, 50);
+                const costoValue = parseInt(value, 10);
                 if (!costoPattern.test(value) ||
                     costoValue < 100 || costoValue > 20000000) {
                     updatedErrorMessages[fieldName] =

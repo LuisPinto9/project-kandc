@@ -61,10 +61,13 @@ const HabitacionesForm = ({ modoEdicion, habitacion, getHabitaciones, ZonasList,
                 }
                 break;
             case "Precio":
-                const precioPattern = /^\d+(\.\d{1,2})?$/;
-                if (!precioPattern.test(value) || parseInt(value) <= 0) {
+                const precioPattern = /^[0-9]+(\.[0-9]+)?$/;
+                const precioValue = parseInt(value, 10);
+
+                if (!precioPattern.test(value) ||
+                    precioValue < 100 || precioValue > 10000000) {
                     updatedErrorMessages[fieldName] =
-                        "El campo Precio debe ser un número mayor que cero y puede contener hasta dos decimales.";
+                        "El campo Precio debe contener solo números y estar en el rango de 100 a 10,000,000.";
                 } else {
                     updatedErrorMessages[fieldName] = "";
                 }
