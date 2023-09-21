@@ -100,7 +100,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
           /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
         if (!contraseñaPattern.test(value)) {
           updatedErrorMessages[fieldName] =
-            "La contraseña debe cumplir con los requisitos de seguridad.";
+            "La contraseña debe tener por lo menos 8 caracteres, una mayúscula, un número y un caracter especial.";
         } else {
           updatedErrorMessages[fieldName] = "";
         }
@@ -238,7 +238,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   onChange={(event) => {
                     setValues({ ...values, IDUsuario: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("IDUsuario");
                   }}
                   className="form-control"
@@ -258,7 +258,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   onChange={(event) => {
                     setValues({ ...values, Nombre: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Nombre");
                   }}
                   className="form-control"
@@ -280,7 +280,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   onChange={(event) => {
                     setValues({ ...values, MetodoRenta: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("MetodoRenta");
                   }}
                   className="form-control"
@@ -302,7 +302,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   onChange={(event) => {
                     setValues({ ...values, ExtensionDias: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("ExtensionDias");
                   }}
                   className="form-control"
@@ -326,7 +326,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   onChange={(event) => {
                     setValues({ ...values, Telefono: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Telefono");
                   }}
                   className="form-control"
@@ -348,7 +348,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   onChange={(event) => {
                     setValues({ ...values, NombreUsuario: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("NombreUsuario");
                   }}
                   className="form-control"
@@ -372,7 +372,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   onChange={(event) => {
                     setValues({ ...values, Contraseña: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Contraseña");
                   }}
                   className="form-control"
@@ -394,7 +394,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   onChange={(event) => {
                     setValues({ ...values, Correo: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Correo");
                   }}
                   className="form-control"
@@ -420,7 +420,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   onChange={(event) => {
                     setValues({ ...values, TipoUsuario: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("TipoUsuario");
                   }}
                 >

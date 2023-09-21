@@ -245,7 +245,7 @@ const ComponentesForm = ({
                   onChange={(event) => {
                     setValues({ ...values, Id: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Id");
                   }}
                   className="form-control"
@@ -264,7 +264,7 @@ const ComponentesForm = ({
                   onChange={(event) => {
                     setValues({ ...values, Nombre: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Nombre");
                   }}
                   className="form-control"
@@ -285,7 +285,7 @@ const ComponentesForm = ({
                   onChange={(event) => {
                     setValues({ ...values, Marca: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Marca");
                   }}
                   className="form-control"
@@ -306,7 +306,7 @@ const ComponentesForm = ({
                   onChange={(event) => {
                     setValues({ ...values, Cantidad: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Cantidad");
                   }}
                   className="form-control"
@@ -327,7 +327,7 @@ const ComponentesForm = ({
                   onChange={(event) => {
                     setValues({ ...values, Costo: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Costo");
                   }}
                   className="form-control"
@@ -348,7 +348,7 @@ const ComponentesForm = ({
                   onChange={(event) => {
                     setValues({ ...values, Estado: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Estado");
                   }}
                   className="form-control"
@@ -369,7 +369,7 @@ const ComponentesForm = ({
                   onChange={(event) => {
                     setValues({ ...values, Descripcion: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Descripcion");
                   }}
                   className="form-control"
@@ -390,7 +390,7 @@ const ComponentesForm = ({
                   onChange={(event) => {
                     setValues({ ...values, Observacion: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Observacion");
                   }}
                   className="form-control"
@@ -415,7 +415,7 @@ const ComponentesForm = ({
                   onChange={(event) => {
                     setValues({ ...values, Habitacion: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Habitacion");
                   }}
                 >
