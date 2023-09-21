@@ -13,7 +13,6 @@ const getEvidenciasByComponente = (req, res) => {
 };
 
 const createEvidencia = (req, res) => {
-  console.log("Creo evidencia:", req.body);
   const id = req.body.id;
   const nombre = req.body.nombre;
   const descripcion = req.body.descripcion;

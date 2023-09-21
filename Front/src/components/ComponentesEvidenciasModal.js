@@ -24,15 +24,17 @@ const ComponenteEvidenciaForm = ({
   const [errorMessages, setErrorMessages] = useState({ ...initialState });
   const [file, setFile] = useState("");
   const [editado, setEditado] = useState(false);
+  const [nombreAnterior, setNombreAnterior] = useState("");
 
   useEffect(() => {
     if (modoEdicion) {
       setValues(evidenciaComponentesSeleccionada);
+      setNombreAnterior(evidenciaComponentesSeleccionada.url);
     } else {
       setValues(initialState);
     }
     // eslint-disable-next-line
-  }, [modoEdicion, evidenciaComponentesSeleccionada]);
+  }, [evidenciaComponentesSeleccionada, modoEdicion]);
 
   const validateField = (fieldName) => {
     const updatedErrorMessages = { ...errorMessages };
@@ -95,11 +97,11 @@ const ComponenteEvidenciaForm = ({
         mostrarMensajeError();
       } else {
         if (modoEdicion) {
-          await updateEvidencia(values, file);
+          await updateEvidencia(values, file, nombreAnterior);
         } else {
           await addEvidencia(values, file);
         }
-        getComponentesEvidencias();
+        await getComponentesEvidencias();
         setEditado(true);
         limpiarCampos();
       }
@@ -122,7 +124,7 @@ const ComponenteEvidenciaForm = ({
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
-    values.url = selectedFile.name;
+    values.url = selectedFile.name.toLowerCase();
   };
 
   return (

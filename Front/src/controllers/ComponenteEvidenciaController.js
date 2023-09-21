@@ -29,7 +29,7 @@ export const addEvidencia = async (datos, file) => {
       icon: "success",
       timer: 2000,
     });
-    addFile(file);
+    await addFile(file);
   } catch (error) {
     Swal.fire({
       title: "Error al registrar los datos",
@@ -41,7 +41,7 @@ export const addEvidencia = async (datos, file) => {
   }
 };
 
-export const addFile = async (file) => {
+const addFile = async (file) => {
   if (file) {
     const formData = new FormData();
     formData.append("image", file);
@@ -54,7 +54,7 @@ export const addFile = async (file) => {
 };
 
 // Actualizar una habitación evidencia
-export const updateEvidencia = async (datos, file) => {
+export const updateEvidencia = async (datos, file, nombreAnterior) => {
   try {
     await Axios.put(
       "http://localhost:4000/componentes-evidencias/update",
@@ -80,7 +80,7 @@ export const updateEvidencia = async (datos, file) => {
       icon: "success",
       timer: 2000,
     });
-    addFile(file);
+    await updateFile(file, nombreAnterior);
   } catch (error) {
     Swal.fire({
       title: "Error al actualizar el registro",
@@ -89,6 +89,18 @@ export const updateEvidencia = async (datos, file) => {
       showCancelButton: false,
       confirmButtonText: "Aceptar",
     });
+  }
+};
+
+const updateFile = async (file, nombre) => {
+  if (file) {
+    const formData = new FormData();
+    formData.append("image", file);
+    await Axios.post(`http://localhost:4000/update-file/${nombre}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }); // Mensaje de éxito del servidor para la imagen
   }
 };
 
@@ -116,6 +128,7 @@ export const eliminarEvidencia = async ({ val, getComponentesEvidencias }) => {
         }
       );
       await getComponentesEvidencias();
+      await deleteFile(val.url);
       Swal.fire({
         title: "<strong>Eliminación exitosa</strong>",
         html:
@@ -136,6 +149,12 @@ export const eliminarEvidencia = async ({ val, getComponentesEvidencias }) => {
       confirmButtonText: "Aceptar",
     });
   }
+};
+
+const deleteFile = async (nombre) => {
+  try {
+    await Axios.delete(`http://localhost:4000/delete-file/${nombre}`);
+  } catch (error) {}
 };
 
 // Obtener información de las componentes evidencia
@@ -183,5 +202,19 @@ export const buscarEvideciaComponente = async (idBuscar) => {
       confirmButtonText: "Aceptar",
     });
     return null;
+  }
+};
+
+export const getEvidenciaImage = async (nombre) => {
+  try {
+    const response = await Axios.get(
+      `http://localhost:4000/get-file/${nombre}`,
+      {
+        responseType: "arraybuffer", // Esto indica a Axios que debe esperar una respuesta en formato binario
+      }
+    );
+    return response.data; // Retorna los datos binarios de la imagen
+  } catch (error) {
+    throw error;
   }
 };

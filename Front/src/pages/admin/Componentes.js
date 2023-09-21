@@ -17,9 +17,11 @@ import {
   componentesEvidencia,
   buscarEvideciaComponente,
   eliminarEvidencia,
+  getEvidenciaImage,
 } from "../../controllers/ComponenteEvidenciaController";
 import ComponenteEvidenciaForm from "../../components/ComponentesEvidenciasModal";
 import componentesImage from "../../images/TV.png";
+import ImageModal from "../../components/ImageModal";
 
 const Componentes = () => {
   const [showEvidencias, setShowEvidencias] = useState(false);
@@ -120,6 +122,24 @@ const Componentes = () => {
   };
 
   let autoIncrementar = 1;
+
+  const [imageUrl, setImageUrl] = useState("");
+
+  const getImageUrl = async (url) => {
+    try {
+      const response = await getEvidenciaImage(url);
+      setImageUrl(response);
+    } catch (error) {}
+    // try {
+    //   const response = await getEvidenciaImage(url);
+    //   const base64String = btoa(
+    //     String.fromCharCode(...new Uint8Array(response))
+    //   );
+    //   setImageUrl(base64String);
+    // } catch (error) {
+    //   console.error("Error al cargar la imagen:", error);
+    // }
+  };
 
   return (
     <div className="d-flex" style={{ minHeight: "78.6vh" }}>
@@ -400,7 +420,20 @@ const Componentes = () => {
                           <td>{val.id}</td>
                           <td>{val.nombre}</td>
                           <td>{val.descripcion}</td>
-                          <td>{val.url}</td>
+                          <td>
+                            <button
+                              type="button"
+                              data-bs-toggle="modal"
+                              data-bs-target="#staticBackdrop"
+                              onClick={() => {
+                                getImageUrl(val.url);
+                              }}
+                              style={{background:"none", color:"black", border:"0px", textDecoration: "underline"}}
+                            >
+                              {val.url}
+                            </button>
+                            <ImageModal imageUrl={imageUrl} />
+                          </td>
                           <td>{val.componente}</td>
                           <td>
                             <i
