@@ -11,7 +11,7 @@ const DashboardAdmin = () => {
         <BarraLateral />
       </div>
       <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
-        <div className="error-404">
+        <div className="error-404" style={{maxWidth:"100%"}}>
           <h1>Edificio K&C</h1>
           <div className="subtitulo">
             <h2>Administración</h2>

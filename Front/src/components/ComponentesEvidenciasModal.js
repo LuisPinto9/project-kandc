@@ -97,11 +97,15 @@ const ComponenteEvidenciaForm = ({
         mostrarMensajeError();
       } else {
         if (modoEdicion) {
-          await updateEvidencia(values, file, nombreAnterior);
+          await updateEvidencia(
+            values,
+            file,
+            nombreAnterior,
+            getComponentesEvidencias
+          );
         } else {
-          await addEvidencia(values, file);
+          await addEvidencia(values, file, getComponentesEvidencias);
         }
-        await getComponentesEvidencias();
         setEditado(true);
         limpiarCampos();
       }

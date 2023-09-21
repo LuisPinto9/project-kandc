@@ -19,7 +19,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
 
   const [values, setValues] = useState(initialState);
   const [errorMessages, setErrorMessages] = useState({ ...initialState });
-  const [editado, setEditado] = useState(false)
+  const [editado, setEditado] = useState(false);
 
   useEffect(() => {
     if (modoEdicion) {
@@ -182,7 +182,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
           await add(values);
         }
         getArrendatarios();
-        setEditado(true)
+        setEditado(true);
         limpiarCampos();
       }
     } else {
@@ -195,9 +195,9 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
       setValues(initialState);
       setErrorMessages({ ...initialState });
     } else if (!editado && modoEdicion) {
-      setValues(usuario)
+      setValues(usuario);
     } else if (!modoEdicion) {
-      setValues(initialState)
+      setValues(initialState);
     }
   };
 
@@ -257,7 +257,6 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.Nombre}
                   onChange={(event) => {
                     setValues({ ...values, Nombre: event.target.value });
-
                   }}
                   onKeyUp={() => {
                     validateField("Nombre");
@@ -280,7 +279,6 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.MetodoRenta}
                   onChange={(event) => {
                     setValues({ ...values, MetodoRenta: event.target.value });
-
                   }}
                   onKeyUp={() => {
                     validateField("MetodoRenta");
@@ -303,7 +301,6 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.ExtensionDias}
                   onChange={(event) => {
                     setValues({ ...values, ExtensionDias: event.target.value });
-
                   }}
                   onKeyUp={() => {
                     validateField("ExtensionDias");
@@ -327,9 +324,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   type="text"
                   value={values.Telefono}
                   onChange={(event) => {
-                    console.log("Nuevo valor del campo Teléfono:", event.target.value);
                     setValues({ ...values, Telefono: event.target.value });
-
                   }}
                   onKeyUp={() => {
                     validateField("Telefono");
@@ -352,7 +347,6 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.NombreUsuario}
                   onChange={(event) => {
                     setValues({ ...values, NombreUsuario: event.target.value });
-
                   }}
                   onKeyUp={() => {
                     validateField("NombreUsuario");
@@ -377,7 +371,6 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.Contraseña}
                   onChange={(event) => {
                     setValues({ ...values, Contraseña: event.target.value });
-
                   }}
                   onKeyUp={() => {
                     validateField("Contraseña");
@@ -400,7 +393,6 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.Correo}
                   onChange={(event) => {
                     setValues({ ...values, Correo: event.target.value });
-
                   }}
                   onKeyUp={() => {
                     validateField("Correo");
@@ -427,7 +419,6 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.TipoUsuario}
                   onChange={(event) => {
                     setValues({ ...values, TipoUsuario: event.target.value });
-
                   }}
                   onKeyUp={() => {
                     validateField("TipoUsuario");

@@ -2,7 +2,7 @@ import Axios from "axios";
 import Swal from "sweetalert2";
 
 // Agregar una habitación evidencia
-export const addEvidencia = async (datos, file) => {
+export const addEvidencia = async (datos, file, getComponentesEvidencias) => {
   try {
     await Axios.post(
       "http://localhost:4000/componentes-evidencias/create",
@@ -23,13 +23,14 @@ export const addEvidencia = async (datos, file) => {
     Swal.fire({
       title: "<strong>Registro exitoso</strong>",
       html:
-        "<i>La habitación evidencia: <strong>" +
+        "<i>La evidencia del componente: <strong>" +
         datos.nombre +
         "</strong> fue registrada</i>",
       icon: "success",
       timer: 2000,
     });
-    await addFile(file);
+    addFile(file);
+    getComponentesEvidencias();
   } catch (error) {
     Swal.fire({
       title: "Error al registrar los datos",
@@ -42,19 +43,26 @@ export const addEvidencia = async (datos, file) => {
 };
 
 const addFile = async (file) => {
-  if (file) {
-    const formData = new FormData();
-    formData.append("image", file);
-    await Axios.post("http://localhost:4000/file", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }); // Mensaje de éxito del servidor para la imagen
-  }
+  try {
+    if (file) {
+      const formData = new FormData();
+      formData.append("image", file);
+      await Axios.post("http://localhost:4000/file", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    }
+  } catch (error) {}
 };
 
 // Actualizar una habitación evidencia
-export const updateEvidencia = async (datos, file, nombreAnterior) => {
+export const updateEvidencia = async (
+  datos,
+  file,
+  nombreAnterior,
+  getComponentesEvidencias
+) => {
   try {
     await Axios.put(
       "http://localhost:4000/componentes-evidencias/update",
@@ -80,7 +88,8 @@ export const updateEvidencia = async (datos, file, nombreAnterior) => {
       icon: "success",
       timer: 2000,
     });
-    await updateFile(file, nombreAnterior);
+    updateFile(file, nombreAnterior);
+    getComponentesEvidencias();
   } catch (error) {
     Swal.fire({
       title: "Error al actualizar el registro",
@@ -93,15 +102,21 @@ export const updateEvidencia = async (datos, file, nombreAnterior) => {
 };
 
 const updateFile = async (file, nombre) => {
-  if (file) {
-    const formData = new FormData();
-    formData.append("image", file);
-    await Axios.post(`http://localhost:4000/update-file/${nombre}`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }); // Mensaje de éxito del servidor para la imagen
-  }
+  try {
+    if (file) {
+      const formData = new FormData();
+      formData.append("image", file);
+      await Axios.post(
+        `http://localhost:4000/update-file/${nombre}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      ); // Mensaje de éxito del servidor para la imagen
+    }
+  } catch (error) {}
 };
 
 export const eliminarEvidencia = async ({ val, getComponentesEvidencias }) => {
@@ -127,8 +142,6 @@ export const eliminarEvidencia = async ({ val, getComponentesEvidencias }) => {
           },
         }
       );
-      await getComponentesEvidencias();
-      await deleteFile(val.url);
       Swal.fire({
         title: "<strong>Eliminación exitosa</strong>",
         html:
@@ -139,7 +152,9 @@ export const eliminarEvidencia = async ({ val, getComponentesEvidencias }) => {
         timer: 2000,
         showConfirmButton: false,
       });
+      getComponentesEvidencias();
     }
+    deleteFile(val.url);
   } catch (error) {
     Swal.fire({
       title: "Error al eliminar el registro",
@@ -201,7 +216,6 @@ export const buscarEvideciaComponente = async (idBuscar) => {
       showCancelButton: false,
       confirmButtonText: "Aceptar",
     });
-    return null;
   }
 };
 

@@ -41,7 +41,7 @@ function Registro() {
       await buscarUsuario(idBuscar).then((data) => {
         setArrendatarios(data);
       });
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const EditarArrendatarios = (val) => {
@@ -106,9 +106,6 @@ function Registro() {
             )}
           </div>
           <div>
-            {/*  <PostRegistroModal getArrendatarios={getArrendatarios} />*/}
-
-
             {ArrendatariosList && (
               <UserForm
                 modoEdicion={false} // Establece el modo de edición a false para agregar
@@ -116,7 +113,6 @@ function Registro() {
                 getArrendatarios={getArrendatarios}
               />
             )}
-
             <i
               type="button"
               data-bs-toggle="modal"
@@ -192,7 +188,6 @@ function Registro() {
                           }}
                           getArrendatarios={getArrendatarios}
                         />
-
                       </td>
                       <td className="row-border-right">
                         <i

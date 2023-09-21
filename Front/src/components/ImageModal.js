@@ -5,7 +5,6 @@ const ImageModal = ({ imageUrl }) => {
 
   useEffect(() => {
     if (imageUrl) {
-      // Si tienes la URL de la imagen en base64, puedes mostrarla directamente
       setImage(imageUrl);
     }
   }, [imageUrl]);
@@ -38,7 +37,7 @@ const ImageModal = ({ imageUrl }) => {
               <img
                 src={URL.createObjectURL(new Blob([image]))}
                 alt="imagen"
-                style={{ width: "200px", height: "200px" }}
+                style={{ maxWidth: "100%", maxHeight: "100%" }}
               />
             )}
           </div>

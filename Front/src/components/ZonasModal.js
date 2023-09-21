@@ -4,7 +4,6 @@ import "../css/modal.css";
 import Swal from "sweetalert2";
 
 const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
-
   const initialState = {
     Id: "",
     Nombre: "",
@@ -15,7 +14,7 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
 
   const [values, setValues] = useState(initialState);
   const [errorMessages, setErrorMessages] = useState({ ...initialState });
-  const [editado, setEditado] = useState(false)
+  const [editado, setEditado] = useState(false);
 
   useEffect(() => {
     if (modoEdicion) {
@@ -24,7 +23,7 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
       setValues(initialState);
     }
     // eslint-disable-next-line
-  }, [zona, modoEdicion])
+  }, [zona, modoEdicion]);
 
   const validateField = (fieldName) => {
     const value = values[fieldName];
@@ -116,7 +115,7 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
           await add(values);
         }
         getZonas();
-        setEditado(true)
+        setEditado(true);
         limpiarCampos();
       }
     } else {
@@ -129,9 +128,9 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
       setValues(initialState);
       setErrorMessages({ ...initialState });
     } else if (!editado && modoEdicion) {
-      setValues(zona)
+      setValues(zona);
     } else if (!modoEdicion) {
-      setValues(initialState)
+      setValues(initialState);
     }
   };
 
@@ -175,7 +174,7 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
                   onChange={(event) => {
                     setValues({ ...values, Id: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Id");
                   }}
                 />
@@ -188,7 +187,7 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
                   onChange={(event) => {
                     setValues({ ...values, Nombre: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Nombre");
                   }}
                   className="form-control"
@@ -226,7 +225,7 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
                   onChange={(event) => {
                     setValues({ ...values, Precio: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Precio");
                   }}
                   className="form-control"
@@ -248,7 +247,7 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
                   onChange={(event) => {
                     setValues({ ...values, Acceso: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Acceso");
                   }}
                   className="form-control"

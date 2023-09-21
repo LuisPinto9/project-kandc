@@ -130,15 +130,6 @@ const Componentes = () => {
       const response = await getEvidenciaImage(url);
       setImageUrl(response);
     } catch (error) {}
-    // try {
-    //   const response = await getEvidenciaImage(url);
-    //   const base64String = btoa(
-    //     String.fromCharCode(...new Uint8Array(response))
-    //   );
-    //   setImageUrl(base64String);
-    // } catch (error) {
-    //   console.error("Error al cargar la imagen:", error);
-    // }
   };
 
   return (
@@ -222,6 +213,7 @@ const Componentes = () => {
                     componente={null}
                     getComponentes={getComponentes}
                     HabitacionesList={HabitacionesList}
+                    
                   />
                 )}
 
@@ -306,6 +298,7 @@ const Componentes = () => {
                               }}
                               getComponentes={getComponentes}
                               HabitacionesList={HabitacionesList}
+                              
                             />
                           </td>
                           <td className="row-border-right">
@@ -346,7 +339,7 @@ const Componentes = () => {
                       setBuscarState(true);
                     } else if (idBuscar === "") {
                       getComponentesEvidencias();
-                      setIdBuscar(""); /*  */
+                      setIdBuscar("");
                       setBuscarState(false);
                     }
                   }}
@@ -378,6 +371,7 @@ const Componentes = () => {
                       evidenciaComponentesSeleccionada={null}
                       getComponentesEvidencias={getComponentesEvidencias}
                       componentesList={ComponentesList}
+                      
                     />
                   </>
                 )}
@@ -397,11 +391,11 @@ const Componentes = () => {
                     <th className="row-border-left" scope="col">
                       #
                     </th>
-                    <th scope="col">ID componente</th>
+                    <th scope="col">ID</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">descripcion</th>
-                    <th scope="col">url</th>
-                    <th scope="col">componente</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Enlace</th>
+                    <th scope="col">Componente al que pertenece</th>
                     <th scope="col">Editar</th>
                     <th className="row-border-right" scope="col">
                       Borrar
@@ -428,7 +422,12 @@ const Componentes = () => {
                               onClick={() => {
                                 getImageUrl(val.url);
                               }}
-                              style={{background:"none", color:"black", border:"0px", textDecoration: "underline"}}
+                              style={{
+                                background: "none",
+                                color: "black",
+                                border: "0px",
+                                textDecoration: "underline",
+                              }}
                             >
                               {val.url}
                             </button>
@@ -458,6 +457,7 @@ const Componentes = () => {
                                 getComponentesEvidencias
                               }
                               componentesList={ComponentesList}
+                              
                             />
                           </td>
                           <td className="row-border-right">
