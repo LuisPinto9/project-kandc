@@ -249,14 +249,7 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
                   onChange={(event) => {
                     setValues({ ...values, Acceso: event.target.value });
                   }}
-<<<<<<< HEAD
-                  onBlur={() => {
-                    validateField("Acceso");
-                  }}
-                  className="form-control"
-=======
                   className="form-select"
->>>>>>> a7c80dd5ca5325df52fbfb1a81e319f8ce948dc3
                   aria-label="acceso"
                   aria-describedby="basic-addon1"
                 >

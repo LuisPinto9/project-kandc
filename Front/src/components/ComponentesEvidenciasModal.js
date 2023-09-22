@@ -37,26 +37,35 @@ const ComponenteEvidenciaForm = ({
   }, [evidenciaComponentesSeleccionada, modoEdicion]);
 
   const validateField = (fieldName) => {
+    const value = values[fieldName];
     const updatedErrorMessages = { ...errorMessages };
     switch (fieldName) {
       case "id":
-        // Validación para el campo Id (similar a la de HabitacionesForm)
+        const idPattern = /^[0-9]+$/;
+        if (!idPattern.test(value) || parseInt(value, 10) === 0) {
+          updatedErrorMessages[fieldName] =
+            "El campo ID debe contener solo números y no ser igual a cero.";
+        } else {
+          updatedErrorMessages[fieldName] = "";
+        }
         break;
       case "nombre":
-        // Validación para el campo Nombre (similar a la de HabitacionesForm)
+        const nombrePattern = /^[\p{L}ÁÉÍÓÚáéíóúÑñ\s]+$/u;
+        if (!nombrePattern.test(value) || value.length < 3) {
+          updatedErrorMessages[fieldName] =
+            "El campo Nombre debe contener solo letras y tener al menos 3 caracteres.";
+        } else {
+          updatedErrorMessages[fieldName] = "";
+        }
         break;
       case "descripcion":
         // Validación para el campo Descripcion (similar a la de HabitacionesForm)
         break;
-
       case "url":
-        // Validación para el campo url (similar a la de HabitacionesForm)
         break;
-
       case "componente":
         // Validación para el campo Habitacion (similar a la de HabitacionesForm)
         break;
-
       default:
         break;
     }

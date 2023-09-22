@@ -139,13 +139,9 @@ app.use("/login", loginRoutes);
 const userRoomsRoutes = require("./routes/UserRoomsRoutes.js");
 app.use("/user-rooms", userRoomsRoutes);
 
-<<<<<<< HEAD
 const ComponentesEvidenciaRoutes = require("./routes/ComponenteEvidenciasRoutes.js");
-const { get } = require("http");
 app.use("/componentes-evidencias", ComponentesEvidenciaRoutes);
 
-=======
->>>>>>> a7c80dd5ca5325df52fbfb1a81e319f8ce948dc3
 app.listen(app.get("port"), () => {
   console.log(`Corriendo en el puerto ${app.get("port")}`);
 });
