@@ -1,77 +1,71 @@
 import React, { useState, useEffect } from "react";
-import { add, update } from "../controllers/ZonasControllers";
+import {
+  addEvidencia,
+  updateEvidencia,
+} from "../controllers/ComponenteEvidenciaController";
 import "../css/modal.css";
 import Swal from "sweetalert2";
 
-const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
+const ComponenteEvidenciaForm = ({
+  modoEdicion,
+  evidenciaComponentesSeleccionada,
+  getComponentesEvidencias,
+  componentesList,
+}) => {
   const initialState = {
-    Id: "",
-    Nombre: "",
-    Descripcion: "",
-    Precio: "",
-    Acceso: "",
+    id: "",
+    nombre: "",
+    descripcion: "",
+    url: "",
+    componente: "",
   };
 
   const [values, setValues] = useState(initialState);
   const [errorMessages, setErrorMessages] = useState({ ...initialState });
+  const [file, setFile] = useState("");
   const [editado, setEditado] = useState(false);
+  const [nombreAnterior, setNombreAnterior] = useState("");
 
   useEffect(() => {
     if (modoEdicion) {
-      setValues(zona);
+      setValues(evidenciaComponentesSeleccionada);
+      setNombreAnterior(evidenciaComponentesSeleccionada.url);
     } else {
       setValues(initialState);
     }
     // eslint-disable-next-line
-  }, [zona, modoEdicion]);
+  }, [evidenciaComponentesSeleccionada, modoEdicion]);
 
   const validateField = (fieldName) => {
     const value = values[fieldName];
     const updatedErrorMessages = { ...errorMessages };
     switch (fieldName) {
-      case "Id":
-        const idPattern = /^\d+$/;
+      case "id":
+        const idPattern = /^[0-9]+$/;
         if (!idPattern.test(value) || parseInt(value, 10) === 0) {
           updatedErrorMessages[fieldName] =
-            "El campo Id debe contener solo números y no ser igual a cero.";
+            "El campo ID debe contener solo números y no ser igual a cero.";
         } else {
           updatedErrorMessages[fieldName] = "";
         }
         break;
-
-      case "Nombre":
-        const nombrePattern = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s0-9]+$/u;
-        if (!nombrePattern.test(value) || value.trim().length < 1) {
+      case "nombre":
+        const nombrePattern = /^[\p{L}ÁÉÍÓÚáéíóúÑñ\s]+$/u;
+        if (!nombrePattern.test(value) || value.length < 3) {
           updatedErrorMessages[fieldName] =
-            "El campo Nombre debe contener letras y números y no puede estar vacío.";
+            "El campo Nombre debe contener solo letras y tener al menos 3 caracteres.";
         } else {
           updatedErrorMessages[fieldName] = "";
         }
         break;
-
-      case "Precio":
-        const precioPattern = /^[0-9]+(\.[0-9]+)?$/;
-        const precioValue = parseInt(value, 10);
-
-        if (!precioPattern.test(value) ||
-          precioValue < 100 || precioValue > 10000000) {
-          updatedErrorMessages[fieldName] =
-            "El campo Precio debe contener solo números y estar en el rango de 100 a 10,000,000.";
-        } else {
-          updatedErrorMessages[fieldName] = "";
-        }
+      case "descripcion":
+        // Validación para el campo Descripcion (similar a la de HabitacionesForm)
         break;
-
-      case "Acceso2":
-        const accesoPattern = /^[A-Za-z\s]+$/;
-        if (!accesoPattern.test(value) || value.trim().length < 1) {
-          updatedErrorMessages[fieldName] =
-            "El campo Acceso debe contener solo letras y no puede estar vacío.";
-        } else {
-          updatedErrorMessages[fieldName] = "";
-        }
+      case "url":
         break;
-
+      case "componente":
+        // Validación para el campo Habitacion (similar a la de HabitacionesForm)
+        break;
       default:
         break;
     }
@@ -79,10 +73,11 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
   };
 
   const validateFields = () => {
-    validateField("Id");
-    validateField("Nombre");
-    validateField("Precio");
-    validateField("Acceso");
+    validateField("id");
+    validateField("nombre");
+    validateField("descripcion");
+    validateField("url");
+    validateField("componente");
   };
 
   const mostrarMensajeError = () => {
@@ -94,30 +89,32 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
       confirmButtonText: "Aceptar",
     });
   };
-
+  // Método botón submit
   const submitForm = async () => {
     validateFields();
-
     const hasErrors = Object.values(errorMessages).some(
       (message) => message !== ""
     );
-
     if (!hasErrors) {
       if (
-        values.Id === "" ||
-        values.Nombre === "" ||
-        values.Descripcion === "" ||
-        values.Precio === "" ||
-        values.Acceso === ""
+        values.id === "" ||
+        values.nombre === "" ||
+        values.descripcion === "" ||
+        values.url === "" ||
+        values.componente === ""
       ) {
         mostrarMensajeError();
       } else {
         if (modoEdicion) {
-          await update(values);
+          await updateEvidencia(
+            values,
+            file,
+            nombreAnterior,
+            getComponentesEvidencias
+          );
         } else {
-          await add(values);
+          await addEvidencia(values, file, getComponentesEvidencias);
         }
-        getZonas();
         setEditado(true);
         limpiarCampos();
       }
@@ -131,17 +128,27 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
       setValues(initialState);
       setErrorMessages({ ...initialState });
     } else if (!editado && modoEdicion) {
-      setValues(zona);
+      setValues(evidenciaComponentesSeleccionada);
     } else if (!modoEdicion) {
       setValues(initialState);
     }
+  };
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    values.url = selectedFile.name.toLowerCase();
   };
 
   return (
     <div>
       <div
         className="modal fade"
-        id={modoEdicion ? "staticBackdrop-put" : "staticBackdrop-post"}
+        id={
+          modoEdicion
+            ? "staticBackdrop-put-evidencia"
+            : "staticBackdrop-post-evidencia"
+        }
         data-bs-backdrop="static"
         data-bs-keyboard="false"
         tabIndex="-1"
@@ -152,7 +159,9 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                {modoEdicion ? "Actualizar Zona" : "Agregar Zona"}
+                {modoEdicion
+                  ? "Actualizar evidencia de un componente"
+                  : "Agregar evidencia de un componente"}
               </h1>
               <button
                 type="button"
@@ -162,104 +171,114 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
                 onClick={limpiarCampos}
               ></button>
             </div>
+
             <div className="modal-body">
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                   ID
                 </span>
                 <input
+                  id="id"
                   type="text"
-                  value={values.Id}
+                  disabled={modoEdicion}
+                  value={values.id}
+                  onChange={(event) => {
+                    setValues({ ...values, id: event.target.value });
+                  }}
+                  onBlur={() => {
+                    validateField("id");
+                  }}
                   className="form-control"
                   aria-label="id"
                   aria-describedby="basic-addon1"
-                  disabled={modoEdicion}
-                  onChange={(event) => {
-                    setValues({ ...values, Id: event.target.value });
-                  }}
-                  onBlur={() => {
-                    validateField("Id");
-                  }}
                 />
+                {errorMessages.id && (
+                  <div className="text-danger">{errorMessages.id}</div>
+                )}
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text">Nombre</span>
                 <input
+                  id="nombre"
                   type="text"
-                  value={values.Nombre}
+                  value={values.nombre}
                   onChange={(event) => {
-                    setValues({ ...values, Nombre: event.target.value });
+                    setValues({ ...values, nombre: event.target.value });
                   }}
                   onBlur={() => {
-                    validateField("Nombre");
+                    validateField("nombre");
                   }}
                   className="form-control"
                   aria-label="nombre"
                   aria-describedby="basic-addon1"
                 />
-                {errorMessages.Nombre && (
-                  <div className="text-danger">{errorMessages.Nombre}</div>
+                {errorMessages.nombre && (
+                  <div className="text-danger">{errorMessages.nombre}</div>
                 )}
               </div>
-
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                   Descripción
                 </span>
                 <input
+                  id="descripcion"
                   type="text"
-                  value={values.Descripcion}
+                  value={values.descripcion}
                   onChange={(event) => {
-                    setValues({ ...values, Descripcion: event.target.value });
+                    setValues({
+                      ...values,
+                      descripcion: event.target.value,
+                    });
+                  }}
+                  onBlur={() => {
+                    validateField("Descripcion");
                   }}
                   className="form-control"
                   aria-label="descripcion"
                   aria-describedby="basic-addon1"
                 />
-              </div>
-
-              <div className="input-group mb-3">
-                <span className="input-group-text" id="basic-addon1">
-                  Precio
-                </span>
-                <input
-                  type="text"
-                  value={values.Precio}
-                  onChange={(event) => {
-                    setValues({ ...values, Precio: event.target.value });
-                  }}
-                  onBlur={() => {
-                    validateField("Precio");
-                  }}
-                  className="form-control"
-                  aria-label="Precio"
-                  aria-describedby="basic-addon1"
-                />
-                {errorMessages.Precio && (
-                  <div className="text-danger">{errorMessages.Precio}</div>
+                {errorMessages.descripcion && (
+                  <div className="text-danger">{errorMessages.descripcion}</div>
                 )}
               </div>
-
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
-                  Acceso
+                  Url
                 </span>
+                <input
+                  id="image"
+                  type="file"
+                  className="form-control"
+                  aria-label="url"
+                  aria-describedby="basic-addon1"
+                  onChange={handleFileChange}
+                />
+              </div>
+              <div className="input-group mb-3">
+                <label className="input-group-text" htmlFor="componente">
+                  Componentes
+                </label>
                 <select
-                  value={values.Acceso}
+                  id="componente"
+                  value={values.componente}
                   onChange={(event) => {
-                    setValues({ ...values, Acceso: event.target.value });
+                    setValues({ ...values, componente: event.target.value });
+                  }}
+                  onBlur={() => {
+                    validateField("componente");
                   }}
                   className="form-select"
-                  aria-label="acceso"
-                  aria-describedby="basic-addon1"
+                  aria-label="Seleccionar componente"
                 >
-                  <option value="">Selecciona el método de acceso</option>
-                  <option value="Acceso Público">Acceso Público</option>
-                  <option value="Acceso Privado">Acceso Privado</option>
-                  {/* Agrega más opciones según tus necesidades */}
+                  <option value="">Seleccionar un componente</option>
+                  {componentesList.map((componente, index) => (
+                    <option key={index} value={componente.id}>
+                      {componente.id}
+                    </option>
+                  ))}
                 </select>
-                {errorMessages.Acceso && (
-                  <div className="text-danger">{errorMessages.Acceso}</div>
+                {errorMessages.componente && (
+                  <div className="text-danger">{errorMessages.componente}</div>
                 )}
               </div>
             </div>
@@ -276,7 +295,9 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
                 type="button"
                 className="btn btn-primary"
                 data-bs-dismiss={modoEdicion ? "modal" : null}
-                onClick={submitForm}
+                onClick={() => {
+                  submitForm();
+                }}
               >
                 {modoEdicion ? "Actualizar" : "Agregar"}
               </button>
@@ -288,4 +309,4 @@ const ZonasForm = ({ modoEdicion, zona, getZonas }) => {
   );
 };
 
-export default ZonasForm;
+export default ComponenteEvidenciaForm;

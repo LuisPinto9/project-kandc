@@ -37,11 +37,11 @@ const updateRoom = (req, res) => {
   const Precio = req.body.Precio;
   const Zona = req.body.Zona;
   const IdUsuarios = req.body.IdUsuarios;
-  console.log('Creo habitacion:', req.body);
-  
+  console.log("Creo habitacion:", req.body);
+
   db.query(
     "update habitaciones set nombre=?,estado=?,precio=?,zonas=?,idUsuarios=? where id=?",
-    [Nombre, Estado, Precio, Zona,  IdUsuarios,Id],
+    [Nombre, Estado, Precio, Zona, IdUsuarios, Id],
     (err, result) => {
       if (err) {
         res.status(500).send("Hubo un error en el servidor");
@@ -78,6 +78,19 @@ const findByName = (req, res) => {
     }
   );
 };
+/* const obtenerUltimoId = (req, res) => {
+  db.query("SELECT MAX(id) as ultimoId FROM habitaciones", (err, result) => {
+      if (err) {
+          res.status(500).send("Hubo un error en el servidor");
+      } else {
+          if (result.length > 0) {
+              res.send({ ultimoId: result[0].ultimoId });
+          } else {
+              res.send({ ultimoId: 0 }); // Si no hay registros, se devuelve 0 como último ID
+          }
+      }
+  });
+}; */
 
 module.exports = {
   getRooms,

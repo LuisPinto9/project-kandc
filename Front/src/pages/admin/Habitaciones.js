@@ -21,22 +21,6 @@ const Habitaciones = () => {
   const [Zona, setZona] = useState("");
   const [HabitacionesList, setHabitaciones] = useState([]);
   const [ZonasList, setZonas] = useState([]);
-
-  /*
-  const [HabitacionesEvidenciaList, setHabitacionesEvidencia] = useState([]);
-  const [evidenciaHabitacionSeleccionada, setEvidenciaHabitacionSeleccionada] = useState(null);
-
- 
-  const [Id2, setId2] = useState("");
-  const [Nombre2, setNombre2] = useState("");
-  const [Descripcion, setDescripcion] = useState("");
-  const [Url, setUrl] = useState("");
-  const [Habitacion, setHabitacion] = useState("");
-
- */
-
-
-  //usuarios
   const [UsuarioList, setUsuarios] = useState([]);
   const [IdUsuarios, setIdUsuarios] = useState("");
   const [NombreBuscar, setNombreBuscar] = useState("");
@@ -88,7 +72,7 @@ const Habitaciones = () => {
       await buscarHabitacion(NombreBuscar).then((data) => {
         setHabitaciones(data);
       });
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {

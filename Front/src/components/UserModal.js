@@ -19,7 +19,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
 
   const [values, setValues] = useState(initialState);
   const [errorMessages, setErrorMessages] = useState({ ...initialState });
-  const [editado, setEditado] = useState(false)
+  const [editado, setEditado] = useState(false);
 
   useEffect(() => {
     if (modoEdicion) {
@@ -47,14 +47,13 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
       case "Nombre":
         const nombrePattern = /^[\p{L}ÁÉÍÓÚáéíóúÑñ\s]+$/u;
         const nombreParts = value.trim().split(/\s+/); // Dividir el valor en palabras
-
         if (
           !nombrePattern.test(value) || // Comprueba que solo contiene letras y espacios
           nombreParts.length < 2 || // Comprueba que haya al menos dos palabras (nombres y apellidos)
           nombreParts.length > 4 // Limita a un máximo de cuatro palabras (por si hay doble apellido)
         ) {
           updatedErrorMessages[fieldName] =
-            "Debe contener letras y espacios y ser Un nombre valido";
+            "Debe contener letras, espacios y ser un nombre valido";
         } else {
           updatedErrorMessages[fieldName] = "";
         }
@@ -107,7 +106,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
           /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
         if (!contraseñaPattern.test(value)) {
           updatedErrorMessages[fieldName] =
-            "Debe contener: 8 caracteres: especiales, Mayuscula, Minuscula, Numeros";
+            "La contraseña debe tener por lo menos 8 caracteres, una mayúscula, un número y un caracter especial.";
         } else {
           updatedErrorMessages[fieldName] = "";
         }
@@ -118,14 +117,20 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
         const yahooPattern = /^[A-Za-z0-9._%+-]+@yahoo\.com$/;
         const hotmailPattern = /^[A-Za-z0-9._%+-]+@hotmail\.com$/;
 
-        if (!(gmailPattern.test(value) || yahooPattern.test(value) || hotmailPattern.test(value)) || value.length > 100) {
+        if (
+          !(
+            gmailPattern.test(value) ||
+            yahooPattern.test(value) ||
+            hotmailPattern.test(value)
+          ) ||
+          value.length > 100
+        ) {
           updatedErrorMessages[fieldName] =
             "Debe ser una dirección de correo electrónico válida de Gmail, Yahoo Mail o Hotmail.";
         } else {
           updatedErrorMessages[fieldName] = "";
         }
         break;
-
 
       default:
         break;
@@ -182,7 +187,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
           await add(values);
         }
         getArrendatarios();
-        setEditado(true)
+        setEditado(true);
         limpiarCampos();
       }
     } else {
@@ -195,9 +200,9 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
       setValues(initialState);
       setErrorMessages({ ...initialState });
     } else if (!editado && modoEdicion) {
-      setValues(usuario)
+      setValues(usuario);
     } else if (!modoEdicion) {
-      setValues(initialState)
+      setValues(initialState);
     }
   };
 
@@ -238,7 +243,7 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   onChange={(event) => {
                     setValues({ ...values, IDUsuario: event.target.value });
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("IDUsuario");
                   }}
                   className="form-control"
@@ -257,9 +262,8 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.Nombre}
                   onChange={(event) => {
                     setValues({ ...values, Nombre: event.target.value });
-
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Nombre");
                   }}
                   className="form-control"
@@ -284,11 +288,11 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   aria-label="metodo-renta"
                   aria-describedby="basic-addon1"
                 >
-                  <option value="">Selecciona el método de renta</option>
+                  <option value="" disabled>
+                    Selecciona el método de renta
+                  </option>
                   <option value="Arriendo">Arriendo</option>
-                  <option value="Compra">Compra</option>
-                  <option value="Leasing">Leasing</option>
-                  <option value="Alquiler">Alquiler</option>
+                  <option value="Alquiler">Hospedaje</option>
                   {/* Agrega más opciones según tus necesidades */}
                 </select>
                 {errorMessages.MetodoRenta && (
@@ -305,9 +309,8 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.ExtensionDias}
                   onChange={(event) => {
                     setValues({ ...values, ExtensionDias: event.target.value });
-
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("ExtensionDias");
                   }}
                   className="form-control"
@@ -329,11 +332,9 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   type="text"
                   value={values.Telefono}
                   onChange={(event) => {
-                    console.log("Nuevo valor del campo Teléfono:", event.target.value);
                     setValues({ ...values, Telefono: event.target.value });
-
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Telefono");
                   }}
                   className="form-control"
@@ -354,9 +355,8 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.NombreUsuario}
                   onChange={(event) => {
                     setValues({ ...values, NombreUsuario: event.target.value });
-
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("NombreUsuario");
                   }}
                   className="form-control"
@@ -379,9 +379,8 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.Contraseña}
                   onChange={(event) => {
                     setValues({ ...values, Contraseña: event.target.value });
-
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Contraseña");
                   }}
                   className="form-control"
@@ -402,9 +401,8 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.Correo}
                   onChange={(event) => {
                     setValues({ ...values, Correo: event.target.value });
-
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("Correo");
                   }}
                   className="form-control"
@@ -429,9 +427,8 @@ const UserForm = ({ modoEdicion, usuario, getArrendatarios }) => {
                   value={values.TipoUsuario}
                   onChange={(event) => {
                     setValues({ ...values, TipoUsuario: event.target.value });
-
                   }}
-                  onKeyUp={() => {
+                  onBlur={() => {
                     validateField("TipoUsuario");
                   }}
                 >
