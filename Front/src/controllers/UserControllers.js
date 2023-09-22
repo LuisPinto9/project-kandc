@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 export const add = async (datos) => {
   try {
     await Axios.post(
-      "http://localhost:4000/user/create",
+      "https://edificiokandc-7a4a0d2f7cde.herokuapp.com/user/create",
       {
         IDUsuario: datos.IDUsuario,
         Nombre: datos.Nombre,
@@ -45,7 +45,7 @@ export const add = async (datos) => {
 export const update = async (datos) => {
   try {
     await Axios.put(
-      "http://localhost:4000/user/update",
+      "https://edificiokandc-7a4a0d2f7cde.herokuapp.com/user/update",
       {
         IDUsuario: datos.IDUsuario,
         Nombre: datos.Nombre,
@@ -99,7 +99,7 @@ export const eliminar = async ({ val, getArrendatarios }) => {
       confirmButtonText: "Sí, eliminar",
     });
     if (result.isConfirmed) {
-      await Axios.delete(`http://localhost:4000/user/delete/${val.id}`, {
+      await Axios.delete(`https://edificiokandc-7a4a0d2f7cde.herokuapp.com/user/delete/${val.id}`, {
         headers: {
           Authorization: localStorage.getItem("auth"),
         },
@@ -130,7 +130,7 @@ export const eliminar = async ({ val, getArrendatarios }) => {
 /* traer la información de los arrendatarios */
 export const arrendatarios = async () => {
   try {
-    const response = await Axios.get("http://localhost:4000/user/get-users", {
+    const response = await Axios.get("https://edificiokandc-7a4a0d2f7cde.herokuapp.com/user/get-users", {
       headers: {
         Authorization: localStorage.getItem("auth"),
       },
@@ -151,7 +151,7 @@ export const arrendatarios = async () => {
 export const buscarUsuario = async (idBuscar) => {
   try {
     const response = await Axios.get(
-      `http://localhost:4000/user/find-users/${idBuscar}`,
+      `https://edificiokandc-7a4a0d2f7cde.herokuapp.com/user/find-users/${idBuscar}`,
       {
         headers: {
           Authorization: localStorage.getItem("auth"),
@@ -174,7 +174,7 @@ export const buscarUsuario = async (idBuscar) => {
 export const buscarUsuarioId = async (idBuscar) => {
   try {
     const response = await Axios.get(
-      `http://localhost:4000/user/find-user-id/${idBuscar}`,
+      `https://edificiokandc-7a4a0d2f7cde.herokuapp.com/user/find-user-id/${idBuscar}`,
       {
         headers: {
           Authorization: localStorage.getItem("auth"),

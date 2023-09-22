@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 export const addEvidencia = async (datos, file, getComponentesEvidencias) => {
   try {
     await Axios.post(
-      "http://localhost:4000/componentes-evidencias/create",
+      "https://edificiokandc-7a4a0d2f7cde.herokuapp.com/componentes-evidencias/create",
 
       {
         id: datos.id,
@@ -47,7 +47,7 @@ const addFile = async (file) => {
     if (file) {
       const formData = new FormData();
       formData.append("image", file);
-      await Axios.post("http://localhost:4000/file", formData, {
+      await Axios.post("https://edificiokandc-7a4a0d2f7cde.herokuapp.com/file", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -65,7 +65,7 @@ export const updateEvidencia = async (
 ) => {
   try {
     await Axios.put(
-      "http://localhost:4000/componentes-evidencias/update",
+      "https://edificiokandc-7a4a0d2f7cde.herokuapp.com/componentes-evidencias/update",
       {
         id: datos.id,
         nombre: datos.nombre,
@@ -107,7 +107,7 @@ const updateFile = async (file, nombre) => {
       const formData = new FormData();
       formData.append("image", file);
       await Axios.post(
-        `http://localhost:4000/update-file/${nombre}`,
+        `https://edificiokandc-7a4a0d2f7cde.herokuapp.com/update-file/${nombre}`,
         formData,
         {
           headers: {
@@ -135,7 +135,7 @@ export const eliminarEvidencia = async ({ val, getComponentesEvidencias }) => {
     });
     if (result.isConfirmed) {
       await Axios.delete(
-        `http://localhost:4000/componentes-evidencias/delete/${val.id}`,
+        `https://edificiokandc-7a4a0d2f7cde.herokuapp.com/componentes-evidencias/delete/${val.id}`,
         {
           headers: {
             Authorization: localStorage.getItem("auth"),
@@ -168,7 +168,7 @@ export const eliminarEvidencia = async ({ val, getComponentesEvidencias }) => {
 
 const deleteFile = async (nombre) => {
   try {
-    await Axios.delete(`http://localhost:4000/delete-file/${nombre}`);
+    await Axios.delete(`https://edificiokandc-7a4a0d2f7cde.herokuapp.com/delete-file/${nombre}`);
   } catch (error) {}
 };
 
@@ -176,7 +176,7 @@ const deleteFile = async (nombre) => {
 export const componentesEvidencia = async () => {
   try {
     const response = await Axios.get(
-      "http://localhost:4000/componentes-evidencias/get-evidencias",
+      "https://edificiokandc-7a4a0d2f7cde.herokuapp.com/componentes-evidencias/get-evidencias",
       {
         headers: {
           Authorization: localStorage.getItem("auth"),
@@ -200,7 +200,7 @@ export const componentesEvidencia = async () => {
 export const buscarEvideciaComponente = async (idBuscar) => {
   try {
     const response = await Axios.get(
-      `http://localhost:4000/componentes-evidencias/find-evidencias/${idBuscar}`,
+      `https://edificiokandc-7a4a0d2f7cde.herokuapp.com/componentes-evidencias/find-evidencias/${idBuscar}`,
       {
         headers: {
           Authorization: localStorage.getItem("auth"),
@@ -222,7 +222,7 @@ export const buscarEvideciaComponente = async (idBuscar) => {
 export const getEvidenciaImage = async (nombre) => {
   try {
     const response = await Axios.get(
-      `http://localhost:4000/get-file/${nombre}`,
+      `https://edificiokandc-7a4a0d2f7cde.herokuapp.com/get-file/${nombre}`,
       {
         responseType: "arraybuffer", // Esto indica a Axios que debe esperar una respuesta en formato binario
       }
