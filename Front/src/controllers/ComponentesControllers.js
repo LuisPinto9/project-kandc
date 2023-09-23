@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 export const add = async (datos) => {
   try {
     await Axios.post(
-      "https://edificiokandc-7a4a0d2f7cde.herokuapp.com/componentes/create",
+      "http://localhost:4000/componentes/create",
       {
         Id: datos.Id,
         Nombre: datos.Nombre,
@@ -46,7 +46,7 @@ export const add = async (datos) => {
 export const update = async (datos) => {
   try {
     await Axios.put(
-      "https://edificiokandc-7a4a0d2f7cde.herokuapp.com/componentes/update",
+      "http://localhost:4000/componentes/update",
       {
         Id: datos.Id,
         Nombre: datos.Nombre,
@@ -101,7 +101,7 @@ export const eliminar = async ({ val, getComponentes }) => {
     });
     if (result.isConfirmed) {
       // Hacer la solicitud DELETE con el ID en la URL
-      await Axios.delete(`https://edificiokandc-7a4a0d2f7cde.herokuapp.com/componentes/delete/${val.id}`, {
+      await Axios.delete(`http://localhost:4000/componentes/delete/${val.id}`, {
         headers: {
           Authorization: localStorage.getItem("auth"),
         },
@@ -134,7 +134,7 @@ export const eliminar = async ({ val, getComponentes }) => {
 export const componentes = async () => {
   try {
     const response = await Axios.get(
-      "https://edificiokandc-7a4a0d2f7cde.herokuapp.com/componentes/get-componentes",
+      "http://localhost:4000/componentes/get-componentes",
       {
         headers: {
           Authorization: localStorage.getItem("auth"),
@@ -157,7 +157,7 @@ export const componentes = async () => {
 export const buscarComponente = async (nombreBuscar) => {
   try {
     const response = await Axios.get(
-      `https://edificiokandc-7a4a0d2f7cde.herokuapp.com/componentes/find-componente/${nombreBuscar}`,
+      `http://localhost:4000/componentes/find-componente/${nombreBuscar}`,
       {
         headers: {
           Authorization: localStorage.getItem("auth"),

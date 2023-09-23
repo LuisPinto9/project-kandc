@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 export const add = async (datos) => {
   try {
     await Axios.post(
-      "https://edificiokandc-7a4a0d2f7cde.herokuapp.com/habitaciones/create",
+      "http://localhost:4000/habitaciones/create",
       {
         Id: datos.Id,
         Nombre: datos.Nombre,
@@ -43,7 +43,7 @@ export const add = async (datos) => {
 export const update = async (datos) => {
   try {
     await Axios.put(
-      "https://edificiokandc-7a4a0d2f7cde.herokuapp.com/habitaciones/update",
+      "http://localhost:4000/habitaciones/update",
       {
         Id: datos.Id,
         Nombre: datos.Nombre,
@@ -96,7 +96,7 @@ export const eliminar = async ({ val, getHabitaciones }) => {
 
     if (result.isConfirmed) {
       await Axios.delete(
-        `https://edificiokandc-7a4a0d2f7cde.herokuapp.com/habitaciones/delete/${val.id}`,
+        `http://localhost:4000/habitaciones/delete/${val.id}`,
         {
           headers: {
             Authorization: localStorage.getItem("auth"),
@@ -131,7 +131,7 @@ export const eliminar = async ({ val, getHabitaciones }) => {
 export const habitaciones = async () => {
   try {
     const response = await Axios.get(
-      "https://edificiokandc-7a4a0d2f7cde.herokuapp.com/habitaciones/get-habitaciones",
+      "http://localhost:4000/habitaciones/get-habitaciones",
       {
         headers: {
           Authorization: localStorage.getItem("auth"),
@@ -154,7 +154,7 @@ export const habitaciones = async () => {
 export const buscarHabitacion = async (nombreBuscar) => {
   try {
     const response = await Axios.get(
-      `https://edificiokandc-7a4a0d2f7cde.herokuapp.com/habitaciones/find-habitacion/${nombreBuscar}`,
+      `http://localhost:4000/habitaciones/find-habitacion/${nombreBuscar}`,
       {
         headers: {
           Authorization: localStorage.getItem("auth"),

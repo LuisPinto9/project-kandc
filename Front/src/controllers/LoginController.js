@@ -4,7 +4,7 @@ import { Swal } from "sweetalert2";
 export const verificar = async (datos) => {
   try {
     const response = await Axios.post(
-      "https://edificiokandc-7a4a0d2f7cde.herokuapp.com/login/credenciales",
+      "http://localhost:4000/login/credenciales",
       {
         NombreUsuario: datos.nombreUsuario,
         Contraseña: datos.contraseña,

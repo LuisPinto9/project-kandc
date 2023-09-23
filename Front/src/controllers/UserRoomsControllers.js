@@ -4,7 +4,7 @@ import { Swal } from "sweetalert2";
 export const getRooms = async () => {
   try {
     const response = await Axios.get(
-      `https://edificiokandc-7a4a0d2f7cde.herokuapp.com/user-rooms/get-habitaciones/${localStorage.getItem(
+      `http://localhost:4000/user-rooms/get-habitaciones/${localStorage.getItem(
         "id"
       )}`,
       {
@@ -29,7 +29,7 @@ export const getRooms = async () => {
 export const getComponents = async () => {
   try {
     const response = await Axios.get(
-      `https://edificiokandc-7a4a0d2f7cde.herokuapp.com/user-rooms/get-componentes/${localStorage.getItem(
+      `http://localhost:4000/user-rooms/get-componentes/${localStorage.getItem(
         "id"
       )}`,
       {
@@ -54,7 +54,7 @@ export const getComponents = async () => {
 export const getZona = async () => {
   try {
     const response = await Axios.get(
-      `https://edificiokandc-7a4a0d2f7cde.herokuapp.com/user-rooms/get-zona/${localStorage.getItem("id")}`,
+      `http://localhost:4000/user-rooms/get-zona/${localStorage.getItem("id")}`,
       {
         headers: {
           Authorization: localStorage.getItem("auth"),
@@ -77,7 +77,7 @@ export const getZona = async () => {
 export const findHabitacion = async (nombreBuscar) => {
   try {
     const response = await Axios.get(
-      `https://edificiokandc-7a4a0d2f7cde.herokuapp.com/user-rooms/find-habitaciones/${localStorage.getItem(
+      `http://localhost:4000/user-rooms/find-habitaciones/${localStorage.getItem(
         "id"
       )}/${nombreBuscar}`,
       {
@@ -102,7 +102,7 @@ export const findHabitacion = async (nombreBuscar) => {
 export const findComponentes = async (nombreBuscar) => {
   try {
     const response = await Axios.get(
-      `https://edificiokandc-7a4a0d2f7cde.herokuapp.com/user-rooms/find-componentes/${localStorage.getItem(
+      `http://localhost:4000/user-rooms/find-componentes/${localStorage.getItem(
         "id"
       )}/${nombreBuscar}`,
       {
@@ -127,7 +127,7 @@ export const findComponentes = async (nombreBuscar) => {
 export const findZona = async (idZona) => {
   try {
     const response = await Axios.get(
-      `https://edificiokandc-7a4a0d2f7cde.herokuapp.com/user-rooms/find-zona/${localStorage.getItem(
+      `http://localhost:4000/user-rooms/find-zona/${localStorage.getItem(
         "id"
       )}/${idZona}`,
       {

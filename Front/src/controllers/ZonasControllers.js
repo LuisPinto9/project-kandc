@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 export const add = async (datos) => {
   try {
     await Axios.post(
-      "https://edificiokandc-7a4a0d2f7cde.herokuapp.com/zonas/create",
+      "http://localhost:4000/zonas/create",
       {
         Id: datos.Id,
         Nombre: datos.Nombre,
@@ -40,7 +40,7 @@ export const add = async (datos) => {
 export const update = async (datos) => {
   try {
     await Axios.put(
-      "https://edificiokandc-7a4a0d2f7cde.herokuapp.com/zonas/update",
+      "http://localhost:4000/zonas/update",
       {
         Id: datos.Id,
         Nombre: datos.Nombre,
@@ -87,7 +87,7 @@ export const eliminar = async ({ val, getZonas }) => {
     });
 
     if (result.isConfirmed) {
-      await Axios.delete(`https://edificiokandc-7a4a0d2f7cde.herokuapp.com/zonas/delete/${val.id}`, {
+      await Axios.delete(`http://localhost:4000/zonas/delete/${val.id}`, {
         headers: {
           Authorization: localStorage.getItem("auth"),
         },
@@ -117,7 +117,7 @@ export const eliminar = async ({ val, getZonas }) => {
 /* traer la información de las zonas */
 export const zonas = async () => {
   try {
-    const response = await Axios.get("https://edificiokandc-7a4a0d2f7cde.herokuapp.com/zonas/get-zonas", {
+    const response = await Axios.get("http://localhost:4000/zonas/get-zonas", {
       headers: {
         Authorization: localStorage.getItem("auth"),
       },
@@ -137,7 +137,7 @@ export const zonas = async () => {
 
 export const getZonasInicio = async () => {
   try {
-    const response = await Axios.get("https://edificiokandc-7a4a0d2f7cde.herokuapp.com/zonas/get-zonas-inicio");
+    const response = await Axios.get("http://localhost:4000/zonas/get-zonas-inicio");
     return response.data;
   } catch (error) {
     Swal.fire({
@@ -154,7 +154,7 @@ export const getZonasInicio = async () => {
 export const buscarZona = async (idBuscar) => {
   try {
     const response = await Axios.get(
-      `https://edificiokandc-7a4a0d2f7cde.herokuapp.com/zonas/find-zona/${idBuscar}`,
+      `http://localhost:4000/zonas/find-zona/${idBuscar}`,
       {
         headers: {
           Authorization: localStorage.getItem("auth"),
